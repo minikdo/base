@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -eu
+
+if ! ssh-add -l > /dev/null; then
+   ssh-add -t 4800
+fi
+
+exec /usr/bin/ssh "$@"
+

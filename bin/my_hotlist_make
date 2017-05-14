@@ -1,0 +1,8 @@
+#!/bin/bash
+
+vpns=($(cat /etc/hosts | grep '^10' | awk '{print $2}'))
+
+for i in "${vpns[@]}"; do
+  #echo "aqq" $i
+  echo "ENTRY \"/home/domino/sh://domino@${i}/home/domino\" URL \"/home/domino/sh://domino@${i}/home/domino\""
+done

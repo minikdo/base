@@ -1,0 +1,120 @@
+# Conky, a system monitor, based on torsmo
+#
+# Any original torsmo code is licensed under the BSD license
+#
+# All code written since the fork of torsmo is licensed under the GPL
+#
+# Please see COPYING for details
+#
+# Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
+# Copyright (c) 2005-2010 Brenden Matthews, Philip Kovacs, et. al. (see AUTHORS)
+# All rights reserved.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+alignment top_right
+double_buffer yes
+background no
+border_width 1
+cpu_avg_samples 2
+#default_color 08cc08
+default_color 535d6d
+#default_outline_color white
+default_outline_color white
+default_shade_color white
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+use_xft yes
+xftfont inconsolata:size=15
+gap_x 100
+gap_y 120
+minimum_size 450
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+own_window yes
+own_window_class Conky
+own_window_type desktop
+own_window_hints below,skip_taskbar,skip_pager
+# own_window_argb_visual yes
+own_window_transparent yes
+stippled_borders 0
+update_interval 3.0
+uppercase no
+use_spacer none
+show_graph_scale no
+show_graph_range no
+if_up_strictness link
+
+# use sometimes: sudo lshw -short >.hardware-list  
+
+TEXT
+$nodename - $sysname $kernel on $machine
+
+${color 535d6c}HARDWARE $hr
+
+${color 535d6c}CPU:$color ${pre_exec cat /home/domino/.hardware-list | grep processor | awk -F'processor' '{print $2}' | awk '{$1=$1}1'}
+${color 535d6c}SSD:$color ${pre_exec cat /home/domino/.hardware-list | grep disk | awk -F'disk' '{print $2}' | awk '{$1=$1}1'}
+
+${color 535d6c}SYSTEM INFORMATION $hr
+
+${color 535d6c}Uptime:        $color $uptime (${pre_exec cat /tmp/sleep.count})
+${color 535d6c}Debian version:$color ${pre_exec cat /etc/debian_version}
+# ${color 535d6c}Kernel version:$color ${pre_exec uname -v | awk -F' ' '{print $8 "-" $4 "-" $5 " " $6 " " $7}'}
+${color 535d6c}Kernel version:$color ${pre_exec uname -v | awk -F'Debian' '{print $2}' | awk '{$1=$1}1'}
+${color 535d6c}System created:$color ${pre_exec stat -c %y .bash_logout | awk -F. '{print $1}'}
+${color 535d6c}Last upgraded:$color  ${pre_exec /home/domino/bin/my_last_upgrade}
+${color 535d6c}Resolution:$color     ${pre_exec xrandr | grep '*' | awk '{print $1}'}
+${color 535d6c}Packages no.:$color   ${pre_exec dpkg -l | grep '^ii' | wc -l}
+
+${color 535d6c}MEMORY AND CPU $hr
+
+# ${color 535d6c}Frequency (in MHz):$color $freq
+# ${color 535d6c}Frequency (in GHz):$color $freq_g
+${color 535d6c}RAM Usage:$color $mem ${color 535d6c}/$color $memmax ${color 535d6c}-$color $memperc% ${membar 4}
+${color 535d6c}CPU Usage:$color $cpu% ${cpubar 4}
+${color 535d6c}Processes:$color $processes  ${color 535d6c}Running:$color $running_processes
+
+${color 535d6c}FILE SYSTEMS $hr
+
+$color /     $color${fs_used /}/${fs_size /}  ${fs_bar 6 /}
+ /boot $color${fs_used /boot}/${fs_size /boot} ${fs_bar 6 /boot}
+
+${color 535d6c}NETWORKING $hr
+
+${color 535d6c}Gateway:$color $gw_iface    ${color 535d6c}Gateway IP:$color $gw_ip
+
+${color 535d6c}DNS:  $color ${nameserver 0}, ${nameserver 1}
+${color 535d6c}ESSID:$color ${wireless_essid wlan0}
+
+${color 535d6c}wlan0: ${if_up wlan0}$color${addr wlan0}    ${else}                 ${endif}\
+${color 535d6c}${tab}tun0: ${if_up tun0}$color${addr tun0}${endif}
+${color 535d6c}ppp0_: ${if_up ppp0}${color}${addr ppp0}    ${else}                 ${endif}\
+${color 535d6c}${tab}eth0: ${if_up eth0}$color${addr eth0}${endif}
+${color 535d6c}dockr:${if_up docker0}$color${addr docker0}${endif}
+
+${color 535d6c}${if_up tun0}${curl http://adm.d/siec 5}${endif}
+# ${color 535d6c}public:${color}${tail /tmp/.myip_only 10}
+
+
+# ${color 535d6c}Name              PID   CPU%   MEM%
+# ${color light535d6c} ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
+# ${color light535d6c} ${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
+# ${color light535d6c} ${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
+# ${color light535d6c} ${top name 4} ${top pid 4} ${top cpu 4} ${top mem 4}
+

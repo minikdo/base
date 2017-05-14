@@ -1,0 +1,18 @@
+application/pdf; evince %s; test=test -n "$DISPLAY"
+text/html; chmod +w %s && /home/domino/bin/my_html_preview %s ; description=HTML Text; nametemplate=%s.html
+text/html; /usr/bin/w3m -I %{charset} -dump -T text/html %s; copiousoutput; description=HTML Text; nametemplate=%s.html
+image/gif; viewnior '%s'; test=test -n "$DISPLAY" ; description=GIF Image; nametemplate=%s.gif
+image/jpeg; viewnior '%s'; test=test -n "$DISPLAY" ; description=JPEG Image; nametemplate=%s.jpeg
+image/png; viewnior '%s'; test=test -n "$DISPLAY" ; description=PNG Image; nametemplate=%s.png
+image/tiff; viewnior '%s'; test=test -n "$DISPLAY" ; description=TIFF Image; nametemplate=%s.tiff
+image/x-portable-anymap; viewnior '%s'; test=test -n "$DISPLAY" ; description=PNM Image; nametemplate=%s.pnm
+image/targa; viewnior '%s'; test=test -n "$DISPLAY" ; description=TGA Image; nametemplate=%s.tga
+image/x-ms-bmp; viewnior '%s'; test=test -n "$DISPLAY" ; description=BMP Image; nametemplate=%s.bmp
+image/x-xpixmap; viewnior '%s'; test=test -n "$DISPLAY" ; description=XPM Image; nametemplate=%s.xpm
+image/pjpeg; viewnior '%s'; test=test -n "$DISPLAY" ; description=JPEG Image; nametemplate=%s.jpeg
+video/mkv;mplayer -zoom %s
+video/mp4;mplayer -zoom %s
+video/x-msvideo;mplayer -zoom %s
+video/avi;mplayer -zoom %s
+video/x-matroska;mplayer -zoom %s
+

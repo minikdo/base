@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -eu
+
+TAP=`synclient -l| grep TapButton1 | awk -F= '{print $2}'`
+ACTION=$*
+
+if [ $TAP = 0 ]; then
+	synclient TapButton1=1
+	synclient TapButton2=2
+	synclient TapButton3=3
+fi
+
+if [ $TAP = 1 ]; then
+	synclient TapButton1=0
+	synclient TapButton2=0
+	synclient TapButton3=0
+fi
+
+if [ "${ACTION}" = "off" ]; then
+	synclient TouchpadOff=1
+fi
+
+if [ "${ACTION}" = "on" ]; then
+	synclient TouchpadOff=0
+fi

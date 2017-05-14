@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -ux
+
+#source /home/domino/.gnupg/gpg-agent-info-debian-X1
+#export GPG_AGENT_INFO
+
+#if [ ! $MBSYNC -eq 1 ]; then
+#    exit
+#fi
+ip ro | grep 'default via' || exit 0 
+
+ping -w3 -c2 8.8.8.8  >/dev/null 2>&1 && mbsync -a
+

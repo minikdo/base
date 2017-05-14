@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -eux
+
+source ~/.zsh_my_env
+#METAR=epwa
+FILE=/tmp/.metar
+
+ping -w3 -c2 8.8.8.8  > /dev/null 2>&1 
+
+if [ $? = 1 ]; then
+    echo -n "PING FAILED" >$FILE
+    exit
+fi
+
+env METARURL=http://tgftp.nws.noaa.gov/data/observations/metar/stations/ \
+    metar $METAR >$FILE
+
+cat $FILE >>/home/domino/.metar.log
+
+if [ $? = 1 ]; then
+    echo -n "NO METAR DATA" >$FILE
+fi
+
+exit
+
+
