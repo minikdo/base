@@ -528,6 +528,8 @@ globalkeys = awful.util.table.join(
     awful.key({ 		  }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 15") end),
     awful.key({ 		  }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 15") end),
     awful.key({ modkey,		  }, "F11",   function () awful.util.spawn("/home/domino/bin/redshift_launcher") end),
+    awful.key({ modkey, "Control" }, "t", function () awful.util.spawn("/home/domino/bin/my_tap") end),
+
     -- Volume
     --awful.key({ 		  }, "XF86AudioRaiseVolume",  APW.Up),
     --awful.key({ 		  }, "XF86AudioLowerVolume",  APW.Down),
@@ -731,6 +733,7 @@ awful.rules.rules = {
         },
         class = {
         	"mpv",
+        	"Evince",
 	   "mplayer2",
 	   "Skype",
 	   "Vlc",
