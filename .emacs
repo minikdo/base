@@ -6,7 +6,7 @@
  '(custom-safe-themes
    (quote
     ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
- '(org-agenda-files (quote ("~/notes.org" "~/calendar/ds.org")))
+ '(org-agenda-files (quote ("~/.calendar/dominik.org")))
  '(package-archives
    (quote
     (("gnu" . "http://elpa.gnu.org/packages/")
@@ -17,6 +17,7 @@
 (global-set-key "\C-ca" 'org-agenda) 
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-iswitchb)
+
 
 ;; disable backup
 (setq backup-inhibited t)
@@ -94,3 +95,6 @@
 ;; python hooks
 (add-hook 'python-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
 (add-hook 'python-mode-hook 'autopair-mode)
+
+;;(require 'org-bullets)
+;;(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))

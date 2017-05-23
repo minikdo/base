@@ -12,6 +12,8 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
+local freedesktop = require("freedesktop")
+
 -- Load Debian menu entries
 require("debian.menu")
 
@@ -134,6 +136,12 @@ awful.layout.layouts = {
 -- }}}
 
 
+
+for s in screen do
+    freedesktop.desktop.add_icons({screen = s})
+end
+
+
 -- {{{ MY WIDGETS
 
 
@@ -182,7 +190,6 @@ mailcounterwidgettimer:start()
 
 metarwidget = wibox.widget.textbox()
 metarwidget.text = "WAITING FOR METAR DATA"
-metarwidget.width = 660
 metarwidgettimer = timer({ timeout = 30 })
 metarwidgettimer:connect_signal("timeout",
   function()
@@ -249,7 +256,6 @@ vicious.register(bat_widget, vicious.widgets.bat, " <span color='white'>$1$2%</s
 
 cpuwidget = wibox.widget.textbox()
 vicious.register(cpuwidget, vicious.widgets.cpu, " <span color='#535d6c'>CPU $1 $2 $3 $4</span>")
-cpuwidget.width = 160
 
 --- }}}
 
@@ -282,7 +288,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "Debian", debian.menu.Debian_menu.Debian },
     { "Libreoffice", "/usr/bin/libreoffice" },
     { "Chromium", "/usr/bin/chromium --incognito" },
-    { "Calendar", function () awful.util.spawn_with_shell("LC_TIME=pl_PL.utf8 /usr/bin/gnome-calendar") end },
+    { "Calendar", function () awful.util.spawn_with_shell("LC_TIME=pl_PL.utf8 /usr/local/bin/gnome-calendar") end },
     { "Shotwell", "/usr/bin/shotwell" },
     { "Gimp", "/usr/bin/gimp" },
     { "Evince", "/usr/bin/evince" },
@@ -297,7 +303,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
-
+-- MY
 mysshmenu = awful.menu({ items = { 
     { "ssh adm", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh adm'" },
     { "ssh kim", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh kim'" },
@@ -448,8 +454,6 @@ awful.screen.connect_for_each_screen(function(s)
         sshaddwidget,
         vpnwidget,
         cpuwidget,
-    --    torwidget,
-      --  dockerwidget,
        }
     }
 
@@ -522,52 +526,62 @@ globalkeys = awful.util.table.join(
               {description = "quit awesome", group = "awesome"}),
 
     -- BEGIN MY
-    --awful.key({ modkey,           }, "a",      awful.tag.viewprev       ),
-    awful.key({ modkey,           }, "z",      awful.tag.viewnext       ),
+
     -- Brightness
-    awful.key({ 		  }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 15") end),
-    awful.key({ 		  }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 15") end),
-    awful.key({ modkey,		  }, "F11",   function () awful.util.spawn("/home/domino/bin/redshift_launcher") end),
-    awful.key({ modkey, "Control" }, "t", function () awful.util.spawn("/home/domino/bin/my_tap") end),
+    awful.key({ 		  }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 15") end,
+    		{description = "brightness up", group = "My custom keys"}),
+    awful.key({ 		  }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 15") end,
+    		{description = "brightness down", group = "My custom keys"}),
+    awful.key({ modkey,		  }, "F11",   function () awful.util.spawn("/home/domino/bin/redshift_launcher") end,
+    		{description = "toggle redshift", group = "My custom keys"}),
+    awful.key({ modkey, "Control" }, "t", function () awful.util.spawn("/home/domino/bin/my_tap") end,
+    		{description = "toggle touchpad", group = "My custom keys"}),
 
     -- Volume
-    --awful.key({ 		  }, "XF86AudioRaiseVolume",  APW.Up),
-    --awful.key({ 		  }, "XF86AudioLowerVolume",  APW.Down),
-    --awful.key({ 		  }, "XF86AudioMute",         APW.ToggleMute),
-    awful.key({ 		  }, "XF86AudioRaiseVolume",  function () awful.util.spawn_with_shell("~/bin/pa_vol_up") end),
-    awful.key({ 		  }, "XF86AudioLowerVolume",  function () awful.util.spawn_with_shell("~/bin/pa_vol_down") end),
-    --awful.key({ 		  }, "XF86AudioMute",         APW.ToggleMute),
-    -- LockScreen & Suspend & Shutdown
-    awful.key({ 		  }, "F12",   function () awful.util.spawn("/home/domino/bin/my_shutdown.sh LockScreen") end),
-    awful.key({ modkey,		  }, "F12",   function () awful.util.spawn("/home/domino/bin/my_shutdown.sh Suspend") end),
-    awful.key({ modkey, "Control" }, "F12",   function () awful.util.spawn("/home/domino/bin/my_shutdown.sh Shutdown") end),
-    -- dmesg
-    awful.key({ modkey,		  }, "d", function () run_or_raise('rxvt -name dmesg -title dmesg -e sh -c "dmesg -w -T"', { name = "Dmesg" }) end),
+    awful.key({ 		  }, "XF86AudioRaiseVolume",  function () awful.util.spawn_with_shell("~/bin/pa_vol_up") end,
+    		{description = "volume up", group = "My custom keys"}),
+    awful.key({ 		  }, "XF86AudioLowerVolume",  function () awful.util.spawn_with_shell("~/bin/pa_vol_down") end,
+    		{description = "volume down", group = "My custom keys"}),
+
+    -- LockScreen & Suspend
+    awful.key({ 		  }, "F12",   function () awful.util.spawn("/home/domino/bin/my_shutdown.sh LockScreen") end,
+    		{description = "lock screen", group = "My custom keys"}),
+    awful.key({ modkey,		  }, "F12",   function () awful.util.spawn("/home/domino/bin/my_shutdown.sh Suspend") end,
+    		{description = "suspend", group = "My custom keys"}),
+
     -- profanity
-    awful.key({ modkey,		  }, "p", function () run_or_raise("rxvt -name profanity -title profanity -e sh -c 'LD_LIBRARY_PATH=/usr/local/lib profanity'", { instance = "profanity" } ) end),
-    --awful.key({ modkey,		  }, "p", function () run_or_raise("xterm -name profanity -e 'LD_LIBRARY_PATH=/usr/local/lib profanity'", { instance = "profanity" } ) end),
+    awful.key({ modkey,		  }, "p", function () run_or_raise("rxvt -name profanity -title profanity -e sh -c 'LD_LIBRARY_PATH=/usr/local/lib profanity'", { instance = "profanity" } ) end,
+    		{description = "profanity", group = "My custom keys"}),
     -- floating term 
-    awful.key({ modkey, "Shift"	  }, "Return",  function () run_or_raise("rxvt -name float -title float -tr -sh 50 -geometry 159x12", { instance = "float" } ) end),
+    awful.key({ modkey, "Shift"	  }, "Return",  function () run_or_raise("rxvt -name float -title float -tr -sh 50 -geometry 159x12", { instance = "float" } ) end,
+    		{description = "open floating terminal", group = "My custom keys"}),
     -- mbsync -a
-    awful.key({ modkey, "Shift"	  }, "m", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 159x12 -e sh -c "/home/domino/bin/my_mbsync"', { instance = "float" } ) end),
+    awful.key({ modkey, "Shift"	  }, "m", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 159x12 -e sh -c "/home/domino/bin/my_mbsync"', { instance = "float" } ) end,
+    		{description = "fetch mail via mbsync", group = "My custom keys"}),
     -- ping 8.8.8.8
-    awful.key({ modkey, "Shift"	  }, "p", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 80x12 -e sh -c "ping 8.8.8.8"', { instance = "float" } ) end),
+    awful.key({ modkey, "Shift"	  }, "p", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 80x12 -e sh -c "ping 8.8.8.8"', { instance = "float" } ) end,
+    		{description = "ping 8.8.8.8", group = "My custom keys"}),
     -- WIFI
-    awful.key({ modkey, "Control" }, "w", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 80x24 -e sh -c "/home/domino/bin/WIFI"', { instance = "float" } ) end),
+    awful.key({ modkey, "Control" }, "w", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 80x24 -e sh -c "/home/domino/bin/WIFI"', { instance = "float" } ) end,
+    		{description = "toggle wifi", group = "My custom keys"}),
     -- PLAY
-    awful.key({ modkey, "Control" }, "p", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 80x24 -e sh -c "/home/domino/bin/PLAY"', { instance = "float" } ) end),
+    awful.key({ modkey, "Control" }, "p", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 80x24 -e sh -c "/home/domino/bin/PLAY"', { instance = "float" } ) end,
+    		{description = "toggle play connection", group = "My custom keys"}),
     -- edit rc.lua
-    awful.key({ modkey,		  }, ",", function () run_or_raise("rxvt -name rc.lua -title rc.lua -e sh -c 'joe ~/.config/awesome/rc.lua'", { instance = "rc.lua" } ) end),
+    awful.key({ modkey,		  }, ",", function () run_or_raise("rxvt -name rc.lua -title rc.lua -e sh -c 'joe ~/.config/awesome/rc.lua'", { instance = "rc.lua" } ) end,
+    		{description = "open rc.lua settings", group = "My custom keys"}),
     -- mutt
-    awful.key({ modkey,		  }, "y", function () run_or_raise("rxvt -name mutt -e 'mutt'", { instance = "mutt" } ) end),
-    -- gnome-calendar FIXME
-    awful.key({ modkey,		  }, "e", function () run_or_raise("LC_TIME=pl_PL.utf8 /usr/bin/gnome-calendar", { instance = "gnome-calendar" } ) end),
+    awful.key({ modkey,		  }, "y", function () run_or_raise("rxvt -name mutt -e 'mutt'", { instance = "mutt" } ) end,
+    		{description = "mutt", group = "My custom keys"}),
     -- irssi
-    awful.key({ modkey, "Shift"	  }, "o", function () run_or_raise("rxvt -sr -T irssi -n irssi -e /home/domino/bin/ssh adm -Xt screen -aAdr -RR irssi irssi", { name = "irssi" }) end),  
+    awful.key({ modkey, "Shift"	  }, "o", function () run_or_raise("rxvt -sr -T irssi -n irssi -e /home/domino/bin/ssh adm -Xt screen -aAdr -RR irssi irssi", { name = "irssi" }) end,  
+    		{description = "irssi", group = "My custom keys"}),
     -- firefox
-    awful.key({ modkey, 	  }, "i", function () run_or_raise("firefox-esr -private-window", { name = "Firefox" }) end),  
+    awful.key({ modkey, 	  }, "i", function () run_or_raise("firefox-esr -private-window", { name = "Firefox" }) end,  
+    		{description = "firefox", group = "My custom keys"}),
     -- tor browser bundle
-    awful.key({ modkey, 	  }, "t", function () run_or_raise("torbrowser-launcher", { name = "Tor Browser" }) end),  
+    awful.key({ modkey, 	  }, "t", function () run_or_raise("torbrowser-launcher", { name = "Tor Browser" }) end,  
+    		{description = "tor browser", group = "My custom keys"}),
     -- END MY
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,

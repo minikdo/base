@@ -57,8 +57,8 @@ COMPLETION_WAITING_DOTS="true"
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
-SAVEHIST=100000
-HISTSIZE=100000
+SAVEHIST=1000000
+HISTSIZE=1000000
 
 
 # Would you like to use another custom folder than $ZSH/custom?
