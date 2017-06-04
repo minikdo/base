@@ -19,6 +19,7 @@ fi
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="terminalparty"
+#ZSH_THEME="gallois"
 
 
 DISABLE_UPDATE_PROMPT="true"

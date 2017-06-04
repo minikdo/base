@@ -80,7 +80,7 @@ editor_filesize_threshold=64M
 editor_stop_format_chars=-+*\\,.;:&>
 mcview_eof=
 ignore_ftp_chattr_errors=true
-skin=solarized
+skin=modarin256root-defbg
 
 editor_state_full_filename=1
 
@@ -94,7 +94,7 @@ menubar_visible=1
 free_space=1
 horizontal_split=0
 vertical_equal=1
-left_panel_size=47
+left_panel_size=94
 horizontal_equal=1
 top_panel_size=19
 

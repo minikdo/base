@@ -100,7 +100,8 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 --beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
-beautiful.init("/home/domino/.config/awesome/themes/default/theme.lua")
+--beautiful.init(awful.util.get_themes_dir() .. "xresources/theme.lua")
+beautiful.init("/home/domino/.config/awesome/themes/xresources/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -396,7 +397,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -562,10 +563,10 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"	  }, "p", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 80x12 -e sh -c "ping 8.8.8.8"', { instance = "float" } ) end,
     		{description = "ping 8.8.8.8", group = "My custom keys"}),
     -- WIFI
-    awful.key({ modkey, "Control" }, "w", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 80x24 -e sh -c "/home/domino/bin/WIFI"', { instance = "float" } ) end,
+    awful.key({ modkey, "Control" }, "w", function () run_or_raise('rxvt -name float -title wifi_connection -tr -sh 50 -geometry 80x24 -e sh -c "/home/domino/bin/WIFI"', { instance = "float" } ) end,
     		{description = "toggle wifi", group = "My custom keys"}),
     -- PLAY
-    awful.key({ modkey, "Control" }, "p", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 80x24 -e sh -c "/home/domino/bin/PLAY"', { instance = "float" } ) end,
+    awful.key({ modkey, "Control" }, "p", function () run_or_raise('rxvt -name float -title play_connection -tr -sh 50 -geometry 80x24 -e sh -c "/home/domino/bin/PLAY"', { instance = "float" } ) end,
     		{description = "toggle play connection", group = "My custom keys"}),
     -- edit rc.lua
     awful.key({ modkey,		  }, ",", function () run_or_raise("rxvt -name rc.lua -title rc.lua -e sh -c 'joe ~/.config/awesome/rc.lua'", { instance = "rc.lua" } ) end,
