@@ -135,3 +135,5 @@
  ;; If there is more than one, they won't work right.
  )
 
+(add-hook 'org-mode-hook 'abbrev-mode)
+(add-hook 'org-mode-hook 'flyspell-mode)
