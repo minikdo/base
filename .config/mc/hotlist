@@ -1,5 +1,6 @@
 ENTRY "/home/domino/sh://domino@adm/home/domino" URL "/home/domino/sh://domino@adm/home/domino"
 ENTRY "/home/domino/sh://domino@linode/home/domino" URL "/home/domino/sh://domino@linode/home/domino"
+ENTRY "/home/domino/sh://bak_router@adm/home/bak_router" URL "/home/bak_router/sh://bak_router@adm/home/bak_router"
 ENTRY "/home/domino/sh://www-data@adm/home/var" URL "/home/domino/sh://www-data@adm/var/www"
 ENTRY "/home/domino/sh://www-data@kim/home/var" URL "/home/domino/sh://www-data@kim/var/www"
 ENTRY "/home/domino/sh://backups@adm/home/backups" URL "/home/domino/sh://backups@adm/home/backups"

@@ -190,7 +190,7 @@ mailcounterwidgettimer:start()
 --metar widget
 
 metarwidget = wibox.widget.textbox()
-metarwidget.text = "WAITING FOR METAR DATA"
+metarwidget.text = "WAITING FOR METAR DATA "
 metarwidgettimer = timer({ timeout = 30 })
 metarwidgettimer:connect_signal("timeout",
   function()
@@ -199,7 +199,7 @@ metarwidgettimer:connect_signal("timeout",
     if metar == nil then
         metarwidget.markup = ''                     
     else
-        metarwidget.markup = '<span color="#535d6c">'..metar..'</span>'
+        metarwidget.markup = '<span color="#535d6c">'..metar..'</span> '
     end
     status:close()    
   end    
@@ -312,8 +312,10 @@ mysshmenu = awful.menu({ items = {
     { "ssh adm -l www-data", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh adm -l www-data'" },
     { "ssh kim -l www-data", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh kim -l www-data'" },
     { "ssh adm -l backups", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh adm -l backups'" },
-    { "mail.log linode", "rxvt -name 'linode mail.log' -title 'linode mail.log' -e sh -c /home/domino/bin/ssh -t linode 'less /var/log/mail.log'" },
-    { "mail.log kim", "rxvt -name 'kim mail.log' -title 'kim mail.log' -e sh -c /home/domino/bin/ssh -t kim 'less /var/log/mail.log'" },
+    { "mail.log linode", 'rxvt -name linode_mail.log -title linode_mail.log -e sh -c "/home/domino/bin/ssh -t linode less /var/log/mail.log"' },
+    { "mail.log kim", 'rxvt -name kim_mail.log -title kim_mail.log -e sh -c "/home/domino/bin/ssh -t kim less /var/log/mail.log"' },
+    { "adm php.log", 'rxvt -name adm_php.log -title adm_php.log -e sh -c "/home/domino/bin/ssh -t www-data@adm less /var/www/adm/log/php5"' },
+    { "kim php.log", 'rxvt -name kim_php.log -title kim_php.log -e sh -c "/home/domino/bin/ssh -t www-data@kim less /var/www/adm/php5"' },
     { "open terminal", terminal }
   }, width = 300 
 })
