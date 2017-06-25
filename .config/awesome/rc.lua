@@ -12,7 +12,7 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
-local freedesktop = require("freedesktop")
+--local freedesktop = require("freedesktop")
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -138,9 +138,9 @@ awful.layout.layouts = {
 
 
 
-for s in screen do
-    freedesktop.desktop.add_icons({screen = s})
-end
+--for s in screen do
+--    freedesktop.desktop.add_icons({screen = s})
+--end
 
 
 -- {{{ MY WIDGETS
@@ -585,6 +585,9 @@ globalkeys = awful.util.table.join(
     -- tor browser bundle
     awful.key({ modkey, 	  }, "t", function () run_or_raise("torbrowser-launcher", { name = "Tor Browser" }) end,  
     		{description = "tor browser", group = "My custom keys"}),
+    -- pavucontrol
+    awful.key({ modkey, 	  }, "v", function () run_or_raise("pavucontrol", { name = "Volume Control" }) end,  
+    		{description = "pavucontrol", group = "My custom keys"}),
     -- END MY
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
