@@ -101,7 +101,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 --beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
 --beautiful.init(awful.util.get_themes_dir() .. "sky/theme.lua")
---beautiful.init("/home/domino/.config/awesome/themes/default/theme.lua")
+--beautiful.init("/home/domino/.config/awesome/themes/zenburn/theme.lua")
 beautiful.init("/home/domino/.config/awesome/themes/xresources/theme.lua")
 
 -- This is used later as the default terminal and editor to run.

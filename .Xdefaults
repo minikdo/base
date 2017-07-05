@@ -1,11 +1,3 @@
-Xft.autohint:      false
-Xft.antialias:     true
-Xft.rgba:          none
-Xft.hinting:       true
-Xft.hintstyle:     hintslight
-Xft.lcdfilter:     lcddefault
-Xft.dpi:	   118
-
 UXTerm*faceName: Inconsolata
 ! UXTerm*faceSize: 13
 XTerm*faceName:  Inconsolata
