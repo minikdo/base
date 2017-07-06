@@ -98,12 +98,6 @@
 ;; change dictionary to polish
 (setq ispell-dictionary "polish")
 
-;; load plugins
-(add-to-list 'load-path "~/.emacs.d/plugins")
-
-;; lua plugin
-(require 'lua-block)
-(lua-block-mode t)
 
 (defun kill-to-end:b ()
   "Kills text from the cursor postion to the end of the buffer. 
