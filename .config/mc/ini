@@ -119,6 +119,8 @@ rxvt-unicode-256color=
 
 xterm-256color=
 
+linux=
+
 [Panels]
 simple_swap=false
 show_mini_info=true

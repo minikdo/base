@@ -11,4 +11,4 @@ set -eux
 
 mv "$1.tmp" "$1"
 
-firefox "$1"
+firefox -private-window "$1"

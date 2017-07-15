@@ -101,7 +101,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 --beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
 --beautiful.init(awful.util.get_themes_dir() .. "sky/theme.lua")
---beautiful.init("/home/domino/.config/awesome/themes/zenburn/theme.lua")
+--beautiful.init("/home/domino/.config/awesome/themes/default/theme.lua")
 beautiful.init("/home/domino/.config/awesome/themes/xresources/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
@@ -291,7 +291,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
     { "Nautilus", "/usr/bin/nautilus" },
     { "Chromium", "/usr/bin/chromium --incognito" },
     { "Libreoffice", "/usr/bin/libreoffice" },
-    { "Calendar", function () awful.util.spawn_with_shell("LC_TIME=pl_PL.utf8 /usr/local/bin/gnome-calendar") end },
+    { "Calendar", function () awful.util.spawn_with_shell("LC_TIME=pl_PL.utf8 /usr/bin/gnome-calendar") end },
     { "Shotwell", "/usr/bin/shotwell" },
     { "Gimp", "/usr/bin/gimp" },
     { "Stellarium", "/usr/bin/stellarium" },
@@ -432,6 +432,7 @@ awful.screen.connect_for_each_screen(function(s)
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
+        
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
@@ -450,9 +451,11 @@ awful.screen.connect_for_each_screen(function(s)
 	  metarwidget,
        },
        {
-	  layout = wibox.layout.fixed.horizontal,
+        layout = wibox.layout.align.horizontal,
+        expand = "outside",
+        nil,
         myipwidget,
-	 }, 
+       }, 
        {
         layout = wibox.layout.fixed.horizontal,
         sshaddwidget,

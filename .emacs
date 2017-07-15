@@ -1,11 +1,11 @@
 ;; Org-mode settings
-(setq org-directory "~/agenda")
+(setq org-directory "~/.agenda")
 
 (defun org-file-path (filename)
   "Return the absolute address of an org file, given its relative name."
   (concat (file-name-as-directory org-directory) filename))
 
-(setq org-index-file (org-file-path "index.org"))
+(setq org-index-file (org-file-path "dominik.org"))
 (setq org-archive-location
       (concat (org-file-path "archive.org") "::* From %s"))
 
@@ -40,7 +40,7 @@
 
 ;; Theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'flatland)
+(load-theme 'flatland t)
 
 ;; Other settings
 (setq-default fill-column 80)
@@ -121,3 +121,16 @@
 ;; apt install emacs-goodies-el for filladapt
 (require 'filladapt)
 (add-hook 'org-mode-hook 'turn-on-filladapt-mode)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (flatland))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
