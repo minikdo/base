@@ -5,8 +5,8 @@ import GeoIP
 
 if __name__ == '__main__':
     gi = GeoIP.open("/usr/share/GeoIP/GeoIPCity.dat", GeoIP.GEOIP_STANDARD)
-    aqq = gi.record_by_addr(sys.argv[1])
-    print("%.2f:%.2f" % (aqq["latitude"], aqq["longitude"]))
+    coord = gi.record_by_addr(sys.argv[1])
+    print("%.2f:%.2f" % (coord["latitude"], coord["longitude"]))
         
     
      

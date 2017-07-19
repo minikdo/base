@@ -15,10 +15,10 @@ nmcli connection show --active | grep "${UUID}"
 
 # connect
 if [ $? != 0 ]; then
-    nmcli radio wwan off                               
+    #nmcli radio wwan off                               
     nmcli radio wifi off
     nmcli radio wwan on 
-    sleep 4s
+    sleep 3s
     play_connect $UUID
     
 else
@@ -34,7 +34,7 @@ TRIES=0
 
 # check internet or connect again       
 while [ $TRIES -lt 3 ]; do
-    ping -w3 -c1 8.8.8.8  > /dev/null 2>&1
+    ping -w4 -c2 8.8.8.8  > /dev/null 2>&1
                                           
     if [ $? = 0 ]; then                   
 
@@ -45,7 +45,7 @@ while [ $TRIES -lt 3 ]; do
 
     nmcli radio wwan off
     nmcli radio wwan on   
-    sleep 4s
+    sleep 6s
     play_connect $UUID
     
     TRIES=$(($TRIES+1))
