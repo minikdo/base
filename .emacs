@@ -114,8 +114,8 @@
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
-(add-hook 'org-mode-hook 'abbrev-mode)
-(add-hook 'org-mode-hook 'flyspell-mode)
+;;(add-hook 'org-mode-hook 'abbrev-mode)
+;;(add-hook 'org-mode-hook 'flyspell-mode)
 
 
 ;; apt install emacs-goodies-el for filladapt
@@ -127,7 +127,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (flatland))))
+ '(custom-enabled-themes (quote (flatland)))
+ 
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
