@@ -587,8 +587,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, 	  }, "i", function () run_or_raise("firefox-esr -private-window", { name = "Firefox" }) end,  
     		{description = "firefox", group = "My custom keys"}),
     -- tor browser bundle
-    awful.key({ modkey, 	  }, "t", function () run_or_raise("torbrowser-launcher", { name = "Tor Browser" }) end,  
-    		{description = "tor browser", group = "My custom keys"}),
+    --awful.key({ modkey, 	  }, "t", function () run_or_raise("torbrowser-launcher", { name = "Tor Browser" }) end,  
+    --		{description = "tor browser", group = "My custom keys"}),
     -- pavucontrol
     awful.key({ modkey, 	  }, "v", function () run_or_raise("pavucontrol", { name = "Volume Control" }) end,  
     		{description = "pavucontrol", group = "My custom keys"}),
