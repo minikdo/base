@@ -147,22 +147,22 @@ awful.layout.layouts = {
 -- {{{ MY WIDGETS
 
 
-myipwidget = wibox.widget.textbox()
-myipwidget.text = "NO EXT IP"
-myipwidgettimer = timer({ timeout = 10 })
-myipwidgettimer:connect_signal("timeout",
-  function()
-      status = io.popen("cat /tmp/.myip", "r")
-      myip = status:read()
-      if myip == nil then
-         myipwidget.text = ''
-	     else
-		 myipwidget.markup = '<span color="#535d6c">'..myip..'</span>'
-	end
-        status:close()
-         end
-       )
-    myipwidgettimer:start()
+--myipwidget = wibox.widget.textbox()
+--myipwidget.text = "NO EXT IP"
+--myipwidgettimer = timer({ timeout = 10 })
+--myipwidgettimer:connect_signal("timeout",
+--  function()
+--      status = io.popen("cat /tmp/.myip", "r")
+--      myip = status:read()
+--      if myip == nil then
+--         myipwidget.text = ''
+--	     else
+--		 myipwidget.markup = '<span color="#535d6c">'..myip..'</span>'
+--	end
+--        status:close()
+--         end
+--       )
+--    myipwidgettimer:start()
     
     
 
@@ -236,7 +236,7 @@ vpnwidget.text = " VPN "
 vpnwidgettimer = timer({ timeout = 10 })
 vpnwidgettimer:connect_signal("timeout",
   function()
-    status = io.popen("/sbin/ifconfig tun0 2>/dev/null", "r")
+    status = io.popen("ip addr | grep tun0 2>/dev/null", "r")
     if status:read() == nil then
         vpnwidget.markup = ' <span color="#FF0000">VPN</span> <span color="#000">|</span>'                     
     else
@@ -454,7 +454,7 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         expand = "outside",
         nil,
-        myipwidget,
+        --myipwidget,
        }, 
        {
         layout = wibox.layout.fixed.horizontal,
