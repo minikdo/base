@@ -21,7 +21,8 @@ URxvt.perl-ext-common: resize-font
 URxvt.resize-font.smaller: C-Down
 URxvt.resize-font.bigger: C-Up
 
-
+URxvt*scrollTtyOutput:  false
+URxvt*scrollWithBuffer: false
 
 ! Xterm escapes, word by word movement
 URxvt.keysym.Control-Left:  \033[1;5D

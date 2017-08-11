@@ -191,7 +191,8 @@ mailcounterwidgettimer:start()
 --metar widget
 
 metarwidget = wibox.widget.textbox()
-metarwidget.text = "WAITING FOR METAR DATA "
+metarwidget:set_forced_width(600)
+metarwidget.text = "WAITING FOR METAR DATA"
 metarwidgettimer = timer({ timeout = 30 })
 metarwidgettimer:connect_signal("timeout",
   function()
@@ -257,6 +258,8 @@ bat_widget = wibox.widget.textbox()
 vicious.register(bat_widget, vicious.widgets.bat, " <span color='white'>$1$2%</span> ", 32, "BAT0")
 
 cpuwidget = wibox.widget.textbox()
+cpuwidget:set_forced_width(170)
+--cpuwidget:set_source(color(beautiful.fg_normal))
 vicious.register(cpuwidget, vicious.widgets.cpu, " <span color='#535d6c'>CPU $1 $2 $3 $4</span>")
 
 --- }}}
@@ -535,9 +538,9 @@ globalkeys = awful.util.table.join(
     -- BEGIN MY
 
     -- Brightness
-    awful.key({ 		  }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 15") end,
+    awful.key({ 		  }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 7") end,
     		{description = "brightness up", group = "My custom keys"}),
-    awful.key({ 		  }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 15") end,
+    awful.key({ 		  }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 7") end,
     		{description = "brightness down", group = "My custom keys"}),
     awful.key({ modkey,		  }, "F11",   function () awful.util.spawn("/home/domino/bin/redshift_launcher") end,
     		{description = "toggle redshift", group = "My custom keys"}),
@@ -756,14 +759,14 @@ awful.rules.rules = {
           "copyq",  -- Includes session name in class.
         },
         class = {
-        	"mpv",
-        	"Evince",
-	   "mplayer2",
-	   "Skype",
-	   "Vlc",
-	   "Viewnior",
-	   "Pavucontrol",
-	   "gimp",
+          "mpv",
+          "Evince",
+	  "mplayer2",
+	  "Skype",
+	  "Vlc",
+	  "Viewnior",
+	  "Pavucontrol",
+	  "gimp",
           "Arandr",
           "Gpick",
           "Kruler",
@@ -772,8 +775,8 @@ awful.rules.rules = {
           "Wpa_gui",
           "pinentry-gnome3",
           "Gcr-prompter",
-	   "pinentry",
-	   "veromix",
+	  "pinentry",
+	  "veromix",
           "xtightvncviewer"},
 
         name = {

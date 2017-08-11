@@ -125,7 +125,7 @@ fast_reload_msg_shown=false
 mark_moves_down=true
 reverse_files_only=true
 auto_save_setup_panels=false
-navigate_with_arrows=false
+navigate_with_arrows=true
 panel_scroll_pages=true
 panel_scroll_center=false
 mouse_move_pages=true
@@ -134,6 +134,8 @@ permission_mode=false
 torben_fj_mode=false
 quick_search_mode=2
 select_flags=6
+
+simple_swap=false
 
 [Panelize]
 Find *.orig after patching=find . -name \\*.orig -print
