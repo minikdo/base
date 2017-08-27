@@ -1,6 +1,7 @@
 ENTRY "domino@adm" URL "/home/domino/sh://domino@adm/home/domino"
 ENTRY "domino@cieszyn" URL "/home/domino/sh://domino@cieszyn/home/domino"
 ENTRY "domino@linode" URL "/home/domino/sh://domino@linode/home/domino"
+ENTRY "domino@linode2" URL "/home/domino/sh://domino@linode2/home/domino"
 ENTRY "domino@sebo" URL "/home/domino/sh://domino@sebo/home/domino"
 ENTRY "domino@zenek" URL "/home/domino/sh://domino@zenek/home/domino"
 ENTRY "domino@sylwia" URL "/home/domino/sh://domino@sylwia/home/domino"
