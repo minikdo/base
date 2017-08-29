@@ -22,8 +22,8 @@ if [ -n "${ACTION}" ];then
 	  ssh-add -D
           # remove cached gpg keys
 	  gpgconf --reload gpg-agent
-	  light-locker-command -l      
-	  #slock
+	  #light-locker-command -l      
+	  slock
 	  ;;
 	esac
 fi
