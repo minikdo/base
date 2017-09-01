@@ -311,15 +311,12 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 -- MY
 mysshmenu = awful.menu({ items = { 
     { "ssh adm", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh adm'" },
-    { "ssh kim", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh kim'" },
     { "ssh linode", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh linode'" },
+    { "ssh linode2", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh linode2'" },
     { "ssh adm -l www-data", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh adm -l www-data'" },
-    { "ssh kim -l www-data", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh kim -l www-data'" },
-    { "ssh adm -l backups", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh adm -l backups'" },
     { "mail.log linode", 'rxvt -name linode_mail.log -title linode_mail.log -e sh -c "/home/domino/bin/ssh -t linode less /var/log/mail.log"' },
-    { "mail.log kim", 'rxvt -name kim_mail.log -title kim_mail.log -e sh -c "/home/domino/bin/ssh -t kim less /var/log/mail.log"' },
+    { "mail.log linode2", 'rxvt -name linode2_mail.log -title linode2_mail.log -e sh -c "/home/domino/bin/ssh -t linode2 less /var/log/mail.log"' },
     { "adm php.log", 'rxvt -name adm_php.log -title adm_php.log -e sh -c "/home/domino/bin/ssh -t www-data@adm less /var/www/adm/log/php5"' },
-    { "kim php.log", 'rxvt -name kim_php.log -title kim_php.log -e sh -c "/home/domino/bin/ssh -t www-data@kim less /var/www/adm/php5"' },
     { "open terminal", terminal }
   }, width = 300 
 })
