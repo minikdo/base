@@ -3,7 +3,7 @@ UXTerm*faceName: Inconsolata
 XTerm*faceName:  Inconsolata
 ! XTerm*faceSize:  11
 
-URxvt*font: xft:Inconsolata-zi4:pixelsize=25
+URxvt*font: xft:Inconsolata-zi4:pixelsize=22
 ! URxvt*font: xft:DejaVu Sans Mono:pixelsize=22
 ! URxvt*faceSize: 15
 URxvt*transparent: false

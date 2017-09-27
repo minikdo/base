@@ -23,3 +23,4 @@ video/x-msvideo=mpv.desktop
 video/avi=mpv.desktop
 video/quicktime=mpv.desktop
 video/webm=mpv.desktop
+application/pdf=evince.desktop

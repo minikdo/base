@@ -88,6 +88,10 @@
 ;;(add-to-list 'ac-source 'ac-source-jedi-direct)
 ;;(add-hook 'python-mode-hook 'jedi:setup)
 
+(require 'package)
+(add-to-list 'package-archives
+	     '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+
 ; Initialize package mode along with all the installed packages
 (package-initialize)
 ;; Enable elpy mode
@@ -97,9 +101,18 @@
 ; Fixing another key binding bug in iedit mode
 (define-key global-map (kbd "C-c o") 'iedit-mode)
 
+;; mmm-mode
+(require 'mmm-auto)
+
 ;; python hooks
 (add-hook 'python-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
 (add-hook 'python-mode-hook 'autopair-mode)
+
+(add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
+
+;; php hooks
+(add-hook 'php-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
+(add-hook 'php-mode-hook 'autopair-mode)
 
 ;; Ido
 (setq ido-everywhere t)

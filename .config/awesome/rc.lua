@@ -511,6 +511,9 @@ globalkeys = awful.util.table.join(
               {description = "swap with previous client by index", group = "client"}),
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
               {description = "focus the next screen", group = "screen"}),
+    -- duplicated for easier key
+    awful.key({ modkey,           }, "x", function () awful.screen.focus_relative( 1) end,
+              {description = "focus the next screen", group = "screen"}),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
@@ -626,16 +629,16 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
 
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"}),
+--    awful.key({ modkey }, "x",
+--              function ()
+--                  awful.prompt.run {
+--                  prompt       = "Run Lua code: ",
+--                textbox      = awful.screen.focused().mypromptbox.widget,
+--              exe_callback = awful.util.eval,
+--            history_path = awful.util.get_cache_dir() .. "/history_eval"
+--        }
+--  end,
+              -- {description = "lua execute prompt", group = "awesome"}),
     -- Menubar -- MY mod: było p
     awful.key({ modkey, }, "a", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
