@@ -101,9 +101,6 @@
 ; Fixing another key binding bug in iedit mode
 (define-key global-map (kbd "C-c o") 'iedit-mode)
 
-;; mmm-mode
-(require 'mmm-auto)
-
 ;; python hooks
 (add-hook 'python-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
 (add-hook 'python-mode-hook 'autopair-mode)
@@ -149,3 +146,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(set-face-background 'highlight-indentation-face "#696969")
+(set-face-background 'highlight-indentation-current-column-face "#696969")
