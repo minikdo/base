@@ -103,13 +103,20 @@
 
 ;; python hooks
 (add-hook 'python-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
+(add-hook 'python-mode-hook (lambda () (highlight-indentation-mode -1))) ;; disable autofill
 (add-hook 'python-mode-hook 'autopair-mode)
 
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
 
 ;; php hooks
-(add-hook 'php-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
+(add-hook 'php-mode-hook (lambda () (auto-fill-mode -1) (abbrev-mode -1))) ;; disable autofill
+;;(add-hook 'php-mode-hook (lambda () (abbrev-mode -1))) ;; disable autofill
 (add-hook 'php-mode-hook 'autopair-mode)
+
+;; web-mode
+(add-hook 'web-mode-hook 'emmet-mode) ;; enable Emmet's css abbreviation.
+(add-hook 'web-mode-hook 'autopair-mode) ;; enable Emmet's css abbreviation.
+(add-hook 'web-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
 
 ;; Ido
 (setq ido-everywhere t)
