@@ -590,6 +590,9 @@ globalkeys = awful.util.table.join(
     -- firefox
     awful.key({ modkey, 	  }, "i", function () run_or_raise("firefox-esr -private-window", { name = "Firefox" }) end,  
     		{description = "firefox", group = "My custom keys"}),
+    -- chromium
+    awful.key({ modkey, "Shift"   }, "i", function () run_or_raise("chromium --incognito", { name = "Chromium" }) end,  
+    		{description = "chromium", group = "My custom keys"}),
     -- tor browser bundle
     --awful.key({ modkey, 	  }, "t", function () run_or_raise("torbrowser-launcher", { name = "Tor Browser" }) end,  
     --		{description = "tor browser", group = "My custom keys"}),
