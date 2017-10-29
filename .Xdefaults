@@ -18,8 +18,8 @@ URxvt*scrollBar: false
 
 URxvt.perl-ext-common: resize-font
 
-URxvt.resize-font.smaller: C-Down
-URxvt.resize-font.bigger: C-Up
+URxvt.resize-font.smaller: C-equal
+URxvt.resize-font.bigger: C-plus
 
 ! URxvt*scrollTtyOutput:  false
 ! URxvt*scrollWithBuffer: false
