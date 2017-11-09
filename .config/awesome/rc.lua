@@ -193,42 +193,20 @@ mailcounterwidgettimer:start()
 metarwidget = wibox.widget.textbox()
 metarwidget:set_forced_width(600)
 metarwidget.text = "WAITING FOR METAR DATA"
-metarwidgettimer = timer({ timeout = 30 })
-metarwidgettimer:connect_signal("timeout",
-  function()
-    status = io.popen("cat /tmp/.metar", "r")
-    metar = status:read()
-    if metar == nil then
-        metarwidget.markup = ''                     
-    else
-        metarwidget.markup = '<span color="#535d6c">'..metar..'</span> '
-    end
-    status:close()    
-  end    
-)    
-metarwidgettimer:start()
-
-
--- sshadd widget
-
-sshaddwidget = wibox.widget.textbox()
-sshaddwidget.text = " SSH "
-sshaddwidgettimer = timer({ timeout = 5 })
-sshaddwidgettimer:connect_signal("timeout",
-  function()
-    status = io.popen("ssh-add -l | grep ED25519 2>/dev/null", "r")
-    if status:read() == nil then
-        sshaddwidget.markup = ' <span color="#535d6c">SSH</span> <span color="#000">|</span>'                     
-    else
-        sshaddwidget.markup = ' <span color="#00FF00">SSH</span> <span color="#000">|</span>'
-    end
-    status:close()    
-  end    
-)    
-sshaddwidgettimer:start()
-
-
-
+--metarwidgettimer = timer({ timeout = 30 })
+--metarwidgettimer:connect_signal("timeout",
+--  function()
+--    status = io.popen("cat /tmp/.metar", "r")
+--    metar = status:read()
+--    if metar == nil then
+--        metarwidget.markup = ''                     
+--    else
+--        metarwidget.markup = '<span color="#535d6c">'..metar..'</span> '
+--    end
+--    status:close()    
+--  end    
+--)    
+--metarwidgettimer:start()
 
 -- VPN widget
 
@@ -459,7 +437,6 @@ awful.screen.connect_for_each_screen(function(s)
        }, 
        {
         layout = wibox.layout.fixed.horizontal,
-        sshaddwidget,
         vpnwidget,
         cpuwidget,
        }

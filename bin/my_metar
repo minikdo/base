@@ -13,15 +13,17 @@ if [ $? = 1 ]; then
     exit
 fi
 
-env METARURL=http://tgftp.nws.noaa.gov/data/observations/metar/stations/ \
-    metar $METAR >$FILE
+#env METARURL=http://tgftp.nws.noaa.gov/data/observations/metar/stations/ \
+METAR=`metar $METAR`
 
-cat $FILE >>/home/domino/.metar.log
+echo -e 'metarwidget.text = "{$METAR}" ' | awesome-client
+
+#cat $FILE >>/home/domino/.metar.log
 
 if [ $? = 1 ]; then
     echo -n "NO METAR DATA" >$FILE
 fi
 
-exit
+#exit
 
 
