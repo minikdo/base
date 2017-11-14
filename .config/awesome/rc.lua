@@ -190,23 +190,15 @@ mailcounterwidgettimer:start()
 
 --metar widget
 
-metarwidget = wibox.widget.textbox()
-metarwidget:set_forced_width(600)
-metarwidget.text = "WAITING FOR METAR DATA"
---metarwidgettimer = timer({ timeout = 30 })
---metarwidgettimer:connect_signal("timeout",
---  function()
---    status = io.popen("cat /tmp/.metar", "r")
---    metar = status:read()
---    if metar == nil then
---        metarwidget.markup = ''                     
---    else
---        metarwidget.markup = '<span color="#535d6c">'..metar..'</span> '
---    end
---    status:close()    
---  end    
---)    
---metarwidgettimer:start()
+--metarwidget = wibox.widget.textbox()
+--metarwidget:set_forced_width(800)
+--metarwidget.text = "WAITING FOR METAR DATA"
+
+metarwidget = wibox.widget 
+{
+    text = "AQQ",
+    widget = wibox.widget.textbox	
+}
 
 -- VPN widget
 
@@ -225,8 +217,6 @@ vpnwidgettimer:connect_signal("timeout",
   end    
 )    
 vpnwidgettimer:start()
-
-
 
 --- }}}
 
@@ -277,7 +267,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
     { "Shotwell", "/usr/bin/shotwell" },
     { "Gimp", "/usr/bin/gimp" },
     { "Stellarium", "/usr/bin/stellarium" },
-    { "rtorrent", "rxvt -sr -T rtorrent -n rtorrent -e /home/domino/bin/ssh kim -Xt screen -aAdr -RR rtorrent rtorrent" },
+    { "rtorrent", "rxvt -sr -T rtorrent -n rtorrent -e /home/domino/bin/ssh kim.dominowisla.pl -Xt screen -aAdr -RR rtorrent rtorrent" },
     { "Skype", function () awful.util.spawn("/home/domino/bin/skype") end },
     { "open terminal", terminal },
     { "suspend", '/home/domino/bin/my_shutdown.sh Suspend' },
@@ -426,19 +416,22 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox2:setup {
        layout = wibox.layout.align.horizontal,
        {
-        layout = wibox.layout.fixed.horizontal,
-	  metarwidget,
+           layout = wibox.layout.fixed.horizontal,
+	   {
+	       metarwidget,
+	       fg = "#535d6c",
+	       widget = wibox.container.background
+	   }
        },
        {
-        layout = wibox.layout.align.horizontal,
-        expand = "outside",
-        nil,
-        --myipwidget,
+           layout = wibox.layout.align.horizontal,
+           expand = "outside",
+           nil,
        }, 
        {
-        layout = wibox.layout.fixed.horizontal,
-        vpnwidget,
-        cpuwidget,
+           layout = wibox.layout.fixed.horizontal,
+           vpnwidget,
+           cpuwidget,
        }
     }
 

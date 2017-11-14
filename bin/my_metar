@@ -2,28 +2,13 @@
 
 set -eu
 
+METAR=epwa
+
 source ~/.zsh_my_env
-#METAR=epwa
-FILE=/tmp/.metar
 
-ping -w3 -c2 8.8.8.8  > /dev/null 2>&1 
-
-if [ $? = 1 ]; then
-    echo -n "PING FAILED" >$FILE
-    exit
-fi
-
-#env METARURL=http://tgftp.nws.noaa.gov/data/observations/metar/stations/ \
 METAR=`metar $METAR`
 
-echo -e 'metarwidget.text = "{$METAR}" ' | awesome-client
-
-#cat $FILE >>/home/domino/.metar.log
-
-if [ $? = 1 ]; then
-    echo -n "NO METAR DATA" >$FILE
-fi
-
-#exit
-
-
+echo -e "metarwidget.text = \"${METAR}\"" | \
+	DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus \
+	DISPLAY=:0.0 \
+	awesome-client
