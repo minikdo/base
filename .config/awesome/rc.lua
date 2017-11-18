@@ -268,7 +268,6 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
     { "Gimp", "/usr/bin/gimp" },
     { "Stellarium", "/usr/bin/stellarium" },
     { "rtorrent", "rxvt -sr -T rtorrent -n rtorrent -e /home/domino/bin/ssh kim.dominowisla.pl -Xt screen -aAdr -RR rtorrent rtorrent" },
-    { "Skype", function () awful.util.spawn("/home/domino/bin/skype") end },
     { "open terminal", terminal },
     { "suspend", '/home/domino/bin/my_shutdown.sh Suspend' },
     { "shutdown", '/home/domino/bin/my_shutdown.sh Shutdown' },
