@@ -37,6 +37,23 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 
 
+(setq org-capture-templates
+      (quote (("t" "todo" entry (file+headline (org-file-path "dominik.org") "Tasks")
+	       "* TODO %?\n %U\n")
+	      ("n" "note" entry (file+headline (org-file-path "dominik.org") "Notes")
+	       "* %? :NOTE:\n %U\n")
+	      ("j" "Journal" entry (file+datetree (org-file-path "journal.org"))
+	       "* %?\n %U\n" )
+	      )))
+
+;; to clock capture entry
+;; :clock-in t :clock-resume t
+
+;;(add-hook 'org-mode-hook 'abbrev-mode)
+;;(add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'org-capture-mode-hook 'flyspell-mode)
+(add-hook 'org-capture-mode-hook 'abbrev-mode)
+
 ;; disable backup
 (setq backup-inhibited t)
 
@@ -105,20 +122,21 @@
 
 ;; python hooks
 (add-hook 'python-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
-(add-hook 'python-mode-hook (lambda () (highlight-indentation-mode -1))) ;; disable autofill
 (add-hook 'python-mode-hook 'autopair-mode)
 
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
 
 ;; php hooks
 (add-hook 'php-mode-hook (lambda () (auto-fill-mode -1) (abbrev-mode -1))) ;; disable autofill
-;;(add-hook 'php-mode-hook (lambda () (abbrev-mode -1))) ;; disable autofill
 (add-hook 'php-mode-hook 'autopair-mode)
 
 ;; web-mode
 (add-hook 'web-mode-hook 'emmet-mode) ;; enable Emmet's css abbreviation.
 (add-hook 'web-mode-hook 'autopair-mode) ;; enable Emmet's css abbreviation.
 (add-hook 'web-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
+
+;; lua-mode
+(add-hook 'lua-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
 
 ;; Ido
 (setq ido-everywhere t)
@@ -132,9 +150,6 @@
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-
-;;(add-hook 'org-mode-hook 'abbrev-mode)
-;;(add-hook 'org-mode-hook 'flyspell-mode)
 
 
 ;; apt install emacs-goodies-el for filladapt
@@ -154,6 +169,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-(set-face-background 'highlight-indentation-face "#696969")
-(set-face-background 'highlight-indentation-current-column-face "#696969")

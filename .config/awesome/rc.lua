@@ -100,8 +100,6 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 --beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
---beautiful.init(awful.util.get_themes_dir() .. "sky/theme.lua")
---beautiful.init("/home/domino/.config/awesome/themes/default/theme.lua")
 beautiful.init("/home/domino/.config/awesome/themes/xresources/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
@@ -119,84 +117,43 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
---    awful.layout.suit.tile.left,
---    awful.layout.suit.tile.bottom,
---    awful.layout.suit.tile.top,
---    awful.layout.suit.fair,
---    awful.layout.suit.fair.horizontal,
---    awful.layout.suit.spiral,
---    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
---    awful.layout.suit.magnifier,
---    awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
     awful.layout.suit.floating,
 }
 -- }}}
 
-
-
---for s in screen do
---    freedesktop.desktop.add_icons({screen = s})
---end
-
-
 -- {{{ MY WIDGETS
 
+-- newmail
 
---myipwidget = wibox.widget.textbox()
---myipwidget.text = "NO EXT IP"
---myipwidgettimer = timer({ timeout = 10 })
---myipwidgettimer:connect_signal("timeout",
---  function()
---      status = io.popen("cat /tmp/.myip", "r")
---      myip = status:read()
---      if myip == nil then
---         myipwidget.text = ''
---	     else
---		 myipwidget.markup = '<span color="#535d6c">'..myip..'</span>'
---	end
---        status:close()
---         end
---       )
---    myipwidgettimer:start()
-    
-    
-
-mailcounterwidget = wibox.widget.textbox()
-mailcounterwidget.text = "N"
-mailcounterwidgettimer = timer({ timeout = 30 })
-mailcounterwidgettimer:connect_signal("timeout",
+newmailwidget = wibox.widget.textbox()
+newmailwidget.text = "N"
+newmailwidgettimer = timer({ timeout = 30 })
+newmailwidgettimer:connect_signal("timeout",
   function()
     status = io.popen("find /home/domino/.mail/minik/INBOX/new -type f | wc -l", "r")
-    mailcounter = status:read()
-    if mailcounter == nil then
-        mailcounterwidget.markup = '<span color="#535d6c">N</span>'                     
+    newmail = status:read()
+    if newmail == nil then
+        newmailwidget.markup = '<span color="#535d6c">N</span>'                     
     else
-       mailcounter = tonumber(mailcounter)
-       if mailcounter > 0 then
-	  mailcounterwidget.markup = '<span color="red">N</span>'
+       newmail = tonumber(newmail)
+       if newmail > 0 then
+	  newmailwidget.markup = '<span color="red">N</span>'
        else
-	  mailcounterwidget.markup = '<span color="#535d6c">N</span>'
+	  newmailwidget.markup = '<span color="#535d6c">N</span>'
        end
     end
     status:close()    
   end    
 )    
-mailcounterwidgettimer:start()
+newmailwidgettimer:start()
 
---metar widget
-
---metarwidget = wibox.widget.textbox()
---metarwidget:set_forced_width(800)
---metarwidget.text = "WAITING FOR METAR DATA"
+-- metar widget
 
 metarwidget = wibox.widget 
 {
-    text = "AQQ",
+    text = "WAITING FOR METAR DATA",
     widget = wibox.widget.textbox	
 }
 
@@ -406,7 +363,7 @@ awful.screen.connect_for_each_screen(function(s)
             mykeyboardlayout,
             wibox.widget.systray(),
 	    bat_widget,
-	    mailcounterwidget,
+	    newmailwidget,
             mytextclock,
             s.mylayoutbox,
         },
@@ -535,20 +492,11 @@ globalkeys = awful.util.table.join(
     -- floating term 
     awful.key({ modkey, "Shift"	  }, "Return",  function () run_or_raise("rxvt -name float -title float -tr -sh 50 -geometry 159x12", { instance = "float" } ) end,
     		{description = "open floating terminal", group = "My custom keys"}),
-    -- mbsync -a
-    awful.key({ modkey, "Shift"	  }, "m", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 159x12 -e sh -c "/home/domino/bin/my_mbsync"', { instance = "float" } ) end,
-    		{description = "fetch mail via mbsync", group = "My custom keys"}),
     -- ping 8.8.8.8
     awful.key({ modkey, "Shift"	  }, "p", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 80x12 -e sh -c "ping 8.8.8.8"', { instance = "float" } ) end,
     		{description = "ping 8.8.8.8", group = "My custom keys"}),
-    -- WIFI
-    awful.key({ modkey, "Control" }, "w", function () run_or_raise('rxvt -name float -title wifi_connection -tr -sh 50 -geometry 80x24 -e sh -c "/home/domino/bin/WIFI"', { instance = "float" } ) end,
-    		{description = "toggle wifi", group = "My custom keys"}),
-    -- PLAY
-    awful.key({ modkey, "Control" }, "p", function () run_or_raise('rxvt -name float -title play_connection -tr -sh 50 -geometry 80x24 -e sh -c "/home/domino/bin/PLAY"', { instance = "float" } ) end,
-    		{description = "toggle play connection", group = "My custom keys"}),
     -- edit rc.lua
-    awful.key({ modkey,		  }, ",", function () run_or_raise("rxvt -name rc.lua -title rc.lua -e sh -c 'joe ~/.config/awesome/rc.lua'", { instance = "rc.lua" } ) end,
+    awful.key({ modkey,		  }, ",", function () run_or_raise("rxvt -name rc.lua -title rc.lua -e sh -c 'emacs -nw ~/.config/awesome/rc.lua'", { instance = "rc.lua" } ) end,
     		{description = "open rc.lua settings", group = "My custom keys"}),
     -- mutt
     awful.key({ modkey,		  }, "y", function () run_or_raise("rxvt -name mutt -e 'mutt'", { instance = "mutt" } ) end,
@@ -565,6 +513,7 @@ globalkeys = awful.util.table.join(
     -- tor browser bundle
     --awful.key({ modkey, 	  }, "t", function () run_or_raise("torbrowser-launcher", { name = "Tor Browser" }) end,  
     --		{description = "tor browser", group = "My custom keys"}),
+ 
     -- pavucontrol
     awful.key({ modkey, 	  }, "v", function () run_or_raise("pavucontrol", { name = "Volume Control" }) end,  
     		{description = "pavucontrol", group = "My custom keys"}),
