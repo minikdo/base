@@ -1,4 +1,5 @@
 ENTRY "domino@adm" URL "/home/domino/sh://domino@adm/home/domino"
+ENTRY "domino@adm/zdjecia-wisla" URL "/home/domino/sh://domino@adm/home/wisla/zdjecia_sort/oferty/"
 ENTRY "/home/domino/sh://www-data@adm/home/var" URL "/home/domino/sh://www-data@adm/var/www"
 ENTRY "domino@cieszyn" URL "/home/domino/sh://domino@cieszyn/home/domino"
 ENTRY "domino@linode" URL "/home/domino/sh://domino@linode/home/domino"

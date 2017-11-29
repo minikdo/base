@@ -26,8 +26,8 @@
 
 (setq org-log-done 'time)
 
-;;(setq org-todo-keywords
-;;     '((sequence "TODO" "DONE" "IN-PROGRESS" "WAITING" "CANCELED")))
+(setq org-todo-keywords
+   '((sequence "TODO" "WAITING" "|" "DONE" )))
 
 ;; Keybindings
 
@@ -42,8 +42,8 @@
 	       "* TODO %?\n %U\n")
 	      ("n" "note" entry (file+headline (org-file-path "dominik.org") "Notes")
 	       "* %? :NOTE:\n %U\n")
-	      ("j" "Journal" entry (file+datetree (org-file-path "journal.org"))
-	       "* %?\n %U\n" )
+	      ("j" "Journal" entry (file (org-file-path "journal.org"))
+	       "* %U %?\n" )
 	      )))
 
 ;; to clock capture entry
@@ -56,6 +56,10 @@
 
 ;; disable backup
 (setq backup-inhibited t)
+
+;; unset page up and down
+(global-unset-key (kbd "<prior>"))
+(global-unset-key (kbd "<next>"))
 
 ;; Theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
