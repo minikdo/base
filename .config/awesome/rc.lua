@@ -98,9 +98,12 @@ end
 
 
 -- {{{ Variable definitions
+
+homedir = os.getenv("HOME")
+
 -- Themes define colours, icons, font and wallpapers.
 --beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
-beautiful.init("/home/domino/.config/awesome/themes/xresources/theme.lua")
+beautiful.init(homedir .. "/.config/awesome/themes/xresources/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -132,7 +135,7 @@ newmailwidget.text = "N"
 newmailwidgettimer = timer({ timeout = 30 })
 newmailwidgettimer:connect_signal("timeout",
   function()
-    status = io.popen("find /home/domino/.mail/minik/INBOX/new -type f | wc -l", "r")
+    status = io.popen("find "..homedir.."/.mail/minik/INBOX/new -type f | wc -l", "r")
     newmail = status:read()
     if newmail == nil then
         newmailwidget.markup = '<span color="#535d6c">N</span>'                     
@@ -218,35 +221,34 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "Debian", debian.menu.Debian_menu.Debian },
     { "Nautilus", "/usr/bin/nautilus" },
     { "Chromium", "/usr/bin/chromium --incognito" },
+    { "Tor Browser", function () awful.util.spawn_with_shell(homedir .. "/usr/tor-browser_en-US/Browser/start-tor-browser") end },
     { "Thunderbird", "/usr/bin/thunderbird" },
     { "Libreoffice", "/usr/bin/libreoffice" },
     { "Calendar", function () awful.util.spawn_with_shell("LC_TIME=pl_PL.utf8 /usr/bin/gnome-calendar") end },
     { "Shotwell", "/usr/bin/shotwell" },
     { "Gimp", "/usr/bin/gimp" },
     { "Stellarium", "/usr/bin/stellarium" },
-    { "rtorrent", "rxvt -sr -T rtorrent -n rtorrent -e /home/domino/bin/ssh kim.dominowisla.pl -Xt screen -aAdr -RR rtorrent rtorrent" },
+    { "rtorrent", "rxvt -sr -T rtorrent -n rtorrent -e " .. homedir .."/bin/ssh kim.dominowisla.pl -Xt screen -aAdr -RR rtorrent rtorrent" },
     { "open terminal", terminal },
-    { "suspend", '/home/domino/bin/my_shutdown.sh Suspend' },
-    { "shutdown", '/home/domino/bin/my_shutdown.sh Shutdown' },
-    { "reboot", '/home/domino/bin/my_shutdown.sh Reboot' },
-    { "lock", '/home/domino/bin/my_shutdown.sh LockScreen' }
+    { "suspend", homedir .. '/bin/my_shutdown.sh Suspend' },
+    { "shutdown", homedir .. '/bin/my_shutdown.sh Shutdown' },
+    { "reboot", homedir .. '/bin/my_shutdown.sh Reboot' },
+    { "lock", homedir .. '/bin/my_shutdown.sh LockScreen' }
                                   }
                         })
 
 -- MY
 mysshmenu = awful.menu({ items = { 
-    { "ssh adm", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh adm'" },
-    { "ssh linode", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh linode'" },
-    { "ssh linode2", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh linode2'" },
-    { "ssh adm -l www-data", "rxvt -e sh -c 'TERM=xterm /home/domino/bin/ssh adm -l www-data'" },
-    { "mail.log linode", 'rxvt -name linode_mail.log -title linode_mail.log -e sh -c "/home/domino/bin/ssh -t linode less /var/log/mail.log"' },
-    { "mail.log linode2", 'rxvt -name linode2_mail.log -title linode2_mail.log -e sh -c "/home/domino/bin/ssh -t linode2 less /var/log/mail.log"' },
-    { "adm php.log", 'rxvt -name adm_php.log -title adm_php.log -e sh -c "/home/domino/bin/ssh -t www-data@adm less /var/www/adm/log/php5"' },
+    { "ssh adm", "rxvt -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh adm'" },
+    { "ssh linode", "rxvt -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh linode'" },
+    { "ssh linode2", "rxvt -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh linode2'" },
+    { "ssh adm -l www-data", "rxvt -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh adm -l www-data'" },
+    { "mail.log linode", "rxvt -name linode_mail.log -title linode_mail.log -e sh -c '"..homedir.."/bin/ssh -t linode less /var/log/mail.log'" },
+    { "mail.log linode2", "rxvt -name linode2_mail.log -title linode2_mail.log -e sh -c '"..homedir.."/bin/ssh -t linode2 less /var/log/mail.log'" },
+    { "adm php.log", "rxvt -name adm_php.log -title adm_php.log -e sh -c '"..homedir.."/bin/ssh -t www-data@adm less /var/www/adm/log/php5'" },
     { "open terminal", terminal }
   }, width = 300 
 })
-
-
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
@@ -469,9 +471,9 @@ globalkeys = awful.util.table.join(
     		{description = "brightness up", group = "My custom keys"}),
     awful.key({ 		  }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 7") end,
     		{description = "brightness down", group = "My custom keys"}),
-    awful.key({ modkey,		  }, "F11",   function () awful.util.spawn("/home/domino/bin/redshift_launcher") end,
+    awful.key({ modkey,		  }, "F11",   function () awful.util.spawn(homedir .. "/bin/redshift_launcher") end,
     		{description = "toggle redshift", group = "My custom keys"}),
-    awful.key({ modkey, "Control" }, "t", function () awful.util.spawn("/home/domino/bin/my_tap") end,
+    awful.key({ modkey, "Control" }, "t", function () awful.util.spawn(homedir .. "/bin/my_tap") end,
     		{description = "toggle touchpad", group = "My custom keys"}),
 
     -- Volume
@@ -481,9 +483,9 @@ globalkeys = awful.util.table.join(
     		{description = "volume down", group = "My custom keys"}),
 
     -- LockScreen & Suspend
-    awful.key({ 		  }, "F12",   function () awful.util.spawn("/home/domino/bin/my_shutdown.sh LockScreen") end,
+    awful.key({ 		  }, "F12",   function () awful.util.spawn(homedir .. "/bin/my_shutdown.sh LockScreen") end,
     		{description = "lock screen", group = "My custom keys"}),
-    awful.key({ modkey,		  }, "F12",   function () awful.util.spawn("/home/domino/bin/my_shutdown.sh Suspend") end,
+    awful.key({ modkey,		  }, "F12",   function () awful.util.spawn(homedir .. "/bin/my_shutdown.sh Suspend") end,
     		{description = "suspend", group = "My custom keys"}),
 
     -- profanity
@@ -502,7 +504,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,		  }, "y", function () run_or_raise("rxvt -name mutt -e 'mutt'", { instance = "mutt" } ) end,
     		{description = "mutt", group = "My custom keys"}),
     -- irssi
-    awful.key({ modkey, "Shift"	  }, "o", function () run_or_raise("rxvt -sr -T irssi -n irssi -e /home/domino/bin/ssh adm -Xt screen -aAdr -RR irssi irssi", { name = "irssi" }) end,  
+    awful.key({ modkey, "Shift"	  }, "o", function () run_or_raise("rxvt -sr -T irssi -n irssi -e "..homedir.."/bin/ssh adm -Xt screen -aAdr -RR irssi irssi", { name = "irssi" }) end,  
     		{description = "irssi", group = "My custom keys"}),
     -- firefox
     awful.key({ modkey, 	  }, "i", function () run_or_raise("firefox-esr -private-window", { name = "Firefox" }) end,  
