@@ -519,6 +519,9 @@ globalkeys = awful.util.table.join(
     -- pavucontrol
     awful.key({ modkey, 	  }, "v", function () run_or_raise("pavucontrol", { name = "Volume Control" }) end,  
     		{description = "pavucontrol", group = "My custom keys"}),
+    -- nautilus
+    awful.key({ modkey, "Shift"	  }, "z", function () awful.spawn("nautilus") end,  
+    		{description = "nautilus", group = "My custom keys"}),
     -- END MY
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
