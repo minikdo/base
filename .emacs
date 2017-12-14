@@ -26,8 +26,15 @@
 
 (setq org-log-done 'time)
 
+(setq calendar-latitude 20.92)
+(setq calendar-longitude 52.26)
+
+
 (setq org-todo-keywords
    '((sequence "TODO" "WAITING" "|" "DONE" )))
+
+(setq org-todo-keyword-faces
+                 '(("WAITING" . "violet")))
 
 ;; Keybindings
 
@@ -166,6 +173,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (flatland)))
+ '(org-agenda-files (quote ("~/.agenda/dominik.org")))
+ '(org-agenda-skip-deadline-if-done t)
+ '(org-agenda-skip-scheduled-if-done t)
  '(org-deadline-warning-days 10))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
