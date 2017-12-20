@@ -109,6 +109,8 @@ alias muttrc="sensible-editor ~/.muttrc"
 alias erc="emacs -nw ~/.emacs"
 alias sshy="torsocks ssh $1"
 alias dq='dpkg -l | grep -i'
+alias acsh='apt-cache show'
+alias ach='apt changelog'
 
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 

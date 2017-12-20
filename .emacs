@@ -1,3 +1,7 @@
+;; Global
+;; Never, ever use tabs
+(setq-default indent-tabs-mode nil)
+
 ;; Org-mode settings
 (setq org-directory "~/.agenda")
 
@@ -114,9 +118,6 @@
 (add-hook 'sgml-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 
-;;(require 'jedi)
-;;(add-to-list 'ac-source 'ac-source-jedi-direct)
-;;(add-hook 'python-mode-hook 'jedi:setup)
 
 (require 'package)
 (add-to-list 'package-archives
@@ -130,6 +131,165 @@
 (define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand)
 ; Fixing another key binding bug in iedit mode
 (define-key global-map (kbd "C-c o") 'iedit-mode)
+
+
+
+;; which-key
+;;(require 'which-key)
+(which-key-mode)
+
+
+
+
+;; ;; Helper to find the best project root
+;; (defun aw/guess-best-root-for-buffer (buf repo-sentry &optional init-sentry)
+;;   "Guesses that the python root is the less 'deep' of either:
+;;      -- the root directory of the repository, or
+;;      -- the directory before the first directory after the root
+;;         having an __init__.py file."
+  
+;;   ;; make list of directories from root, removing empty
+;;   (defun make-dir-list (path)
+;;     (delq nil (mapcar (lambda (x) (and (not (string= x "")) x))
+;; 		      (split-string path "/"))))
+;;   ;; convert a list of directories to a path starting at "/"
+;;   (defun dir-list-to-path (dirs)
+;;     (mapconcat 'identity (cons "" dirs) "/"))
+;;   ;; a little something to try to find the "best" root directory
+;;   (defun try-find-best-root (base-dir buffer-dir current)
+;;     (cond
+;;      (base-dir ;; traverse until we reach the base
+;;       (try-find-best-root (cdr base-dir) (cdr buffer-dir)
+;; 			                              (append current (list (car
+;; 									     buffer-dir)))))
+     
+;;      (buffer-dir ;; try until we hit the current directory
+;;       (let* ((next-dir (append current (list (car buffer-dir))))
+;; 	     (sentry-file (concat (dir-list-to-path next-dir) "/"
+;; 				  init-sentry)))
+;; 	(if (file-exists-p sentry-file)
+;; 	    (dir-list-to-path current)
+;; 	  (try-find-best-root nil (cdr buffer-dir) next-dir))))
+     
+;;      (t nil)))
+  
+;;   (let* ((buffer-dir (expand-file-name (file-name-directory
+;; 					    (buffer-file-name buf))))
+;; 	 (vc-root-dir (vc-find-root buffer-dir repo-sentry)))
+;;     (if (and init-sentry vc-root-dir)
+;; 	(try-find-best-root
+;; 	 (make-dir-list (expand-file-name vc-root-dir))
+;; 	 (make-dir-list buffer-dir)
+;; 	 '())
+;;       vc-root-dir))) ;; default to vc root if sentry not given
+
+
+
+
+
+
+
+;; from: https://stackoverflow.com/questions/21246218/how-can-i-make-emacs-jedi-use-project-specific-virtualenvs
+
+(defun project-directory (buffer-name)
+  "Return the root directory of the project that contain the
+given BUFFER-NAME. Any directory with a .git or .jedi file/directory
+is considered to be a project root."
+  (interactive)
+  (let ((root-dir (file-name-directory buffer-name)))
+    (while (and root-dir
+                (not (file-exists-p (concat root-dir ".git")))
+                (not (file-exists-p (concat root-dir
+                                            ".jedi"))))
+      (setq root-dir
+            (if (equal root-dir "/")
+                nil
+              (file-name-directory (directory-file-name
+                                    root-dir)))))
+    root-dir))
+
+(defun project-name (buffer-name)
+  "Return the name of the project that contain the given BUFFER-NAME."
+  (let ((root-dir (project-directory buffer-name)))
+    (if root-dir
+        (file-name-nondirectory
+         (directory-file-name root-dir))
+      nil)))
+
+(defun jedi-setup-venv ()
+  "Activates the virtualenv of the current buffer."
+  (let ((project-name (project-name buffer-file-name)))
+    (when project-name (venv-workon project-name))))
+
+(setq jedi:setup-keys t)
+(setq jedi:complete-on-dot t)
+(add-hook 'python-mode-hook 'jedi-setup-venv)
+(add-hook 'python-mode-hook 'jedi:setup)
+
+
+
+
+
+
+
+
+
+
+;; projectile
+(require 'projectile)
+(projectile-global-mode)
+(setq projectile-completion-system 'ido)
+
+(require 'auto-complete-config)
+(ac-config-default)
+;; ac menu (optional)
+;;(setq ac-show-menu-immediately-on-auto-complete t)
+(setq ac-auto-show-menu (* ac-delay 2))
+
+;;(require 'jedi)
+;;(add-to-list 'ac-sources 'ac-source-jedi-direct)
+;;(add-hook 'python-mode-hook 'jedi:setup)
+
+;;(defvar jedi-config:vcs-root-sentinel ".git")
+;;(defvar jedi-config:python-module-sentinel "__init__.py")
+
+
+;; from https://github.com/wernerandrew/drewmacs2
+
+;; Jedi
+;; This is a bit of a doozy
+;; Requires the aw/guess-best-root-for-buffer defined in
+;; custom-functions.el
+
+(defun setup-jedi-extra-args ()
+  (let ((project-base (aw/guess-best-root-for-buffer
+		       (current-buffer) ".git"
+		       "__init__.py")))
+    (make-local-variable 'jedi:server-args)
+    (when project-base (set 'jedi:server-args (list "--sys-path"
+						    project-base)))))
+
+(require 'jedi)
+(setq jedi:setup-keys t)
+(setq jedi:complete-on-dot t)
+;; Only manually see in function tooltip
+(setq jedi:get-in-function-call-delay 10000000)
+(setq jedi:server-command
+      (list (executable-find "python")
+	    (cadr jedi:server-command)))
+(add-to-list 'ac-sources 'ac-source-jedi-direct)
+(add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'python-mode-hook 'setup-jedi-extra-args)
+;; jedi-specific keybindings
+(add-hook 'python-mode-hook
+	  '(lambda ()
+	     (local-set-key (kbd "M-?") 'jedi:show-doc)
+	     (local-set-key (kbd "M-.") 'jedi:goto-definition)
+	     (local-set-key (kbd "M-,") 'jedi:goto-definition-pop-marker)
+	     (local-set-key (kbd "M-/")
+			    'jedi:get-in-function-call)))
+
+
 
 ;; python hooks
 (add-hook 'python-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
@@ -150,8 +310,45 @@
 (add-hook 'lua-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
 
 ;; Ido
-(setq ido-everywhere t)
-(ido-mode t)
+;;(setq ido-everywhere t)
+;;(ido-mode t)
+
+
+(require 'flx-ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq flx-ido-use-faces 1)
+
+
+;; Display ido results vertically, rather than horizontally
+(setq ido-decorations
+      (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]"
+              " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+
+(defun ido-disable-line-truncation () (set (make-local-variable 'truncate-lines)
+                                           nil))
+(add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
+(defun ido-define-keys () ;; C-n/p is more intuitive in vertical layout
+  (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+  (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
+  ;; and include our custom ones also
+  (define-key ido-completion-map (kbd "M-k") 'ido-next-match)
+  (define-key ido-completion-map (kbd "M-i") 'ido-prev-match))
+(add-hook 'ido-setup-hook 'ido-define-keys)
+
+;; ag, if we can find the executable
+(if (executable-find "ag") ; Require only if executable exists
+    (progn
+      (require 'ag)
+      ;; same buffer for every search
+      (setq ag-reuse-buffers t)
+      (setq ag-results-pane nil))) ;; disable for now
+
+
+
 
 ;; Smex
 (require 'smex)
@@ -173,10 +370,21 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (flatland)))
- '(org-agenda-files (quote ("~/.agenda/dominik.org")))
+ '(jedi:server-command
+   (quote
+    ("/home/domino/sites/machines/.virtualenv/default/bin/jediepcserver")))
+ '(org-agenda-files (quote ("~/.agenda/dominik.org")) t)
  '(org-agenda-skip-deadline-if-done t)
  '(org-agenda-skip-scheduled-if-done t)
- '(org-deadline-warning-days 10))
+ '(org-deadline-warning-days 10)
+ '(projectile-git-command "git ls-files -zc --exclude-standard")
+ '(projectile-globally-ignored-directories
+   (quote
+    (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" ".pyc" "__pycache__")))
+ '(python-environment-virtualenv
+   (quote
+    ("virtualenv" "--no-site-packages" "--quiet" "--python" "python3"))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
