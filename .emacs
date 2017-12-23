@@ -383,7 +383,9 @@ is considered to be a project root."
     (".idea" ".eunit" ".git" ".hg" ".fslckout" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" ".pyc" "__pycache__")))
  '(python-environment-virtualenv
    (quote
-    ("virtualenv" "--no-site-packages" "--quiet" "--python" "python3"))))
+    ("virtualenv" "--no-site-packages" "--quiet" "--python" "python3")))
+ '(python-shell-interpreter "ipython3")
+ '(python-shell-interpreter-args "--simple-prompt --pprint"))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

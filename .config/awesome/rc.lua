@@ -488,6 +488,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,		  }, "F12",   function () awful.util.spawn(homedir .. "/bin/my_shutdown.sh Suspend") end,
     		{description = "suspend", group = "My custom keys"}),
 
+    -- emacs
+    awful.key({ modkey,		  }, "e", function () run_or_raise("rxvt -name emacs -e 'emacs24-nox'", { instance = "emacs" } ) end,
+    		{description = "emacs", group = "My custom keys"}),
     -- profanity
     awful.key({ modkey,		  }, "p", function () run_or_raise("rxvt -name profanity -title profanity -e sh -c 'LD_LIBRARY_PATH=/usr/local/lib profanity'", { instance = "profanity" } ) end,
     		{description = "profanity", group = "My custom keys"}),
