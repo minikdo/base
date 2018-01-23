@@ -217,10 +217,17 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end}
 }
 
+xrandrmenu = {
+   { "arandr", "arandr" },
+   { "eDPI1, DP1, HDMI2", function () awful.util.spawn_with_shell(homedir .. "/.screenlayout/x1.sh") end },
+   { "DP1 off", function () awful.util.spawn_with_shell("xrandr --output DP1 --off") end },
+}
+
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Debian", debian.menu.Debian_menu.Debian },
-    { "Nautilus", "/usr/bin/nautilus" },
-    { "Chromium", "/usr/bin/chromium --incognito" },
+                             { "Debian", debian.menu.Debian_menu.Debian },
+                             { "xrandr", xrandrmenu },
+                             { "Nautilus", "/usr/bin/nautilus" },
+                             { "Chromium", "/usr/bin/chromium --incognito" },
     { "Tor Browser", function () awful.util.spawn_with_shell(homedir .. "/usr/tor-browser_en-US/Browser/start-tor-browser") end },
     { "Thunderbird", "/usr/bin/thunderbird" },
     { "Libreoffice", "/usr/bin/libreoffice" },
@@ -234,8 +241,8 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
     { "shutdown", homedir .. '/bin/my_shutdown.sh Shutdown' },
     { "reboot", homedir .. '/bin/my_shutdown.sh Reboot' },
     { "lock", homedir .. '/bin/my_shutdown.sh LockScreen' }
-                                  }
-                        })
+}
+                       })
 
 -- MY
 mysshmenu = awful.menu({ items = { 
