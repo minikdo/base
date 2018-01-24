@@ -219,8 +219,10 @@ myawesomemenu = {
 
 xrandrmenu = {
    { "arandr", "arandr" },
+   { "eDP1 1920x1080", function () awful.util.spawn_with_shell("xrandr --output eDP1 --primary --mode 1920x1080") end },
    { "eDPI1, DP1, HDMI2", function () awful.util.spawn_with_shell(homedir .. "/.screenlayout/x1.sh") end },
    { "DP1 off", function () awful.util.spawn_with_shell("xrandr --output DP1 --off") end },
+   { "DP1 HDMI2 off", function () awful.util.spawn_with_shell("xrandr --output DP1 --off --output HDMI2 --off") end },
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
