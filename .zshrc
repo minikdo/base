@@ -114,6 +114,8 @@ alias ach='apt changelog'
 
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+eval "$(direnv hook zsh)"
+
 unsetopt share_history
 setopt completealiases   
 
