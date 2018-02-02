@@ -217,6 +217,13 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end}
 }
 
+cheatmenu = {
+   { "org-mode", "evince -f "..homedir.."/doc/configi/orgcard.pdf" },
+   { "ref-card", "evince -f "..homedir.."/doc/configi/refcard.pdf" },
+   { "auctex", "evince -f "..homedir.."/doc/configi/auctexref.pdf" },
+   { "two scoops", "evince -f "..homedir.."/doc/configi/two-scoops-of-django-1-11.pdf" },
+}
+
 xrandrmenu = {
    { "arandr", "arandr" },
    { "eDP1 1920x1080", function () awful.util.spawn_with_shell("xrandr --output eDP1 --primary --mode 1920x1080") end },
@@ -227,6 +234,7 @@ xrandrmenu = {
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                              { "Debian", debian.menu.Debian_menu.Debian },
+                             { "cheat sheets", cheatmenu },
                              { "xrandr", xrandrmenu },
                              { "Nautilus", "/usr/bin/nautilus" },
                              { "Chromium", "/usr/bin/chromium --incognito" },
