@@ -12,8 +12,6 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
---local freedesktop = require("freedesktop")
-
 -- Load Debian menu entries
 require("debian.menu")
 
@@ -100,6 +98,8 @@ end
 -- {{{ Variable definitions
 
 homedir = os.getenv("HOME")
+host_rtorrent = "kim.dominowisla.pl"
+my_inbox_path = "/.mail/minik/INBOX/new"
 
 -- Themes define colours, icons, font and wallpapers.
 --beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
@@ -135,7 +135,7 @@ newmailwidget.text = "N"
 newmailwidgettimer = timer({ timeout = 30 })
 newmailwidgettimer:connect_signal("timeout",
   function()
-    status = io.popen("find "..homedir.."/.mail/minik/INBOX/new -type f | wc -l", "r")
+    status = io.popen("find "..homedir..my_inbox_path.." -type f | wc -l", "r")
     newmail = status:read()
     if newmail == nil then
         newmailwidget.markup = '<span color="#535d6c">N</span>'                     
@@ -226,27 +226,27 @@ cheatmenu = {
 
 xrandrmenu = {
    { "arandr", "arandr" },
-   { "eDP1 1920x1080", function () awful.util.spawn_with_shell("xrandr --output eDP1 --primary --mode 1920x1080") end },
-   { "eDPI1, DP1, HDMI2", function () awful.util.spawn_with_shell(homedir .. "/.screenlayout/x1.sh") end },
-   { "DP1 off", function () awful.util.spawn_with_shell("xrandr --output DP1 --off") end },
-   { "DP1 HDMI2 off", function () awful.util.spawn_with_shell("xrandr --output DP1 --off --output HDMI2 --off") end },
+   { "------" },
+   { "1: 1920x1080", function () awful.util.spawn_with_shell("xrandr --output eDP1 --primary --mode 1920x1080") end },
+   { "1", function () awful.util.spawn_with_shell("xrandr --output DP1 --off --output HDMI2 --off") end },
+   { "1, 2", function () awful.util.spawn_with_shell("xrandr --output DP1 --off") end },
+   { "1, 2, 3", function () awful.util.spawn_with_shell(homedir .. "/.screenlayout/x1.sh") end },
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                             { "Debian", debian.menu.Debian_menu.Debian },
-                             { "cheat sheets", cheatmenu },
-                             { "xrandr", xrandrmenu },
-                             { "Nautilus", "/usr/bin/nautilus" },
-                             { "Chromium", "/usr/bin/chromium --incognito" },
-    { "Tor Browser", function () awful.util.spawn_with_shell(homedir .. "/usr/tor-browser_en-US/Browser/start-tor-browser") end },
-    { "Thunderbird", "/usr/bin/thunderbird" },
-    { "Libreoffice", "/usr/bin/libreoffice" },
-    { "Calendar", function () awful.util.spawn_with_shell("LC_TIME=pl_PL.utf8 /usr/bin/gnome-calendar") end },
-    { "Shotwell", "/usr/bin/shotwell" },
-    { "Gimp", "/usr/bin/gimp" },
-    { "Stellarium", "/usr/bin/stellarium" },
-    { "rtorrent", "rxvt -sr -T rtorrent -n rtorrent -e " .. homedir .."/bin/ssh kim.dominowisla.pl -Xt screen -aAdr -RR rtorrent rtorrent" },
+mymainmenu = awful.menu({ items = {
+    { "awesome", myawesomemenu, beautiful.awesome_icon },
+    { "debian", debian.menu.Debian_menu.Debian },
+    { "cheat sheets", cheatmenu },
+    { "xrandr", xrandrmenu },
+    { " " },
+    { "nautilus", "/usr/bin/nautilus" },
+    { "tor browser", function () awful.util.spawn_with_shell(homedir .. "/usr/tor-browser_en-us/browser/start-tor-browser") end },
+    { "thunderbird", "/usr/bin/thunderbird" },
+    { "calendar", function () awful.util.spawn_with_shell("lc_time=pl_pl.utf8 /usr/bin/gnome-calendar") end },
+    { "shotwell", "/usr/bin/shotwell" },
+    { "rtorrent", "rxvt -sr -T rtorrent -n rtorrent -e ".. homedir .."/bin/ssh "..host_rtorrent.." -Xt screen -aAdr -RR rtorrent rtorrent" },
     { "open terminal", terminal },
+    { " " },
     { "suspend", homedir .. '/bin/my_shutdown.sh Suspend' },
     { "shutdown", homedir .. '/bin/my_shutdown.sh Shutdown' },
     { "reboot", homedir .. '/bin/my_shutdown.sh Reboot' },
@@ -512,7 +512,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,		  }, "p", function () run_or_raise("rxvt -name profanity -title profanity -e sh -c 'LD_LIBRARY_PATH=/usr/local/lib profanity'", { instance = "profanity" } ) end,
     		{description = "profanity", group = "My custom keys"}),
     -- floating term 
-    awful.key({ modkey, "Shift"	  }, "Return",  function () run_or_raise("rxvt -name float -title float -tr -sh 50 -geometry 159x12", { instance = "float" } ) end,
+    awful.key({ modkey, "Shift"	  }, "Return",  function () awful.util.spawn("rxvt -name float -title float -tr -sh 50 -geometry 110x16", { instance = "float" } ) end,
     		{description = "open floating terminal", group = "My custom keys"}),
     -- ping 8.8.8.8
     awful.key({ modkey, "Shift"	  }, "p", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 80x12 -e sh -c "ping 8.8.8.8"', { instance = "float" } ) end,
@@ -586,7 +586,7 @@ globalkeys = awful.util.table.join(
 --        }
 --  end,
               -- {description = "lua execute prompt", group = "awesome"}),
-    -- Menubar -- MY mod: było p
+    -- Menubar -- MY mod: previously p
     awful.key({ modkey, }, "a", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
 )
