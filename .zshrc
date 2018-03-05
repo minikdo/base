@@ -123,4 +123,6 @@ setopt completealiases
 apt_pref="apt"
 apt_upgr="upgrade"
 
+export VIRTUAL_ENV_DISABLE_PROMPT=
+
 # --- END ---
