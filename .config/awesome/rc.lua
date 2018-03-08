@@ -218,9 +218,7 @@ myawesomemenu = {
 }
 
 cheatmenu = {
-   { "org-mode", "evince -f "..homedir.."/doc/configi/orgcard.pdf" },
-   { "ref-card", "evince -f "..homedir.."/doc/configi/refcard.pdf" },
-   { "auctex", "evince -f "..homedir.."/doc/configi/auctexref.pdf" },
+   { "org-mode", "evince -f "..homedir.."/doc/configi/allrefs.pdf" },
    { "two scoops", "evince -f "..homedir.."/doc/configi/two-scoops-of-django-1-11.pdf" },
 }
 
