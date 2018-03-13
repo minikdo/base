@@ -19,8 +19,7 @@ fi
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="terminalparty"
-#ZSH_THEME="gallois"
-
+# ZSH_THEME="jreese"
 
 DISABLE_UPDATE_PROMPT="true"
 
@@ -69,7 +68,7 @@ HISTSIZE=1000000
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git debian battery systemd sudo history man virtualenv virtualenvwrapper) 
+plugins=(zsh-completions git debian battery systemd sudo history man virtualenvwrapper) 
 
 
 # User configuration
@@ -80,8 +79,9 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 source $ZSH/oh-my-zsh.sh
 
 # Automatically list directory contents on `cd`.
-auto-ls () { ls --color; }
-chpwd_functions=( auto-ls $chpwd_functions )
+# psuje workon 
+# auto-ls () { ls --color; }
+# chpwd_functions=( auto-ls $chpwd_functions )
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -120,9 +120,10 @@ eval "$(direnv hook zsh)"
 unsetopt share_history
 setopt completealiases   
 
+
 apt_pref="apt"
 apt_upgr="upgrade"
 
-export VIRTUAL_ENV_DISABLE_PROMPT=
+#export VIRTUAL_ENV_DISABLE_PROMPT=
 
 # --- END ---

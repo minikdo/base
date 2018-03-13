@@ -21,9 +21,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (flatland)))
- ;; '(jedi:server-command
-   ;; (quote
-    ;; ("~/.emacs.d/.python-environments/default/bin/jediepcserver")))
+ '(jedi:server-command
+   (quote
+    ("~/.emacs.d/.python-environments/default/bin/jediepcserver")))
+ '(org-agenda-skip-deadline-if-done t)
+ '(org-agenda-skip-scheduled-if-done t)
+ '(org-deadline-warning-days 10)
  '(projectile-git-command "git ls-files -zc --exclude-standard")
  '(projectile-globally-ignored-directories
    (quote
@@ -33,4 +36,9 @@
     ("virtualenv" "--no-site-packages" "--quiet" "--python" "python3")))
  '(python-shell-interpreter "ipython3")
  '(python-shell-interpreter-args "--simple-prompt --pprint"))
-
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

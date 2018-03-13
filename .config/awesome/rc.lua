@@ -240,7 +240,7 @@ mymainmenu = awful.menu({ items = {
     { "nautilus", "/usr/bin/nautilus" },
     { "tor browser", function () awful.util.spawn_with_shell(homedir .. "/usr/tor-browser_en-us/browser/start-tor-browser") end },
     { "thunderbird", "/usr/bin/thunderbird" },
-    { "calendar", function () awful.util.spawn_with_shell("lc_time=pl_pl.utf8 /usr/bin/gnome-calendar") end },
+    { "calendar", function () awful.util.spawn_with_shell("LC_TIME=pl_PL.UTF-8 /usr/bin/gnome-calendar") end },
     { "shotwell", "/usr/bin/shotwell" },
     { "rtorrent", "rxvt -sr -T rtorrent -n rtorrent -e ".. homedir .."/bin/ssh "..host_rtorrent.." -Xt screen -aAdr -RR rtorrent rtorrent" },
     { "open terminal", terminal },
