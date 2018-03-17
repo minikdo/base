@@ -39,6 +39,7 @@
 !/.fonts.conf
 !/.gitignore.d
 !/.gitignore.d/base
+!/.global_gitignore
 !/.local
 !/.local/share
 !/.local/share/applications
