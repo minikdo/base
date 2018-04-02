@@ -24,6 +24,7 @@
  '(jedi:server-command
    (quote
     ("~/.emacs.d/.python-environments/default/bin/jediepcserver")))
+ '(menu-bar-mode nil)
  '(org-agenda-skip-deadline-if-done t)
  '(org-agenda-skip-scheduled-if-done t)
  '(org-deadline-warning-days 10)
@@ -34,11 +35,20 @@
  '(python-environment-virtualenv
    (quote
     ("virtualenv" "--no-site-packages" "--quiet" "--python" "python3")))
- '(python-shell-interpreter "ipython3")
- '(python-shell-interpreter-args "--simple-prompt --pprint"))
+ ;; '(python-shell-interpreter "python4")
+ '(python-shell-interpreter "/usr/bin/ipython3")
+ ;; '(python-shell-interpreter-args "-i"))
+ '(python-shell-interpreter-args "--simple-prompt --pprint -i"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'dired-find-alternate-file 'disabled nil)
+
+
+;; (with-eval-after-load 'python
+      ;; (add-hook 'python-mode-hook (lambda () (setq python-shell-interpreter
+                                                   ;; "python3"))))
+

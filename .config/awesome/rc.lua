@@ -242,7 +242,7 @@ mymainmenu = awful.menu({ items = {
     { "thunderbird", "/usr/bin/thunderbird" },
     { "calendar", function () awful.util.spawn_with_shell("LC_TIME=pl_PL.UTF-8 /usr/bin/gnome-calendar") end },
     { "shotwell", "/usr/bin/shotwell" },
-    { "rtorrent", "rxvt -sr -T rtorrent -n rtorrent -e ".. homedir .."/bin/ssh "..host_rtorrent.." -Xt screen -aAdr -RR rtorrent rtorrent" },
+    { "rtorrent", "urxvtc -sr -T rtorrent -n rtorrent -e ".. homedir .."/bin/ssh "..host_rtorrent.." -Xt screen -aAdr -RR rtorrent rtorrent" },
     { "open terminal", terminal },
     { " " },
     { "suspend", homedir .. '/bin/my_shutdown.sh Suspend' },
@@ -254,13 +254,13 @@ mymainmenu = awful.menu({ items = {
 
 -- MY
 mysshmenu = awful.menu({ items = { 
-    { "ssh adm", "rxvt -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh adm'" },
-    { "ssh linode", "rxvt -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh linode'" },
-    { "ssh linode2", "rxvt -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh linode2'" },
-    { "ssh adm -l www-data", "rxvt -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh adm -l www-data'" },
-    { "mail.log linode", "rxvt -name linode_mail.log -title linode_mail.log -e sh -c '"..homedir.."/bin/ssh -t linode less /var/log/mail.log'" },
-    { "mail.log linode2", "rxvt -name linode2_mail.log -title linode2_mail.log -e sh -c '"..homedir.."/bin/ssh -t linode2 less /var/log/mail.log'" },
-    { "adm php.log", "rxvt -name adm_php.log -title adm_php.log -e sh -c '"..homedir.."/bin/ssh -t www-data@adm less /var/www/adm/log/php5'" },
+    { "ssh adm", "urxvtc -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh adm'" },
+    { "ssh linode", "urxvtc -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh linode'" },
+    { "ssh linode2", "urxvtc -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh linode2'" },
+    { "ssh adm -l www-data", "urxvtc -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh adm -l www-data'" },
+    { "mail.log linode", "urxvtc -name linode_mail.log -title linode_mail.log -e sh -c '"..homedir.."/bin/ssh -t linode less /var/log/mail.log'" },
+    { "mail.log linode2", "urxvtc -name linode2_mail.log -title linode2_mail.log -e sh -c '"..homedir.."/bin/ssh -t linode2 less /var/log/mail.log'" },
+    { "adm php.log", "urxvtc -name adm_php.log -title adm_php.log -e sh -c '"..homedir.."/bin/ssh -t www-data@adm less /var/www/adm/log/php5'" },
     { "open terminal", terminal }
   }, width = 300 
 })
@@ -458,6 +458,12 @@ globalkeys = awful.util.table.join(
     -- duplicated for easier key
     awful.key({ modkey,           }, "x", function () awful.screen.focus_relative( 1) end,
               {description = "focus the next screen", group = "screen"}),
+    awful.key({ modkey,       }, "F1", function () awful.screen.focus(1) end,
+              {description = "focus screen #1", group = "screen"}),
+    awful.key({ modkey,       }, "F2", function () awful.screen.focus(2) end,
+              {description = "focus screen #2", group = "screen"}),
+    awful.key({ modkey,       }, "F3", function () awful.screen.focus(3) end,
+              {description = "focus screen #3", group = "screen"}),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
@@ -503,26 +509,23 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,		  }, "F12",   function () awful.util.spawn(homedir .. "/bin/my_shutdown.sh Suspend") end,
     		{description = "suspend", group = "My custom keys"}),
 
-    -- emacs
-    awful.key({ modkey,		  }, "e", function () run_or_raise("rxvt -name emacs -e 'emacs24-nox'", { instance = "emacs" } ) end,
-    		{description = "emacs", group = "My custom keys"}),
+    -- emacsclient
+    awful.key({ modkey,		  }, "e", function () run_or_raise("urxvtc -name emacs -e '"..homedir.."/bin/e'", { instance = "emacs" } ) end,
+    		{description = "emacsclient", group = "My custom keys"}),
     -- profanity
-    awful.key({ modkey,		  }, "p", function () run_or_raise("rxvt -name profanity -title profanity -e sh -c 'LD_LIBRARY_PATH=/usr/local/lib profanity'", { instance = "profanity" } ) end,
+    awful.key({ modkey,		  }, "p", function () run_or_raise("urxvtc -name profanity -title profanity -e sh -c 'LD_LIBRARY_PATH=/usr/local/lib profanity'", { instance = "profanity" } ) end,
     		{description = "profanity", group = "My custom keys"}),
     -- floating term 
-    awful.key({ modkey, "Shift"	  }, "Return",  function () awful.util.spawn("rxvt -name float -title float -tr -sh 50 -geometry 110x16", { instance = "float" } ) end,
+    awful.key({ modkey, "Shift"	  }, "Return",  function () awful.util.spawn("urxvtc -name float -title float -tr -sh 50 -geometry 110x16", { instance = "float" } ) end,
     		{description = "open floating terminal", group = "My custom keys"}),
     -- ping 8.8.8.8
-    awful.key({ modkey, "Shift"	  }, "p", function () run_or_raise('rxvt -name float -title float -tr -sh 50 -geometry 80x12 -e sh -c "ping 8.8.8.8"', { instance = "float" } ) end,
+    awful.key({ modkey, "Shift"	  }, "p", function () run_or_raise('urxvtc -name float -title float -tr -sh 50 -geometry 80x12 -e sh -c "ping 8.8.8.8"', { instance = "float" } ) end,
     		{description = "ping 8.8.8.8", group = "My custom keys"}),
-    -- edit rc.lua
-    awful.key({ modkey,		  }, ",", function () run_or_raise("rxvt -name rc.lua -title rc.lua -e sh -c 'emacs -nw ~/.config/awesome/rc.lua'", { instance = "rc.lua" } ) end,
-    		{description = "open rc.lua settings", group = "My custom keys"}),
     -- mutt
-    awful.key({ modkey,		  }, "y", function () run_or_raise("rxvt -name mutt -e 'mutt'", { instance = "mutt" } ) end,
+    awful.key({ modkey,		  }, "y", function () run_or_raise("urxvtc -name mutt -e 'mutt'", { instance = "mutt" } ) end,
     		{description = "mutt", group = "My custom keys"}),
     -- irssi
-    awful.key({ modkey, "Shift"	  }, "o", function () run_or_raise("rxvt -sr -T irssi -n irssi -e "..homedir.."/bin/ssh adm -Xt screen -aAdr -RR irssi irssi", { name = "irssi" }) end,  
+    awful.key({ modkey, "Shift"	  }, "o", function () run_or_raise("urxvtc -sr -T irssi -n irssi -e "..homedir.."/bin/ssh adm -Xt screen -aAdr -RR irssi irssi", { name = "irssi" }) end,  
     		{description = "irssi", group = "My custom keys"}),
     -- firefox
     awful.key({ modkey, 	  }, "i", function () run_or_raise("firefox-esr -private-window", { name = "Firefox" }) end,  

@@ -68,7 +68,7 @@ HISTSIZE=1000000
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-completions git debian battery systemd sudo history man virtualenvwrapper) 
+plugins=(zsh-completions git debian battery systemd sudo history man pip virtualenvwrapper) 
 
 
 # User configuration
@@ -105,9 +105,11 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshrc="sensible-editor ~/.zshrc"
-alias muttrc="sensible-editor ~/.muttrc"
-alias erc="emacs -nw ~/.emacs"
+
+EDITOR=e
+
+alias zshrc="$EDITOR ~/.zshrc"
+alias muttrc="$EDITOR ~/.muttrc"
 alias sshy="torsocks ssh $1"
 alias dq='dpkg -l | grep -i'
 alias acsh='apt-cache show'
