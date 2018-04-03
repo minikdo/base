@@ -106,7 +106,7 @@ source $ZSH/oh-my-zsh.sh
 #
 # Example aliases
 
-EDITOR=e
+EDITOR="emacsclient -t --alternate-editor=''"
 
 alias zshrc="$EDITOR ~/.zshrc"
 alias muttrc="$EDITOR ~/.muttrc"
