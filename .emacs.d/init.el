@@ -21,6 +21,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (flatland)))
+ '(elpy-modules
+   (quote
+    (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(jedi:server-command
    (quote
     ("~/.emacs.d/.python-environments/default/bin/jediepcserver")))
@@ -35,9 +38,7 @@
  '(python-environment-virtualenv
    (quote
     ("virtualenv" "--no-site-packages" "--quiet" "--python" "python3")))
- ;; '(python-shell-interpreter "python4")
  '(python-shell-interpreter "/usr/bin/ipython3")
- ;; '(python-shell-interpreter-args "-i"))
  '(python-shell-interpreter-args "--simple-prompt --pprint -i"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -131,6 +131,7 @@ is considered to be a project root."
 
 ;; php hooks
 (add-hook 'php-mode-hook (lambda () (auto-fill-mode -1) (abbrev-mode -1))) ;; disable autofill
+(add-hook 'php-mode-hook (lambda () (highlight-indentation-mode 0))) ;; disable autofill
 (add-hook 'php-mode-hook 'autopair-mode)
 
 ;; web-mode
