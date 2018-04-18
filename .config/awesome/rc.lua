@@ -219,7 +219,7 @@ myawesomemenu = {
 
 cheatmenu = {
    { "org-mode", "evince -f "..homedir.."/doc/configi/allrefs.pdf" },
-   { "two scoops", "evince -f "..homedir.."/doc/configi/two-scoops-of-django-1-11.pdf" },
+   { "two scoops", "evince -f "..homedir.."/doc/configi/django/two-scoops-of-django-1-11.pdf" },
 }
 
 xrandrmenu = {
