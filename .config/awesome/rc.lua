@@ -102,7 +102,7 @@ host_rtorrent = "kim.dominowisla.pl"
 my_inbox_path = "/.mail/minik/INBOX/new"
 
 -- Themes define colours, icons, font and wallpapers.
---beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
+-- beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
 beautiful.init(homedir .. "/.config/awesome/themes/xresources/theme.lua")
 
 -- This is used later as the default terminal and editor to run.

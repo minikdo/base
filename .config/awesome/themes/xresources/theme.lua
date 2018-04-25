@@ -15,7 +15,7 @@ local theme_assets = dofile("/usr/share/awesome/themes/xresources/assets.lua")
 theme.font          = "inconsolata"
 
 theme.bg_normal     = xrdb.background
-theme.bg_focus      = xrdb.color15
+theme.bg_focus      = xrdb.color14
 theme.bg_urgent     = xrdb.color9
 theme.bg_minimize   = xrdb.color8
 theme.bg_systray    = theme.bg_normal
@@ -88,15 +88,17 @@ end
 local is_dark_bg = (bg_numberic_value < 383)
 
 -- Generate wallpaper:
-local wallpaper_bg = xrdb.color8
-local wallpaper_fg = xrdb.color7
-local wallpaper_alt_fg = xrdb.color12
-if not is_dark_bg then
-    wallpaper_bg, wallpaper_fg = wallpaper_fg, wallpaper_bg
-end
-theme.wallpaper = function(s)
-    return theme_assets.wallpaper(wallpaper_bg, wallpaper_fg, wallpaper_alt_fg, s)
-end
+-- local wallpaper_bg = xrdb.color8
+-- local wallpaper_fg = xrdb.color7
+-- local wallpaper_alt_fg = xrdb.color12
+-- if not is_dark_bg then
+    -- wallpaper_bg, wallpaper_fg = wallpaper_fg, wallpaper_bg
+-- end
+-- theme.wallpaper = function(s)
+    -- return theme_assets.wallpaper(wallpaper_bg, wallpaper_fg, wallpaper_alt_fg, s)
+-- end
+
+theme.wallpaper = "/home/domino/Downloads/debian_background.png"
 
 return theme
 

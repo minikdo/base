@@ -4,7 +4,7 @@
 
 local theme = {}
 
-theme.font          = "Inconsolata"
+theme.font          = "inconsolata"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#6C887A"
