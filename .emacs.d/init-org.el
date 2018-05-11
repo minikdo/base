@@ -50,7 +50,7 @@
 	      ("n" "note" entry (file+headline (org-file-path "dominik.org") "Notes")
 	       "* %? :NOTE:\n %U\n")
 	      ("j" "Journal" entry (file (org-file-path "journal.org"))
-	       "* %U %?\n" )
+	       "* %U\n\n%?\n" )
 	      )))
 
 ;; to clock capture entry
@@ -58,8 +58,8 @@
 
 ;;(add-hook 'org-mode-hook 'abbrev-mode)
 ;;(add-hook 'org-mode-hook 'flyspell-mode)
-(add-hook 'org-capture-mode-hook 'flyspell-mode)
-(add-hook 'org-capture-mode-hook 'abbrev-mode)
+;; (add-hook 'org-capture-mode-hook 'flyspell-mode)
+;; (add-hook 'org-capture-mode-hook 'abbrev-mode)
 
 (custom-set-variables
  '(org-agenda-skip-deadline-if-done t)

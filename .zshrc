@@ -68,7 +68,7 @@ HISTSIZE=1000000
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-completions git debian battery systemd sudo history man pip virtualenvwrapper) 
+plugins=(zsh-completions git git-annex debian battery systemd sudo history man pip virtualenvwrapper) 
 
 
 # User configuration
