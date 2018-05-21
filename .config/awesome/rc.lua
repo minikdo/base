@@ -245,10 +245,10 @@ mymainmenu = awful.menu({ items = {
     { "rtorrent", "urxvtc -sr -T rtorrent -n rtorrent -e ".. homedir .."/bin/ssh "..host_rtorrent.." -Xt screen -aAdr -RR rtorrent rtorrent" },
     { "open terminal", terminal },
     { " " },
-    { "suspend", homedir .. '/bin/my_shutdown.sh Suspend' },
-    { "shutdown", homedir .. '/bin/my_shutdown.sh Shutdown' },
-    { "reboot", homedir .. '/bin/my_shutdown.sh Reboot' },
-    { "lock", homedir .. '/bin/my_shutdown.sh LockScreen' }
+    { "suspend", 'ssh-add -D; gpgconf --reload gpg-agent; systemctl suspend' },
+    { "shutdown", 'systemctl poweroff' },
+    { "reboot", 'systemctl reboot' },
+    { "lock", 'ssh-add -D; gpgconf --reload gpg-agent; slock' }
 }
                        })
 

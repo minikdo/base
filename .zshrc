@@ -110,6 +110,7 @@ EDITOR="emacsclient -t --alternate-editor=''"
 
 alias zshrc="$EDITOR ~/.zshrc"
 alias muttrc="$EDITOR ~/.muttrc"
+alias rclua="$EDITOR ~/.config/awesome/rc.lua"
 alias sshy="torsocks ssh $1"
 alias dq='dpkg -l | grep -i'
 alias acsh='apt-cache show'
