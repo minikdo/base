@@ -238,17 +238,15 @@ mymainmenu = awful.menu({ items = {
     { "xrandr", xrandrmenu },
     { " " },
     { "nautilus", "/usr/bin/nautilus" },
-    { "tor browser", function () awful.util.spawn_with_shell(homedir .. "/usr/tor-browser_en-us/browser/start-tor-browser") end },
-    { "thunderbird", "/usr/bin/thunderbird" },
     { "calendar", function () awful.util.spawn_with_shell("LC_TIME=pl_PL.UTF-8 /usr/bin/gnome-calendar") end },
     { "shotwell", "/usr/bin/shotwell" },
     { "rtorrent", "urxvtc -sr -T rtorrent -n rtorrent -e ".. homedir .."/bin/ssh "..host_rtorrent.." -Xt screen -aAdr -RR rtorrent rtorrent" },
     { "open terminal", terminal },
     { " " },
-    { "suspend", 'ssh-add -D; gpgconf --reload gpg-agent; systemctl suspend' },
-    { "shutdown", 'systemctl poweroff' },
-    { "reboot", 'systemctl reboot' },
-    { "lock", 'ssh-add -D; gpgconf --reload gpg-agent; slock' }
+    { "suspend", function () awful.util.spawn_with_shell("ssh-add -D ; gpgconf --reload gpg-agent ; systemctl suspend") end },
+    { "shutdown", function () awful.util.spawn_with_shell("systemctl poweroff") end },
+    { "reboot", function () awful.util.spawn_with_shell("systemctl reboot") end },
+    { "lock", function () awful.util.spawn_with_shell("ssh-add -D ; gpgconf --reload gpg-agent ; slock") end }
 }
                        })
 
@@ -504,9 +502,9 @@ globalkeys = awful.util.table.join(
     		{description = "volume down", group = "My custom keys"}),
 
     -- LockScreen & Suspend
-    awful.key({ 		  }, "F12",   function () awful.util.spawn(homedir .. "/bin/my_shutdown.sh LockScreen") end,
+    awful.key({ 		  }, "F12",   function () awful.util.spawn_with_shell("ssh-add -D ; gpgconf --reload gpg-agent ; slock") end,
     		{description = "lock screen", group = "My custom keys"}),
-    awful.key({ modkey,		  }, "F12",   function () awful.util.spawn(homedir .. "/bin/my_shutdown.sh Suspend") end,
+    awful.key({ modkey,		  }, "F12",   function () awful.util.spawn_with_shell("ssh-add -D ; gpgconf --reload gpg-agent ; systemctl suspend") end,
     		{description = "suspend", group = "My custom keys"}),
 
     -- emacsclient

@@ -49,8 +49,10 @@
 	       "* TODO %?\n %U\n")
 	      ("n" "note" entry (file+headline (org-file-path "notes.org") "Notes")
 	       "* %? :NOTE:\n %U\n")
-	      ("j" "Journal" entry (file (org-file-path "journal.org"))
+	      ("j" "journal" entry (file (org-file-path "journal.org"))
 	       "* %U\n\n%?\n" )
+	      ("s" "shopping" table-line (file+headline (org-file-path "dominik.org") "Zakupy")
+	       "|%U|%?| |" )
 	      )))
 
 ;; to clock capture entry
