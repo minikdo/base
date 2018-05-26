@@ -514,7 +514,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,		  }, "p", function () run_or_raise("urxvtc -name profanity -title profanity -e sh -c 'LD_LIBRARY_PATH=/usr/local/lib profanity'", { instance = "profanity" } ) end,
     		{description = "profanity", group = "My custom keys"}),
     -- floating term 
-    awful.key({ modkey, "Shift"	  }, "Return",  function () awful.util.spawn("urxvtc -name float -title float -tr -sh 50 -geometry 110x16", { instance = "float" } ) end,
+    awful.key({ modkey, "Shift"	  }, "Return",  function () awful.util.spawn("urxvtc -name float -title float -tr -sh 50 -geometry 110x20", { instance = "float" } ) end,
     		{description = "open floating terminal", group = "My custom keys"}),
     -- ping 8.8.8.8
     awful.key({ modkey, "Shift"	  }, "p", function () run_or_raise('urxvtc -name float -title float -tr -sh 50 -geometry 80x12 -e sh -c "ping 8.8.8.8"', { instance = "float" } ) end,
