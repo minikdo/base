@@ -185,3 +185,4 @@ is considered to be a project root."
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 
+(require 'git-annex)
