@@ -219,23 +219,16 @@ myawesomemenu = {
 
 cheatmenu = {
    { "org-mode", "evince -f "..homedir.."/doc/configi/allrefs.pdf" },
-   { "two scoops", "evince -f "..homedir.."/doc/configi/django/two-scoops-of-django-1-11.pdf" },
-}
-
-xrandrmenu = {
-   { "arandr", "arandr" },
-   { "------" },
-   { "1: 1920x1080", function () awful.util.spawn_with_shell("xrandr --output eDP1 --primary --mode 1920x1080") end },
-   { "1", function () awful.util.spawn_with_shell("xrandr --output DP1 --off --output HDMI2 --off") end },
-   { "1, 2", function () awful.util.spawn_with_shell("xrandr --output DP1 --off") end },
-   { "1, 2, 3", function () awful.util.spawn_with_shell(homedir .. "/.screenlayout/x1.sh") end },
+   { "two scoops", "evince -f "..homedir.."/docs/configi/django/two-scoops-of-django-1-11.pdf" },
 }
 
 mymainmenu = awful.menu({ items = {
     { "awesome", myawesomemenu, beautiful.awesome_icon },
     { "debian", debian.menu.Debian_menu.Debian },
     { "cheat sheets", cheatmenu },
-    { "xrandr", xrandrmenu },
+    { " " },
+    { "1920x1080", function () awful.util.spawn_with_shell("xrandr --output eDP1 --primary --mode 1920x1080  --output HDMI2 --off") end },
+    { "HDMI on", function () awful.util.spawn_with_shell(homedir .. "/.screenlayout/x1.sh") end },
     { " " },
     { "nautilus", "/usr/bin/nautilus" },
     { "calendar", function () awful.util.spawn_with_shell("LC_TIME=pl_PL.UTF-8 /usr/bin/gnome-calendar") end },
@@ -523,7 +516,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,		  }, "y", function () run_or_raise("urxvtc -name mutt -e 'mutt'", { instance = "mutt" } ) end,
     		{description = "mutt", group = "My custom keys"}),
     -- irssi
-    awful.key({ modkey, "Shift"	  }, "o", function () run_or_raise("urxvtc -sr -T irssi -n irssi -e "..homedir.."/bin/ssh adm -Xt screen -aAdr -RR irssi irssi", { name = "irssi" }) end,  
+    awful.key({ modkey, "Shift"	  }, "o", function () run_or_raise("urxvtc -sr -T irssi -n irssi -e ssh adm -Xt screen -aAdr -RR irssi irssi", { name = "irssi" }) end,  
     		{description = "irssi", group = "My custom keys"}),
     -- firefox
     awful.key({ modkey, 	  }, "i", function () run_or_raise("firefox-esr -private-window", { name = "Firefox" }) end,  
@@ -723,6 +716,7 @@ awful.rules.rules = {
            "pinentry-gnome3",
            "Gcr-prompter",
            "pinentry",
+           "Pinentry",
            "veromix",
            "xtightvncviewer"},
 
