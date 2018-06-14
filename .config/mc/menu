@@ -376,3 +376,36 @@ C       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
 + x /usr/bin/open | x /usr/local/bin/open & x /bin/sh
 o       Open next a free console
         open -s -- sh
+
+
++ ! t t
+g       git annex get
+        git annex get %f
+
++ t t
+g       git annex get
+        git annex get %u
+
++ ! t t
+G       git annex drop
+        git annex drop %f
+
++ t t
+G       git annex drop
+        git annex drop %u
+
++ ! t t
+u       git annex unlock
+        git annex unlock %f
+
++ t t
+u       git annex unlock
+        git annex unlock %u
+
++ ! t t
+U       git annex add
+        git annex add %f
+
++ t t
+U       git annex add
+        git annex add %u
