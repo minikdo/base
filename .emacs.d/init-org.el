@@ -50,7 +50,7 @@
 	      ("n" "note" entry (file+headline (org-file-path "notes.org") "Notes")
 	       "* %? :NOTE:\n %U\n")
 	      ("j" "journal" entry (file (org-file-path "journal.org"))
-	       "* %U\n\n%?\n" )
+	       "* %U %?\n\n" )
 	      ("s" "shopping" table-line (file+headline (org-file-path "dominik.org") "Zakupy")
 	       "|%U|%?| |" )
 	      )))
