@@ -113,6 +113,7 @@ alias muttrc="$EDITOR ~/.muttrc"
 alias rclua="$EDITOR ~/.config/awesome/rc.lua"
 alias sshy="torsocks ssh $1"
 alias dq='dpkg -l | grep -i'
+alias dl='dpkg -l | less -S'
 alias acsh='apt-cache show'
 alias ach='apt changelog'
 alias jf='journalctl -f'
