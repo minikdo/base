@@ -218,7 +218,7 @@ myawesomemenu = {
 }
 
 cheatmenu = {
-   { "org-mode", "evince -f "..homedir.."/doc/configi/allrefs.pdf" },
+   { "emacs cheat sheets", "evince -f "..homedir.."/docs/configi/allrefs.pdf" },
    { "two scoops", "evince -f "..homedir.."/docs/configi/django/two-scoops-of-django-1-11.pdf" },
 }
 
@@ -483,23 +483,18 @@ globalkeys = awful.util.table.join(
     		{description = "brightness up", group = "My custom keys"}),
     awful.key({ 		  }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 7") end,
     		{description = "brightness down", group = "My custom keys"}),
-    awful.key({ modkey,		  }, "F11",   function () awful.util.spawn(homedir .. "/bin/redshift_launcher") end,
-    		{description = "toggle redshift", group = "My custom keys"}),
     awful.key({ modkey, "Control" }, "t", function () awful.util.spawn(homedir .. "/bin/my_tap") end,
     		{description = "toggle touchpad", group = "My custom keys"}),
-
     -- Volume
     awful.key({ 		  }, "XF86AudioRaiseVolume",  function () awful.util.spawn_with_shell("~/bin/pa_vol_up") end,
     		{description = "volume up", group = "My custom keys"}),
     awful.key({ 		  }, "XF86AudioLowerVolume",  function () awful.util.spawn_with_shell("~/bin/pa_vol_down") end,
     		{description = "volume down", group = "My custom keys"}),
-
     -- LockScreen & Suspend
-    awful.key({ 		  }, "F12",   function () awful.util.spawn_with_shell("ssh-add -D ; gpgconf --reload gpg-agent ; slock") end,
+    awful.key({ 		  }, "F12",   function () awful.util.spawn_with_shell("gpgconf --reload gpg-agent ; slock") end,
     		{description = "lock screen", group = "My custom keys"}),
-    awful.key({ modkey,		  }, "F12",   function () awful.util.spawn_with_shell("ssh-add -D ; gpgconf --reload gpg-agent ; systemctl suspend") end,
+    awful.key({ modkey,		  }, "F12",   function () awful.util.spawn_with_shell("gpgconf --reload gpg-agent ; systemctl suspend") end,
     		{description = "suspend", group = "My custom keys"}),
-
     -- emacsclient
     awful.key({ modkey,		  }, "e", function () run_or_raise("urxvtc -name emacs -e '"..homedir.."/bin/e'", { instance = "emacs" } ) end,
     		{description = "emacsclient", group = "My custom keys"}),
@@ -507,10 +502,10 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,		  }, "p", function () run_or_raise("urxvtc -name profanity -title profanity -e sh -c 'LD_LIBRARY_PATH=/usr/local/lib profanity'", { instance = "profanity" } ) end,
     		{description = "profanity", group = "My custom keys"}),
     -- floating term 
-    awful.key({ modkey, "Shift"	  }, "Return",  function () awful.util.spawn("urxvtc -name float -title float -tr -sh 50 -geometry 110x20", { instance = "float" } ) end,
+    awful.key({ modkey, "Shift"	  }, "Return",  function () awful.util.spawn("urxvtc -name float1 -sh 50 ", { instance = "float1" } ) end,
     		{description = "open floating terminal", group = "My custom keys"}),
     -- ping 8.8.8.8
-    awful.key({ modkey, "Shift"	  }, "p", function () run_or_raise('urxvtc -name float -title float -tr -sh 50 -geometry 80x12 -e sh -c "ping 8.8.8.8"', { instance = "float" } ) end,
+    awful.key({ modkey, "Shift"	  }, "p", function () run_or_raise('urxvtc -name float -title float -tr -sh 50 -e sh -c "ping 8.8.8.8"', { instance = "float" } ) end,
     		{description = "ping 8.8.8.8", group = "My custom keys"}),
     -- mutt
     awful.key({ modkey,		  }, "y", function () run_or_raise("urxvtc -name mutt -e 'mutt'", { instance = "mutt" } ) end,
@@ -519,15 +514,11 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"	  }, "o", function () run_or_raise("urxvtc -sr -T irssi -n irssi -e ssh adm -Xt screen -aAdr -RR irssi irssi", { name = "irssi" }) end,  
     		{description = "irssi", group = "My custom keys"}),
     -- firefox
-    awful.key({ modkey, 	  }, "i", function () run_or_raise("firefox-esr -private-window", { name = "Firefox" }) end,  
+    awful.key({ modkey, 	  }, "i", function () run_or_raise("firefox-esr -no-remote", { name = "Firefox" }) end,  
     		{description = "firefox", group = "My custom keys"}),
     -- chromium
     awful.key({ modkey, "Shift"   }, "i", function () run_or_raise("chromium --incognito", { name = "Chromium" }) end,  
     		{description = "chromium", group = "My custom keys"}),
-    -- tor browser bundle
-    --awful.key({ modkey, 	  }, "t", function () run_or_raise("torbrowser-launcher", { name = "Tor Browser" }) end,  
-    --		{description = "tor browser", group = "My custom keys"}),
- 
     -- pavucontrol
     awful.key({ modkey, 	  }, "v", function () run_or_raise("pavucontrol", { name = "Volume Control" }) end,  
     		{description = "pavucontrol", group = "My custom keys"}),
@@ -702,7 +693,6 @@ awful.rules.rules = {
            "Nautilus",
            "Evince",
            "mplayer2",
-           "Skype",
            "Vlc",
            "Viewnior",
            "Pavucontrol",
@@ -734,25 +724,11 @@ awful.rules.rules = {
       }, properties = { titlebars_enabled = false }
     },
     
-    { rule_any = { class = { "Skype", "Viewnior" }}, properties = { titlebars_enabled = true } },
-
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
-    
     -- BEGIN MY
---    { rule = { class = "Tor Browser" },
---      properties = { screen = 1, tag = "2", switchtotag = true, focus = true, 
----                     width = 1368, height = 841, floating = true, 
---	             border_width=1, border_color='#000000', x=276, y=119 } },
- --   { rule = { class = "Torbrowser-launcher" },
---      properties = { screen = 1, tag = "2", switchtotag = true, focus = true, 
---                     floating = true, border_width=5,
- --                    border_color='#000000', x=470 } },
- --   { rule = { instance = "TorLauncher" },
- --     properties = { screen = 1, tag = "2", switchtotag = true, focus = true, 
- --                    floating = true, border_width=5,
- --                    border_color='#000000', x=470 } },
+
+    { rule_any = { class = { "Viewnior" }},
+      properties = { titlebars_enabled = true } },
+
     { rule = { class = "Firefox" },
       properties = { screen = 1, tag = "1", switchtotag = true, focus = true  } },
     { rule = { class = "Firefox", instance = "Browser" },
@@ -764,20 +740,12 @@ awful.rules.rules = {
     { rule = { class = "URxvt", instance = "dmesg" },
       properties = { focus = false },
       		     callback = awful.client.setslave },
-    { rule = { class = "XTerm", instance = "mutt" },
-      properties = { screen = 1, tag = "1", switchtotag = true, focus = true },
-      		     callback = awful.client.setslave, 
-      		     awful.client.swap.bydirection("up") },
     { rule = { class = "URxvt", instance = "profanity" },
       properties = { focus = true, switchtotag = true },
       		     callback = awful.client.setslave },
-    { rule = { class = "URxvt", instance = "rc.lua" },
-      properties = { switchtotag = true, focus = true } },
     { rule = { class = "URxvt", instance = "float" },
-      properties = { placement = awful.placement.centered, focus = true, floating = true } },
-    { rule = { class = "Conky" },
-       properties = { floating = true, sticky = true, ontop = false,
-                       focusable = false } }    
+      properties = { placement = awful.placement.centered,
+                     focus = true, floating = true } },
     -- END MY
 }
 -- }}}
