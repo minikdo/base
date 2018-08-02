@@ -393,7 +393,7 @@ awful.screen.connect_for_each_screen(function(s)
            nil,
        }, 
        {
-           layout = wibox.layout.fixed.horizontal,
+          layout = wibox.layout.fixed.horizontal,
            vpnwidget,
            cpuwidget,
        }
