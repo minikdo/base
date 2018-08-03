@@ -245,14 +245,14 @@ mymainmenu = awful.menu({ items = {
 
 -- MY
 mysshmenu = awful.menu({ items = { 
-    { "ssh adm", "urxvtc -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh adm'" },
-    { "ssh linode", "urxvtc -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh linode'" },
-    { "ssh linode2", "urxvtc -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh linode2'" },
-    { "ssh adm -l www-data", "urxvtc -e sh -c 'TERM=xterm " .. homedir .."/bin/ssh adm -l www-data'" },
-    { "mail.log linode", "urxvtc -name linode_mail.log -title linode_mail.log -e sh -c '"..homedir.."/bin/ssh -t linode less /var/log/mail.log'" },
-    { "mail.log linode2", "urxvtc -name linode2_mail.log -title linode2_mail.log -e sh -c '"..homedir.."/bin/ssh -t linode2 less /var/log/mail.log'" },
-    { "adm php.log", "urxvtc -name adm_php.log -title adm_php.log -e sh -c '"..homedir.."/bin/ssh -t www-data@adm less /var/www/adm/log/php5'" },
-    { "open terminal", terminal }
+    { "ssh adm",         "urxvtc -e sh -c 'ssh adm'" },
+    { "ssh linode",      "urxvtc -e sh -c 'ssh linode'" },
+    { "ssh linode2",     "urxvtc -e sh -c 'ssh linode2'" },
+    { "ssh www-data",    "urxvtc -e sh -c 'ssh adm -l www-data'" },
+    { "journal linode",  "urxvtc -name linode journal  -title linode journal  -fade 40 -fg green  -e sh -c 'ssh linode  journalctl -f'" },
+    { "journal linode2", "urxvtc -name linode2 journal -title linode2 journal -fade 40 -fg orange -e sh -c 'ssh linode2 journalctl -f'" },
+    { "adm php.log",     "urxvtc -name adm_php.log -title adm_php.log -e sh -c 'ssh -t www-data@adm less /var/www/adm/log/php5'" },
+    { "open terminal",   terminal }
   }, width = 300 
 })
 
@@ -502,7 +502,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,		  }, "p", function () run_or_raise("urxvtc -name profanity -title profanity -e sh -c 'LD_LIBRARY_PATH=/usr/local/lib profanity'", { instance = "profanity" } ) end,
     		{description = "profanity", group = "My custom keys"}),
     -- floating term 
-    awful.key({ modkey, "Shift"	  }, "Return",  function () awful.util.spawn("urxvtc -name float1 -sh 50 ", { instance = "float1" } ) end,
+    awful.key({ modkey, "Shift"	  }, "Return",  function () awful.util.spawn("urxvtc -name float1 -tr -sh 50 ", { instance = "float1" } ) end,
     		{description = "open floating terminal", group = "My custom keys"}),
     -- ping 8.8.8.8
     awful.key({ modkey, "Shift"	  }, "p", function () run_or_raise('urxvtc -name float -title float -tr -sh 50 -e sh -c "ping 8.8.8.8"', { instance = "float" } ) end,
