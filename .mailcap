@@ -1,5 +1,5 @@
 application/pdf; evince %s; test=test -n "$DISPLAY"
-text/html; chmod +w %s && /home/domino/bin/my_html_preview %s ; description=HTML Text; nametemplate=%s.html
+text/html; chmod +w %s && $HOME/bin/my_html_preview %s ; description=HTML Text; nametemplate=%s.html
 text/html; /usr/bin/w3m -I %{charset} -dump -T text/html %s; copiousoutput; description=HTML Text; nametemplate=%s.html
 image/gif; viewnior '%s'; test=test -n "$DISPLAY" ; description=GIF Image; nametemplate=%s.gif
 image/jpeg; viewnior '%s'; test=test -n "$DISPLAY" ; description=JPEG Image; nametemplate=%s.jpeg

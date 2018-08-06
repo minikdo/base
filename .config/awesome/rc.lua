@@ -248,12 +248,11 @@ mysshmenu = awful.menu({ items = {
     { "ssh adm",         "urxvtc -e sh -c 'ssh adm'" },
     { "ssh linode",      "urxvtc -e sh -c 'ssh linode'" },
     { "ssh linode2",     "urxvtc -e sh -c 'ssh linode2'" },
-    { "ssh www-data",    "urxvtc -e sh -c 'ssh adm -l www-data'" },
-    { "journal linode",  "urxvtc -name linode journal  -title linode journal  -fade 40 -fg green  -e sh -c 'ssh linode  journalctl -f'" },
+    { "ssh www-data",    "urxvtc -e sh -c 'ssh www-data@adm'" },
+    { "adm php.log",     "urxvtc -name adm_php.log -title adm_php.log -face 40 -fg yellow -e sh -c 'ssh -t www-data@adm less /var/www/adm/log/php5'" },
     { "journal linode2", "urxvtc -name linode2 journal -title linode2 journal -fade 40 -fg orange -e sh -c 'ssh linode2 journalctl -f'" },
-    { "adm php.log",     "urxvtc -name adm_php.log -title adm_php.log -e sh -c 'ssh -t www-data@adm less /var/www/adm/log/php5'" },
-    { "open terminal",   terminal }
-  }, width = 300 
+    { "journal linode",  "urxvtc -name linode journal  -title linode journal  -fade 40 -fg green  -e sh -c 'ssh linode  journalctl -f'" },
+}, width = 300 
 })
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
@@ -730,16 +729,20 @@ awful.rules.rules = {
       properties = { titlebars_enabled = true } },
 
     { rule = { class = "Firefox" },
-      properties = { screen = 1, tag = "1", switchtotag = true, focus = true  } },
+      properties = { screen = 1, tag = "1",
+                     switchtotag = true,
+                     focus = true  } },
     { rule = { class = "Firefox", instance = "Browser" },
       properties = { screen = 1, tag = "1" },
       		     callback = awful.client.setslave },
     { rule = { class = "Firefox", role = "pop-up" },
       properties = { screen = 1, tag = "1" },
       		     callback = awful.client.setslave },
-    { rule = { class = "URxvt", instance = "dmesg" },
-      properties = { focus = false },
-      		     callback = awful.client.setslave },
+    { rule = { class = "URxvt", instance = "mutt" },
+      properties = { screen = 1,
+                     tag = "8",
+                     switchtotag = true,
+                     focus = true  } },
     { rule = { class = "URxvt", instance = "profanity" },
       properties = { focus = true, switchtotag = true },
       		     callback = awful.client.setslave },

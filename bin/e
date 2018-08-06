@@ -1,9 +1,11 @@
 #!/bin/bash
 
 USERID=`id -u`
+
 if [ ! -e /tmp/emacs$USERID/server ]; then
     echo "Starting server."
     emacs --daemon
+
     while [ ! -e "/tmp/emacs$USERID/server" ]; do
         sleep 0.5
     done

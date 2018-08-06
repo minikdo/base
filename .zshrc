@@ -53,6 +53,8 @@ COMPLETION_WAITING_DOTS="true"
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+export HIST_STAMPS="yyyy-mm-dd"
+
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -64,6 +66,7 @@ plugins=(zsh-completions git git-annex debian battery systemd sudo history man p
 
 
 # User configuration
+
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -94,7 +97,6 @@ source $ZSH/oh-my-zsh.sh
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="yyyy-mm-dd"
 export HISTSIZE=100000
 export SAVEHIST=100000
 
@@ -123,7 +125,6 @@ eval "$(direnv hook zsh)"
 
 unsetopt share_history
 setopt completealiases   
-
 
 apt_pref="apt"
 apt_upgr="upgrade"

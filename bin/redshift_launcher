@@ -37,8 +37,8 @@ fi
 
 
 COORDS="52:21"
-IP=$(curl -m 5 -k https://139.162.172.22/ip.php )
-
+# IP=$(curl -m 5 -k https://139.162.172.22/ip.php )
+IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 if [ $? = 0 ]; then
 
