@@ -53,8 +53,6 @@ COMPLETION_WAITING_DOTS="true"
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-export HIST_STAMPS="yyyy-mm-dd"
-
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -97,8 +95,9 @@ source $ZSH/oh-my-zsh.sh
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-export HISTSIZE=100000
-export SAVEHIST=100000
+# export HIST_STAMPS="yyyy-mm-dd"
+export HISTSIZE=50
+export SAVEHIST=0
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -110,6 +109,7 @@ export SAVEHIST=100000
 export EDITOR="emacsclient -t --alternate-editor=''"
 
 alias zshrc="$EDITOR ~/.zshrc"
+alias zshh="$EDITOR ~/.zsh_history"
 alias muttrc="$EDITOR ~/.muttrc"
 alias rclua="$EDITOR ~/.config/awesome/rc.lua"
 alias sshy="torsocks ssh $1"

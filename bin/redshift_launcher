@@ -1,9 +1,10 @@
 #!/bin/bash
 
-set -u
+set -ux
 
 MODE=${1:-nothing}
 
+# FIXME: doesn't work with redshift <defunct>
 killall redshift
 
 if [ $? = 0 ]; then

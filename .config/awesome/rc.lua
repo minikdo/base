@@ -133,6 +133,7 @@ awful.layout.layouts = {
 newmailwidget = wibox.widget.textbox()
 newmailwidget.text = "N"
 newmailwidgettimer = timer({ timeout = 30 })
+-- newmailwidgettimer = gears.timer(timeout:30)
 newmailwidgettimer:connect_signal("timeout",
   function()
     status = io.popen("find "..homedir..my_inbox_path.." -type f | wc -l", "r")
@@ -217,29 +218,28 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end}
 }
 
-cheatmenu = {
-   { "emacs cheat sheets", "evince -f "..homedir.."/docs/configi/allrefs.pdf" },
-   { "two scoops", "evince -f "..homedir.."/docs/configi/django/two-scoops-of-django-1-11.pdf" },
+myterminalmenu = {
+    { "terminal", terminal },
+    { "terminal orange", "urxvtc -fg orange" },
+    { "terminal yellow", "urxvtc -fg yellow" },
+    { "terminal blue",   "urxvtc -fg blue" },
 }
-
+                              
 mymainmenu = awful.menu({ items = {
-    { "awesome", myawesomemenu, beautiful.awesome_icon },
-    { "debian", debian.menu.Debian_menu.Debian },
-    { "cheat sheets", cheatmenu },
+    { "awesome",  myawesomemenu, beautiful.awesome_icon },
+    { "terminal", myterminalmenu },
     { " " },
-    { "1920x1080", function () awful.util.spawn_with_shell("xrandr --output eDP1 --primary --mode 1920x1080  --output HDMI2 --off") end },
-    { "HDMI on", function () awful.util.spawn_with_shell(homedir .. "/.screenlayout/x1.sh") end },
+    { "single display", function () awful.util.spawn_with_shell("xrandr --output eDP1 --primary --mode 1920x1080  --output HDMI2 --off") end },
+    { "hdmi",           function () awful.util.spawn_with_shell(homedir .. "/.screenlayout/x1.sh") end },
     { " " },
     { "nautilus", "/usr/bin/nautilus" },
     { "calendar", function () awful.util.spawn_with_shell("LC_TIME=pl_PL.UTF-8 /usr/bin/gnome-calendar") end },
     { "shotwell", "/usr/bin/shotwell" },
-    { "rtorrent", "urxvtc -sr -T rtorrent -n rtorrent -e ".. homedir .."/bin/ssh "..host_rtorrent.." -Xt screen -aAdr -RR rtorrent rtorrent" },
-    { "open terminal", terminal },
     { " " },
-    { "suspend", function () awful.util.spawn_with_shell("ssh-add -D ; gpgconf --reload gpg-agent ; systemctl suspend") end },
+    { "suspend",  function () awful.util.spawn_with_shell("systemctl suspend") end },
     { "shutdown", function () awful.util.spawn_with_shell("systemctl poweroff") end },
-    { "reboot", function () awful.util.spawn_with_shell("systemctl reboot") end },
-    { "lock", function () awful.util.spawn_with_shell("ssh-add -D ; gpgconf --reload gpg-agent ; slock") end }
+    { "reboot",   function () awful.util.spawn_with_shell("systemctl reboot") end },
+    { "lock",     function () awful.util.spawn_with_shell("slock") end }
 }
                        })
 
@@ -248,10 +248,9 @@ mysshmenu = awful.menu({ items = {
     { "ssh adm",         "urxvtc -e sh -c 'ssh adm'" },
     { "ssh linode",      "urxvtc -e sh -c 'ssh linode'" },
     { "ssh linode2",     "urxvtc -e sh -c 'ssh linode2'" },
-    { "ssh www-data",    "urxvtc -e sh -c 'ssh www-data@adm'" },
-    { "adm php.log",     "urxvtc -name adm_php.log -title adm_php.log -face 40 -fg yellow -e sh -c 'ssh -t www-data@adm less /var/www/adm/log/php5'" },
-    { "journal linode2", "urxvtc -name linode2 journal -title linode2 journal -fade 40 -fg orange -e sh -c 'ssh linode2 journalctl -f'" },
-    { "journal linode",  "urxvtc -name linode journal  -title linode journal  -fade 40 -fg green  -e sh -c 'ssh linode  journalctl -f'" },
+    { "journal linode2", "urxvtc -name linode2_journal -title linode2_journal -fg yellow -e sh -c 'ssh linode2 journalctl -f'" },
+    { "journal linode",  "urxvtc -name linode_journal  -title linode_journal  -fg orange -e sh -c 'linode_journal'" },
+    { "journal",         "urxvtc -name journal         -title journal         -fg green  -e sh -c 'journalctl -f'" },
 }, width = 300 
 })
 
@@ -501,10 +500,10 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,		  }, "p", function () run_or_raise("urxvtc -name profanity -title profanity -e sh -c 'LD_LIBRARY_PATH=/usr/local/lib profanity'", { instance = "profanity" } ) end,
     		{description = "profanity", group = "My custom keys"}),
     -- floating term 
-    awful.key({ modkey, "Shift"	  }, "Return",  function () awful.util.spawn("urxvtc -name float1 -tr -sh 50 ", { instance = "float1" } ) end,
+    awful.key({ modkey, "Shift"	  }, "Return",  function () awful.util.spawn("urxvtc -name float1 -tr -sh 25 ", { instance = "float1" } ) end,
     		{description = "open floating terminal", group = "My custom keys"}),
     -- ping 8.8.8.8
-    awful.key({ modkey, "Shift"	  }, "p", function () run_or_raise('urxvtc -name float -title float -tr -sh 50 -e sh -c "ping 8.8.8.8"', { instance = "float" } ) end,
+    awful.key({ modkey, "Shift"	  }, "p", function () run_or_raise('urxvtc -name ping -title ping -tr -sh 50 -e sh -c "ping 8.8.8.8"', { instance = "ping" } ) end,
     		{description = "ping 8.8.8.8", group = "My custom keys"}),
     -- mutt
     awful.key({ modkey,		  }, "y", function () run_or_raise("urxvtc -name mutt -e 'mutt'", { instance = "mutt" } ) end,
