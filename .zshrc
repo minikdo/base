@@ -106,7 +106,7 @@ export SAVEHIST=0
 #
 # Example aliases
 
-export EDITOR="emacsclient -t --alternate-editor=''"
+export EDITOR=e
 
 alias zshrc="$EDITOR ~/.zshrc"
 alias zshh="$EDITOR ~/.zsh_history"

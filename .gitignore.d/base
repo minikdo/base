@@ -3,15 +3,12 @@
 !/bin
 !/bin/e
 !/bin/ipfilt
-!/bin/my_hotlist_make
 !/bin/my_html_preview
 !/bin/my_metar
-!/bin/my_shutdown.sh
 !/bin/my_tap
 !/bin/pa_vol_down
 !/bin/pa_vol_up
 !/bin/redshift_launcher
-!/bin/ssh
 !/.config
 !/.config/awesome
 !/.config/awesome/rc.lua
@@ -30,6 +27,7 @@
 !/.config/mc/menu
 !/.config/mc/panels.ini
 !/.emacs.d
+!/.emacs.d/custom-functions.el
 !/.emacs.d/init.el
 !/.emacs.d/init-keys.el
 !/.emacs.d/init-mode.el

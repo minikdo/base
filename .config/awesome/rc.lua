@@ -136,7 +136,7 @@ newmailwidgettimer = timer({ timeout = 30 })
 -- newmailwidgettimer = gears.timer(timeout:30)
 newmailwidgettimer:connect_signal("timeout",
   function()
-    status = io.popen("find "..homedir..my_inbox_path.." -type f | wc -l", "r")
+    status = io.popen("ls "..homedir..my_inbox_path.." | wc -l", "r")
     newmail = status:read()
     if newmail == nil then
         newmailwidget.markup = '<span color="#535d6c">N</span>'                     
@@ -228,14 +228,12 @@ myterminalmenu = {
 mymainmenu = awful.menu({ items = {
     { "awesome",  myawesomemenu, beautiful.awesome_icon },
     { "terminal", myterminalmenu },
-    { " " },
     { "single display", function () awful.util.spawn_with_shell("xrandr --output eDP1 --primary --mode 1920x1080  --output HDMI2 --off") end },
     { "hdmi",           function () awful.util.spawn_with_shell(homedir .. "/.screenlayout/x1.sh") end },
-    { " " },
     { "nautilus", "/usr/bin/nautilus" },
     { "calendar", function () awful.util.spawn_with_shell("LC_TIME=pl_PL.UTF-8 /usr/bin/gnome-calendar") end },
     { "shotwell", "/usr/bin/shotwell" },
-    { " " },
+    { "---", },
     { "suspend",  function () awful.util.spawn_with_shell("systemctl suspend") end },
     { "shutdown", function () awful.util.spawn_with_shell("systemctl poweroff") end },
     { "reboot",   function () awful.util.spawn_with_shell("systemctl reboot") end },
@@ -489,9 +487,9 @@ globalkeys = awful.util.table.join(
     awful.key({ 		  }, "XF86AudioLowerVolume",  function () awful.util.spawn_with_shell("~/bin/pa_vol_down") end,
     		{description = "volume down", group = "My custom keys"}),
     -- LockScreen & Suspend
-    awful.key({ 		  }, "F12",   function () awful.util.spawn_with_shell("gpgconf --reload gpg-agent ; slock") end,
+    awful.key({ 		  }, "F12",   function () awful.util.spawn_with_shell("slock") end,
     		{description = "lock screen", group = "My custom keys"}),
-    awful.key({ modkey,		  }, "F12",   function () awful.util.spawn_with_shell("gpgconf --reload gpg-agent ; systemctl suspend") end,
+    awful.key({ modkey,		  }, "F12",   function () awful.util.spawn_with_shell("systemctl suspend") end,
     		{description = "suspend", group = "My custom keys"}),
     -- emacsclient
     awful.key({ modkey,		  }, "e", function () run_or_raise("urxvtc -name emacs -e '"..homedir.."/bin/e'", { instance = "emacs" } ) end,
