@@ -9,6 +9,6 @@
 
 (global-set-key (kbd "ESC <down>") 'ff/comment-and-go-down)
 (global-set-key (kbd "ESC <up>") 'ff/uncomment-and-go-up)
-(global-set-key (kbd "ESC <right>") 'select-next-window)
+;; (global-set-key (kbd "ESC <right>") 'select-next-window)
 ;; (global-set-key (kbd "M-[") 'select-previous-window)
 

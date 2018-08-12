@@ -219,25 +219,25 @@ myawesomemenu = {
 }
 
 myterminalmenu = {
-    { "terminal", terminal },
+    { "terminal",        terminal },
+    { "terminal green",  "urxvtc -fg green"  },
     { "terminal orange", "urxvtc -fg orange" },
     { "terminal yellow", "urxvtc -fg yellow" },
-    { "terminal blue",   "urxvtc -fg blue" },
 }
                               
 mymainmenu = awful.menu({ items = {
-    { "awesome",  myawesomemenu, beautiful.awesome_icon },
-    { "terminal", myterminalmenu },
+    { "awesome",        myawesomemenu, beautiful.awesome_icon },
+    { "terminal",       myterminalmenu },
     { "single display", function () awful.util.spawn_with_shell("xrandr --output eDP1 --primary --mode 1920x1080  --output HDMI2 --off") end },
     { "hdmi",           function () awful.util.spawn_with_shell(homedir .. "/.screenlayout/x1.sh") end },
-    { "nautilus", "/usr/bin/nautilus" },
-    { "calendar", function () awful.util.spawn_with_shell("LC_TIME=pl_PL.UTF-8 /usr/bin/gnome-calendar") end },
-    { "shotwell", "/usr/bin/shotwell" },
+    { "nautilus",       "/usr/bin/nautilus" },
+    { "calendar",       function () awful.util.spawn_with_shell("LC_TIME=pl_PL.UTF-8 /usr/bin/gnome-calendar") end },
+    { "shotwell",       "/usr/bin/shotwell" },
     { "---", },
-    { "suspend",  function () awful.util.spawn_with_shell("systemctl suspend") end },
-    { "shutdown", function () awful.util.spawn_with_shell("systemctl poweroff") end },
-    { "reboot",   function () awful.util.spawn_with_shell("systemctl reboot") end },
-    { "lock",     function () awful.util.spawn_with_shell("slock") end }
+    { "suspend",        function () awful.util.spawn_with_shell("systemctl suspend") end },
+    { "shutdown",       function () awful.util.spawn_with_shell("systemctl poweroff") end },
+    { "reboot",         function () awful.util.spawn_with_shell("systemctl reboot") end },
+    { "lock",           function () awful.util.spawn_with_shell("slock") end }
 }
                        })
 
