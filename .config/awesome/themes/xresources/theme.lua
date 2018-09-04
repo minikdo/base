@@ -98,7 +98,8 @@ local is_dark_bg = (bg_numberic_value < 383)
     -- return theme_assets.wallpaper(wallpaper_bg, wallpaper_fg, wallpaper_alt_fg, s)
 -- end
 
-theme.wallpaper = "/home/domino/Downloads/debian_background.png"
+-- theme.wallpaper = "/home/domino/Downloads/debian_background.png"
+theme.wallpaper = "/home/domino/.wallpapers/gdm_kdm_plymouth_1920x1080.png"
 
 return theme
 

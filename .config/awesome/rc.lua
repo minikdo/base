@@ -737,7 +737,7 @@ awful.rules.rules = {
       		     callback = awful.client.setslave },
     { rule = { class = "URxvt", instance = "mutt" },
       properties = { screen = 1,
-                     tag = "8",
+                     tag = "9",
                      switchtotag = true,
                      focus = true  } },
     { rule = { class = "URxvt", instance = "profanity" },

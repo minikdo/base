@@ -118,6 +118,7 @@ alias dl='dpkg -l | less -S'
 alias acsh='apt-cache show'
 alias ach='apt changelog'
 alias jf='journalctl -f'
+alias jc='journalctl'
 
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
