@@ -126,6 +126,29 @@ awful.layout.layouts = {
 }
 -- }}}
 
+-- run_or_raise("redshift -l 52:22", { instance = "redshift" })
+
+
+-- }}}
+
+
+
+function run_once(cmd)
+   findme = cmd
+   firstspace = cmd:find(" ")
+   if firstspace then
+      findme = cmd:sub(0, firstspace-1)
+   end
+   awful.spawn.with_shell("pgrep -u domino -x " .. findme .. " > /dev/null || (" .. cmd .. ")")
+end
+
+run_once("mutt")
+
+
+
+
+
+
 -- {{{ MY WIDGETS
 
 -- newmail
@@ -814,6 +837,9 @@ client.connect_signal("mouse::enter", function(c)
         client.focus = c
     end
 end)
+
+
+
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
