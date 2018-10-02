@@ -25,3 +25,5 @@
 ;; Change dictionary to polish
 (setq ispell-dictionary "polish")
 
+;; disable scratch message
+(setq initial-scratch-message "")

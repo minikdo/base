@@ -46,7 +46,7 @@
 
 (setq org-capture-templates
       (quote (("t" "todo" entry (file+headline (org-file-path "dominik.org") "Tasks")
-	       "* TODO %?\n %U\n")
+	       "* TODO %? %^g\n %U\n")
 	      ("n" "note" entry (file+headline (org-file-path "notes.org") "Notes")
 	       "* %? :NOTE:\n %U\n")
 	      ("j" "journal" entry (file (org-file-path "journal.org"))
