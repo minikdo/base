@@ -99,7 +99,8 @@ local is_dark_bg = (bg_numberic_value < 383)
 -- end
 
 -- theme.wallpaper = "/home/domino/Downloads/debian_background.png"
-theme.wallpaper = "/home/domino/.wallpapers/gdm_kdm_plymouth_1920x1080.png"
+-- theme.wallpaper = "/home/domino/.wallpapers/gdm_kdm_plymouth_1920x1080.png"
+theme.wallpaper = "/home/domino/Downloads/Debian-Wallpaperlarge-debian-wallpaper-1920x1080-for-tablet-PIC-WPXH669978.jpg"
 
 return theme
 
