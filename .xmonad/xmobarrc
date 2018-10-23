@@ -1,0 +1,44 @@
+Config { font = "xft:Inconsolata-zi4"
+       , additionalFonts = []
+       , borderColor = "black"
+       , border = TopB
+       , bgColor = "black"
+       , fgColor = "grey"
+       , alpha = 255
+       , position = Top
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [ Run Weather "EPWA" ["-t","<tempC>°C | Q<pressure>",
+                                          "-L","18","-H","25",
+                                          "--normal","green",
+                                          "--high","red",
+                                          "--low","lightblue"] 36000
+                    , Run Network "wlp4s0" ["-L","0","-H","32",
+                                            "--normal","green","--high","red"] 10
+                    , Run Cpu ["-L","3","-H","50",
+                               "--normal","green","--high","red"] 10
+                    , Run BatteryP ["BAT0"]
+                            ["-t", "<acstatus><left>%",
+                             "-L", "10", "-H", "80", "-p", "3",
+                             "--", "-O",
+                             "<fc=darkgrey>On</fc> - ", "-i", "",                        
+                             "-L", "-15", "-H", "-5",         
+                             "-l", "darkgrey", "-m"     , "white",
+                             "-h", "grey"]
+                             600
+                    , Run StdinReader
+                    , Run Com "sh" ["-c","ls ~/.mail/minik/INBOX/new | wc -w"] "mailcount" 600
+                    , Run Date "%a %b %_d %H:%M" "date" 10
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% | %cpu% | %wlp4s0% }\
+                    \{ <fc=#ee9a00>%date%</fc> | <fc=#808080>%battery%</fc> | <fc=lightgreen>%mailcount%</fc> | %EPWA%"
+       }
