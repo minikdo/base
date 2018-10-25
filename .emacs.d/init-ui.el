@@ -27,3 +27,4 @@
 
 ;; disable scratch message
 (setq initial-scratch-message "")
+(setq initial-major-mode 'fundamental-mode)

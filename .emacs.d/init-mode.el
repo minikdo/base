@@ -1,3 +1,6 @@
+;; fundamental
+(add-hook 'fundamental-mode-hook (lambda () (setq fill-column 999))) ;; disable autofill
+
 ;; html
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 (add-hook 'sgml-mode-hook 'autopair-mode) ;; Auto-start on any markup modes

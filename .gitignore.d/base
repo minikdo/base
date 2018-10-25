@@ -49,6 +49,9 @@
 !/.urxvt/ext
 !/.urxvt/ext/resize-font
 !/.Xdefaults
+!/.xmonad
+!/.xmonad/xmobarrc
+!/.xmonad/xmonad.hs
 !/.Xresources
 !/.Xsession
 !/.zshrc

@@ -3,7 +3,7 @@ import XMonad
 import XMonad.Actions.DwmPromote
 import XMonad.Actions.GridSelect
 import XMonad.Actions.WindowBringer
-import XMonad.Actions.CycleWS
+-- import XMonad.Actions.CycleWS
 import XMonad.Actions.WindowGo
 
 import XMonad.Hooks.DynamicLog
@@ -167,10 +167,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_Return), windows W.swapMaster)
 
     -- Goto next workspace
-    , ((modm,               xK_Right ), nextWS)
+    -- , ((modm,               xK_Right ), nextWS)
 
     -- Goto previous workspace
-    , ((modm,               xK_Left  ), prevWS)
+    -- , ((modm,               xK_Left  ), prevWS)
 
     -- Chromium
     , ((modm,               xK_i     ), runOrRaiseMaster "chromium" (className =? "Chromium"))
@@ -227,7 +227,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_Return), dwmpromote)
 
     -- Make screenshot with scrot
-    , ((modm              , xK_Print ), spawn "scrot -e 'mv $f /tmp/'")
+    , ((modm              , xK_Print ), spawn "scrot -e 'mv $f ~'")
 
     -- Pop open a dmenu with window titles to be taken to the corresponding workspace
     , ((modm .|. shiftMask, xK_g     ), gotoMenu)
