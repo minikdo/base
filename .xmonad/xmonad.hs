@@ -211,6 +211,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Lock the screen using command specified by myScreenlocker
     , ((0                 , xK_F12   ), spawn myScreenlocker)
 
+    -- Lock the screen using command specified by myScreenlocker
+    , ((modm .|. controlMask, xK_F12 ), spawn "systemctl suspend")
+
     -- Lock the screen using command specified by myYAScreenlocker
     , ((modm              , xK_F12   ), spawn myYAScreenlocker)
 
