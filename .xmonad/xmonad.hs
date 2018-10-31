@@ -18,7 +18,6 @@ import XMonad.Layout.Grid
 
 import XMonad.Prompt
 import XMonad.Prompt.Input
--- import XMonad.Prompt.MPD
 import XMonad.Prompt.Shell
 
 import XMonad.Util.Run (spawnPipe, runProcessWithInput, runInTerm)
@@ -35,7 +34,6 @@ import System.IO
 import System.Exit
 
 import qualified Data.Map        as M
--- import qualified Network.MPD     as MPD
 import qualified XMonad.StackSet as W
 
 myTerminal :: [Char]
@@ -57,7 +55,10 @@ myBorderWidth :: Dimension
 myBorderWidth = 1
 
 myFocusedBorderColor :: [Char]
-myFocusedBorderColor = "#096ee2"
+myFocusedBorderColor = "darkgreen"
+
+myTabConfig = def { inactiveBorderColor = "#FF0000"
+                  , activeTextColor = "#00FF00"}
 
 myLayout = tiled ||| Grid ||| Mirror tiled ||| OneBig (3/4) (3/4) ||| simpleTabbed ||| Full
   where
@@ -152,7 +153,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_n     ), refresh)
 
     -- Move focus to the next window
-    , ((modm,               xK_Tab   ), windows W.focusDown)
+    , ((modm,              xK_Tab   ), windows W.focusDown)
 
     -- Move focus to the next window
     , ((modm,               xK_j     ), windows W.focusDown)
@@ -182,10 +183,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
 
     -- Volume Up
-    , ((0,   xF86XK_AudioRaiseVolume ), spawn "~/bin/pa_vol_up")
+    , ((0  , xF86XK_AudioRaiseVolume ), spawn "~/bin/pa_vol_up")
 
     -- Volume Down
-    , ((0,   xF86XK_AudioLowerVolume ), spawn "~/bin/pa_vol_down")
+    , ((0  , xF86XK_AudioLowerVolume ), spawn "~/bin/pa_vol_down")
+
+    -- Brightness Up
+    , ((0  , xF86XK_MonBrightnessUp  ), spawn "xbacklight -inc 10")
+
+    -- Brightness Down
+    , ((0  , xF86XK_MonBrightnessDown), spawn "xbacklight -dec 10")
 
     -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
@@ -217,11 +224,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Lock the screen using command specified by myYAScreenlocker
     , ((modm              , xK_F12   ), spawn myYAScreenlocker)
 
+    -- Restart xmonad
+    , ((modm              , xK_q     ), spawn "xmonad --restart")
+
+    -- Recompile xmonad
+    , ((modm .|. controlMask, xK_q   ), spawn "xmonad --recompile")
+
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
-
-    -- Restart xmonad
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
 
     -- Display items in a 2D grid and let the user select from it
     , ((modm              , xK_g     ), goToSelected def)
@@ -238,23 +248,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Pop open a dmenu with window titles to dragged it into the current workspace
     , ((modm .|. shiftMask, xK_b     ), bringMenu)
 
-    -- Pop open a dmenu to control MPD
-    -- , ((modm              , xK_x     ), spawn "/home/dogsleg/bin/dmenu_mpd.sh")
-
     -- Pop open a dmenu to poweroff/reboot/suspend/lock
-    , ((modm              , xK_z     ), spawn "/home/domino/bin/dmenu_shutdown.sh")
+    , ((modm              , xK_z     ), spawn "~/bin/dmenu_shutdown.sh")
 
     -- Pop tiny terminal window via Scratchpad
     , ((modm              , xK_grave ), scratchpadSpawnAction def {terminal = "urxvtc -name terminal"})
 
     -- Shell Prompt to run a shell command
-    , ((modm .|. controlMask,   xK_x ), shellPrompt myXPConfig)
-
-    -- MPD Prompt to add album to the playlist
-    -- , ((modm .|. controlMask,    xK_m), addMatching MPD.withMPD myXPConfig [MPD.Artist, MPD.Album] >> return ())
+    , ((modm .|. controlMask, xK_x   ), shellPrompt myXPConfig)
 
     -- Calculator Prompt to run concalc
-    , ((modm              , xK_c    ), calcPrompt myCalcConfig "concalc")
+    , ((modm              , xK_c     ), calcPrompt myCalcConfig "concalc")
     
     ]
     ++
@@ -283,7 +287,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 main :: IO ()
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobarrc"
-    setRandomWallpaper ["$HOME/.wallpapers/haskell"]
+    setRandomWallpaper ["~/.wallpapers/haskell"]
     xmonad $ ewmh $ def
         { workspaces         = myWorkspaces
         , terminal           = myTerminal
