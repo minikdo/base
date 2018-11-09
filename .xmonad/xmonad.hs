@@ -5,6 +5,7 @@ import XMonad.Actions.GridSelect
 import XMonad.Actions.WindowBringer
 -- import XMonad.Actions.CycleWS
 import XMonad.Actions.WindowGo
+import XMonad.Actions.SpawnOn
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -15,6 +16,7 @@ import XMonad.Hooks.PerWindowKbdLayout
 import XMonad.Layout.OneBig
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Grid
+import XMonad.Layout.NoBorders
 
 import XMonad.Prompt
 import XMonad.Prompt.Input
@@ -287,7 +289,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 main :: IO ()
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobarrc"
-    setRandomWallpaper ["~/.wallpapers/haskell"]
+    setRandomWallpaper ["$HOME/.wallpapers/haskell"]
     xmonad $ ewmh $ def
         { workspaces         = myWorkspaces
         , terminal           = myTerminal
@@ -302,10 +304,10 @@ main = do
         , handleEventHook    = mconcat
                                [ perWindowKbdLayout
                                , docksEventHook
-                               , handleEventHook def ]
+                               , handleEventHook def <+> fullscreenEventHook ]
 
         , manageHook = manageDocks <+> myManageHook
                         <+> manageHook def
-        , layoutHook = avoidStruts $ myLayout
+        , layoutHook = lessBorders OnlyFloat $ avoidStruts $ myLayout
         , logHook = dynamicLogWithPP $ myPP { ppOutput = hPutStrLn xmproc }
         }
