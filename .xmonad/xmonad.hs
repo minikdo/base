@@ -48,24 +48,71 @@ myYAScreenlocker :: [Char]
 myYAScreenlocker = "/usr/bin/xtrlock"
 
 myTitleLength :: Int
-myTitleLength = 120
+myTitleLength = 40
 
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
+myFocusFollowsMouse = False
 
 myBorderWidth :: Dimension
 myBorderWidth = 1
 
 myFocusedBorderColor :: [Char]
-myFocusedBorderColor = "darkgreen"
+myFocusedBorderColor = active
 
-myTabConfig = def { inactiveBorderColor = "#FF0000"
-                  , activeTextColor = "#00FF00"}
+base03  = "#002b36"
+base02  = "#073642"
+base01  = "#586e75"
+base00  = "#657b83"
+base0   = "#839496"
+base1   = "#93a1a1"
+base2   = "#eee8d5"
+base3   = "#fdf6e3"
+yellow  = "#b58900"
+orange  = "#cb4b16"
+red     = "#dc322f"
+magenta = "#d33682"
+violet  = "#6c71c4"
+blue    = "#268bd2"
+cyan    = "#2aa198"
+green   = "#859900"
 
-myLayout = tiled ||| Grid ||| Mirror tiled ||| OneBig (3/4) (3/4) ||| simpleTabbed ||| Full
+active      = blue
+activeWarn  = red
+inactive    = base02
+focusColor  = blue
+unfocusColor = base02
+
+-- topBarTheme = def
+    -- { fontName              = myFont
+    -- , inactiveBorderColor   = base03
+    -- , inactiveColor         = base03
+    -- , inactiveTextColor     = base03
+    -- , activeBorderColor     = active
+    -- , activeColor           = active
+    -- , activeTextColor       = active
+    -- , urgentBorderColor     = red
+    -- , urgentTextColor       = yellow
+    -- , decoHeight            = topbar
+    -- }
+
+myTabTheme = def
+    { fontName              = myFont
+    , activeColor           = active
+    , inactiveColor         = base02
+    , activeBorderColor     = active
+    , inactiveBorderColor   = base02
+    , activeTextColor       = base03
+    , inactiveTextColor     = base00
+    }
+              
+myFont :: [Char]
+myFont = "xft:Inconsolata-zi4"
+
+myLayout = simpleTabbed ||| tiled ||| Grid ||| Mirror tiled ||| OneBig (3/4) (3/4) ||| Full
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled = Tall 1 (10/100) (1/2)
+    simpleTabbed = tabbed shrinkText myTabTheme
 
 myModMask :: KeyMask
 myModMask = mod4Mask
@@ -90,10 +137,10 @@ myWorkspaces :: [[Char]]
 myWorkspaces = [ "1:web", "2:emacs", "3:mutt", "4", "5", "6", "7", "8", "9:jrnl" ]
 
 myPP :: PP
-myPP = def { ppTitle   = xmobarColor "#8DBF27" "" . shorten myTitleLength
+myPP = def { ppTitle   = xmobarColor blue      "" . shorten myTitleLength
            , ppCurrent = xmobarColor "#D5CD6A" "" . wrap "[" "]"
-           , ppHidden  = xmobarColor "#A52A2A" "" . noScratchPad
-           , ppLayout  = xmobarColor "#62C5D1" ""
+           , ppHidden  = xmobarColor active    "" . noScratchPad
+           , ppLayout  = xmobarColor blue      ""
            , ppSep     = " :: "
            , ppWsSep   = " "
            }
@@ -104,7 +151,7 @@ myPP = def { ppTitle   = xmobarColor "#8DBF27" "" . shorten myTitleLength
 
 myXPConfig :: XPConfig
 myXPConfig = def
-             { font              = "xft:Inconsolata-zi4"
+             { font              = myFont
              , bgColor           = "#A52A2A"
              , fgColor           = "#D5CD6A"
              , bgHLight          = "#2F2F2F"
@@ -118,7 +165,7 @@ myXPConfig = def
 
 myCalcConfig :: XPConfig
 myCalcConfig = def
-               { font                = "xft:Inconsolata-zi4"
+               { font                = myFont
                , bgColor             = "#A52A2A"
                , fgColor             = "#D5CD6A"
                , promptBorderWidth   = 0
