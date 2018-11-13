@@ -17,29 +17,32 @@ Config { font             = "xft:Inconsolata-zi4"
        , iconRoot         = "."
        , allDesktops      = True
        , overrideRedirect = True
-       , commands = [ Run Weather "EPWA" [ "-t"         , "<fc=#268bd2><tempC>°C Rh:<rh> Dew:<dewPointC>°C Q<pressure></fc>"
+       , commands = [ Run Weather "EPWA" [ "-t"         , "<tempC>°C Rh:<rh> Dew:<dewPointC>°C Q<pressure>"
                                          , "-L"         , "18"
                                          , "-H"         , "25"
                                          , "--normal"   , "green"
                                          , "--high"     , "red"
                                          , "--low"      , "lightblue" ] 36000
-                    , Run Cpu            [ "-L"         , "3"
+                    , Run Cpu            [ "-m"         , "2"
+                                         , "-L"         , "3"
                                          , "-H"         , "50"
-                                         , "--normal"   , "green      , #002b36"
-                                         , "--high"     , "red" ] 10
+                                         , "--normal"   , "green,#002b36"
+                                         , "--high"     , "red,#002b36" ] 10
                     , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s | <rx>kB/s"
                                          , "--Low"      , "1000" 
                                          , "--High"     , "5000"
-                                         , "--low"      , "darkgreen  , #002b36"
-                                         , "--normal"   , "darkorange , #002b36"
-                                         , "--high"     , "darkred,     #002b36" ] 10
+                                         , "-m", "4"
+                                         , "--low"      , "darkgreen,#002b36"
+                                         , "--normal"   , "darkorange,#002b36"
+                                         , "--high"     , "darkred,#002b36" ] 10
                     , Run BatteryP       [ "BAT0" ]
-                                         [ "-t"         , "<fc=#268bd2><acstatus><left>%</fc>"
+                                         [ "-t"         , "<acstatus><left>%"
                                          , "-L"         , "10"
                                          , "-H"         , "80"
                                          , "-p"         , "3"
                                          , "--"         
-                                         , "-O"         , "<fc=darkgrey>On</fc> "
+                                         , "-O"         , "+" -- On
+                                         , "-o"         , "-" -- Off
                                          , "-i"         , ""
                                          , "-L"         , "-15"
                                          , "-H"         , "-5"
@@ -53,5 +56,5 @@ Config { font             = "xft:Inconsolata-zi4"
        , sepChar  = "%"
        , alignSep = "}{"
        , template = "%StdinReader% <fc=#268bd2,#002b36> %dynnetwork% %cpu% </fc>}\
-                    \{ %mailcount% <fc=#ee9a00>%date%</fc> %battery% %EPWA%"
+                    \{ %mailcount% <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%  %EPWA%</fc>"
        }
