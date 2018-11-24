@@ -98,7 +98,6 @@ end
 -- {{{ Variable definitions
 
 homedir = os.getenv("HOME")
-host_rtorrent = "kim.dominowisla.pl"
 my_inbox_path = "/.mail/minik/INBOX/new"
 
 -- Themes define colours, icons, font and wallpapers.
@@ -352,7 +351,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()

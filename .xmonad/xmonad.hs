@@ -134,7 +134,7 @@ myManageHook = composeAll
     ] <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
 
 myWorkspaces :: [[Char]]
-myWorkspaces = [ "1:web", "2:emacs", "3:mutt", "4", "5", "6", "7", "8:cal", "9:jrnl" ]
+myWorkspaces = [ "1:web", "2:emacs", "3:mutt", "4", "5", "6", "7:sig", "8:cal", "9:jrnl" ]
 
 myPP :: PP
 myPP = def { ppTitle   = xmobarColor blue      "" . shorten myTitleLength

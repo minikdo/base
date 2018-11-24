@@ -17,4 +17,5 @@ ENTRY "sylwia"           URL "/home/domino/sh://domino@sylwia/home/domino"
 ENTRY "lenovo"           URL "/home/domino/sh://domino@lenovo/home/domino"
 ENTRY "kim"              URL "/home/domino/sh://domino@kim/home/domino"
 ENTRY "rpi3"             URL "/home/domino/sh://domino@rpi3/home/domino"
-
+ENTRY "rpi3.local"       URL "/home/domino/sh://domino@rpi3.local/home/domino"
+ENTRY "rpi.local"        URL "/home/domino/sh://domino@rpi.local/home/domino"
