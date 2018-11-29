@@ -28,6 +28,12 @@ Config { font             = "xft:Inconsolata-zi4"
                                          , "-H"         , "50"
                                          , "--normal"   , "green,#002b36"
                                          , "--high"     , "red,#002b36" ] 10
+                    , Run Memory         [ "-t"         , "Mem: <usedratio>%"
+                                         , "--Low"      , "20"        -- units: -- %
+                                         , "--High"     , "90"        -- units: -- %
+                                         , "--low"      , "darkgreen,#002b36"
+                                         , "--normal"   , "darkorange,#002b36"
+                                         , "--high"     , "darkred,#002b36" ] 10
                     , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s | <rx>kB/s"
                                          , "--Low"      , "1000" 
                                          , "--High"     , "5000"
@@ -55,6 +61,6 @@ Config { font             = "xft:Inconsolata-zi4"
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% <fc=#268bd2,#002b36> %dynnetwork% %cpu% </fc>}\
+       , template = "%StdinReader% <fc=#268bd2,#002b36> %dynnetwork% %cpu% %memory% </fc>}\
                     \{ %mailcount% <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%  %EPWA%</fc>"
        }
