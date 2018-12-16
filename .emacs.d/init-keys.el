@@ -12,3 +12,4 @@
 ;; (global-set-key (kbd "ESC <right>") 'select-next-window)
 ;; (global-set-key (kbd "M-[") 'select-previous-window)
 
+(global-set-key (kbd "C-x k") 'kill-this-buffer)

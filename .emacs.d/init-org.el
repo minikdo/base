@@ -11,7 +11,7 @@
 
 (setq org-agenda-files (list org-index-file))
 
-(setq org-default-notes-file (concat org-directory "/dominik.org"))
+(setq org-default-notes-file (org-file-path "/dominik.org"))
 
 ;; Hitting C-c C-x C-s will mark a todo as done and move it to an appropriate
 ;; place in the archive.
@@ -28,6 +28,9 @@
 
 (setq calendar-latitude 20.92)
 (setq calendar-longitude 52.26)
+
+(setq org-agenda-custom-commands
+      '(("X" agenda "" nil (org-file-path "agenda.txt"))))
 
 
 (setq org-todo-keywords
@@ -47,12 +50,8 @@
 (setq org-capture-templates
       (quote (("t" "todo" entry (file+headline (org-file-path "dominik.org") "Tasks")
 	       "* TODO %? %^g\n %U\n")
-	      ("n" "note" entry (file+headline (org-file-path "notes.org") "Notes")
-	       "* %? :NOTE:\n %U\n")
 	      ("j" "journal" entry (file (org-file-path "journal.org"))
 	       "* %U %?\n\n" )
-	      ("s" "shopping" table-line (file+headline (org-file-path "dominik.org") "Zakupy")
-	       "|%U|%?| |" )
 	      )))
 
 ;; to clock capture entry

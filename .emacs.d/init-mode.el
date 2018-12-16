@@ -108,6 +108,8 @@ is considered to be a project root."
 (add-hook 'python-mode-hook 'jedi-setup-venv)
 (add-hook 'python-mode-hook 'jedi:setup)
 
+(setq flymake-python-pyflakes-executable "flake8")
+
 
 
 ;; which-key
