@@ -30,7 +30,7 @@
 (setq calendar-longitude 52.26)
 
 (setq org-agenda-custom-commands
-      '(("X" agenda "" nil (org-file-path "agenda.txt"))))
+      '(("X" agenda "" ((org-agenda-span (quote day))) ("~/.agenda/agenda.txt")))) ;; FIXME
 
 
 (setq org-todo-keywords
