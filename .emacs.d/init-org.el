@@ -26,8 +26,10 @@
 
 (setq org-log-done 'time)
 
-(setq calendar-latitude 20.92)
-(setq calendar-longitude 52.26)
+(setq calendar-latitude 52.26)
+(setq calendar-longitude 20.92)
+
+(setq org-agenda-include-diary t)
 
 (setq org-agenda-custom-commands
       '(("X" agenda "" ((org-agenda-span (quote day))) ("~/.agenda/agenda.txt")))) ;; FIXME
