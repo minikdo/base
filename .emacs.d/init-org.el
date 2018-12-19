@@ -59,8 +59,8 @@
 ;; to clock capture entry
 ;; :clock-in t :clock-resume t
 
-;;(add-hook 'org-mode-hook 'abbrev-mode)
-;;(add-hook 'org-mode-hook 'flyspell-mode)
+;; (add-hook 'org-mode-hook 'abbrev-mode)
+;; (add-hook 'org-mode-hook 'flyspell-mode)
 ;; (add-hook 'org-capture-mode-hook 'flyspell-mode)
 ;; (add-hook 'org-capture-mode-hook 'abbrev-mode)
 
@@ -73,4 +73,3 @@
 ;; apt install emacs-goodies-el for filladapt
 (require 'filladapt)
 (add-hook 'org-mode-hook 'turn-on-filladapt-mode)
-

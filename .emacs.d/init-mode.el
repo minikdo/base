@@ -1,6 +1,7 @@
 ;; fundamental
 (add-hook 'fundamental-mode-hook (lambda () (setq fill-column 999))) ;; disable autofill
 
+
 ;; html
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 (add-hook 'sgml-mode-hook 'autopair-mode) ;; Auto-start on any markup modes
@@ -16,7 +17,7 @@
 (define-key global-map (kbd "C-c o") 'iedit-mode)
 
 
-;; Completing point by some yasnippet key
+;; completing point by some yasnippet key
 (defun yas-ido-expand ()
   "Lets you select (and expand) a yasnippet key"
   (interactive)
@@ -42,39 +43,7 @@
 (define-key yas-minor-mode-map (kbd "<C-tab>")     'yas-ido-expand)
 
 
-;; Jedi
-;; This is a bit of a doozy
-;; Requires the aw/guess-best-root-for-buffer defined in
-;; custom-functions.el
-
-;; (defun setup-jedi-extra-args ()
-  ;; (let ((project-base (aw/guess-best-root-for-buffer
-                       ;; (current-buffer) ".git" "__init__.py")))
-    ;; (make-local-variable 'jedi:server-args)
-    ;; (when project-base (set 'jedi:server-args (list "--sys-path" project-base
-                                                    ;; "--virtual-env" "~/.virtualenvs/machines")))))
-
-
-;; (require 'jedi)
-;; (setq jedi:setup-keys t)
-;; (setq jedi:complete-on-dot t)
-;; ;; Only manually see in function tooltip
-;; (setq jedi:get-in-function-call-delay 10000000)
-;; (setq jedi:server-command
-      ;; (list (executable-find "python")
-            ;; (cadr jedi:server-command)))
-;; (add-to-list 'ac-sources 'ac-source-jedi-direct)
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (add-hook 'python-mode-hook 'setup-jedi-extra-args)
-;; ;; jedi-specific keybindings
-;; (add-hook 'python-mode-hook
-          ;; '(lambda ()
-             ;; (local-set-key (kbd "M-?") 'jedi:show-doc)
-             ;; (local-set-key (kbd "M-.") 'jedi:goto-definition)
-             ;; (local-set-key (kbd "M-,") 'jedi:goto-definition-pop-marker)
-             ;; (local-set-key (kbd "M-/") 'jedi:get-in-function-call)))
-
-
+;; jediserver
 (defun project-directory (buffer-name)
   "Return the root directory of the project that contain the
 given BUFFER-NAME. Any directory with a .git or .jedi file/directory
