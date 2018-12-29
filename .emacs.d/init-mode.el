@@ -100,6 +100,7 @@ is considered to be a project root."
 ;; python hooks
 (add-hook 'python-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
 (add-hook 'python-mode-hook 'autopair-mode)
+(add-hook 'python-mode-hook 'show-paren-mode)
 
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
 
