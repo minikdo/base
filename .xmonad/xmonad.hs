@@ -122,6 +122,7 @@ myManageHook = composeAll
     [ isFullscreen                        --> doFullFloat
       , className =? "Chromium"           --> doShift "1:web"
       , title     =? "mutt"               --> doShift "3:mutt"
+      , title     =? "jrnl"               --> doShift "9:jrnl"
       , className =? "Navigator"          --> doFloat
       , className =? "Tor Browser"        --> doFloat
       , className =? "Evince"             --> doFullFloat
@@ -129,6 +130,7 @@ myManageHook = composeAll
       , className =? "vlc"                --> doFullFloat
       , className =? "mpv"                --> doFullFloat
       , className =? "Arandr"             --> doFloat
+      , className =? "Signal"             --> doFloat
       , className =? "Pavucontrol"        --> doFloat
       , stringProperty "WM_WINDOW_ROLE" =? "pop-up" --> doFloat
     ] <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
