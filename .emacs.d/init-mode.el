@@ -149,8 +149,6 @@ is considered to be a project root."
 
 (add-hook 'ido-setup-hook 'ido-define-keys)
 
-
-
 ;; Smex
 (require 'smex)
 (setq smex-completion-method 'ivy) 
@@ -181,3 +179,11 @@ is considered to be a project root."
             (setq TeX-command-default "XeLaTeX")
             (setq TeX-save-query nil)
             (setq TeX-show-compilation t)))
+
+
+;; Arduino
+
+(add-to-list 'load-path "~/.emacs.d/vendor/arduino-mode")
+(setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . arduino-mode)
+                            auto-mode-alist))
+(autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)

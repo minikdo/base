@@ -124,7 +124,7 @@ myManageHook = composeAll
       , title     =? "mutt"               --> doShift "3:mutt"
       , title     =? "jrnl"               --> doShift "9:jrnl"
       , className =? "Navigator"          --> doFloat
-      -- , className =? "Tor Browser"        --> doFloat
+      , className =? "Tor Browser"        --> doShift "1:web"
       , className =? "Evince"             --> doFullFloat
       , className =? "Viewnior"           --> doFullFloat
       , className =? "vlc"                --> doFullFloat
@@ -224,11 +224,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Goto previous workspace
     -- , ((modm,               xK_Left  ), prevWS)
 
-    -- Chromium
-    , ((modm,               xK_i     ), runOrRaiseMaster "chromium" (className =? "Chromium"))
+    -- Chromium or Tbb
+    -- , ((modm,               xK_i     ), runOrRaiseMaster "chromium" (className =? "Chromium"))
+    , ((modm,               xK_i     ), runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser"))
 
     -- Mutt
     , ((modm,               xK_y     ), raiseMaybe (runInTerm "-title mutt"  "zsh -c 'mutt'") (title =? "mutt"))
+
+    -- Profanity
+    , ((modm,               xK_u     ), raiseMaybe (runInTerm "-title profanity"  "zsh -c 'profanity'") (title =? "profanity"))
 
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
