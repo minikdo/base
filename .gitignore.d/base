@@ -29,6 +29,7 @@
 !/.config/systemd
 !/.config/systemd/user
 !/.config/systemd/user/emacs.service
+!/.dpkg-selections
 !/.emacs.d
 !/.emacs.d/custom-functions.el
 !/.emacs.d/init.el
