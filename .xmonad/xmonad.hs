@@ -122,6 +122,7 @@ myManageHook = composeAll
     [ isFullscreen                        --> doFullFloat
       , className =? "Chromium"           --> doShift "1:web"
       , title     =? "mutt"               --> doShift "3:mutt"
+      , title     =? "profanity"          --> doShift "3:mutt"
       , title     =? "jrnl"               --> doShift "9:jrnl"
       , className =? "Navigator"          --> doFloat
       , className =? "Tor Browser"        --> doShift "1:web"
@@ -229,10 +230,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_i     ), runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser"))
 
     -- Mutt
-    , ((modm,               xK_y     ), raiseMaybe (runInTerm "-title mutt"  "zsh -c 'mutt'") (title =? "mutt"))
+    , ((modm,               xK_s     ), raiseMaybe (runInTerm "-title mutt"  "zsh -c 'mutt'") (title =? "mutt"))
 
     -- Profanity
-    , ((modm,               xK_u     ), raiseMaybe (runInTerm "-title profanity"  "zsh -c 'profanity'") (title =? "profanity"))
+    , ((modm,               xK_d     ), raiseMaybe (runInTerm "-title profanity"  "zsh -c 'profanity'") (title =? "profanity"))
 
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
