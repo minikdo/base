@@ -1,6 +1,7 @@
 *
 !/.ansible.cfg
 !/bin
+!/bin/dmenu_shutdown.sh
 !/bin/e
 !/bin/ipfilt
 !/bin/my_html_preview
