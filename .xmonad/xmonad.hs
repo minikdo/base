@@ -126,6 +126,7 @@ myManageHook = composeAll
       , title     =? "jrnl"               --> doShift "9:jrnl"
       , className =? "Navigator"          --> doFloat
       , className =? "Tor Browser"        --> doShift "1:web"
+      , className =? "Gnome-calendar"     --> doShift "8:cal"
       , className =? "Evince"             --> doFullFloat
       , className =? "Viewnior"           --> doFullFloat
       , className =? "vlc"                --> doFullFloat
@@ -243,6 +244,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Volume Down
     , ((0  , xF86XK_AudioLowerVolume ), spawn "~/bin/pa_vol_down")
+
+    -- Mic Toggle
+    , ((0  , 0x1008FFB2              ), spawn "~/bin/pa_mic_toggle.sh")
 
     -- Brightness Up
     , ((0  , xF86XK_MonBrightnessUp  ), spawn "xbacklight -inc 10")
