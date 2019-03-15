@@ -17,7 +17,7 @@ Config { font             = "xft:Inconsolata-zi4"
        , iconRoot         = "."
        , allDesktops      = True
        , overrideRedirect = True
-       , commands = [ Run Weather "EPWA" [ "-t"         , "<tempC>°C Rh:<rh> Dew:<dewPointC>°C Q<pressure>"
+       , commands = [ Run Weather "EPWA" [ "-t"         , "<tempC>°C <skyCondition> Q<pressure>"
                                          , "-L"         , "18"
                                          , "-H"         , "25"
                                          , "--normal"   , "green"
