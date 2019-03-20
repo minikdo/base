@@ -239,17 +239,9 @@ myawesomemenu = {
    { "restart", awesome.restart },
    { "quit", function() awesome.quit() end}
 }
-
-myterminalmenu = {
-    { "terminal",        terminal },
-    { "terminal green",  "urxvtc -fg green"  },
-    { "terminal orange", "urxvtc -fg orange" },
-    { "terminal yellow", "urxvtc -fg yellow" },
-}
                               
 mymainmenu = awful.menu({ items = {
     { "awesome",        myawesomemenu, beautiful.awesome_icon },
-    { "terminal",       myterminalmenu },
     { "single display", function () awful.util.spawn_with_shell("xrandr --output eDP1 --primary --mode 1920x1080  --output HDMI2 --off") end },
     { "hdmi",           function () awful.util.spawn_with_shell(homedir .. "/.screenlayout/x1.sh") end },
     { "nautilus",       "/usr/bin/nautilus" },
@@ -262,17 +254,6 @@ mymainmenu = awful.menu({ items = {
     { "lock",           function () awful.util.spawn_with_shell("slock") end }
 }
                        })
-
--- MY
-mysshmenu = awful.menu({ items = { 
-    { "ssh adm",         "urxvtc -e sh -c 'ssh adm'" },
-    { "ssh linode",      "urxvtc -e sh -c 'ssh linode'" },
-    { "ssh linode2",     "urxvtc -e sh -c 'ssh linode2'" },
-    { "journal linode2", "urxvtc -name linode2_journal -title linode2_journal -fg yellow -e sh -c 'ssh linode2 journalctl -f'" },
-    { "journal linode",  "urxvtc -name linode_journal  -title linode_journal  -fg orange -e sh -c 'linode_journal'" },
-    { "journal",         "urxvtc -name journal         -title journal         -fg green  -e sh -c 'journalctl -f'" },
-}, width = 300 
-})
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
@@ -453,9 +434,6 @@ globalkeys = awful.util.table.join(
     ),
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
-    --MY
-    awful.key({ modkey,           }, "s", function () mysshmenu:show() end,
-              {description = "show ssh menu", group = "awesome"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
@@ -511,38 +489,23 @@ globalkeys = awful.util.table.join(
     -- LockScreen & Suspend
     awful.key({ 		  }, "F12",   function () awful.util.spawn_with_shell("slock") end,
     		{description = "lock screen", group = "My custom keys"}),
-    awful.key({ modkey,		  }, "F12",   function () awful.util.spawn_with_shell("systemctl suspend") end,
+    awful.key({ modkey,		  }, "z",   function () awful.util.spawn_with_shell("systemctl suspend") end,
     		{description = "suspend", group = "My custom keys"}),
-    -- emacsclient
-    awful.key({ modkey,		  }, "e", function () run_or_raise("urxvtc -name emacs -e '"..homedir.."/bin/e'", { instance = "emacs" } ) end,
-    		{description = "emacsclient", group = "My custom keys"}),
     -- profanity
-    awful.key({ modkey,		  }, "p", function () run_or_raise("urxvtc -name profanity -title profanity -e sh -c 'LD_LIBRARY_PATH=/usr/local/lib profanity'", { instance = "profanity" } ) end,
+    awful.key({ modkey,		  }, "d", function () run_or_raise("urxvtc -name profanity -title profanity -e sh -c 'LD_LIBRARY_PATH=/usr/local/lib profanity'", { instance = "profanity" } ) end,
     		{description = "profanity", group = "My custom keys"}),
     -- floating term 
-    awful.key({ modkey, "Shift"	  }, "Return",  function () awful.util.spawn("urxvtc -name float1 -tr -sh 25 ", { instance = "float1" } ) end,
+    awful.key({ modkey, 	  }, "`",  function () awful.util.spawn("urxvtc -name float1 -tr -sh 25 ", { instance = "float1" } ) end,
     		{description = "open floating terminal", group = "My custom keys"}),
-    -- ping 8.8.8.8
-    awful.key({ modkey, "Shift"	  }, "p", function () run_or_raise('urxvtc -name ping -title ping -tr -sh 50 -e sh -c "ping 8.8.8.8"', { instance = "ping" } ) end,
-    		{description = "ping 8.8.8.8", group = "My custom keys"}),
     -- mutt
-    awful.key({ modkey,		  }, "y", function () run_or_raise("urxvtc -name mutt -e 'mutt'", { instance = "mutt" } ) end,
+    awful.key({ modkey,		  }, "s", function () run_or_raise("urxvtc -name mutt -e 'mutt'", { instance = "mutt" } ) end,
     		{description = "mutt", group = "My custom keys"}),
-    -- irssi
-    awful.key({ modkey, "Shift"	  }, "o", function () run_or_raise("urxvtc -sr -T irssi -n irssi -e ssh adm -Xt screen -aAdr -RR irssi irssi", { name = "irssi" }) end,  
-    		{description = "irssi", group = "My custom keys"}),
-    -- firefox
-    awful.key({ modkey, 	  }, "i", function () run_or_raise("firefox-esr -no-remote", { name = "Firefox" }) end,  
+    -- tor browser tbb
+    awful.key({ modkey, 	  }, "i", function () run_or_raise("torbrowser-launcher", { name = "Tor Browser" }) end,  
     		{description = "firefox", group = "My custom keys"}),
-    -- chromium
-    awful.key({ modkey, "Shift"   }, "i", function () run_or_raise("chromium --incognito", { name = "Chromium" }) end,  
-    		{description = "chromium", group = "My custom keys"}),
     -- pavucontrol
     awful.key({ modkey, 	  }, "v", function () run_or_raise("pavucontrol", { name = "Volume Control" }) end,  
     		{description = "pavucontrol", group = "My custom keys"}),
-    -- nautilus
-    awful.key({ modkey, "Shift"	  }, "z", function () awful.spawn("nautilus") end,  
-    		{description = "nautilus", group = "My custom keys"}),
     -- END MY
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
