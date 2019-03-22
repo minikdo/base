@@ -127,7 +127,6 @@ myManageHook = composeAll
       , className =? "Navigator"          --> doFloat
       , className =? "Tor Browser"        --> doShift "1:web"
       , className =? "Gnome-calendar"     --> doShift "8:cal"
-      , className =? "Evince"             --> doFullFloat
       , className =? "Viewnior"           --> doFullFloat
       , className =? "vlc"                --> doFullFloat
       , className =? "mpv"                --> doFullFloat
