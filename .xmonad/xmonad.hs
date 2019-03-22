@@ -12,6 +12,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.PerWindowKbdLayout
+import XMonad.Hooks.SetWMName
 
 import XMonad.Layout.OneBig
 import XMonad.Layout.Tabbed
@@ -128,6 +129,7 @@ myManageHook = composeAll
       , className =? "Tor Browser"        --> doShift "1:web"
       , className =? "Gnome-calendar"     --> doShift "8:cal"
       , className =? "Viewnior"           --> doFullFloat
+      , className =? "processing-app-Base" --> doFloat
       , className =? "vlc"                --> doFullFloat
       , className =? "mpv"                --> doFullFloat
       , className =? "Arandr"             --> doFloat
@@ -354,6 +356,7 @@ main = do
         , borderWidth        = myBorderWidth
         , focusedBorderColor = myFocusedBorderColor
 
+        , startupHook        = setWMName "LG3D"
         , modMask            = myModMask
         , keys               = myKeys
         , mouseBindings      = myMouseBindings
