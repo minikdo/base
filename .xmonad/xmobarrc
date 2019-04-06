@@ -55,12 +55,19 @@ Config { font             = "xft:Inconsolata-zi4"
                                          , "-l"         , "darkgrey"
                                          , "-m"         , "white"
                                          , "-h"         , "grey" ] 600
+                    , Run CoreTemp       [ "--template" , "<core0>:<core1>:<core2>°C"
+                                         , "--Low"      , "70"        -- units: -- °C
+                                         , "--High"     , "80"        -- units: -- °C
+                                         , "--low"      , "#268bd2,#002b36"
+                                         , "--normal"   , "darkorange,#002b36"
+                                         , "--high"     , "darkred,#002b36"
+                                         ] 50
                     , Run StdinReader
                     , Run Com  "sh"      [ "-c"         , "~/bin/mailcounter.sh" ] "mailcount" 300
                     , Run Date "%a %b %_d %H:%M" "date" 10
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% <fc=#268bd2,#002b36> %dynnetwork% %cpu% %memory% </fc>}\
+       , template = "%StdinReader% <fc=#268bd2,#002b36> %dynnetwork% %cpu% %memory% %coretemp% </fc>}\
                     \{ %mailcount% <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%  %EPWA%</fc>"
        }

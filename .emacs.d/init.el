@@ -52,6 +52,9 @@
  '(org-agenda-skip-deadline-if-done t)
  '(org-agenda-skip-scheduled-if-done t)
  '(org-deadline-warning-days 10)
+ '(org-export-with-author nil)
+ '(org-export-with-date nil)
+ '(org-export-with-toc nil)
  '(org-latex-default-packages-alist
    (quote
     (("AUTO" "inputenc" t)
@@ -70,7 +73,7 @@
      ("" "amssymb" t)
      ("" "hyperref" nil)
      "\\tolerance=1000"
-     ("margin=1cm" "geometry" t))))
+     ("margin=1.5cm" "geometry" t))))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(projectile-git-command "git ls-files -zc --exclude-standard")
