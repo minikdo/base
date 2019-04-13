@@ -55,7 +55,7 @@ Config { font             = "xft:Inconsolata-zi4"
                                          , "-l"         , "darkgrey"
                                          , "-m"         , "white"
                                          , "-h"         , "grey" ] 600
-                    , Run CoreTemp       [ "--template" , "<core0>:<core1>:<core2>°C"
+                    , Run CoreTemp       [ "--template" , "<core0>°C <core1>°C <core2>°C"
                                          , "--Low"      , "70"        -- units: -- °C
                                          , "--High"     , "80"        -- units: -- °C
                                          , "--low"      , "#268bd2,#002b36"
