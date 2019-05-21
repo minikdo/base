@@ -109,7 +109,7 @@ myTabTheme = def
 myFont :: [Char]
 myFont = "xft:Inconsolata-zi4"
 
-myLayout = simpleTabbed ||| tiled ||| Grid ||| Mirror tiled ||| OneBig (3/4) (3/4) ||| Full
+myLayout = simpleTabbed ||| Grid ||| tiled ||| Mirror tiled ||| OneBig (3/4) (3/4) ||| Full
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled = Tall 1 (10/100) (1/2)
@@ -129,6 +129,7 @@ myManageHook = composeAll
       , className =? "Tor Browser"        --> doShift "1:web"
       , className =? "Gnome-calendar"     --> doShift "8:cal"
       , className =? "Viewnior"           --> doFullFloat
+      , className =? "Pinentry"           --> doFloat
       , className =? "processing-app-Base" --> doFloat
       , className =? "vlc"                --> doFullFloat
       , className =? "mpv"                --> doFullFloat
