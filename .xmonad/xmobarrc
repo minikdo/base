@@ -48,7 +48,7 @@ Config { font             = "xft:Inconsolata-zi4"
                                          , "-p"         , "3"
                                          , "--"         
                                          , "-O"         , "+" -- On
-                                         , "-o"         , "-" -- Off
+                                         , "-o"         , "-<timeleft>" -- Off
                                          , "-i"         , ""
                                          , "-L"         , "-15"
                                          , "-H"         , "-5"

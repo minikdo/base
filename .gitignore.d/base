@@ -1,5 +1,6 @@
 *
 !/.ansible.cfg
+!/.bashrc
 !/bin
 !/bin/dmenu_shutdown.sh
 !/bin/e
@@ -7,6 +8,7 @@
 !/bin/my_html_preview
 !/bin/my_metar
 !/bin/my_tap
+!/bin/pa_mic_toggle.sh
 !/bin/pa_vol_down
 !/bin/pa_vol_up
 !/bin/redshift_launcher
