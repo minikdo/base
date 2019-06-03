@@ -115,7 +115,6 @@ alias rclua="$EDITOR ~/.config/awesome/rc.lua"
 alias xmonadrc="$EDITOR ~/.xmonad/xmonad.hs"
 alias irssi="ssh adm -Xt screen -aAdr -RR irssi irssi"
 alias sshy="torsocks ssh $1"
-alias dq="dpkg -l | grep -i"
 alias dl='dpkg -l | less -S'
 alias acsh='apt-cache show'
 alias ach='apt changelog'
@@ -124,6 +123,13 @@ alias jc='journalctl'
 alias lf='systemctl list-units --state=failed'
 
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+function dq () {
+    dpkg-query -W \
+               -f='${binary:Package} '"$fg[blue]"'(${Version})'"$reset_color"'\n' \
+        | grep -i --colour=never $1
+}
+
 
 eval "$(direnv hook zsh)"
 

@@ -56,7 +56,7 @@ Config { font             = "xft:Inconsolata-zi4"
                                          , "-m"         , "white"
                                          , "-h"         , "grey" ] 600
                     , Run StdinReader
-                    , Run Com  "sh"      [ "-c"         , "~/bin/mailcounter.sh" ] "mailcount" 300
+                    , Run Com  "sh"      [ "-c"         , "~/bin/mailcounter.sh" ] "mailcount" 150
                     , Run Date "%a %b %_d %H:%M" "date" 10
                     ]
        , sepChar  = "%"
