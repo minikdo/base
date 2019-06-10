@@ -43,8 +43,9 @@ Config { font             = "xft:Inconsolata-zi4"
                                          , "--high"     , "darkred,#002b36" ] 10
                     , Run BatteryP       [ "BAT0" ]
                                          [ "-t"         , "<acstatus><left>%"
-                                         , "-L"         , "10"
+                                         , "-L"         , "16"
                                          , "-H"         , "80"
+                                         , "-l"         , "red"
                                          , "-p"         , "3"
                                          , "--"         
                                          , "-O"         , "+" -- On
@@ -52,7 +53,7 @@ Config { font             = "xft:Inconsolata-zi4"
                                          , "-i"         , ""
                                          , "-L"         , "-15"
                                          , "-H"         , "-5"
-                                         , "-l"         , "darkgrey"
+                                         , "-l"         , "red"
                                          , "-m"         , "white"
                                          , "-h"         , "grey" ] 600
                     , Run StdinReader
