@@ -60,16 +60,18 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-annex debian battery systemd sudo history man pip virtualenvwrapper) 
+plugins=(git git-annex debian battery systemd sudo history man pip
+         virtualenvwrapper) 
 
 
 # User configuration
-
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
+
+# autoload -U compinit && compinit
 
 # Automatically list directory contents on `cd`.
 # psuje workon 
@@ -121,6 +123,7 @@ alias ach='apt changelog'
 alias jf='journalctl -f'
 alias jc='journalctl'
 alias lf='systemctl list-units --state=failed'
+alias wpa="$EDITOR /etc/wpa_supplicant/wpa_supplicant-wlp4s0.conf"
 
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
@@ -130,6 +133,9 @@ function dq () {
         | grep -i --colour=never $1
 }
 
+function ipaddr () { echo; ip -c a; zle redisplay }
+zle -N ipaddr
+bindkey "^[k" ipaddr
 
 eval "$(direnv hook zsh)"
 
@@ -138,6 +144,7 @@ setopt completealiases
 
 apt_pref="apt"
 apt_upgr="upgrade"
+
 
 #export VIRTUAL_ENV_DISABLE_PROMPT=
 
