@@ -123,7 +123,8 @@ alias ach='apt changelog'
 alias jf='journalctl -f'
 alias jc='journalctl'
 alias lf='systemctl list-units --state=failed'
-alias wpa="$EDITOR /etc/wpa_supplicant/wpa_supplicant-wlp4s0.conf"
+alias wpa="$EDITOR /etc/wpa_supplicant/wpa_supplicant-*.conf"
+alias ad="sudo apt update && apt list --upgradable"
 
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
