@@ -1,5 +1,6 @@
 ;; fundamental
-(add-hook 'fundamental-mode-hook (lambda () (setq fill-column 999))) ;; disable autofill
+(add-hook 'text-mode-hook (lambda () (setq fill-column 999))) ;; disable autofill
+;; (add-hook 'text-mode-hook (lambda () (linum-mode -1))) ;; disable autofill
 
 
 ;; html
