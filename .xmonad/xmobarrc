@@ -57,11 +57,11 @@ Config { font             = "xft:Inconsolata-zi4"
                                          , "-m"         , "white"
                                          , "-h"         , "grey" ] 600
                     , Run StdinReader
-                    , Run Com  "sh"      [ "-c"         , "~/bin/mailcounter.sh" ] "mailcount" 150
+                    -- , Run Com  "sh"      [ "-c"         , "~/bin/mailcounter.sh" ] "mailcount" 150
                     , Run Date "%a %b %_d %H:%M" "date" 10
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
        , template = "%StdinReader% <fc=#268bd2,#002b36> %dynnetwork% %cpu% %memory%</fc>}\
-                    \{ %mailcount% <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%  %EPWA%</fc>"
+                    \{ <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%  %EPWA%</fc>"
        }
