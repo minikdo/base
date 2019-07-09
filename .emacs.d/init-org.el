@@ -73,3 +73,5 @@
 ;; apt install emacs-goodies-el for filladapt
 (require 'filladapt)
 (add-hook 'org-mode-hook 'turn-on-filladapt-mode)
+
+(setq browse-url-browser-function 'browse-url-chromium)

@@ -73,7 +73,8 @@
      ("" "amssymb" t)
      ("" "hyperref" nil)
      "\\tolerance=1000"
-     ("margin=1.5cm" "geometry" t))))
+     ("margin=1.5cm" "geometry" t)
+     "\\setlength\\parindent{0pt}")))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(projectile-git-command "git ls-files -zc --exclude-standard")
