@@ -19,7 +19,6 @@ fi
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="terminalparty"
-# ZSH_THEME="jreese"
 
 DISABLE_UPDATE_PROMPT="true"
 
@@ -62,7 +61,6 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git git-annex debian battery systemd sudo history man pip
          virtualenvwrapper) 
-
 
 # User configuration
 
@@ -115,7 +113,6 @@ alias zshh="$EDITOR ~/.zsh_history"
 alias muttrc="$EDITOR ~/.muttrc"
 alias rclua="$EDITOR ~/.config/awesome/rc.lua"
 alias xmonadrc="$EDITOR ~/.xmonad/xmonad.hs"
-alias irssi="ssh ustron.cjdns -Xt screen -aAdr -RR irssi irssi"
 alias sshy="torsocks ssh $1"
 alias dl='dpkg -l | less -S'
 alias acsh='apt-cache show'
@@ -125,8 +122,6 @@ alias jc='journalctl'
 alias lf='systemctl list-units --state=failed'
 alias wpa="$EDITOR /etc/wpa_supplicant/wpa_supplicant-*.conf"
 alias ad="sudo apt update && apt list --upgradable"
-
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 function dq () {
     dpkg-query -W \
@@ -146,7 +141,4 @@ setopt completealiases
 apt_pref="apt"
 apt_upgr="upgrade"
 
-
 #export VIRTUAL_ENV_DISABLE_PROMPT=
-
-# --- END ---
