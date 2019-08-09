@@ -121,13 +121,13 @@ myModMask = mod4Mask
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
     [ isFullscreen                        --> doFullFloat
-      , className =? "Chromium"           --> doShift "1:web"
-      , title     =? "mutt"               --> doShift "3:mutt"
-      , title     =? "profanity"          --> doShift "3:mutt"
-      , title     =? "jrnl"               --> doShift "9:jrnl"
+      , className =? "Chromium"           --> doShift "1"
+      , title     =? "mutt"               --> doShift "3"
+      , title     =? "profanity"          --> doShift "3"
+      , title     =? "jrnl"               --> doShift "9"
       , className =? "Navigator"          --> doFloat
-      , className =? "Tor Browser"        --> doShift "1:web"
-      , className =? "Gnome-calendar"     --> doShift "8:cal"
+      , className =? "Tor Browser"        --> doShift "1"
+      , className =? "Gnome-calendar"     --> doShift "8"
       , className =? "Viewnior"           --> doFullFloat
       , className =? "Pinentry"           --> doFloat
       , className =? "processing-app-Base" --> doFloat
@@ -140,7 +140,7 @@ myManageHook = composeAll
     ] <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
 
 myWorkspaces :: [[Char]]
-myWorkspaces = [ "1:web", "2:emacs", "3:mutt", "4", "5", "6", "7", "8:cal", "9:jrnl" ]
+myWorkspaces = [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
 
 myPP :: PP
 myPP = def { ppTitle   = xmobarColor blue      "" . shorten myTitleLength
@@ -149,6 +149,7 @@ myPP = def { ppTitle   = xmobarColor blue      "" . shorten myTitleLength
            , ppLayout  = xmobarColor blue      ""
            , ppSep     = " :: "
            , ppWsSep   = " "
+           , ppOrder   = \(ws:___) -> [ws]
            }
   where
     noScratchPad ws = if ws == "NSP"
@@ -348,7 +349,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
 main :: IO ()
 main = do
-    xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobarrc"
+    xmproc <- spawnPipe "/usr/bin/xmobar ~/.config/xmobar/xmobarrc"
     setRandomWallpaper ["$HOME/.wallpapers/haskell"]
     xmonad $ ewmh $ def
         { workspaces         = myWorkspaces
@@ -369,6 +370,6 @@ main = do
 
         , manageHook = manageDocks <+> myManageHook
                         <+> manageHook def
-        , layoutHook = lessBorders OnlyFloat $ avoidStruts $ myLayout
+        , layoutHook = avoidStruts $ myLayout
         , logHook = dynamicLogWithPP $ myPP { ppOutput = hPutStrLn xmproc }
         }

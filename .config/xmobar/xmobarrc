@@ -41,9 +41,15 @@ Config { font             = "xft:Inconsolata-zi4"
                                          , "--low"      , "darkgreen,#002b36"
                                          , "--normal"   , "darkorange,#002b36"
                                          , "--high"     , "darkred,#002b36" ] 10
+                    , Run Wireless "wlp4s0" [ "-t", "signal: <quality>%"
+                                         , "--Low"      , "50"        -- units: -- %
+                                         , "--High"     , "99"        -- units: -- %
+                                         , "--low"      , "red,#002b36"
+                                         , "--normal"   , "darkorange,#002b36"
+                                         , "--high"     , "darkgreen,#002b36" ] 100
                     , Run BatteryP       [ "BAT0" ]
                                          [ "-t"         , "<acstatus><left>%"
-                                         , "-L"         , "16"
+                                         , "-L"         , "20"
                                          , "-H"         , "80"
                                          , "-l"         , "red"
                                          , "-p"         , "3"
@@ -62,6 +68,6 @@ Config { font             = "xft:Inconsolata-zi4"
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% <fc=#268bd2,#002b36> %dynnetwork% %cpu% %memory%</fc>}\
+       , template = "%StdinReader% <fc=#268bd2,#002b36> %dynnetwork% %wlp4s0wi% %cpu% %memory%</fc>}\
                     \{ <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%  %EPWA%</fc>"
        }
