@@ -75,6 +75,9 @@
      "\\tolerance=1000"
      ("margin=1.5cm" "geometry" t)
      "\\setlength\\parindent{0pt}")))
+ '(package-selected-packages
+   (quote
+    (tabbar session pod-mode muttrc-mode mutt-alias markdown-mode initsplit htmlize graphviz-dot-mode folding eproject diminish csv-mode browse-kill-ring boxquote bm bar-cursor apache-mode yaml-mode which-key web-mode virtualenvwrapper systemd smex simpleclip rainbow-mode projectile php-mode ox-twbs org-bullets org-alert multiple-cursors monokai-theme molokai-theme moe-theme lua-mode jinja2-mode jedi haskell-mode git-annex git flymake-python-pyflakes flx-ido flatland-theme emmet-mode elpy color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized autopair auctex afternoon-theme adaptive-wrap abyss-theme)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(projectile-git-command "git ls-files -zc --exclude-standard")

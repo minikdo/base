@@ -122,6 +122,7 @@ myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
     [ isFullscreen                        --> doFullFloat
       , className =? "Chromium"           --> doShift "1"
+      , className =? "Emacs"              --> doShift "2"
       , title     =? "mutt"               --> doShift "3"
       , title     =? "profanity"          --> doShift "3"
       , title     =? "jrnl"               --> doShift "9"
@@ -232,6 +233,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Chromium or Tbb
     -- , ((modm,               xK_i     ), runOrRaiseMaster "chromium" (className =? "Chromium"))
     , ((modm,               xK_i     ), runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser"))
+
+    -- Emacs
+    , ((modm,               xK_o     ), runOrRaiseMaster "egtk" (className =? "Emacs"))
 
     -- Mutt
     , ((modm,               xK_s     ), raiseMaybe (runInTerm "-title mutt"  "zsh -c 'mutt'") (title =? "mutt"))

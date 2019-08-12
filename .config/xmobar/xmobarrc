@@ -19,7 +19,7 @@ Config { font             = "xft:Inconsolata-zi4"
        , overrideRedirect = True
        , commands = [ Run Weather "EPWA" [ "-t"         , "<tempC>°C <skyCondition> Q<pressure>"
                                          , "-L"         , "18"
-                                         , "-H"         , "25"
+                                         , "-H"         , "28"
                                          , "--normal"   , "green"
                                          , "--high"     , "red"
                                          , "--low"      , "lightblue" ] 36000
