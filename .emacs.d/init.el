@@ -17,7 +17,7 @@
 (load-file "~/.emacs.d/modes/mail-mode.el")
 (load-file "~/.emacs.d/modes/org.el")
 (load-file "~/.emacs.d/modes/php-mode.el")
-;; (load-file "~/.emacs.d/modes/projectile.el")
+(load-file "~/.emacs.d/modes/projectile.el")
 ;; (load-file "~/.emacs.d/modes/python-mode.el")
 (load-file "~/.emacs.d/modes/smex.el")
 ;; (load-file "~/.emacs.d/modes/web-mode.el")

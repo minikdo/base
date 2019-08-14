@@ -17,51 +17,51 @@ Config { font             = "xft:Inconsolata-zi4"
        , iconRoot         = "."
        , allDesktops      = True
        , overrideRedirect = True
-       , commands = [ Run Weather "EPWA" [ "-t"         , "<tempC>°C <skyCondition> Q<pressure>"
-                                         , "-L"         , "18"
-                                         , "-H"         , "28"
-                                         , "--normal"   , "green"
-                                         , "--high"     , "red"
-                                         , "--low"      , "lightblue" ] 36000
-                    , Run Cpu            [ "-m"         , "2"
-                                         , "-L"         , "3"
-                                         , "-H"         , "50"
-                                         , "--normal"   , "green,#002b36"
-                                         , "--high"     , "red,#002b36" ] 10
-                    , Run Memory         [ "-t"         , "Mem: <usedratio>%"
-                                         , "--Low"      , "20"        -- units: -- %
-                                         , "--High"     , "90"        -- units: -- %
-                                         , "--low"      , "darkgreen,#002b36"
-                                         , "--normal"   , "darkorange,#002b36"
-                                         , "--high"     , "darkred,#002b36" ] 10
-                    , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s | <rx>kB/s"
-                                         , "--Low"      , "1000" 
-                                         , "--High"     , "5000"
-                                         , "-m", "4"
-                                         , "--low"      , "darkgreen,#002b36"
-                                         , "--normal"   , "darkorange,#002b36"
-                                         , "--high"     , "darkred,#002b36" ] 10
+       , commands = [ Run Weather "EPWA"    [ "-t"         , "<tempC>°C <skyCondition> Q<pressure>"
+                                            , "-L"         , "18"
+                                            , "-H"         , "28"
+                                            , "--normal"   , "green"
+                                            , "--high"     , "red"
+                                            , "--low"      , "lightblue" ] 36000
+                    , Run Cpu               [ "-m"         , "2"
+                                            , "-L"         , "3"
+                                            , "-H"         , "50"
+                                            , "--normal"   , "green,#002b36"
+                                            , "--high"     , "red,#002b36" ] 10
+                    , Run Memory            [ "-t"         , "Mem: <usedratio>%"
+                                            , "--Low"      , "20"        -- units: -- %
+                                            , "--High"     , "90"        -- units: -- %
+                                            , "--low"      , "darkgreen,#002b36"
+                                            , "--normal"   , "darkorange,#002b36"
+                                            , "--high"     , "darkred,#002b36" ] 10
+                    , Run DynNetwork        [ "--template" , "<dev>: <tx>kB/s | <rx>kB/s"
+                                            , "--Low"      , "1000" 
+                                            , "--High"     , "5000"
+                                            , "-m"         , "4"
+                                            , "--low"      , "darkgreen,#002b36"
+                                            , "--normal"   , "darkorange,#002b36"
+                                            , "--high"     , "darkred,#002b36" ] 10
                     , Run Wireless "wlp4s0" [ "-t", "signal: <quality>%"
-                                         , "--Low"      , "50"        -- units: -- %
-                                         , "--High"     , "99"        -- units: -- %
-                                         , "--low"      , "red,#002b36"
-                                         , "--normal"   , "darkorange,#002b36"
-                                         , "--high"     , "darkgreen,#002b36" ] 100
-                    , Run BatteryP       [ "BAT0" ]
-                                         [ "-t"         , "<acstatus><left>%"
-                                         , "-L"         , "20"
-                                         , "-H"         , "80"
-                                         , "-l"         , "red"
-                                         , "-p"         , "3"
-                                         , "--"         
-                                         , "-O"         , "+" -- On
-                                         , "-o"         , "-<timeleft>" -- Off
-                                         , "-i"         , ""
-                                         , "-L"         , "-15"
-                                         , "-H"         , "-5"
-                                         , "-l"         , "red"
-                                         , "-m"         , "white"
-                                         , "-h"         , "grey" ] 600
+                                            , "--Low"      , "50"        -- units: -- %
+                                            , "--High"     , "99"        -- units: -- %
+                                            , "--low"      , "red,#002b36"
+                                            , "--normal"   , "darkorange,#002b36"
+                                            , "--high"     , "darkgreen,#002b36" ] 100
+                    , Run BatteryP          [ "BAT0" ]
+                                            [ "-t"         , "<acstatus><left>%"
+                                            , "-L"         , "20"
+                                            , "-H"         , "80"
+                                            , "-l"         , "red"
+                                            , "-p"         , "3"
+                                            , "--"         
+                                            , "-O"         , "+" -- On
+                                            , "-o"         , "-<timeleft>" -- Off
+                                            , "-i"         , ""
+                                            , "-L"         , "-15"
+                                            , "-H"         , "-5"
+                                            , "-l"         , "red"
+                                            , "-m"         , "white"
+                                            , "-h"         , "grey" ] 600
                     , Run StdinReader
                     , Run CatInt 0 "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon1/fan1_input" [] 100
                     -- , Run Com  "sh"      [ "-c"         , "~/bin/mailcounter.sh" ] "mailcount" 150

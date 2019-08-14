@@ -5,13 +5,13 @@
   "Return the absolute address of an org file, given its relative name."
   (concat (file-name-as-directory org-directory) filename))
 
-(setq org-index-file (org-file-path "dominik.org"))
+(setq org-index-file (org-file-path "agenda.org"))
 (setq org-archive-location
       (concat (org-file-path "archive.org") "::* From %s"))
 
 (setq org-agenda-files (list org-index-file))
 
-(setq org-default-notes-file (org-file-path "/dominik.org"))
+(setq org-default-notes-file (org-file-path "/agenda.org"))
 
 ;; Hitting C-c C-x C-s will mark a todo as done and move it to an appropriate
 ;; place in the archive.
@@ -50,11 +50,11 @@
 
 
 (setq org-capture-templates
-      (quote (("t" "todo" entry (file+headline (org-file-path "dominik.org") "Tasks")
-	       "* TODO %? %^g\n %U\n")
-	      ("j" "journal" entry (file (org-file-path "journal.org"))
-	       "* %U %?\n\n" )
-	      )))
+      '(("t" "todo" entry (file+headline "~/.agenda/agenda.org" "Tasks")
+	     "* TODO %? %^g\n %U\n")
+	    ("j" "journal" entry (file "~/.agenda/journal.org")
+	     "* %U %?\n\n" )
+	    ))
 
 ;; to clock capture entry
 ;; :clock-in t :clock-resume t
