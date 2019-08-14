@@ -7,6 +7,9 @@
 
 ;; (load (relative-to-full-path "init-org.el"))
 
+;; to install debian packages:
+;; sudo apt install $(grep -ri 'Debian packages:' ~/.emacs.d/modes | awk -F:  '{print $3}' | tr '\n' ' ')
+
 (load-file "~/.emacs.d/general.el")
 
 ;; (load-file "~/.emacs.d/modes/auctex.el")
