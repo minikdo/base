@@ -21,14 +21,20 @@ is considered to be a project root."
          (directory-file-name root-dir))
       nil)))
 
+
 (defun jedi-setup-venv ()
   "Activates the virtualenv of the current buffer."
+  (interactive)
   (let ((project-name (project-name buffer-file-name)))
     (when project-name (venv-workon project-name))))
 
+
+
+(setq python-environment-virtualenv
+      '("virtualenv" "--no-site-packages" "--python" "python3"))
+
+
 (setq jedi:setup-keys t)
 (setq jedi:complete-on-dot t)
-(add-hook 'python-mode-hook 'jedi-setup-venv)
-(add-hook 'python-mode-hook 'jedi:setup)
 
 ;; (setq flymake-python-pyflakes-executable "flake8")
