@@ -63,7 +63,7 @@ Config { font             = "xft:Inconsolata-zi4"
                                             , "-m"         , "white"
                                             , "-h"         , "grey" ] 600
                     , Run StdinReader
-                    , Run CatInt 0 "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon1/fan1_input" [] 100
+                    , Run CatInt 0 "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon2/fan1_input" [] 100
                     -- , Run Com  "sh"      [ "-c"         , "~/bin/mailcounter.sh" ] "mailcount" 150
                     , Run Date "%a %b %_d %H:%M" "date" 10
                     ]
