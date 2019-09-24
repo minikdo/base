@@ -125,7 +125,7 @@ alias ad="sudo apt update && apt list --upgradable"
 
 function dq () {
     dpkg-query -W \
-               -f='${binary:Package} '"$fg[blue]"'(${Version})'"$reset_color"'\n' \
+               -f='${db:Status-Abbrev}${binary:Package} '"$fg[blue]"'(${Version})'"$reset_color"'\n' \
         | grep -i --colour=never $1
 }
 

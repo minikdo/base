@@ -21,6 +21,8 @@
 !/.config/awesome/themes/xresources
 !/.config/awesome/themes/xresources/assets.lua
 !/.config/awesome/themes/xresources/theme.lua
+!/.config/conky
+!/.config/conky/conky.conf
 !/.config/fontconfig
 !/.config/fontconfig/fonts.conf
 !/.config/mc

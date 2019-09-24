@@ -63,12 +63,13 @@ Config { font             = "xft:Inconsolata-zi4"
                                             , "-m"         , "white"
                                             , "-h"         , "grey" ] 600
                     , Run StdinReader
-                    , Run CatInt 0 "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon2/fan1_input" [] 100
+                    -- , Run CatInt 0 "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon2/fan1_input" [] 100
                     -- , Run Com  "sh"      [ "-c"         , "~/bin/mailcounter.sh" ] "mailcount" 150
                     , Run Date "%a %b %_d %H:%M" "date" 10
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% <fc=#268bd2,#002b36> %dynnetwork% %wlp4s0wi% %cpu% %memory% Fan: </fc><fc=darkorange,#002b36>%cat0% </fc> }\
+       -- Fan: </fc><fc=darkorange,#002b36>%cat0%
+       , template = "%StdinReader% <fc=#268bd2,#002b36> %dynnetwork% %wlp4s0wi% %cpu% %memory%  </fc> }\
                     \{ <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%  %EPWA%</fc>"
        }
