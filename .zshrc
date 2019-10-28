@@ -64,7 +64,7 @@ plugins=(git git-annex debian battery systemd sudo history man pip
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/sbin/:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -119,6 +119,7 @@ alias acsh='apt-cache show'
 alias ach='apt changelog'
 alias jf='journalctl -f'
 alias jc='journalctl'
+alias uq='systemctl list-units | grep $1'
 alias lf='systemctl list-units --state=failed'
 alias wpa="$EDITOR /etc/wpa_supplicant/wpa_supplicant-*.conf"
 alias ad="sudo apt update && apt list --upgradable"
