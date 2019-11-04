@@ -33,6 +33,7 @@
 !/.config/mc/panels.ini
 !/.config/systemd
 !/.config/systemd/user
+!/.config/systemd/user/compton.service
 !/.config/systemd/user/emacs.service
 !/.config/systemd/user/redshift.service
 !/.config/xmobar
@@ -88,5 +89,5 @@
 !/.xmonad
 !/.xmonad/xmonad.hs
 !/.Xresources
-!/.Xsession
+!/.xsession
 !/.zshrc
