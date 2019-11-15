@@ -118,7 +118,7 @@ alias dl='dpkg -l | less -S'
 alias acsh='apt-cache show'
 alias ach='apt changelog'
 alias jf='journalctl -f'
-alias jc='journalctl'
+alias jc='journalctl --since=today'
 alias uq='systemctl list-units | grep $1'
 alias lf='systemctl list-units --state=failed'
 alias wpa="$EDITOR /etc/wpa_supplicant/wpa_supplicant-*.conf"
