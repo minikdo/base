@@ -1,0 +1,10 @@
+[Unit]
+Description=Update notmuch
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/notmuch new
+Restart=no
+
+[Install]
+WantedBy=default.target

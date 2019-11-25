@@ -1,5 +1,3 @@
-ENTRY "dell"             URL "/home/domino/sh://domino@dell/home/domino"
-ENTRY "dell (root)"      URL "sh://root@dell/"
 ENTRY "adm"              URL "/home/domino/sh://domino@adm/home/domino"
 ENTRY "adm (root)"       URL "sh://root@adm/"
 ENTRY "adm (www-data)"   URL "/home/domino/sh://www-data@adm/var/www"
