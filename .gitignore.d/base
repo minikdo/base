@@ -48,11 +48,14 @@
 !/.emacs.d/modes/arduino.el
 !/.emacs.d/modes/auctex.el
 !/.emacs.d/modes/auto-complete.el
+!/.emacs.d/modes/autopair.el
+!/.emacs.d/modes/elpy.el
 !/.emacs.d/modes/flx-ido.el
 !/.emacs.d/modes/git-annex.el
 !/.emacs.d/modes/jediserver.el
 !/.emacs.d/modes/mail-mode.el
 !/.emacs.d/modes/org.el
+!/.emacs.d/modes/persistent-scratch.el
 !/.emacs.d/modes/php-mode.el
 !/.emacs.d/modes/projectile.el
 !/.emacs.d/modes/python-mode.el
