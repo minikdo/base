@@ -11,6 +11,12 @@ if [ -f ~/.zsh_my_env ]; then
     . ~/.zsh_my_env
 fi
 
+
+if [ -f ~/.config/fzf/key-bindings.zsh ]; then
+    . ~/.config/fzf/key-bindings.zsh
+fi
+
+
 #zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 
@@ -129,6 +135,11 @@ function dq () {
                -f='${db:Status-Abbrev}${binary:Package} '"$fg[blue]"'(${Version})'"$reset_color"'\n' \
         | grep -i --colour=never $1
 }
+
+autoload -U edit-command-line
+zle -N edit-command-line
+# bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
 
 function ipaddr () { echo; ip -c a; zle redisplay }
 zle -N ipaddr
