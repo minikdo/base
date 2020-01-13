@@ -11,12 +11,6 @@ if [ -f ~/.zsh_my_env ]; then
     . ~/.zsh_my_env
 fi
 
-
-if [ -f ~/.config/fzf/key-bindings.zsh ]; then
-    . ~/.config/fzf/key-bindings.zsh
-fi
-
-
 #zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 
@@ -152,5 +146,9 @@ setopt completealiases
 
 apt_pref="apt"
 apt_upgr="upgrade"
+
+if [ -f ~/.config/fzf/key-bindings.zsh ]; then
+    . ~/.config/fzf/key-bindings.zsh
+fi
 
 #export VIRTUAL_ENV_DISABLE_PROMPT=
