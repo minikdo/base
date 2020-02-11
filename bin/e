@@ -11,4 +11,6 @@ if [ ! -e /tmp/emacs$USERID/server ]; then
     done
 fi
 
-emacsclient -t "$@"
+# emacsclient -t "$@"
+wmctrl -xa emacs
+emacsclient -n "$@"

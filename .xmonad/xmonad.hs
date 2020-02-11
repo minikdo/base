@@ -14,10 +14,11 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.PerWindowKbdLayout
 import XMonad.Hooks.SetWMName
 
-import XMonad.Layout.OneBig
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Grid
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Spacing
+import XMonad.Layout.Gaps
 
 import XMonad.Prompt
 import XMonad.Prompt.Input
@@ -109,10 +110,12 @@ myTabTheme = def
 myFont :: [Char]
 myFont = "xft:Inconsolata-zi4"
 
-myLayout = simpleTabbed ||| Grid ||| tiled ||| Mirror tiled ||| OneBig (3/4) (3/4) ||| Full
+myLayout = simpleTabbed ||| spacedGrid ||| gappedSpacedGrid ||| tiled ||| Full
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled = Tall 1 (10/100) (1/2)
+    spacedGrid = spacingWithEdge 10 $ Grid
+    gappedSpacedGrid = spacing 10 $ gaps [(U,10), (D, 10), (L, 10), (R,320)] $ Grid
     simpleTabbed = tabbed shrinkText myTabTheme
 
 myModMask :: KeyMask
