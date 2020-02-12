@@ -7,6 +7,8 @@ URxvt*font:            xft:Inconsolata-zi4:pixelsize=19
 XTerm*ScrollKey:       true
 XTern*sixelScrolling:  true
 
+URxvt.internalBorder:  8
+
 XTerm*termName:        xterm-256color
 UXTerm*termName:       xterm-256color
 URxvt.termName:        rxvt-unicode-256color
