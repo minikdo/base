@@ -123,6 +123,7 @@ alias uq='systemctl list-units | grep $1'
 alias lf='systemctl list-units --state=failed'
 alias wpa="$EDITOR /etc/wpa_supplicant/wpa_supplicant-*.conf"
 alias ad="sudo apt update && apt list --upgradable"
+alias pass='EDITOR=nano pass'
 
 function dq () {
     dpkg-query -W \
