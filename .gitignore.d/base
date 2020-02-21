@@ -74,7 +74,6 @@
 !/.local/share/applications/mimeapps.list
 !/.local/share/applications/mpv.desktop
 !/.mailcap
-!/.packages
 !/.tmux.conf
 !/.urxvt
 !/.urxvt/ext
