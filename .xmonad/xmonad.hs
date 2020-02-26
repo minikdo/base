@@ -321,6 +321,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Pop open a dmenu to poweroff/reboot/suspend/lock
     , ((modm              , xK_z     ), spawn "~/bin/dmenu_shutdown.sh")
 
+    -- Pop open a dmenu to poweroff/reboot/suspend/lock
+    , ((modm              , xK_u     ), spawn "~/bin/passmenu")
+
     -- Pop tiny terminal window via Scratchpad
     , ((modm              , xK_grave ), scratchpadSpawnAction def {terminal = "urxvtc -name terminal"})
 
