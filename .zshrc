@@ -111,7 +111,6 @@ export EDITOR=e
 alias zshrc="$EDITOR ~/.zshrc"
 alias zshh="$EDITOR ~/.zsh_history"
 alias muttrc="$EDITOR ~/.muttrc"
-alias rclua="$EDITOR ~/.config/awesome/rc.lua"
 alias xmonadrc="$EDITOR ~/.xmonad/xmonad.hs"
 alias sshy="torsocks ssh $1"
 alias dl='dpkg -l | less -S'
@@ -124,6 +123,7 @@ alias lf='systemctl list-units --state=failed'
 alias wpa="$EDITOR /etc/wpa_supplicant/wpa_supplicant-*.conf"
 alias ad="sudo apt update && apt list --upgradable"
 alias pass='EDITOR=nano pass'
+alias cls="echo -ne '\033c'" # urxvt terminal clean buffer
 
 function dq () {
     dpkg-query -W \
