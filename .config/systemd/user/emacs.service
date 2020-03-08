@@ -7,5 +7,7 @@ Environment=TERM=rxvt-unicode-256color
 ExecStart=/usr/bin/emacs --daemon
 ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
 Restart=always
+
 [Install]
+Also=emacs.socket
 WantedBy=default.target
