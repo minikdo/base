@@ -63,7 +63,7 @@
 ;;?
 ;; (setq-default c-basic-offset 4)
 
-(server-start)
+;; (server-start)
 
 (when window-system
   (progn

@@ -1,16 +1,18 @@
 #!/bin/bash
 
 USERID=`id -u`
+SOCKET=/run/user/$USERID/emacs/server
 
-if [ ! -e /tmp/emacs$USERID/server ]; then
-    echo "Starting server."
-    emacs --daemon
-
-    while [ ! -e "/tmp/emacs$USERID/server" ]; do
-        sleep 0.5
-    done
+if [ ! -e ${SOCKET} ]; then
+    echo "Emacs socket not found"
+    exit 1
 fi
 
+# open buffer in the current terminal
 # emacsclient -t "$@"
+
+# switch to the desktop containing emacs client
 wmctrl -xa emacs
-emacsclient -n "$@"
+
+# open buffer with no-wait
+emacsclient -n "$@" --socket-name ${SOCKET}

@@ -32,6 +32,7 @@
 !/.config/systemd/user/compton.service
 !/.config/systemd/user/conky.service
 !/.config/systemd/user/emacs.service
+!/.config/systemd/user/emacs.socket
 !/.config/systemd/user/notmuch.service
 !/.config/systemd/user/notmuch.timer
 !/.config/systemd/user/redshift.service
