@@ -116,8 +116,8 @@ alias sshy="torsocks ssh $1"
 alias dl='dpkg -l | less -S'
 alias acsh='apt-cache show'
 alias ach='apt changelog'
-alias jf='journalctl -f'
-alias jc='journalctl --since=today'
+alias jf='journalctl -f -n100'
+alias jc='journalctl -e --since=today'
 alias uq='systemctl list-units | grep $1'
 alias lf='systemctl list-units --state=failed'
 alias wpa="$EDITOR /etc/wpa_supplicant/wpa_supplicant-*.conf"
