@@ -69,9 +69,10 @@
   (progn
     (global-unset-key (kbd "C-z"))
     (setq scroll-bar-mode nil)
-    (tool-bar-mode nil)
-    (menu-bar-mode nil)))
+    (tool-bar-mode -1)
+    (menu-bar-mode -1)))
 
+(global-unset-key (kbd "C-z"))
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 
