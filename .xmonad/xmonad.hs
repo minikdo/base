@@ -138,7 +138,7 @@ myManageHook = composeAll
       , className =? "vlc"                --> doFullFloat
       , className =? "mpv"                --> doFullFloat
       , className =? "Arandr"             --> doFloat
-      -- , className =? "Signal"             --> doFloat
+      , className =? "Evince"             --> doFloat
       , className =? "Pavucontrol"        --> doFloat
       , stringProperty "WM_WINDOW_ROLE" =? "pop-up" --> doFloat
     ] <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)

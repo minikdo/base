@@ -1,3 +1,5 @@
+;; Debian packages: elpa-htmlize
+
 ;; Org-mode settings
 (setq org-directory "~/.agenda")
 
