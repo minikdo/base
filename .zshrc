@@ -152,4 +152,6 @@ if [ -f ~/.config/fzf/key-bindings.zsh ]; then
     . ~/.config/fzf/key-bindings.zsh
 fi
 
+autoload -U compinit && compinit
+
 #export VIRTUAL_ENV_DISABLE_PROMPT=

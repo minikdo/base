@@ -360,7 +360,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 main :: IO ()
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar ~/.config/xmobar/xmobarrc"
-    setRandomWallpaper ["$HOME/.wallpapers/haskell"]
+    setRandomWallpaper ["$HOME/.local/share/wallpapers"]
     xmonad $ ewmh $ def
         { workspaces         = myWorkspaces
         , terminal           = myTerminal
