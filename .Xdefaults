@@ -1,7 +1,8 @@
 UXTerm*faceName:       Inconsolata
 XTerm*faceName:        Inconsolata
 
-URxvt*font:            xft:Inconsolata-zi4:pixelsize=19
+!URxvt*font:            xft:Inconsolata-zi4:pixelsize=19
+URxvt*font:            xft:Iosevka Extended:pixelsize=17
 !URxvt*transparent:     false
 !URxvt*shading:         0
 XTerm*ScrollKey:       true
