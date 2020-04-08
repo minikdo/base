@@ -11,5 +11,5 @@ set -eux
 
 mv "$1.tmp" "$1"
 
-# firefox -private-window "$1"
-chromium --incognito "$1"
+firefox -private-window "$1"
+#chromium --incognito "$1"

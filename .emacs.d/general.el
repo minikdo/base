@@ -8,6 +8,8 @@
 ;; (add-to-list 'default-frame-alist
              ;; '(font . "Hack-12"))
 
+(set-default-font "-BE5N-Iosevka-normal-normal-expanded-*-18-*-*-*-d-0-iso10646-1")
+
 (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
 (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
