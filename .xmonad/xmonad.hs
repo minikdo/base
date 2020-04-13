@@ -126,12 +126,12 @@ myManageHook = composeAll
     [ isFullscreen                        --> doFullFloat
       , className =? "Chromium"           --> doShift "1"
       , className =? "Emacs"              --> doShift "2"
-      , title     =? "mutt"               --> doShift "3"
-      , title     =? "profanity"          --> doShift "3"
+      , title     =? "mutt"               --> doShift "8"
+      , title     =? "profanity"          --> doShift "8"
       , title     =? "jrnl"               --> doShift "9"
       , className =? "Navigator"          --> doFloat
       , className =? "Tor Browser"        --> doShift "1"
-      , className =? "Gnome-calendar"     --> doShift "8"
+      -- , className =? "Gnome-calendar"     --> doShift "8"
       , className =? "Viewnior"           --> doFullFloat
       , className =? "Pinentry"           --> doFloat
       -- , className =? "processing-app-Base" --> doFloat
