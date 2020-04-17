@@ -21,5 +21,8 @@ urxvtd -q -o -f && \
 
 synclient TapButton1=0 TapButton2=0 TapButton3=0 PalmDetect=1 &
 
+XAUTH=/tmp/container_xauth
+DISPLAY=:0
+xauth nextract - "$DISPLAY" | sed -e 's/^..../ffff/' | xauth -f "$XAUTH" nmerge -
+
 exec xmonad
-#exec awesome

@@ -12,7 +12,7 @@ fi
 # emacsclient -t "$@"
 
 # switch to the desktop containing emacs client
-wmctrl -xa emacs
+#wmctrl -xa emacs
 
 # open buffer with no-wait
-emacsclient -n "$@" --socket-name ${SOCKET}
+emacsclient --socket-name ${SOCKET} -nw "$@"
