@@ -1,5 +1,6 @@
 import XMonad
 
+import XMonad.Actions.DynamicProjects
 import XMonad.Actions.DwmPromote
 import XMonad.Actions.GridSelect
 import XMonad.Actions.WindowBringer
@@ -17,6 +18,7 @@ import XMonad.Hooks.SetWMName
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Grid
 import XMonad.Layout.NoBorders
+-- import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
 
@@ -110,13 +112,52 @@ myTabTheme = def
 myFont :: [Char]
 myFont = "xft:Inconsolata-zi4"
 
-myLayout = simpleTabbed ||| spacedGrid ||| gappedSpacedGrid ||| tiled ||| Full
+projects :: [Project]
+projects =
+  [ Project { projectName      = "1"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ do runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser")
+                                           spawn "firefox"
+            }
+  , Project { projectName      = "2"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ do runOrRaiseMaster "egtk" (className =? "Emacs")
+            }
+  , Project { projectName      = "3"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ do spawn myTerminal
+            }
+  , Project { projectName      = "4"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ do spawn myTerminal
+            }
+  , Project { projectName      = "5"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ do spawn myTerminal
+            }
+  , Project { projectName      = "7"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ do spawn "riot-web"
+            }
+  , Project { projectName      = "8"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ do runInTerm "-name mutt" "mutt"
+            }
+  , Project { projectName      = "9"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ do runInTerm "-name jrnl" "journalctl -n40 -f"
+            }
+  ]
+
+myLayout = simpleTabbed ||| gappedSpacedGrid ||| tiled ||| Full
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled = Tall 1 (10/100) (1/2)
-    spacedGrid = spacingWithEdge 10 $ Grid
+    -- spacedGrid = spacingWithEdge 10 $ Grid
     gappedSpacedGrid = spacing 10 $ gaps [(U,10), (D, 10), (L, 10), (R,320)] $ Grid
     simpleTabbed = tabbed shrinkText myTabTheme
+
+-- myLayoutHook = onWorkspace "3" l2 ?
 
 myModMask :: KeyMask
 myModMask = mod4Mask
@@ -128,7 +169,7 @@ myManageHook = composeAll
       , className =? "Emacs"              --> doShift "2"
       , title     =? "mutt"               --> doShift "8"
       , title     =? "profanity"          --> doShift "8"
-      , title     =? "jrnl"               --> doShift "9"
+      -- , title     =? "jrnl"               --> doShift "9"
       , className =? "Navigator"          --> doFloat
       , className =? "Tor Browser"        --> doShift "1"
       -- , className =? "Gnome-calendar"     --> doShift "8"
@@ -361,12 +402,13 @@ main :: IO ()
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar ~/.config/xmobar/xmobarrc"
     setRandomWallpaper ["$HOME/.local/share/wallpapers"]
-    xmonad $ ewmh $ def
+    xmonad $ ewmh $ dynamicProjects projects def
         { workspaces         = myWorkspaces
         , terminal           = myTerminal
         , focusFollowsMouse  = myFocusFollowsMouse
         , borderWidth        = myBorderWidth
         , focusedBorderColor = myFocusedBorderColor
+        -- , dynamicProjects projects
 
         , startupHook        = setWMName "LG3D"
         , modMask            = myModMask
