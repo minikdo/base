@@ -168,7 +168,6 @@ myModMask = mod4Mask
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
     [ isFullscreen                        --> doFullFloat
-      , className =? "Chromium"           --> doShift "1"
       , className =? "Emacs"              --> doShift "2"
       , title     =? "mutt"               --> doShift "8"
       , title     =? "profanity"          --> doShift "8"
@@ -178,9 +177,9 @@ myManageHook = composeAll
       , className =? "Pinentry"           --> doFloat
       , className =? "vlc"                --> doFullFloat
       , className =? "mpv"                --> doFullFloat
-      , className =? "Arandr"             --> doFloat
-      , className =? "Evince"             --> doFloat
-      , className =? "Pavucontrol"        --> doFloat
+      , className =? "Arandr"             --> doCenterFloat
+      , className =? "Evince"             --> doCenterFloat
+      , className =? "Pavucontrol"        --> doCenterFloat
       , stringProperty "WM_WINDOW_ROLE" =? "pop-up" --> doFloat
     ] <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
 
@@ -210,7 +209,7 @@ myXPConfig = def
              , fgHLight          = "#F0E0AF"
              , promptBorderWidth = 0
              , position          = Top
-             , height            = 15
+             , height            = 20
              , historySize       = 50
              , historyFilter     = deleteConsecutive
              }
@@ -290,13 +289,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
 
     -- Volume Up
-    , ((0  , xF86XK_AudioRaiseVolume ), spawn "~/bin/pa_vol_up")
+    , ((0  , xF86XK_AudioRaiseVolume ), spawn "pa_vol_up")
 
     -- Volume Down
-    , ((0  , xF86XK_AudioLowerVolume ), spawn "~/bin/pa_vol_down")
+    , ((0  , xF86XK_AudioLowerVolume ), spawn "pa_vol_down")
 
     -- Mic Toggle
-    , ((0  , 0x1008FFB2              ), spawn "~/bin/pa_mic_toggle.sh")
+    , ((0  , 0x1008FFB2              ), spawn "pa_mic_toggle")
 
     -- Brightness Up
     , ((0  , xF86XK_MonBrightnessUp  ), spawn "xbacklight -inc 10")
@@ -337,9 +336,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --restart")
 
-    -- Recompile xmonad
-    , ((modm .|. controlMask, xK_q   ), spawn "xmonad --recompile")
-
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
@@ -348,9 +344,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Push the master window to the next window in the stack
     , ((modm .|. shiftMask, xK_Return), dwmpromote)
-
-    -- Make screenshot with scrot
-    , ((modm              , xK_Print ), spawn "scrot -e 'mv $f ~'")
 
     -- Pop open a dmenu with window titles to be taken to the corresponding workspace
     , ((modm .|. shiftMask, xK_g     ), gotoMenu)
@@ -361,11 +354,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Pop open a dmenu to poweroff/reboot/suspend/lock
     , ((modm              , xK_z     ), spawn "~/bin/dmenu_shutdown.sh")
 
-    -- Pop open a dmenu to poweroff/reboot/suspend/lock
+    -- Pop open a dmenu to pass
     , ((modm              , xK_u     ), spawn "~/bin/passmenu")
 
     -- Pop tiny terminal window via Scratchpad
-    , ((modm              , xK_grave ), scratchpadSpawnAction def {terminal = "rxvt -name 'terminal'"})
+    , ((modm              , xK_grave ), scratchpadSpawnAction def {terminal = "urxvt"})
 
     -- Shell Prompt to run a shell command
     , ((modm .|. controlMask, xK_x   ), shellPrompt myXPConfig)
