@@ -26,7 +26,7 @@ import XMonad.Prompt
 import XMonad.Prompt.Input
 import XMonad.Prompt.Shell
 
-import XMonad.Util.Run (spawnPipe, runProcessWithInput, runInTerm)
+import XMonad.Util.Run (spawnPipe, runProcessWithInput, runInTerm, safeSpawn)
 import XMonad.Util.Scratchpad (scratchpadSpawnAction, scratchpadManageHook)
 
 import XMonad.Wallpaper
@@ -43,7 +43,10 @@ import qualified Data.Map        as M
 import qualified XMonad.StackSet as W
 
 myTerminal :: [Char]
-myTerminal = "urxvtc"
+myTerminal = "st"
+
+myTmux :: [Char]
+myTmux = "st -e tmux"
 
 myScreenlocker :: [Char]
 myScreenlocker = "/usr/bin/slock"
@@ -117,7 +120,7 @@ projects =
   [ Project { projectName      = "1"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser")
-                                           spawn "firefox"
+                                           safeSpawn "firefox" []
             }
   , Project { projectName      = "2"
             , projectDirectory = "~/"
@@ -125,27 +128,27 @@ projects =
             }
   , Project { projectName      = "3"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn myTerminal
+            , projectStartHook = Just $ do spawn myTmux
             }
   , Project { projectName      = "4"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn myTerminal
+            , projectStartHook = Just $ do spawn myTmux
             }
   , Project { projectName      = "5"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn myTerminal
+            , projectStartHook = Just $ do spawn myTmux
             }
   , Project { projectName      = "7"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "riot-web"
+            , projectStartHook = Just $ do safeSpawn "riot-desktop" []
             }
   , Project { projectName      = "8"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do runInTerm "-name mutt" "mutt"
+            , projectStartHook = Just $ do runInTerm "-t mutt" "mutt"
             }
   , Project { projectName      = "9"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do runInTerm "-name jrnl" "journalctl -n40 -f"
+            , projectStartHook = Just $ do runInTerm "-t jrnl" "~/bin/my_tmux.sh"
             }
   ]
 
@@ -169,13 +172,10 @@ myManageHook = composeAll
       , className =? "Emacs"              --> doShift "2"
       , title     =? "mutt"               --> doShift "8"
       , title     =? "profanity"          --> doShift "8"
-      -- , title     =? "jrnl"               --> doShift "9"
       , className =? "Navigator"          --> doFloat
       , className =? "Tor Browser"        --> doShift "1"
-      -- , className =? "Gnome-calendar"     --> doShift "8"
       , className =? "Viewnior"           --> doFullFloat
       , className =? "Pinentry"           --> doFloat
-      -- , className =? "processing-app-Base" --> doFloat
       , className =? "vlc"                --> doFullFloat
       , className =? "mpv"                --> doFullFloat
       , className =? "Arandr"             --> doFloat
@@ -274,18 +274,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Goto previous workspace
     -- , ((modm,               xK_Left  ), prevWS)
 
-    -- Chromium or Tbb
-    -- , ((modm,               xK_i     ), runOrRaiseMaster "chromium" (className =? "Chromium"))
+    -- Tor Browser
     , ((modm,               xK_i     ), runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser"))
 
     -- Emacs
     , ((modm,               xK_o     ), runOrRaiseMaster "egtk" (className =? "Emacs"))
 
     -- Mutt
-    , ((modm,               xK_s     ), raiseMaybe (runInTerm "-title mutt"  "zsh -c 'mutt'") (title =? "mutt"))
+    , ((modm,               xK_s     ), raiseMaybe (runInTerm "-t mutt" "mutt") (title =? "mutt"))
 
     -- Profanity
-    , ((modm,               xK_d     ), raiseMaybe (runInTerm "-title profanity"  "zsh -c 'profanity'") (title =? "profanity"))
+    , ((modm,               xK_d     ), raiseMaybe (runInTerm "-t profanity" "profanity") (title =? "profanity"))
 
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
@@ -366,7 +365,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_u     ), spawn "~/bin/passmenu")
 
     -- Pop tiny terminal window via Scratchpad
-    , ((modm              , xK_grave ), scratchpadSpawnAction def {terminal = "urxvtc -name terminal"})
+    , ((modm              , xK_grave ), scratchpadSpawnAction def {terminal = "rxvt -name 'terminal'"})
 
     -- Shell Prompt to run a shell command
     , ((modm .|. controlMask, xK_x   ), shellPrompt myXPConfig)
@@ -403,6 +402,7 @@ main = do
     xmproc <- spawnPipe "/usr/bin/xmobar ~/.config/xmobar/xmobarrc"
     setRandomWallpaper ["$HOME/.local/share/wallpapers"]
     xmonad $ ewmh $ dynamicProjects projects def
+    -- xmonad $ ewmh $ def
         { workspaces         = myWorkspaces
         , terminal           = myTerminal
         , focusFollowsMouse  = myFocusFollowsMouse
