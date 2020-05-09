@@ -397,7 +397,7 @@ main = do
     xmonad $ ewmh $ dynamicProjects projects def
     -- xmonad $ ewmh $ def
         { workspaces         = myWorkspaces
-        , terminal           = myTerminal
+        , terminal           = myTmux
         , focusFollowsMouse  = myFocusFollowsMouse
         , borderWidth        = myBorderWidth
         , focusedBorderColor = myFocusedBorderColor
