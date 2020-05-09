@@ -14,7 +14,7 @@ xss-lock slock &
 
 xrdb -merge ~/.Xdefaults 
 
-urxvtd -q -o -f &
+# urxvtd -q -o -f &
 
 synclient TapButton1=0 TapButton2=0 TapButton3=0 PalmDetect=1 &
 
