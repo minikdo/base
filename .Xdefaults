@@ -1,13 +1,10 @@
 UXTerm*faceName:       Inconsolata
 XTerm*faceName:        Inconsolata
 
-!Emacs.font             xft:Iosevka Extended:pixelsize=17
-Emacs.font:             -BE5N-Iosevka-normal-normal-expanded-*-18-*-*-*-d-0-iso10646-1
+Emacs.font:            -BE5N-Iosevka-normal-normal-expanded-*-18-*-*-*-d-0-iso10646-1
 
-!URxvt*font:            xft:Inconsolata-zi4:pixelsize=19
 URxvt*font:            xft:Iosevka Extended:pixelsize=17
-!URxvt*transparent:     false
-!URxvt*shading:         0
+
 XTerm*ScrollKey:       true
 XTern*sixelScrolling:  true
 
@@ -15,6 +12,7 @@ URxvt.internalBorder:  8
 
 XTerm*termName:        xterm-256color
 UXTerm*termName:       xterm-256color
+
 URxvt.termName:        rxvt-unicode-256color
 URxvt*scrollBar:       false
 URxvt*geometry:        100x25
@@ -24,7 +22,7 @@ URxvt.perl-ext-common: resize-font
 URxvt.resize-font.smaller: C-Down
 URxvt.resize-font.bigger:  C-Up
 
-URxvt*depth: 32
+URxvt*depth:      32
 URxvt*background: rgba:0000/0000/0200/c200
 
 ! Xterm escapes, word by word movement
@@ -35,27 +33,19 @@ URxvt.keysym.Control-Right: \033[1;5C
 *background:	#101012
 *cursorColor:   red
 
-! black
-*color0:	#1F1F1F
-*color8:	#4d4d4d
-! redc
-*color1:	#A54242
-*color9:	#CC6666 
-! green
-*color2:	#B7CE42
-*color10:	#BDE077
-! yellow
-*color3:	#FEA63C
-*color11:	#FFE863
-! blue
-*color4:	#66AABB
-*color12:	#AACCBB
-! magenta
-*color5:	#B7416E
-*color13:	#BB4466
-! cyan
-*color6:	#5E7175
-*color14:	#A3BABF
-! white
-*color7:	#DDEEDD
-*color15:	#6C887A
+*color0:	    #1F1F1F
+*color1:	    #A54242
+*color2:	    #B7CE42
+*color3:	    #FEA63C
+*color4:	    #66AABB
+*color5:	    #B7416E
+*color6:	    #5E7175
+*color7:	    #DDEEDD
+*color8:	    #4d4d4d
+*color9:	    #CC6666
+*color10:	    #BDE077
+*color11:	    #FFE863
+*color12:	    #AACCBB
+*color13:	    #BB4466
+*color14:	    #A3BABF
+*color15:	    #6C887A
