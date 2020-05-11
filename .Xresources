@@ -1,9 +1,7 @@
-! Dracula Xresources palette
 Xft.autohint:      false
 Xft.antialias:     true
 Xft.rgba:          none
 Xft.hinting:       true
 Xft.hintstyle:     hintslight
 Xft.lcdfilter:     lcddefault
-Xft.dpi:           120
-
+Xft.dpi:           112
