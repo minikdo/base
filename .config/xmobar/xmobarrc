@@ -23,9 +23,9 @@ Config { font             = "xft:Inconsolata-zi4"
                                             , "--normal"   , "green"
                                             , "--high"     , "red"
                                             , "--low"      , "lightblue" ] 36000
-                    , Run Cpu               [ "-m"         , "2"
-                                            , "-L"         , "3"
-                                            , "-H"         , "50"
+                    , Run Cpu               [ "-m"         , "3"
+                                            , "-L"         , "30"
+                                            , "-H"         , "60"
                                             , "--normal"   , "green,#002b36"
                                             , "--high"     , "red,#002b36" ] 10
                     , Run Memory            [ "-t"         , "Mem: <usedratio>%"
@@ -37,16 +37,16 @@ Config { font             = "xft:Inconsolata-zi4"
                     , Run DynNetwork        [ "--template" , "<dev>: <tx>kB/s | <rx>kB/s"
                                             , "--Low"      , "1000" 
                                             , "--High"     , "5000"
-                                            , "-m"         , "4"
+                                            , "-m"         , "5"
                                             , "--low"      , "darkgreen,#002b36"
                                             , "--normal"   , "darkorange,#002b36"
                                             , "--high"     , "darkred,#002b36" ] 10
-                    , Run Wireless "wlp4s0" [ "-t", "signal: <quality>%"
+                    , Run Wireless "wlp4s0" [ "-t"         , "signal: <quality>%"
+                                            , "-m"         , "3"
                                             , "--Low"      , "50"        -- units: -- %
-                                            , "--High"     , "99"        -- units: -- %
                                             , "--low"      , "red,#002b36"
                                             , "--normal"   , "darkorange,#002b36"
-                                            , "--high"     , "darkgreen,#002b36" ] 100
+                                            , "--high"     , "darkorange,#002b36" ] 10
                     , Run BatteryP          [ "BAT0" ]
                                             [ "-t"         , "<acstatus><left>%"
                                             , "-L"         , "20"
