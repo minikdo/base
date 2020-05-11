@@ -4,7 +4,6 @@ import XMonad.Actions.DynamicProjects
 import XMonad.Actions.DwmPromote
 import XMonad.Actions.GridSelect
 import XMonad.Actions.WindowBringer
--- import XMonad.Actions.CycleWS
 import XMonad.Actions.WindowGo
 import XMonad.Actions.SpawnOn
 
@@ -18,7 +17,6 @@ import XMonad.Hooks.SetWMName
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Grid
 import XMonad.Layout.NoBorders
--- import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
 
@@ -66,14 +64,14 @@ myBorderWidth = 1
 myFocusedBorderColor :: [Char]
 myFocusedBorderColor = active
 
-base03  = "#002b36"
-base02  = "#073642"
-base01  = "#586e75"
-base00  = "#657b83"
 base0   = "#839496"
 base1   = "#93a1a1"
 base2   = "#eee8d5"
 base3   = "#fdf6e3"
+base00  = "#657b83"
+base01  = "#586e75"
+base02  = "#073642"
+base03  = "#002b36"
 yellow  = "#b58900"
 orange  = "#cb4b16"
 red     = "#dc322f"
@@ -83,24 +81,11 @@ blue    = "#268bd2"
 cyan    = "#2aa198"
 green   = "#859900"
 
-active      = blue
-activeWarn  = red
-inactive    = base02
-focusColor  = blue
+active       = blue
+activeWarn   = red
+inactive     = base02
+focusColor   = blue
 unfocusColor = base02
-
--- topBarTheme = def
-    -- { fontName              = myFont
-    -- , inactiveBorderColor   = base03
-    -- , inactiveColor         = base03
-    -- , inactiveTextColor     = base03
-    -- , activeBorderColor     = active
-    -- , activeColor           = active
-    -- , activeTextColor       = active
-    -- , urgentBorderColor     = red
-    -- , urgentTextColor       = yellow
-    -- , decoHeight            = topbar
-    -- }
 
 myTabTheme = def
     { fontName              = myFont
@@ -113,7 +98,7 @@ myTabTheme = def
     }
               
 myFont :: [Char]
-myFont = "xft:Inconsolata-zi4"
+myFont = "xft:Iosevka Extended"
 
 projects :: [Project]
 projects =
@@ -134,33 +119,27 @@ projects =
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn myTmux
             }
-  , Project { projectName      = "5"
-            , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn myTmux
-            }
   , Project { projectName      = "7"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do safeSpawn "riot-desktop" []
             }
   , Project { projectName      = "8"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do runInTerm "-t mutt" "mutt"
+            , projectStartHook = Just $ do spawn "rxvt -title mutt -e mutt"
             }
   , Project { projectName      = "9"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do runInTerm "-t jrnl" "~/bin/my_tmux.sh"
+            , projectStartHook = Just $ do spawn "st -t jrnl ~/bin/my_tmux.sh"
             }
   ]
 
-myLayout = simpleTabbed ||| gappedSpacedGrid ||| tiled ||| Full
+myLayout = simpleTabbed ||| tiled ||| gappedSpacedGrid ||| Full
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled = Tall 1 (10/100) (1/2)
     -- spacedGrid = spacingWithEdge 10 $ Grid
     gappedSpacedGrid = spacing 10 $ gaps [(U,10), (D, 10), (L, 10), (R,320)] $ Grid
     simpleTabbed = tabbed shrinkText myTabTheme
-
--- myLayoutHook = onWorkspace "3" l2 ?
 
 myModMask :: KeyMask
 myModMask = mod4Mask
@@ -267,12 +246,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Swap the focused window and the master window
     , ((modm .|. shiftMask, xK_Return), windows W.swapMaster)
 
-    -- Goto next workspace
-    -- , ((modm,               xK_Right ), nextWS)
-
-    -- Goto previous workspace
-    -- , ((modm,               xK_Left  ), prevWS)
-
     -- Tor Browser
     , ((modm,               xK_i     ), runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser"))
 
@@ -280,10 +253,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_o     ), runOrRaiseMaster "egtk" (className =? "Emacs"))
 
     -- Mutt
-    , ((modm,               xK_s     ), raiseMaybe (runInTerm "-t mutt" "mutt") (title =? "mutt"))
+    , ((modm,               xK_s     ), raiseMaybe (spawn "rxvt -title mutt -e mutt") (title =? "mutt"))
 
     -- Profanity
-    , ((modm,               xK_d     ), raiseMaybe (runInTerm "-t profanity" "profanity") (title =? "profanity"))
+    , ((modm,               xK_d     ), raiseMaybe (spawn "st -t profanity profanity") (title =? "profanity"))
 
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
@@ -327,11 +300,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Lock the screen using command specified by myScreenlocker
     , ((0                 , xK_F12   ), spawn myScreenlocker)
 
-    -- Lock the screen using command specified by myScreenlocker
+    -- Suspend machine
     , ((modm              , xK_F12   ), spawn "systemctl suspend")
-
-    -- Lock the screen using command specified by myYAScreenlocker
-    -- , ((modm              , xK_F12   ), spawn myYAScreenlocker)
 
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --restart")
@@ -369,7 +339,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
     ++
 
-
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
     [((m .|. modm, k), windows $ f i)
@@ -401,7 +370,6 @@ main = do
         , focusFollowsMouse  = myFocusFollowsMouse
         , borderWidth        = myBorderWidth
         , focusedBorderColor = myFocusedBorderColor
-        -- , dynamicProjects projects
 
         , startupHook        = setWMName "LG3D"
         , modMask            = myModMask
