@@ -98,7 +98,7 @@ myTabTheme = def
     }
               
 myFont :: [Char]
-myFont = "xft:Iosevka Extended"
+myFont = "xft:Inconsolata-zi4"
 
 projects :: [Project]
 projects =
