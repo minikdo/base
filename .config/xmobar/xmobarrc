@@ -26,27 +26,29 @@ Config { font             = "xft:Inconsolata-zi4"
                     , Run Cpu               [ "-m"         , "3"
                                             , "-L"         , "30"
                                             , "-H"         , "60"
-                                            , "--normal"   , "green,#002b36"
+                                            , "--low"      , "#025e7c,#002b36"
+                                            , "--normal"   , "orange,#002b36"
                                             , "--high"     , "red,#002b36" ] 10
                     , Run Memory            [ "-t"         , "Mem: <usedratio>%"
-                                            , "--Low"      , "20"        -- units: -- %
+                                            , "-m"         , "3"
+                                            , "--Low"      , "50"        -- units: -- %
                                             , "--High"     , "90"        -- units: -- %
-                                            , "--low"      , "darkgreen,#002b36"
+                                            , "--low"      , "#025e7c,#002b36"
                                             , "--normal"   , "darkorange,#002b36"
                                             , "--high"     , "darkred,#002b36" ] 10
-                    , Run DynNetwork        [ "--template" , "<dev>: <tx>kB/s | <rx>kB/s"
-                                            , "--Low"      , "1000" 
-                                            , "--High"     , "5000"
-                                            , "-m"         , "5"
-                                            , "--low"      , "darkgreen,#002b36"
-                                            , "--normal"   , "darkorange,#002b36"
+                    , Run Network "wlp4s0"  [ "--template" , "<dev>: <tx>kB/s | <rx>kB/s"
+                                            , "--High"     , "500000"
+                                            , "-m"         , "7"
+                                            , "--low"      , "#025e7c,#002b36"
+                                            , "--normal"   , "#025e7c,#002b36"
                                             , "--high"     , "darkred,#002b36" ] 10
                     , Run Wireless "wlp4s0" [ "-t"         , "signal: <quality>%"
                                             , "-m"         , "3"
                                             , "--Low"      , "50"        -- units: -- %
+                                            , "--High"     , "65"        -- units: -- %
                                             , "--low"      , "red,#002b36"
                                             , "--normal"   , "darkorange,#002b36"
-                                            , "--high"     , "darkorange,#002b36" ] 10
+                                            , "--high"     , "#025e7c,#002b36" ] 10
                     , Run BatteryP          [ "BAT0" ]
                                             [ "-t"         , "<acstatus><left>%"
                                             , "-L"         , "20"
@@ -63,13 +65,10 @@ Config { font             = "xft:Inconsolata-zi4"
                                             , "-m"         , "white"
                                             , "-h"         , "grey" ] 600
                     , Run StdinReader
-                    -- , Run CatInt 0 "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon2/fan1_input" [] 100
-                    -- , Run Com  "sh"      [ "-c"         , "~/bin/mailcounter.sh" ] "mailcount" 150
                     , Run Date "%a %b %_d %H:%M" "date" 10
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       -- Fan: </fc><fc=darkorange,#002b36>%cat0%
-       , template = "%StdinReader% <fc=#268bd2,#002b36> %dynnetwork% %wlp4s0wi% %cpu% %memory%  </fc> }\
+       , template = "%StdinReader% <fc=#268bd2,#002b36> %wlp4s0% %wlp4s0wi% %cpu% %memory%  </fc> }\
                     \{ <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%  %EPWA%</fc>"
        }
