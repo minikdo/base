@@ -105,7 +105,6 @@ export SAVEHIST=0
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
 
 export EDITOR=e
 
@@ -117,38 +116,51 @@ alias sshy="torsocks ssh $1"
 alias dl='dpkg -l | less -S'
 alias acsh='apt-cache show'
 alias ach='apt changelog'
+alias ad="sudo apt update && apt list --upgradable"
 alias jf='journalctl -f -n100'
 alias jc='journalctl -e --since=today'
 alias uq='systemctl list-units | grep $1'
 alias lf='systemctl list-units --state=failed'
 alias wpa="$EDITOR /etc/wpa_supplicant/wpa_supplicant-*.conf"
-alias ad="sudo apt update && apt list --upgradable"
 alias pass='EDITOR=nano pass'
 alias cls="echo -ne '\033c'" # urxvt terminal clean buffer
 
+
+# Function to query dpkg
 function dq () {
     dpkg-query -W \
                -f='${db:Status-Abbrev}${binary:Package} '"$fg[blue]"'(${Version})'"$reset_color"'\n' \
         | grep -i --colour=never $1
 }
 
-autoload -U edit-command-line
-zle -N edit-command-line
-# bindkey '^xe' edit-command-line
-bindkey '^x^e' edit-command-line
 
-function ipaddr () { echo; ip -c a; zle redisplay }
+# Function to print ip addr with M-k
+function ipaddr () {
+    echo; ip -c a; zle redisplay
+}
 zle -N ipaddr
 bindkey "^[k" ipaddr
 
+
+# Edit command line
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
+
+
+# direnv
 eval "$(direnv hook zsh)"
 
+
+# 
 unsetopt share_history
 setopt completealiases   
 
 apt_pref="apt"
 apt_upgr="upgrade"
 
+
+# fzf
 if [ -f ~/.config/fzf/key-bindings.zsh ]; then
     . ~/.config/fzf/key-bindings.zsh
 fi
