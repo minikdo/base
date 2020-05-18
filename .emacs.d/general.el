@@ -145,6 +145,25 @@
   (if (> arg 1) (ff/uncomment-and-go-down (1- arg))))
 
 
+(defun minikdo/logcheck-clean ()
+  "Removes sensitive data from logs."
+  (interactive)
+  (let (
+        (p1 (region-beginning))
+        (p2 (region-end)))
+    (save-restriction
+      (narrow-to-region p1 p2)
+      (goto-char (point-min))
+      (while (search-forward-regexp "^\\w\\{3\\} [ :[:digit:]]\\{11\\} [._[:alnum:]-]+" nil t)
+        (replace-match "Jan  1 00:00:00 debian" nil t))
+      (goto-char (point-min))
+      (while (search-forward-regexp "[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}" nil t)
+        (replace-match "1.2.3.4" nil t))
+      (goto-char (point-min))
+      (while (search-forward-regexp "[._[:alnum:]-]+@[._[:alnum:]-]+" nil t)
+        (replace-match "john.doe@do-main.com" nil t)))))
+
+
 ;; unset page up and down
 (global-unset-key (kbd "<prior>"))
 (global-unset-key (kbd "<next>"))
