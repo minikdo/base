@@ -2,8 +2,6 @@ import XMonad
 
 import XMonad.Actions.DynamicProjects
 import XMonad.Actions.DwmPromote
-import XMonad.Actions.GridSelect
-import XMonad.Actions.WindowBringer
 import XMonad.Actions.WindowGo
 import XMonad.Actions.SpawnOn
 
@@ -48,9 +46,6 @@ myTmux = "st -e tmux"
 
 myScreenlocker :: [Char]
 myScreenlocker = "/usr/bin/slock"
-
-myYAScreenlocker :: [Char]
-myYAScreenlocker = "/usr/bin/xtrlock"
 
 myTitleLength :: Int
 myTitleLength = 40
@@ -126,6 +121,7 @@ projects =
   , Project { projectName      = "8"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn "rxvt -title mutt -e mutt"
+                                           spawn "st -t profanity profanity"
             }
   , Project { projectName      = "9"
             , projectDirectory = "~/"
@@ -141,9 +137,6 @@ myLayout = simpleTabbed ||| tiled ||| gappedSpacedGrid ||| Full
     gappedSpacedGrid = spacing 10 $ gaps [(U,10), (D, 10), (L, 10), (R,320)] $ Grid
     simpleTabbed = tabbed shrinkText myTabTheme
 
-myModMask :: KeyMask
-myModMask = mod4Mask
-
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
     [ isFullscreen                        --> doFullFloat
@@ -153,13 +146,14 @@ myManageHook = composeAll
       , className =? "Navigator"          --> doFloat
       , className =? "Tor Browser"        --> doShift "1"
       , className =? "Viewnior"           --> doFullFloat
-      , className =? "Pinentry"           --> doFloat
+      , className =? "Pinentry"           --> doCenterFloat
       , className =? "vlc"                --> doFullFloat
       , className =? "mpv"                --> doFullFloat
       , className =? "Arandr"             --> doCenterFloat
-      , className =? "Evince"             --> doCenterFloat
+      , className =? "Evince"             --> doRectFloat (W.RationalRect 0.2 0.05 0.6 0.9)
       , className =? "Pavucontrol"        --> doCenterFloat
       , stringProperty "WM_WINDOW_ROLE" =? "pop-up" --> doFloat
+      , stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog" --> doRectFloat (W.RationalRect 0.2 0.1 0.6 0.8)
     ] <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
 
 myWorkspaces :: [[Char]]
@@ -210,6 +204,11 @@ calcPrompt c ans =
     trim  = f . f
       where f = reverse . dropWhile isSpace
 
+
+myModMask :: KeyMask
+myModMask = mod4Mask
+
+-- showKeybindings :: [((KeyMask, KeySym), NamedAction)] -> NamedAction
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
@@ -217,10 +216,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm              , xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm              , xK_p     ), spawn "dmenu_run -p $ -nf white -sb brown -sf yellow")
+    , ((modm              , xK_d     ), spawn "dmenu_run -p $ -nf white -sb brown -sf yellow")
 
     -- close focused window
-    , ((modm .|. shiftMask, xK_c     ), kill)
+    , ((modm              , xK_BackSpace ), kill)
 
     -- Rotate through the available layout algorithms
     , ((modm,               xK_space ), sendMessage NextLayout)
@@ -240,23 +239,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Move focus to the previous window
     , ((modm,               xK_k     ), windows W.focusUp)
 
-    -- Move focus to the master window
-    , ((modm,               xK_m     ), windows W.focusMaster)
-
-    -- Swap the focused window and the master window
-    , ((modm .|. shiftMask, xK_Return), windows W.swapMaster)
-
     -- Tor Browser
     , ((modm,               xK_i     ), runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser"))
 
-    -- Emacs
-    , ((modm,               xK_o     ), runOrRaiseMaster "egtk" (className =? "Emacs"))
+    -- Emacs Scratch
+    , ((modm,               xK_s     ), spawn "e-scratch" )
 
     -- Mutt
-    , ((modm,               xK_s     ), raiseMaybe (spawn "rxvt -title mutt -e mutt") (title =? "mutt"))
+    , ((modm,               xK_m     ), raiseMaybe (spawn "rxvt -title mutt -e mutt") (title =? "mutt"))
 
     -- Profanity
-    , ((modm,               xK_d     ), raiseMaybe (spawn "st -t profanity profanity") (title =? "profanity"))
+    , ((modm,               xK_p     ), raiseMaybe (spawn "st -t profanity profanity") (title =? "profanity"))
 
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
@@ -300,32 +293,20 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Lock the screen using command specified by myScreenlocker
     , ((0                 , xK_F12   ), spawn myScreenlocker)
 
-    -- Suspend machine
-    , ((modm              , xK_F12   ), spawn "systemctl suspend")
-
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --restart")
 
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
-    -- Display items in a 2D grid and let the user select from it
-    , ((modm              , xK_g     ), goToSelected def)
-
     -- Push the master window to the next window in the stack
     , ((modm .|. shiftMask, xK_Return), dwmpromote)
 
-    -- Pop open a dmenu with window titles to be taken to the corresponding workspace
-    , ((modm .|. shiftMask, xK_g     ), gotoMenu)
-
-    -- Pop open a dmenu with window titles to dragged it into the current workspace
-    , ((modm .|. shiftMask, xK_b     ), bringMenu)
-
     -- Pop open a dmenu to poweroff/reboot/suspend/lock
-    , ((modm              , xK_z     ), spawn "~/bin/dmenu_shutdown.sh")
+    , ((modm              , xK_z     ), spawn "dmenu_shutdown")
 
     -- Pop open a dmenu to pass
-    , ((modm              , xK_u     ), spawn "~/bin/passmenu")
+    , ((modm              , xK_u     ), spawn "passmenu")
 
     -- Pop tiny terminal window via Scratchpad
     , ((modm              , xK_grave ), scratchpadSpawnAction def {terminal = "urxvt"})
@@ -339,6 +320,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
     ++
 
+
+  
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
     [((m .|. modm, k), windows $ f i)
