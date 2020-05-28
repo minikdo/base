@@ -145,6 +145,7 @@ myManageHook = composeAll
       , title     =? "profanity"          --> doShift "8"
       , className =? "Navigator"          --> doFloat
       , className =? "Tor Browser"        --> doShift "1"
+      , className =? "Riot"               --> doShift "7"
       , className =? "Viewnior"           --> doFullFloat
       , className =? "Pinentry"           --> doCenterFloat
       , className =? "vlc"                --> doFullFloat

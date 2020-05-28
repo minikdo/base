@@ -57,6 +57,10 @@
 (column-number-mode t)
 (setq linum-format "%4d ")
 
+;; for better scrolling
+(setq scroll-conservatively 1000)
+(setq scroll-margin 3)
+
 ;; save cursor position in files
 (setq save-place-file "~/.emacs.d/saveplace")
 (setq-default save-place t)
@@ -65,7 +69,6 @@
 ;;?
 ;; (setq-default c-basic-offset 4)
 
-;; (server-start)
 
 (when window-system
   (progn
@@ -111,11 +114,11 @@
 ;; (setq auto-mode-alist (append '((".*tmp/neomutt.*" . mail-mode)) auto-mode-alist))
 
 (defadvice kill-region (before unix-werase activate compile)
-        "When called interactively with no active region, delete a single word
-    backwards instead."
-	(interactive
-	 (if mark-active (list (region-beginning) (region-end))
-	   (list (save-excursion (backward-word 1) (point)) (point)))))
+  "When called interactively with no active region, delete a single word 
+  backwards instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+	 (list (save-excursion (backward-word 1) (point)) (point)))))
 
 
 (defun kill-to-end:b ()
@@ -146,7 +149,7 @@
 
 
 (defun minikdo/logcheck-clean ()
-  "Removes sensitive data from logs."
+  "Removes sensitive metadata from logs."
   (interactive)
   (let (
         (p1 (region-beginning))
