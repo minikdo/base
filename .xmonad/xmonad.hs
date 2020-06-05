@@ -110,10 +110,6 @@ projects =
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn myTmux
             }
-  , Project { projectName      = "4"
-            , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn myTmux
-            }
   , Project { projectName      = "7"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do safeSpawn "riot-desktop" []
