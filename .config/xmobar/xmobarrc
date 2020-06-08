@@ -36,13 +36,13 @@ Config { font             = "xft:Inconsolata-zi4"
                                             , "--low"      , "#025e7c,#002b36"
                                             , "--normal"   , "darkorange,#002b36"
                                             , "--high"     , "darkred,#002b36" ] 10
-                    , Run Network "wlp4s0"  [ "--template" , "<dev>: <tx>kB/s | <rx>kB/s"
+                    , Run Network "wlan0"   [ "--template" , "<dev>: <tx>kB/s | <rx>kB/s"
                                             , "--High"     , "500000"
                                             , "-m"         , "7"
                                             , "--low"      , "#025e7c,#002b36"
                                             , "--normal"   , "#025e7c,#002b36"
                                             , "--high"     , "darkred,#002b36" ] 10
-                    , Run Wireless "wlp4s0" [ "-t"         , "signal: <quality>%"
+                    , Run Wireless "wlan0"  [ "-t"         , "signal: <quality>%"
                                             , "-m"         , "3"
                                             , "--Low"      , "50"        -- units: -- %
                                             , "--High"     , "65"        -- units: -- %
@@ -69,6 +69,6 @@ Config { font             = "xft:Inconsolata-zi4"
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% <fc=#268bd2,#002b36> %wlp4s0% %wlp4s0wi% %cpu% %memory%  </fc> }\
+       , template = "%StdinReader% <fc=#268bd2,#002b36> %wlan0% %wlan0wi% %cpu% %memory%  </fc> }\
                     \{ <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%  %EPWA%</fc>"
        }
