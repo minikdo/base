@@ -15,6 +15,7 @@
 ;; (load-file "~/.emacs.d/modes/autopair.el")
 (load-file "~/.emacs.d/modes/auctex.el")
 (load-file "~/.emacs.d/modes/auto-complete.el")
+(load-file "~/.emacs.d/modes/multiple-cursors.el")
 (load-file "~/.emacs.d/modes/elisp.el")
 (load-file "~/.emacs.d/modes/flx-ido.el")
 (load-file "~/.emacs.d/modes/git-annex.el")
@@ -46,7 +47,7 @@
  '(org-deadline-warning-days 10)
  '(package-selected-packages
    (quote
-    (centaur-tabs rainbow-mode persistent-scratch python python-mode python-environment epc emmet-mode which-key web-mode tabbar smex session pyvenv projectile pod-mode php-mode muttrc-mode mutt-alias markdown-mode jedi initsplit htmlize graphviz-dot-mode git-annex folding flx-ido eproject diminish csv-mode clues-theme browse-kill-ring boxquote bm bar-cursor apache-mode)))
+    (multiple-cursors centaur-tabs rainbow-mode persistent-scratch python python-mode python-environment epc emmet-mode which-key web-mode tabbar smex session pyvenv projectile pod-mode php-mode muttrc-mode mutt-alias markdown-mode jedi initsplit htmlize graphviz-dot-mode git-annex folding flx-ido eproject diminish csv-mode clues-theme browse-kill-ring boxquote bm bar-cursor apache-mode)))
  '(scroll-conservatively 1000)
  '(scroll-margin 3))
 (custom-set-faces
