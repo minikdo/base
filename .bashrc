@@ -130,3 +130,7 @@ __prompt_command() {
         PS1="[${BRed}$curr_exit${RCol}] $PS1"
     fi
 }
+
+export NVM_DIR="$HOME/git/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
