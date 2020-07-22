@@ -112,7 +112,7 @@ projects =
             }
   , Project { projectName      = "7"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do safeSpawn "riot-desktop" []
+            , projectStartHook = Just $ do safeSpawn "element-desktop" []
             }
   , Project { projectName      = "8"
             , projectDirectory = "~/"
@@ -142,7 +142,7 @@ myManageHook = composeAll
       , className =? "Navigator"          --> doFloat
       , className =? "Tor Browser"        --> doShift "1"
       , className =? "Firefox-esr"        --> doShift "1"
-      , className =? "Riot"               --> doShift "7"
+      , className =? "Element"            --> doShift "7"
       , className =? "Viewnior"           --> doFullFloat
       , className =? "Pinentry"           --> doCenterFloat
       , className =? "vlc"                --> doFullFloat
