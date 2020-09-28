@@ -65,7 +65,7 @@ plugins=(git git-annex debian battery systemd sudo history man pip
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/sbin/:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/bin:/usr/sbin/:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
