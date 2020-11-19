@@ -64,7 +64,8 @@
  
 ;; default browser
 
-(setq browse-url-browser-function 'browse-url-chromium)
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "firefox-esr")
 
 ;; agenda
 
