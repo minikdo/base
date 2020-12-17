@@ -74,6 +74,13 @@
          ((org-agenda-span (quote day)))
          ("~/.agenda/agenda.txt")))) ;; FIXME
 
+(setq org-agenda-custom-commands
+      '(("o" "TODOs except cyclic tasks"
+         ((tags-todo "-cycl")))))
+
+(defun ds/org-todo-except-cyclic () (interactive) (org-agenda nil "o"))
+(global-set-key (kbd "<f6>") (lambda() (interactive)(ds/org-todo-except-cyclic)))
+
 (setq org-todo-keywords
    '((sequence "TODO" "WAITING" "|" "DONE" )))
 

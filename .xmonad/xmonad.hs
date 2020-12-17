@@ -110,10 +110,10 @@ projects =
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn myTmux
             }
-  , Project { projectName      = "7"
-            , projectDirectory = "~/"
-            , projectStartHook = Just $ do safeSpawn "element-desktop" []
-            }
+  -- , Project { projectName      = "7"
+            -- , projectDirectory = "~/"
+            -- , projectStartHook = Just $ do safeSpawn "element-desktop" []
+            -- }
   , Project { projectName      = "8"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn "rxvt -title mutt -e mutt"
