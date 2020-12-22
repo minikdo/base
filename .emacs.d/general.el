@@ -1,9 +1,8 @@
-;; ???
 (message nil);; Debian packages: elpa-use-package elpa-fill-column-indicator fonts-hack
 
 ;; This is only needed once, near the top of the file
-;;(eval-when-compile
-;;  (require 'use-package))
+(eval-when-compile
+ (require 'use-package))
 
 ;; (add-to-list 'default-frame-alist
              ;; '(font . "Hack-12"))
@@ -61,6 +60,10 @@
 (setq scroll-conservatively 1000)
 (setq scroll-margin 3)
 
+;; default clues color was illegible
+(custom-set-faces '(isearch-fail ((t (:background "red")))))
+
+
 ;; save cursor position in files
 (setq save-place-file "~/.emacs.d/saveplace")
 (setq-default save-place t)
@@ -101,8 +104,8 @@
 ;; Handy key definition
 (define-key global-map "\M-Q" 'unfill-paragraph)
 
-;(setq custom-file "~/.emacs.d/custom.el")
-;(load custom-file 'noerror)
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
 
 ;; start maximized
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -170,11 +173,6 @@
 ;; unset page up and down
 (global-unset-key (kbd "<prior>"))
 (global-unset-key (kbd "<next>"))
-
-;; org-mode
-(global-set-key (kbd "<f5>") (lambda() (interactive)(org-agenda-list)))
-;; (global-set-key (kbd "<f6>") (lambda() (interactive)(org-todo-list)))
-(global-set-key (kbd "<f7>") (lambda() (interactive)(find-file "~/.emacs.d/init.el")))
 
 (global-set-key (kbd "ESC <down>") 'ff/comment-and-go-down)
 (global-set-key (kbd "ESC <up>") 'ff/uncomment-and-go-up)

@@ -56,7 +56,7 @@
   ("" "textcomp" t)
   ("" "marvosym" t)
   ("" "wasysym" t)
-  ("" "amssymb" t)
+  ;; ("" "amssymb" t)
   ("" "hyperref" nil)
   "\\tolerance=1000"
   ("margin=2.5cm" "geometry" t)
@@ -69,14 +69,18 @@
 
 ;; agenda
 
-(setq org-agenda-custom-commands
-      '(("X" agenda ""
-         ((org-agenda-span (quote day)))
-         ("~/.agenda/agenda.txt")))) ;; FIXME
+;; (info "(org) Setting options")
 
 (setq org-agenda-custom-commands
       '(("o" "TODOs except cyclic tasks"
-         ((tags-todo "-cycl")))))
+         ((tags-todo "-cycl")))
+        ("O" "TODOs except cyclic tasks with day agenda"
+         ((agenda)
+          (tags-todo "-cycl"))
+         ((org-agenda-span 'day)))
+        ("X" agenda ""
+         ((org-agenda-span (quote day)))
+         ("~/.agenda/agenda.txt"))))
 
 (defun ds/org-todo-except-cyclic () (interactive) (org-agenda nil "o"))
 (global-set-key (kbd "<f6>") (lambda() (interactive)(ds/org-todo-except-cyclic)))
@@ -87,11 +91,11 @@
 (setq org-todo-keyword-faces
                  '(("WAITING" . "violet")))
 
-;; keybindings
+;; capture templates
 
 (setq org-capture-templates
       '(("t" "todo" entry (file+headline "~/.agenda/agenda.org" "Tasks")
-	     "* TODO %? %^g\n %U\n")
+	     "* TODO %?\n %U\n")
 	    ("j" "journal" entry (file "~/.agenda/journal.org")
 	     "* %U %?\n" )
         ("n" "nie" entry (file "~/.agenda/nie.org")
@@ -106,3 +110,7 @@
 (global-set-key "\C-ca" 'org-agenda) 
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-iswitchb)
+
+(global-set-key (kbd "<f5>") (lambda() (interactive)(org-agenda-list)))
+;; (global-set-key (kbd "<f6>") (lambda() (interactive)(org-todo-list)))
+(global-set-key (kbd "<f7>") (lambda() (interactive)(find-file "~/.emacs.d/init.el")))
