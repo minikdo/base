@@ -52,6 +52,7 @@
 
 ;; dominik:
 (global-linum-mode t)
+(set-face-underline-p 'linum nil)
 (set-window-margins nil 1)
 (column-number-mode t)
 (setq linum-format "%4d ")
@@ -61,7 +62,8 @@
 (setq scroll-margin 3)
 
 ;; default clues color was illegible
-(custom-set-faces '(isearch-fail ((t (:background "red")))))
+(custom-set-faces '(isearch-fail ((t (:background "red"))))
+                  '(hl-line ((t (:background "gray21")))))
 
 
 ;; save cursor position in files
@@ -170,9 +172,14 @@
         (replace-match "john.doe@do-main.com" nil t)))))
 
 
-;; unset page up and down
+;; unset page up and down. Too close to arrows on ThinkPads
 (global-unset-key (kbd "<prior>"))
 (global-unset-key (kbd "<next>"))
+;; too hard:
+;; (global-unset-key (kbd "<up>"))
+;; (global-unset-key (kbd "<down>"))
+;; (global-unset-key (kbd "<left>"))
+;; (global-unset-key (kbd "<right>"))
 
 (global-set-key (kbd "ESC <down>") 'ff/comment-and-go-down)
 (global-set-key (kbd "ESC <up>") 'ff/uncomment-and-go-up)
@@ -181,3 +188,54 @@
 
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
+
+(use-package bind-key
+  ;; Use C-h B to show a list of user-defined bindings
+  :bind ("C-h B" . describe-personal-keybindings))
+
+(bind-key* "<C-return>" 'other-window)
+
+;; (bind-key* "<f8>" '(lambda() (interactive)(find-file "~/.emacs.d/init.el")))
+(bind-key* "<f8>" (lambda() (interactive)(dired-other-window "~/.emacs.d/")))
+
+(bind-key* "<f5>" (lambda() (interactive) (switch-to-buffer "*scratch*")))
+
+
+;; dired
+
+(defun toggle-hidden-in-dired ()
+  (interactive)
+  (setq dired-actual-switches  (if (equal dired-actual-switches
+                                          "-l --group-directories-first")
+                                   "-la --group-directories-first"
+                                 "-l --group-directories-first"))
+  (dired-readin))
+
+(use-package dired
+  :init
+  ;; FIXME: not working
+  (add-hook 'dired-mode-hook #'linum-mode)
+  :config
+  (setq dired-recursive-copies 'always)
+  (setq dired-recursive-deletes 'always)
+  (setq wdired-allow-to-change-permissions t)
+  ;; (setq delete-by-moving-to-trash t)
+  (setq dired-listing-switches
+        "-AGFhlv --group-directories-first")
+  (setq dired-dwim-target t)
+  ;; Hooks' syntax is controlled by the `use-package-hook-name-suffix'
+  ;; variable.  The "-hook" suffix is intentional.
+  :hook ((dired-mode . dired-hide-details-mode)
+         (dired-mode-hook . hl-line-mode))
+  :bind ("C-." . toggle-hidden-in-dired))
+
+(switch-to-buffer "*scratch*")
+
+
+(use-package fill-column-indicator
+  :config
+  ;; Set column to show fill-column-indicator
+  (setq fci-rule-column '80)
+  ;; Set fill-column-indicator color
+  (setq fci-rule-color "gray1")
+  :hook (python-mode . fci-mode))

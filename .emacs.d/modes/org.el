@@ -82,8 +82,6 @@
          ((org-agenda-span (quote day)))
          ("~/.agenda/agenda.txt"))))
 
-(defun ds/org-todo-except-cyclic () (interactive) (org-agenda nil "o"))
-(global-set-key (kbd "<f6>") (lambda() (interactive)(ds/org-todo-except-cyclic)))
 
 (setq org-todo-keywords
    '((sequence "TODO" "WAITING" "|" "DONE" )))
@@ -111,6 +109,9 @@
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-iswitchb)
 
-(global-set-key (kbd "<f5>") (lambda() (interactive)(org-agenda-list)))
+;; (global-set-key (kbd "<f5>") (lambda() (interactive)(org-agenda-list)))
 ;; (global-set-key (kbd "<f6>") (lambda() (interactive)(org-todo-list)))
-(global-set-key (kbd "<f7>") (lambda() (interactive)(find-file "~/.emacs.d/init.el")))
+;; (global-set-key (kbd "<f6>") (lambda() (interactive)(org-agenda nil "o")))
+
+(bind-key* "<f6>" '(lambda() (interactive) (org-agenda-list)))
+(bind-key* "<f7>" '(lambda() (interactive) (org-agenda nil "o")))

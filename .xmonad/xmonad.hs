@@ -116,7 +116,7 @@ projects =
             -- }
   , Project { projectName      = "8"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "rxvt -title mutt -e mutt"
+            , projectStartHook = Just $ do spawn "st -t mutt ~/bin/my_mutt"
                                            spawn "st -t profanity profanity"
             }
   , Project { projectName      = "9"
@@ -136,13 +136,13 @@ myLayout = simpleTabbed ||| tiled ||| gappedSpacedGrid ||| Full
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
     [ isFullscreen                        --> doFullFloat
+      , className =? "Tor Browser"        --> doShift "1"
+      , className =? "Firefox-esr"        --> doShift "1"
       , className =? "Emacs"              --> doShift "2"
+      , className =? "Element"            --> doShift "7"
       , title     =? "mutt"               --> doShift "8"
       , title     =? "profanity"          --> doShift "8"
       , className =? "Navigator"          --> doFloat
-      , className =? "Tor Browser"        --> doShift "1"
-      , className =? "Firefox-esr"        --> doShift "1"
-      , className =? "Element"            --> doShift "7"
       , className =? "Viewnior"           --> doFullFloat
       , className =? "Pinentry"           --> doCenterFloat
       , className =? "vlc"                --> doFullFloat
@@ -244,7 +244,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_s     ), spawn "e-scratch" )
 
     -- Mutt
-    , ((modm,               xK_m     ), raiseMaybe (spawn "rxvt -title mutt -e mutt") (title =? "mutt"))
+    , ((modm,               xK_m     ), raiseMaybe (spawn "st -t mutt ~/bin/my_mutt") (title =? "mutt"))
 
     -- Profanity
     , ((modm,               xK_p     ), raiseMaybe (spawn "st -t profanity profanity") (title =? "profanity"))

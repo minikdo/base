@@ -1,12 +1,5 @@
 (package-initialize)
 
-;; ?
-;; (defun relative-to-full-path (filename)
-    ;; (concat (file-name-directory (or load-file-name buffer-file-name))
-            ;; filename))
-
-;; (load (relative-to-full-path "init-org.el"))
-
 ;; install debian packages:
 ;; sudo apt install $(grep -ri 'Debian packages:' ~/.emacs.d/modes | awk -F:  '{print $3}' | tr '\n' ' ')
 
@@ -30,5 +23,5 @@
 (load-file "~/.emacs.d/modes/web-mode.el")
 (load-file "~/.emacs.d/modes/which-key.el")
 (load-file "~/.emacs.d/modes/persistent-scratch.el")
-;; (load-file "~/.emacs.d/modes/yas.el")
+(load-file "~/.emacs.d/modes/yas.el")
 (load-file "~/.emacs.d/modes/themes.el")
