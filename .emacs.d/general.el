@@ -1,4 +1,7 @@
-(message nil);; Debian packages: elpa-use-package elpa-fill-column-indicator fonts-hack
+;; Debian packages: elpa-use-package elpa-fill-column-indicator fonts-hack
+(message nil)
+
+(setq debug-on-error t)
 
 ;; This is only needed once, near the top of the file
 (eval-when-compile
@@ -9,30 +12,31 @@
 
 (set-default-font "-BE5N-Iosevka-normal-normal-expanded-*-18-*-*-*-d-0-iso10646-1")
 
+;; Transparency
 (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
 (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
 (add-to-list 'package-archives
              '("melpa" . "https://stable.melpa.org/packages/") t)
 
-;;ERROR
-;;(require 'fill-column-indicator)
+
+;; Enable automatic updating a buffer if a file changes on disk
+(global-auto-revert-mode 1)
+
+;; Add new line when cursor moves beyond the end of a buffer
+(setq next-line-add-newlines t)
 
 (setq initial-major-mode 'text-mode)
 
 (setq backup-inhibited t) ; disable backup
 
-;; (if (file-directory-p "~/.emacs.d/backups")
-    ;; (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
-  ;; (message "Directory does not exist: ~/.emacs.d/backups"))
+;; Save cursor position in files
+(setq save-place-file "~/.emacs.d/saveplace")
+(setq-default save-place t)
+(require 'saveplace)
 
-;; (filesets-init)
-
-;; (setq backup-by-copying t    ; Don't delink hardlinks
-      ;; delete-old-versions t  ; Clean up the backups
-      ;; version-control t      ; Use version numbers on backups,
-      ;; kept-new-versions 3    ; keep some new versions
-      ;; kept-old-versions 2)   ; and some old ones, too
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
 
 (global-set-key (kbd "C-c d") 'diff-buffer-with-file)
 (global-set-key (kbd "C-c R") 'revert-buffer)
@@ -43,57 +47,42 @@
 ;; (setq auto-fill-mode t)
 ;; (setq-default auto-fill-function 'do-auto-fill)
 
-;; raul:
 (setq mouse-yank-at-point t)
 (setq column-number-mode 1)
 (setq line-number-mode 1)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-;; dominik:
 (global-linum-mode t)
+(setq linum-format "%4d ")
 (set-face-underline-p 'linum nil)
+
 (set-window-margins nil 1)
 (column-number-mode t)
-(setq linum-format "%4d ")
 
-;; for better scrolling
+;; For better scrolling
 (setq scroll-conservatively 1000)
 (setq scroll-margin 3)
 
-;; default clues color was illegible
+;; Default clues color was illegible
 (custom-set-faces '(isearch-fail ((t (:background "red"))))
                   '(hl-line ((t (:background "gray21")))))
 
 
-;; save cursor position in files
-(setq save-place-file "~/.emacs.d/saveplace")
-(setq-default save-place t)
-(require 'saveplace)
-
-;;?
-;; (setq-default c-basic-offset 4)
-
-
-(when window-system
-  (progn
-    (global-unset-key (kbd "C-z"))
-    (setq scroll-bar-mode nil)
-    (tool-bar-mode -1)
-    (menu-bar-mode -1)))
+;; (when window-system
+;;   (progn
+;;     (global-unset-key (kbd "C-z"))
+;;     (setq scroll-bar-mode nil)
+;;     (tool-bar-mode -1)
+;;     (menu-bar-mode -1)))
 
 (global-unset-key (kbd "C-z"))
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 
-(setq initial-scratch-message "")
-
-
-;; (when (featurep 'scroll-bar) (scroll-bar-mode -1))
+;; (setq initial-scratch-message "")
 
 (defalias 'yes-or-no-p 'y-or-n-p)
-
-;; (global-set-key (kbd "C-x C-b") 'bs-show)
 
 (defun unfill-paragraph (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."
@@ -106,8 +95,6 @@
 ;; Handy key definition
 (define-key global-map "\M-Q" 'unfill-paragraph)
 
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file 'noerror)
 
 ;; start maximized
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -115,8 +102,6 @@
 (setq show-paren-delay 0)
 (show-paren-mode 1)
 
-;; (setq auto-mode-alist (append '((".*tmp/mutt.*" . mail-mode)) auto-mode-alist))
-;; (setq auto-mode-alist (append '((".*tmp/neomutt.*" . mail-mode)) auto-mode-alist))
 
 (defadvice kill-region (before unix-werase activate compile)
   "When called interactively with no active region, delete a single word 
@@ -172,19 +157,12 @@
         (replace-match "john.doe@do-main.com" nil t)))))
 
 
-;; unset page up and down. Too close to arrows on ThinkPads
+;; Unset page up and down. Too close to arrows on ThinkPads
 (global-unset-key (kbd "<prior>"))
 (global-unset-key (kbd "<next>"))
-;; too hard:
-;; (global-unset-key (kbd "<up>"))
-;; (global-unset-key (kbd "<down>"))
-;; (global-unset-key (kbd "<left>"))
-;; (global-unset-key (kbd "<right>"))
 
 (global-set-key (kbd "ESC <down>") 'ff/comment-and-go-down)
 (global-set-key (kbd "ESC <up>") 'ff/uncomment-and-go-up)
-;; (global-set-key (kbd "ESC <right>") 'select-next-window)
-;; (global-set-key (kbd "M-[") 'select-previous-window)
 
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
@@ -201,14 +179,15 @@
 (bind-key* "<f5>" (lambda() (interactive) (switch-to-buffer "*scratch*")))
 
 
-;; dired
+;; Dired
 
 (defun toggle-hidden-in-dired ()
   (interactive)
-  (setq dired-actual-switches  (if (equal dired-actual-switches
-                                          "-l --group-directories-first")
-                                   "-la --group-directories-first"
-                                 "-l --group-directories-first"))
+  (setq dired-actual-switches
+        (if (equal dired-actual-switches
+                   "-l --group-directories-first")
+            "-la --group-directories-first"
+          "-l --group-directories-first"))
   (dired-readin))
 
 (use-package dired
@@ -229,7 +208,7 @@
          (dired-mode-hook . hl-line-mode))
   :bind ("C-." . toggle-hidden-in-dired))
 
-(switch-to-buffer "*scratch*")
+;; (switch-to-buffer "*scratch*")
 
 
 (use-package fill-column-indicator

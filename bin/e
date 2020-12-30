@@ -1,7 +1,7 @@
 #!/bin/bash
 
 USERID=`id -u`
-SOCKET=/run/user/$USERID/emacs/server
+SOCKET=/run/user/$USERID/emacs-nox/server
 
 if [ ! -e ${SOCKET} ]; then
     echo "Emacs socket not found"

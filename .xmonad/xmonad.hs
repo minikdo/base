@@ -104,7 +104,7 @@ projects =
             }
   , Project { projectName      = "2"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do runOrRaiseMaster "egtk" (className =? "Emacs")
+            , projectStartHook = Just $ do runOrRaiseMaster "emacs" (className =? "Emacs")
             }
   , Project { projectName      = "3"
             , projectDirectory = "~/"
