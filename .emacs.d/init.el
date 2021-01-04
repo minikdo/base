@@ -12,7 +12,7 @@
 
 (package-initialize)
 
-(setq debug-on-error t)
+(setq debug-on-error nil)
 
 ;; This is only needed once, near the top of the file
 ;; Debian packages: elpa-use-package
@@ -37,7 +37,7 @@
 (setq initial-major-mode 'text-mode)
 
 ;; Transparency
-(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+(set-frame-parameter (selected-frame) 'alpha '(95 . 95))
 
 ;; Package configuration
 (add-to-list 'package-archives
@@ -139,6 +139,15 @@
   (if (> arg 1) (ff/uncomment-and-go-down (1- arg))))
 
 
+(defun minikdo/switch-to-scratch-end ()
+  "Switch to *scratch*. If in *scratch*, go to end."
+  (interactive)
+  (if (equal (current-buffer) (get-buffer "*scratch*"))
+      (end-of-buffer))
+  (switch-to-buffer "*scratch*")
+  (recenter-top-bottom))
+
+
 (defun minikdo/logcheck-clean ()
   "Removes sensitive metadata from logs."
   (interactive)
@@ -181,8 +190,8 @@
 (bind-key* "<C-return>" 'other-window)
 (bind-key* "ESC <down>" 'ff/comment-and-go-down)
 (bind-key* "ESC <up>" 'ff/uncomment-and-go-up)
-(bind-key* "<f5>" '(lambda() (interactive) (switch-to-buffer "*scratch*")))
-(bind-key* "<f8>" '(lambda() (interactive)(find-file "~/.emacs.d/init.el")))
+(bind-key* "<f5>" '(lambda() (interactive) (minikdo/switch-to-scratch-end)))
+(bind-key* "<f8>" '(lambda() (interactive) (find-file "~/.emacs.d/init.el")))
 ;; (bind-key* "<f8>" '(lambda() (interactive)(dired-other-window "~/.emacs.d/")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -226,10 +235,23 @@
   (show-paren-mode t)
   (setq show-paren-delay 0))
 
-;; (add-hook 'emacs-lisp-mode-hook 'autopair-mode)
+(use-package paredit
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  ;; enable in the *scratch* buffer
+  (add-hook 'lisp-interaction-mode-hook #'paredit-mode)
+  (add-hook 'ielm-mode-hook #'paredit-mode)
+  (add-hook 'lisp-mode-hook #'paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
+
 (use-package autopair-mode
-  :hook (emacs-lisp-mode
-         python-mode))
+  :disabled t
+  :hook (python-mode))
+
+(use-package electric-pair
+  :hook
+  (python-mode . electric-pair-local-mode)
+  (latex-mode . electric-pair-local-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                  ;;;;
@@ -264,8 +286,9 @@
 ;;;;                   ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; autoloaded?
 ;; Debian packages: elpa-git-annex
-(use-package git-annex)
+;; (use-package git-annex)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            ;;;;

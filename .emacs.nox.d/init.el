@@ -5,6 +5,8 @@
 
 (setq backup-inhibited t) ;; disable backup
 
+(global-auto-revert-mode 1)
+
 (setq ispell-dictionary "polish")
 
 (setq fill-column 79)

@@ -84,21 +84,45 @@
 
 
 (setq org-todo-keywords
-   '((sequence "TODO" "WAITING" "|" "DONE" )))
+      '((sequence "TODO" "WAIT" "|" "DONE" )))
 
 (setq org-todo-keyword-faces
-                 '(("WAITING" . "violet")))
+      '(("WAIT" . "violet")))
 
-;; capture templates
+;;
+;; Capture templates and org-protocol
+;;
+
+(require 'org-protocol)
 
 (setq org-capture-templates
       '(("t" "todo" entry (file+headline "~/.agenda/agenda.org" "Tasks")
-	     "* TODO %?\n %U\n")
+	     "* TODO %?\n%U\n")
 	    ("j" "journal" entry (file "~/.agenda/journal.org")
 	     "* %U %?\n" )
         ("n" "nie" entry (file "~/.agenda/nie.org")
-	     "* TODO %?\n  %U\n")
-	    ))
+	     "* TODO %?\n%U\n")
+        ("i" "issues" entry (file "~/.agenda/issues.org")
+	     "* TODO %?\n%U\n")
+        ("m" "Mail" entry
+         (file+headline "~/.agenda/agenda.org" "Incoming")
+         "* TODO %?\n%U\nSource: %:link\n\n%i"
+         :empty-lines 1
+         )))
+
+(add-hook 'org-capture-mode-hook 'delete-other-windows)
+(setq my-org-protocol-flag nil)
+(defadvice org-capture-finalize (after delete-frame-at-end activate)
+  "Delete frame at remember finalization"
+  (progn (if my-org-protocol-flag (delete-frame))
+         (setq my-org-protocol-flag nil)))
+(defadvice org-capture-kill (after delete-frame-at-end activate)
+  "Delete frame at remember abort"
+  (progn (if my-org-protocol-flag (delete-frame))
+         (setq my-org-protocol-flag nil)))
+(defadvice org-protocol-capture (before set-org-protocol-flag activate)
+  (setq my-org-protocol-flag t))
+
 
 (add-hook 'org-mode-hook 'auto-fill-mode)
 
