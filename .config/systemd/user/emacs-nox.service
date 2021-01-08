@@ -1,0 +1,11 @@
+[Unit]
+Description=Emacs-nox for terminal and mutt
+
+[Service]
+Type=forking
+ExecStart=
+ExecStart="/usr/bin/emacs" "--daemon=nox" "-q" "-l" "/home/domino/.emacs.nox.d/init.el"
+
+[Install]
+Also=emacs-nox.socket
+WantedBy=default.target
