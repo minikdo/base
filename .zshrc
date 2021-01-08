@@ -61,7 +61,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git git-annex debian battery systemd sudo history man pip
-         virtualenvwrapper zsh_reload) 
+         virtualenvwrapper zsh_reload z) 
 
 # User configuration
 
