@@ -29,6 +29,14 @@ Config { font             = "xft:Inconsolata-zi4"
                                             , "--low"      , "#025e7c,#002b36"
                                             , "--normal"   , "orange,#002b36"
                                             , "--high"     , "red,#002b36" ] 10
+                    , Run MultiCpu          [ "-m"         , "3"
+                                            , "-t"         , "<total0> <total1> <total2> <total3>"
+                                            , "--Low"      , "50"         -- units: %
+                                            , "--High"     , "85"         -- units: %
+                                            , "--low"      , "#025e7c,#002b36"
+                                            , "--normal"   , "#025e7c,#002b36"
+                                            , "--high"     , "#025e7c,#002b36"
+                                            ] 10
                     , Run Memory            [ "-t"         , "Mem: <usedratio>%"
                                             , "-m"         , "3"
                                             , "--Low"      , "50"        -- units: -- %
@@ -69,6 +77,6 @@ Config { font             = "xft:Inconsolata-zi4"
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% <fc=#268bd2,#002b36> %wlan0% %wlan0wi% %cpu% %memory%  </fc> }\
+       , template = "%StdinReader% <fc=#268bd2,#002b36> %wlan0% %wlan0wi% %cpu% %multicpu% %memory% </fc> }\
                     \{ <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%  %EPWA%</fc>"
        }
