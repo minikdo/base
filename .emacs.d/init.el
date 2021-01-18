@@ -288,9 +288,9 @@
 
 ;; autoloaded?
 ;; Debian packages: elpa-git-annex
-;; (use-package git-annex)
+;; (require 'git-annex)
+(use-package git-annex)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            ;;;;
 ;;;; === PERSISTENT-SCRATCH === ;;;;
 ;;;;                            ;;;;
@@ -423,9 +423,9 @@
 
 (define-key yas-minor-mode-map (kbd "<C-tab>")     'yas-ido-expand)
 
-;;
-;; Load other modes
-;;
+;;;;
+;;;; Load other modes
+;;;;
 
 (load-file "~/.emacs.d/modes/multiple-cursors.el")
 (load-file "~/.emacs.d/modes/flx-ido.el")
