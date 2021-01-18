@@ -117,7 +117,7 @@ projects =
   , Project { projectName      = "8"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn "st -t mutt ~/bin/my_mutt"
-                                           spawn "st -t profanity profanity"
+                                           spawn "st -t profanity ~/my_profanity"
             }
   , Project { projectName      = "9"
             , projectDirectory = "~/"
@@ -247,7 +247,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_m     ), raiseMaybe (spawn "st -t mutt ~/bin/my_mutt") (title =? "mutt"))
 
     -- Profanity
-    , ((modm,               xK_p     ), raiseMaybe (spawn "st -t profanity profanity") (title =? "profanity"))
+    , ((modm,               xK_p     ), raiseMaybe (spawn "st -t profanity ~/bin/my_profanity") (title =? "profanity"))
 
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
