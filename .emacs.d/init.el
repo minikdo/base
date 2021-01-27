@@ -251,7 +251,8 @@
 (use-package electric-pair
   :hook
   (python-mode . electric-pair-local-mode)
-  (latex-mode . electric-pair-local-mode))
+  (latex-mode . electric-pair-local-mode)
+  (javascript-mode . electric-pair-local-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                  ;;;;
