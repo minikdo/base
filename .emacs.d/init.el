@@ -252,7 +252,8 @@
   :hook
   (python-mode . electric-pair-local-mode)
   (latex-mode . electric-pair-local-mode)
-  (javascript-mode . electric-pair-local-mode))
+  (js-mode . electric-pair-local-mode)
+  (scss-mode . electric-pair-local-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                  ;;;;
@@ -370,6 +371,20 @@
 (add-hook 'elpy-mode-hook (lambda ()
                             (highlight-indentation-mode -1)
                             (setq display-line-numbers 1)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;                 ;;;;
+;;;; === JS-MODE === ;;;;
+;;;;                 ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (use-package js
+  ;; :init
+  ;; (lambda () (setq display-line-numbers 1)))
+
+(add-hook 'js-mode-hook (lambda ()
+                          (yas-minor-mode)
+                          (setq display-line-numbers t)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                  ;;;;
