@@ -253,6 +253,7 @@
   (python-mode . electric-pair-local-mode)
   (latex-mode . electric-pair-local-mode)
   (js-mode . electric-pair-local-mode)
+  (yaml-mode . electric-pair-local-mode)
   (scss-mode . electric-pair-local-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -293,6 +294,7 @@
 ;; (require 'git-annex)
 (use-package git-annex)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            ;;;;
 ;;;; === PERSISTENT-SCRATCH === ;;;;
 ;;;;                            ;;;;
