@@ -278,10 +278,34 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Debian packages: elpa-auto-complete
-(require 'auto-complete-config)
-(ac-config-default)
+;; (require 'auto-complete-config)
+;; (ac-config-default)
 
-(setq ac-auto-show-menu (* ac-delay 2))
+;; (setq ac-auto-show-menu (* ac-delay 2))
+(use-package auto-complete
+  :disabled t
+  :init
+  (progn
+    ;; (ac-config-default)
+    ;; (global-auto-complete-mode t)
+    )
+  :config
+  (setq ac-ignore-case nil)
+  (setq ac-auto-show-menu (* ac-delay 2)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;                          ;;;;
+;;;; === COMPANY-COMPLETE === ;;;;
+;;;;                          ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Debian packages: elpa-company
+(use-package company
+  :config
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 3)
+  (global-company-mode t))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                   ;;;;
@@ -374,6 +398,9 @@
                             (highlight-indentation-mode -1)
                             (setq display-line-numbers 1)))
 
+
+(add-hook 'python-mode-hook (lambda () (auto-complete-mode -1)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                 ;;;;
 ;;;; === JS-MODE === ;;;;
@@ -449,3 +476,12 @@
 (load-file "~/.emacs.d/modes/flx-ido.el")
 (load-file "~/.emacs.d/modes/org.el")
 (load-file "~/.emacs.d/modes/php-mode.el")
+
+;; (use-package company-jedi
+  ;; :config
+  ;; (add-hook 'python-mode-hook 'jedi-setup))
+
+;; (defun my/python-mode-hook ()
+  ;; (add-to-list 'company-backends 'company-jedi))
+
+;; (add-hook 'python-mode-hook 'my/python-mode-hook)
