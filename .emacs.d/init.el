@@ -301,6 +301,7 @@
 
 ;; Debian packages: elpa-company
 (use-package company
+  :disabled t
   :config
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 3)
