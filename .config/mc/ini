@@ -128,6 +128,8 @@ screen-256color=
 
 linux=
 
+st-256color=
+
 [Panels]
 show_mini_info=true
 kilobyte_si=false
