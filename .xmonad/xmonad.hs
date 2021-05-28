@@ -47,6 +47,9 @@ myTmux = "st -e tmux"
 myScreenlocker :: [Char]
 myScreenlocker = "/usr/bin/slock"
 
+myYAScreenlocker :: [Char]
+myYAScreenlocker = "/usr/bin/xtrlock"
+
 myTitleLength :: Int
 myTitleLength = 40
 
@@ -110,10 +113,10 @@ projects =
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn myTmux
             }
-  -- , Project { projectName      = "7"
-            -- , projectDirectory = "~/"
-            -- , projectStartHook = Just $ do safeSpawn "element-desktop" []
-            -- }
+  , Project { projectName      = "7"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ do spawn "LC_ALL=pl_PL.UTF-8 signal-desktop"
+            }
   , Project { projectName      = "8"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn "st -t mutt ~/bin/my_mutt"
@@ -290,6 +293,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Lock the screen using command specified by myScreenlocker
     , ((0                 , xK_F12   ), spawn myScreenlocker)
+
+    -- Lock the screen using command specified by myYAScreenlocker
+    , ((modm              , xK_F12   ), spawn myYAScreenlocker)
 
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --restart")
