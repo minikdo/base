@@ -113,10 +113,10 @@ projects =
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn myTmux
             }
-  , Project { projectName      = "7"
-            , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "LC_ALL=pl_PL.UTF-8 signal-desktop"
-            }
+  -- , Project { projectName      = "7"
+            -- , projectDirectory = "~/"
+            -- , projectStartHook = Just $ do spawn "LC_ALL=pl_PL.UTF-8 signal-desktop"
+            -- }
   , Project { projectName      = "8"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn "st -t mutt ~/bin/my_mutt"
