@@ -117,11 +117,11 @@ projects =
             -- , projectDirectory = "~/"
             -- , projectStartHook = Just $ do spawn "LC_ALL=pl_PL.UTF-8 signal-desktop"
             -- }
-  , Project { projectName      = "8"
-            , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "st -t mutt ~/bin/my_mutt"
-                                           spawn "st -t profanity ~/my_profanity"
-            }
+  -- , Project { projectName      = "8"
+            -- , projectDirectory = "~/"
+            -- , projectStartHook = Just $ do spawn "st -t mutt ~/bin/my_mutt"
+                                           -- spawn "st -t profanity ~/my_profanity"
+            -- }
   , Project { projectName      = "9"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn "st -t jrnl ~/bin/my_tmux.sh"
@@ -241,16 +241,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_k     ), windows W.focusUp)
 
     -- Tor Browser
-    , ((modm,               xK_i     ), runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser"))
+    -- , ((modm,               xK_i     ), runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser"))
 
     -- Emacs Scratch
-    , ((modm,               xK_s     ), spawn "e-scratch" )
+    -- , ((modm,               xK_s     ), spawn "e-scratch" )
 
     -- Mutt
-    , ((modm,               xK_m     ), raiseMaybe (spawn "st -t mutt ~/bin/my_mutt") (title =? "mutt"))
+    -- , ((modm,               xK_m     ), raiseMaybe (spawn "st -t mutt ~/bin/my_mutt") (title =? "mutt"))
 
     -- Profanity
-    , ((modm,               xK_p     ), raiseMaybe (spawn "st -t profanity ~/bin/my_profanity") (title =? "profanity"))
+    -- , ((modm,               xK_p     ), raiseMaybe (spawn "st -t profanity ~/bin/my_profanity") (title =? "profanity"))
 
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
