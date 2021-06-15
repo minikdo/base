@@ -168,3 +168,4 @@ fi
 autoload -U compinit && compinit
 
 #export VIRTUAL_ENV_DISABLE_PROMPT=
+VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3'

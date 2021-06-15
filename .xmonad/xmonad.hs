@@ -39,10 +39,10 @@ import qualified Data.Map        as M
 import qualified XMonad.StackSet as W
 
 myTerminal :: [Char]
-myTerminal = "st"
+myTerminal = "alacritty"
 
 myTmux :: [Char]
-myTmux = "st -e tmux"
+myTmux = "alacritty -e tmux"
 
 myScreenlocker :: [Char]
 myScreenlocker = "/usr/bin/slock"
@@ -102,8 +102,8 @@ projects :: [Project]
 projects =
   [ Project { projectName      = "1"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser")
-                                           safeSpawn "firefox" []
+            , projectStartHook = Just $ do safeSpawn "firefox" []
+                                           -- runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser")
             }
   , Project { projectName      = "2"
             , projectDirectory = "~/"
@@ -119,8 +119,8 @@ projects =
             -- }
   -- , Project { projectName      = "8"
             -- , projectDirectory = "~/"
-            -- , projectStartHook = Just $ do spawn "st -t mutt ~/bin/my_mutt"
-                                           -- spawn "st -t profanity ~/my_profanity"
+            -- , projectStartHook = Just $ do spawn "alacritty -t mutt ~/bin/my_mutt"
+                                           -- spawn "alacritty -t profanity ~/my_profanity"
             -- }
   , Project { projectName      = "9"
             , projectDirectory = "~/"
@@ -152,7 +152,7 @@ myManageHook = composeAll
       , className =? "mpv"                --> doFullFloat
       , className =? "Arandr"             --> doCenterFloat
       , className =? "Evince"             --> doRectFloat (W.RationalRect 0.2 0.05 0.6 0.9)
-      , className =? "Pavucontrol"        --> doCenterFloat
+      , className =? "Pavucontrol"        --> doRectFloat (W.RationalRect 0.15 0.15 0.7 0.7)
       , stringProperty "WM_WINDOW_ROLE" =? "pop-up" --> doFloat
       , stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog" --> doRectFloat (W.RationalRect 0.2 0.1 0.6 0.8)
     ] <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
@@ -247,10 +247,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm,               xK_s     ), spawn "e-scratch" )
 
     -- Mutt
-    -- , ((modm,               xK_m     ), raiseMaybe (spawn "st -t mutt ~/bin/my_mutt") (title =? "mutt"))
+    , ((modm,               xK_m     ), raiseMaybe (spawn "alacritty --title mutt -e ~/bin/my_mutt") (title =? "mutt"))
 
     -- Profanity
-    -- , ((modm,               xK_p     ), raiseMaybe (spawn "st -t profanity ~/bin/my_profanity") (title =? "profanity"))
+    , ((modm,               xK_p     ), raiseMaybe (spawn "alacritty --title profanity -e ~/bin/my_profanity") (title =? "profanity"))
 
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
