@@ -117,14 +117,14 @@ projects =
             -- , projectDirectory = "~/"
             -- , projectStartHook = Just $ do spawn "LC_ALL=pl_PL.UTF-8 signal-desktop"
             -- }
-  -- , Project { projectName      = "8"
-            -- , projectDirectory = "~/"
-            -- , projectStartHook = Just $ do spawn "alacritty -t mutt ~/bin/my_mutt"
-                                           -- spawn "alacritty -t profanity ~/my_profanity"
-            -- }
+  , Project { projectName      = "8"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ do spawn "alacritty -t mutt -e ~/bin/my_mutt"
+                                           -- spawn "alacritty -t profanity -e ~/my_profanity"
+            }
   , Project { projectName      = "9"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "st -t jrnl ~/bin/my_tmux.sh"
+            , projectStartHook = Just $ do spawn "alacritty -t jrnl -e ~/bin/my_tmux.sh"
             }
   ]
 
