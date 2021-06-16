@@ -255,6 +255,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
 
+    -- Volume Mute
+    , ((0  , xF86XK_AudioMute        ), spawn "pa_sink_toggle")
+
     -- Volume Up
     , ((0  , xF86XK_AudioRaiseVolume ), spawn "pa_vol_up")
 
