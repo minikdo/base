@@ -3,7 +3,7 @@ Description=Update notmuch
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/notmuch new
+ExecStart=/usr/bin/notmuch new --quiet
 Restart=no
 
 [Install]
