@@ -10,6 +10,10 @@
                              (setq gc-cons-threshold 16777216
                                    gc-cons-percentage 0.1)))
 
+;; Package configuration
+(add-to-list 'package-archives
+             '("melpa" . "https://stable.melpa.org/packages/") t)
+
 (package-initialize)
 
 (setq debug-on-error nil)
@@ -24,6 +28,7 @@
 
 ;; Downloaded from https://github.com/be5invis/iosevka
 (set-frame-font "iosevka 12" nil t)
+(set-face-attribute 'default nil :height 130)
 
 ;; Custom colors
 (custom-set-faces
@@ -39,10 +44,6 @@
 ;; Transparency
 (set-frame-parameter (selected-frame) 'alpha '(95 . 95))
 
-;; Package configuration
-(add-to-list 'package-archives
-             '("melpa" . "https://stable.melpa.org/packages/") t)
-
 ;; Enable automatic updating a buffer if a file changes on disk
 (global-auto-revert-mode 1)
 
@@ -50,9 +51,11 @@
 (setq backup-inhibited t)
 
 ;; Save cursor position in files
+(save-place-mode 1)
 (setq save-place-file "~/.emacs.d/saveplace")
-(setq-default save-place t)
-(require 'saveplace)
+;; Version 24.5 or older
+;; (setq-default save-place t)
+;; (require 'saveplace)
 
 ;; Custom file
 (setq custom-file "~/.emacs.d/custom.el")
@@ -329,6 +332,18 @@
 ;; https://github.com/Fanael/persistent-scratch
 (persistent-scratch-setup-default)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;                          ;;;;
+;;;; === MULTIPLE-CURSORS === ;;;;
+;;;;                          ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/unmark-next-like-this)
+         ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                   ;;;;
 ;;;; === WHICH-KEY === ;;;;
@@ -381,7 +396,7 @@
   ;; Bind key to projectile-command-map
   :bind (:map projectile-mode-map ("C-c p" . projectile-command-map)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;`
+;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                ;;;;
 ;;;; === PYTHON === ;;;;
 ;;;;                ;;;;
@@ -401,6 +416,7 @@
 
 
 (add-hook 'python-mode-hook (lambda () (auto-complete-mode -1)))
+(setq elpy-rpc-python-command "/usr/bin/python3")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                 ;;;;
@@ -473,7 +489,6 @@
 ;;;; Load other modes
 ;;;;
 
-;; (load-file "~/.emacs.d/modes/multiple-cursors.el")
 (load-file "~/.emacs.d/modes/flx-ido.el")
 (load-file "~/.emacs.d/modes/org.el")
 (load-file "~/.emacs.d/modes/php-mode.el")

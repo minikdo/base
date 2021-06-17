@@ -70,7 +70,10 @@
 
 (use-package yasnippet
   ;; Enable yasnippet globally
-  :config (yas-global-mode 1)
+  :config
+  (setq yas-snippet-dirs
+        '("~/.emacs.nox.d/snippets"))
+  (yas-global-mode 1)
   ;; Bind keys
   :bind (("C-c y l" . yas-describe-tables)
          ("C-c y x" . yas-expand)

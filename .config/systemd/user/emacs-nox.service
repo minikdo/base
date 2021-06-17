@@ -5,6 +5,7 @@ Description=Emacs-nox for terminal and mutt
 Type=forking
 ExecStart=
 ExecStart="/usr/bin/emacs" "--daemon=nox" "-q" "-l" "/home/domino/.emacs.nox.d/init.el"
+ExecStop="/usr/bin/emacsclient" "--eval" "'(kill-emacs)'" "-s" "/run/user/1000/emacs-nox/server"
 
 [Install]
 Also=emacs-nox.socket

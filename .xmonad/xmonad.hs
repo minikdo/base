@@ -243,9 +243,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Tor Browser
     -- , ((modm,               xK_i     ), runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser"))
 
-    -- Emacs Scratch
-    -- , ((modm,               xK_s     ), spawn "e-scratch" )
-
     -- Mutt
     , ((modm,               xK_m     ), raiseMaybe (spawn "alacritty --title mutt -e ~/bin/my_mutt") (title =? "mutt"))
 

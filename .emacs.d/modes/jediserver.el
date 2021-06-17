@@ -29,9 +29,8 @@ is considered to be a project root."
     (when project-name (venv-workon project-name))))
 
 
-
 (setq python-environment-virtualenv
-      '("virtualenv" "--no-site-packages" "--python" "python3"))
+      '("virtualenv"))
 
 
 (setq jedi:setup-keys t)

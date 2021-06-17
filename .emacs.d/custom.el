@@ -6,7 +6,7 @@
  '(custom-safe-themes
    '("ed91d4e59412defda16b551eb705213773531f30eb95b69319ecd142fab118ca" default))
  '(fringe-mode 10 nil (fringe))
- '(package-hidden-regexps '(""))
+ '(package-hidden-regexps '("\\`backtrace\\'" ""))
  '(package-selected-packages
    '(elpy company-jedi multiple-cursors centaur-tabs rainbow-mode persistent-scratch python python-mode python-environment epc emmet-mode which-key web-mode tabbar smex session pyvenv projectile pod-mode php-mode muttrc-mode mutt-alias markdown-mode jedi initsplit htmlize graphviz-dot-mode git-annex folding flx-ido eproject diminish csv-mode clues-theme browse-kill-ring boxquote bm bar-cursor apache-mode)))
 
