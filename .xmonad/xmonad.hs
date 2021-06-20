@@ -217,7 +217,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm              , xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm              , xK_d     ), spawn "dmenu_run -p $ -nf white -sb brown -sf yellow")
+    , ((modm              , xK_s     ), spawn "dmenu_run -p $ -nf white -sb brown -sf yellow")
 
     -- close focused window
     , ((modm              , xK_BackSpace ), kill)
@@ -307,7 +307,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_Return), dwmpromote)
 
     -- Pop open a dmenu to poweroff/reboot/suspend/lock
-    , ((modm              , xK_z     ), spawn "dmenu_shutdown")
+    , ((modm              , xK_x     ), spawn "dmenu_shutdown")
 
     -- Pop open a dmenu to pass
     , ((modm              , xK_u     ), spawn "passmenu")
