@@ -61,7 +61,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git git-annex debian battery systemd sudo history man pip
-         virtualenvwrapper zsh_reload z) 
+         virtualenvwrapper zsh_reload z ansible) 
 
 # User configuration
 
@@ -124,7 +124,7 @@ alias lf='systemctl list-units --state=failed'
 alias wpa="$EDITOR /etc/wpa_supplicant/wpa_supplicant-*.conf"
 alias pass='EDITOR=nano pass'
 alias cls="echo -ne '\033c'" # urxvt terminal clean buffer
-
+alias known_hosts="nano ~/.ssh/known_hosts"
 
 # Function to query dpkg
 function dq () {
