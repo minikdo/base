@@ -93,6 +93,7 @@
 (use-package mail
   :init
   (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
+  (add-to-list 'auto-mode-alist '("/neomutt" . mail-mode))
   :hook
   (mail-mode . footnote-mode)
   (mail-mode . yas-minor-mode)
