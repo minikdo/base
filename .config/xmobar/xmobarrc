@@ -74,12 +74,9 @@ Config { font             = "xft:Inconsolata-zi4"
                                             , "-h"         , "grey" ] 600
                     , Run StdinReader
                     , Run Date "%a %b %_d %H:%M" "date" 10
-                    , Run Brightness        [ "-t", "<percent>%"
-                                            , "--"
-                                            , "-D", "intel_backlight" ] 60
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
        , template = "%StdinReader% <fc=#268bd2,#002b36> %wlp3s0% %wlp3s0wi% %multicpu% %memory% </fc> }\
-                    \{ <fc=#ee9a00>%date%</fc> <fc=#404042>[%bright%]</fc> <fc=#268bd2>%battery%  %EPWA%</fc>"
+                    \{ <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%  %EPWA%</fc>"
        }
