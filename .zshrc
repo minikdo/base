@@ -125,6 +125,7 @@ alias wpa="$EDITOR /etc/wpa_supplicant/wpa_supplicant-*.conf"
 alias pass='EDITOR=nano pass'
 alias cls="echo -ne '\033c'" # urxvt terminal clean buffer
 alias known_hosts="nano ~/.ssh/known_hosts"
+alias ss="ss -ltunp"
 
 # Function to query dpkg
 function dq () {
