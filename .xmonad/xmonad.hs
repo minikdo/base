@@ -253,16 +253,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
 
     -- Volume Mute
-    , ((0  , xF86XK_AudioMute        ), spawn "pa_sink_toggle")
+    , ((0  , xF86XK_AudioMute        ), spawn "pa_switch --sink-mute-toggle")
 
     -- Volume Up
-    , ((0  , xF86XK_AudioRaiseVolume ), spawn "pa_vol_up")
+    , ((0  , xF86XK_AudioRaiseVolume ), spawn "pa_switch --volume-up")
 
     -- Volume Down
-    , ((0  , xF86XK_AudioLowerVolume ), spawn "pa_vol_down")
+    , ((0  , xF86XK_AudioLowerVolume ), spawn "pa_switch --volume-down")
 
     -- Mic Toggle
-    , ((0  , 0x1008FFB2              ), spawn "pa_mic_toggle")
+    , ((0  , 0x1008FFB2              ), spawn "pa_switch --mic-toggle")
 
     -- Brightness Up
     , ((0  , xF86XK_MonBrightnessUp  ), spawn "xbacklight -inc 10")
