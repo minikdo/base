@@ -491,7 +491,6 @@
 
 (load-file "~/.emacs.d/modes/flx-ido.el")
 (load-file "~/.emacs.d/modes/org.el")
-(load-file "~/.emacs.d/modes/php-mode.el")
 
 ;; (use-package company-jedi
   ;; :config
