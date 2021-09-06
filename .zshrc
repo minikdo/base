@@ -150,7 +150,9 @@ bindkey '^x^e' edit-command-line
 
 
 # direnv
-eval "$(direnv hook zsh)"
+if [ -x /usr/bin/direnv ]; then
+    eval "$(direnv hook zsh)"
+fi
 
 
 # 
