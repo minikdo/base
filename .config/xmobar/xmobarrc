@@ -1,6 +1,6 @@
 -- -*- mode: haskell; -*-
 
-Config { font             = "xft:Inconsolata-zi4"
+Config { font             = "xft:Iosevka-11"
        , additionalFonts  = []
        , borderColor      = "black"
        , border           = TopB

@@ -1,9 +1,9 @@
 UXTerm*faceName:       Inconsolata
 XTerm*faceName:        Inconsolata
 
-Emacs.font:            -BE5N-Iosevka-normal-normal-expanded-*-18-*-*-*-d-0-iso10646-1
+!! Emacs.font:            -BE5N-Iosevka-normal-normal-expanded-*-18-*-*-*-d-0-iso10646-1
 
-URxvt*font:            xft:Iosevka Extended:pixelsize=17
+URxvt.font:            xft:Iosevka:size=12
 
 XTerm*ScrollKey:       true
 XTern*sixelScrolling:  true

@@ -47,9 +47,6 @@ myTmux = "alacritty -e tmux"
 myScreenlocker :: [Char]
 myScreenlocker = "/usr/bin/slock"
 
-myYAScreenlocker :: [Char]
-myYAScreenlocker = "/usr/bin/xtrlock"
-
 myTitleLength :: Int
 myTitleLength = 40
 
@@ -96,14 +93,13 @@ myTabTheme = def
     }
               
 myFont :: [Char]
-myFont = "xft:Inconsolata-zi4"
+myFont = "xft:Iosevka"
 
 projects :: [Project]
 projects =
   [ Project { projectName      = "1"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do safeSpawn "firefox" []
-                                           -- runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser")
             }
   , Project { projectName      = "2"
             , projectDirectory = "~/"
@@ -113,18 +109,13 @@ projects =
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn myTmux
             }
-  -- , Project { projectName      = "7"
-            -- , projectDirectory = "~/"
-            -- , projectStartHook = Just $ do spawn "LC_ALL=pl_PL.UTF-8 signal-desktop"
-            -- }
   , Project { projectName      = "8"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "alacritty -t mutt -e ~/bin/my_mutt"
-                                           -- spawn "alacritty -t profanity -e ~/my_profanity"
+            , projectStartHook = Just $ do spawn "alacritty -t mutt -e neomutt"
             }
   , Project { projectName      = "9"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "alacritty -t jrnl -e ~/bin/my_tmux.sh"
+            , projectStartHook = Just $ do spawn "alacritty -t jrnl -e my_jrnl"
             }
   ]
 
@@ -142,7 +133,6 @@ myManageHook = composeAll
       , className =? "Tor Browser"        --> doShift "1"
       , className =? "Firefox-esr"        --> doShift "1"
       , className =? "Emacs"              --> doShift "2"
-      , className =? "Element"            --> doShift "7"
       , title     =? "mutt"               --> doShift "8"
       , title     =? "profanity"          --> doShift "8"
       , className =? "Navigator"          --> doFloat
@@ -240,9 +230,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Move focus to the previous window
     , ((modm,               xK_k     ), windows W.focusUp)
 
-    -- Tor Browser
-    -- , ((modm,               xK_i     ), runOrRaiseMaster "torbrowser-launcher" (className =? "Tor Browser"))
-
     -- Mutt
     , ((modm,               xK_m     ), raiseMaybe (spawn "alacritty --title mutt -e ~/bin/my_mutt") (title =? "mutt"))
 
@@ -294,9 +281,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Lock the screen using command specified by myScreenlocker
     , ((0                 , xK_F12   ), spawn myScreenlocker)
 
-    -- Lock the screen using command specified by myYAScreenlocker
-    , ((modm              , xK_F12   ), spawn myYAScreenlocker)
-
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --restart")
 
@@ -323,7 +307,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     
     ]
     ++
-
 
   
     -- mod-[1..9], Switch to workspace N
@@ -353,7 +336,7 @@ main = do
     xmonad $ ewmh $ dynamicProjects projects def
     -- xmonad $ ewmh $ def
         { workspaces         = myWorkspaces
-        , terminal           = myTmux
+        , terminal           = myTerminal
         , focusFollowsMouse  = myFocusFollowsMouse
         , borderWidth        = myBorderWidth
         , focusedBorderColor = myFocusedBorderColor
