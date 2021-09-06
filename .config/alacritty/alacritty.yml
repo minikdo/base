@@ -666,10 +666,6 @@ background_opacity: .89
 #   - SearchHistoryNext
 #       Go to the next regex in the search history.
 #
-# - macOS exclusive actions:
-#   - ToggleSimpleFullscreen
-#       Enter fullscreen without occupying another space.
-#
 # - Linux/BSD exclusive actions:
 #
 #   - CopySelection
