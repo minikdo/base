@@ -39,7 +39,7 @@
 
 ;; export setting
 
-(setq org-export-with-author nil)
+(setq org-export-with-author t)
 (setq org-export-with-date nil)
 (setq org-export-with-toc nil)
 (setq org-latex-default-packages-alist (quote
@@ -47,7 +47,7 @@
   ("T1" "fontenc" nil)
   ("" "fixltx2e" nil)
   ("" "graphicx" t)
-  ("" "longtable" nil)
+  ("" "longtable" t)
   ("" "float" nil)
   ("" "wrapfig" nil)
   ("" "rotating" nil)
@@ -56,6 +56,8 @@
   ("" "textcomp" t)
   ("" "marvosym" t)
   ("" "wasysym" t)
+  ("" "parskip" t)
+  ("" "libertine" t)
   ;; ("" "amssymb" t)
   ("" "hyperref" nil)
   "\\tolerance=1000"
