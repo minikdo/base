@@ -1,10 +1,6 @@
 *
 !/.ansible.cfg
 !/.bashrc
-!/bin/dmenu_shutdown
-!/bin/e
-!/bin/passmenu
-!/bin/pa_switch
 !/.config/alacritty/alacritty.yml
 !/.config/conky/conky.conf
 !/.config/dunst/dunstrc
@@ -26,7 +22,6 @@
 !/.emacs.d/custom.el
 !/.emacs.d/init.el
 !/.emacs.d/modes/flx-ido.el
-!/.emacs.d/modes/jediserver.el
 !/.emacs.d/modes/org.el
 !/.emacs.nox.d/init.el
 !/.gimp-2.8/scripts/arrow.scm
