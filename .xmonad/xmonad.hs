@@ -231,10 +231,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_k     ), windows W.focusUp)
 
     -- Mutt
-    , ((modm,               xK_m     ), raiseMaybe (spawn "alacritty --title mutt -e ~/bin/my_mutt") (title =? "mutt"))
+    , ((modm,               xK_m     ), raiseMaybe (spawn "alacritty --title mutt -e neomutt") (title =? "mutt"))
 
     -- Profanity
-    , ((modm,               xK_p     ), raiseMaybe (spawn "alacritty --title profanity -e ~/bin/my_profanity") (title =? "profanity"))
+    , ((modm,               xK_p     ), raiseMaybe (spawn "alacritty --title profanity -e profanity") (title =? "profanity"))
 
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
