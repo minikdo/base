@@ -195,6 +195,7 @@
 (bind-key* "ESC <up>" 'ff/uncomment-and-go-up)
 (bind-key* "<f5>" '(lambda() (interactive) (minikdo/switch-to-scratch-end)))
 (bind-key* "<f8>" '(lambda() (interactive) (find-file "~/.emacs.d/init.el")))
+(bind-key* "<f9>" '(lambda() (interactive) (ispell-buffer)))
 ;; (bind-key* "<f8>" '(lambda() (interactive)(dired-other-window "~/.emacs.d/")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;
