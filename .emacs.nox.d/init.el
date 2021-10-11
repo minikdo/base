@@ -40,6 +40,7 @@
 (bind-key* "C-x k" 'kill-this-buffer)
 (bind-key* "<f5>" (lambda() (interactive) (switch-to-buffer "*scratch*")))
 (bind-key* "<f8>" (lambda() (interactive) (find-file "~/.emacs.nox.d/init.el")))
+(bind-key* "<f9>" '(lambda() (interactive) (flyspell-buffer)))
 
 (use-package paren
   :config
