@@ -7,6 +7,7 @@
 
 (global-auto-revert-mode 1)
 
+(require 'ispell)
 (setq ispell-dictionary "polish")
 
 (setq fill-column 79)
