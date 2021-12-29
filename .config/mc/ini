@@ -6,7 +6,7 @@ auto_save_setup=true
 preallocate_space=false
 auto_menu=false
 use_internal_view=true
-use_internal_edit=true
+use_internal_edit=false
 clear_before_exec=true
 confirm_delete=true
 confirm_overwrite=true
@@ -99,7 +99,7 @@ menubar_visible=true
 free_space=true
 horizontal_split=false
 vertical_equal=true
-left_panel_size=95
+left_panel_size=127
 horizontal_equal=true
 top_panel_size=18
 
