@@ -16,7 +16,7 @@
 
 (package-initialize)
 
-(setq debug-on-error nil)
+;; (setq debug-on-error nil)
 
 ;; This is only needed once, near the top of the file
 ;; Debian packages: elpa-use-package
@@ -485,6 +485,15 @@ is considered to be a project root."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                  ;;;;
+;;;; == EMMET-MODE == ;;;;
+;;;;                  ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(add-to-list 'load-path "~/.emacs.d/modes/emmet")
+(require 'emmet)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;                  ;;;;
 ;;;; === WEB-MODE === ;;;;
 ;;;;                  ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -500,17 +509,76 @@ is considered to be a project root."
 (setq web-mode-enable-auto-pairing t)
 
 
+
+
+;;;; === VUE-HTML-POLY-MODE === ;;;;
+
+;; (setq load-path
+      ;; (append '("~/git/polymode/")
+              ;; load-path))
+
+
+;; (add-to-list 'load-path "~/.emacs.d/modes/vue-html")
+;; (require 'vue-html-mode)
+
+
+;;;; === VUE-POLY-MODE === ;;;;
+
+;; (use-package polymode
+;;   :mode ("\\.vue\\'" . poly-vue-mode) ; use-package allows us to set .vue files to a poly-vue-mode, which I will define below
+;;   :config
+;;   (define-hostmode poly-vue-hostmode :mode 'vue-html-mode) ; The "host" mode is html-mode
+;;   (define-innermode poly-js-vue-innermode ; The first inner mode is for js
+;;     :mode 'js-mode
+;;     :head-matcher "^[ \t]*<script.*>"
+;;     :tail-matcher "^[ \t]*</script.*>"
+;;     :head-mode 'host
+;;     :tail-mode 'host)
+;;   (define-innermode poly-scss-vue-innermode ; The second inner mode is for scss
+;;     :mode 'scss-mode
+;;     :head-matcher "^[ \t]*<style.*>"
+;;     :tail-matcher "^[ \t]*</style.*>"    
+;;     :head-mode 'host
+;;     :tail-mode 'host    
+;;     )
+;;   (define-polymode poly-vue-mode ; Define a new polymode, with two inner modes
+;;     :hostmode 'poly-vue-hostmode
+;;     :innermodes '(poly-js-vue-innermode poly-scss-vue-innermode)))
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                  ;;;;
 ;;;; === YAS-MODE === ;;;;
 ;;;;                  ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package yasnippet
+  ;; Enable yasnippet globally
+  :config
+  (setq yas-snippet-dirs
+        '("~/.emacs.d/snippets"))
+  (yas-global-mode 1)
+  ;; Bind keys
+  :bind (("C-c y l" . yas-describe-tables)
+         ("C-c y x" . yas-expand)
+         ("C-c y i" . yas-insert-snippet)
+         ("C-c y d" . yas-load-directory)
+         ("C-c y n" . yas-new-snippet)
+         ("C-c y a" . yas-reload-all)
+         ("C-c y t" . yas-tryout-snippet)
+         ("C-c y f" . yas-visit-snippet-file)))
+
+(use-package yasnippet-snippets
+  ;; Initialize yasnippet-snippets after yasnippet itself
+  :after yasnippet
+  :config (yasnippet-snippets-initialize))
+
 ;; Debian packages: elpa-yasnippet elpa-yasnippet-snippets
 ;; Fixing a key binding bug in elpy
-(define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand)
+;; (define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand)
 ;; Fixing another key binding bug in iedit mode
-(define-key global-map (kbd "C-c o") 'iedit-mode)
+;; (define-key global-map (kbd "C-c o") 'iedit-mode)
 
 ;; completing point by some yasnippet key
 (defun yas-ido-expand ()
@@ -535,7 +603,7 @@ is considered to be a project root."
         (insert key)
         (yas-expand)))))
 
-(define-key yas-minor-mode-map (kbd "<C-tab>")     'yas-ido-expand)
+;; (define-key yas-minor-mode-map (kbd "<C-tab>")     'yas-ido-expand)
 
 ;;;;
 ;;;; Load other modes
