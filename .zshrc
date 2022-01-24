@@ -1,3 +1,6 @@
+NVM_LAZY=1
+NVM_LAZY_CMD=(vue)
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -61,7 +64,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git git-annex debian battery systemd sudo history man pip
-         virtualenvwrapper z ansible) 
+         virtualenvwrapper z ansible nvm) 
 
 # User configuration
 
@@ -127,6 +130,7 @@ alias cls="echo -ne '\033c'" # urxvt terminal clean buffer
 alias known_hosts="nano ~/.ssh/known_hosts"
 alias post_new="nano ~/.mail/.notmuch/hooks/post-new"
 alias ss="ss -ltunp"
+alias ahu="apt-history upgrade"
 
 # Function to query dpkg
 function dq () {
