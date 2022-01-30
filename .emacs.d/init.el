@@ -257,6 +257,7 @@
   (python-mode . electric-pair-local-mode)
   (latex-mode . electric-pair-local-mode)
   (js-mode . electric-pair-local-mode)
+  (html-mode . electric-pair-local-mode)
   (yaml-mode . electric-pair-local-mode)
   (scss-mode . electric-pair-local-mode))
 
@@ -508,43 +509,18 @@ is considered to be a project root."
 (setq web-mode-enable-auto-closing t)
 (setq web-mode-enable-auto-pairing t)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;                    ;;;;
+;;;; === MHTML-MODE === ;;;;
+;;;;                    ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-
-;;;; === VUE-HTML-POLY-MODE === ;;;;
-
-;; (setq load-path
-      ;; (append '("~/git/polymode/")
-              ;; load-path))
-
-
-;; (add-to-list 'load-path "~/.emacs.d/modes/vue-html")
-;; (require 'vue-html-mode)
-
-
-;;;; === VUE-POLY-MODE === ;;;;
-
-;; (use-package polymode
-;;   :mode ("\\.vue\\'" . poly-vue-mode) ; use-package allows us to set .vue files to a poly-vue-mode, which I will define below
-;;   :config
-;;   (define-hostmode poly-vue-hostmode :mode 'vue-html-mode) ; The "host" mode is html-mode
-;;   (define-innermode poly-js-vue-innermode ; The first inner mode is for js
-;;     :mode 'js-mode
-;;     :head-matcher "^[ \t]*<script.*>"
-;;     :tail-matcher "^[ \t]*</script.*>"
-;;     :head-mode 'host
-;;     :tail-mode 'host)
-;;   (define-innermode poly-scss-vue-innermode ; The second inner mode is for scss
-;;     :mode 'scss-mode
-;;     :head-matcher "^[ \t]*<style.*>"
-;;     :tail-matcher "^[ \t]*</style.*>"    
-;;     :head-mode 'host
-;;     :tail-mode 'host    
-;;     )
-;;   (define-polymode poly-vue-mode ; Define a new polymode, with two inner modes
-;;     :hostmode 'poly-vue-hostmode
-;;     :innermodes '(poly-js-vue-innermode poly-scss-vue-innermode)))
-
+(use-package mhtml-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.vue?\\'" . mhtml-mode))
+  :config
+  (lambda () (setq display-line-numbers t))
+  (add-hook 'html-mode-hook 'emmet-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -580,6 +556,7 @@ is considered to be a project root."
 ;; Fixing another key binding bug in iedit mode
 ;; (define-key global-map (kbd "C-c o") 'iedit-mode)
 
+;; NOT WORKING
 ;; completing point by some yasnippet key
 (defun yas-ido-expand ()
   "Lets you select (and expand) a yasnippet key"
@@ -603,7 +580,7 @@ is considered to be a project root."
         (insert key)
         (yas-expand)))))
 
-;; (define-key yas-minor-mode-map (kbd "<C-tab>")     'yas-ido-expand)
+(define-key yas-minor-mode-map (kbd "<C-tab>")     'yas-ido-expand)
 
 ;;;;
 ;;;; Load other modes

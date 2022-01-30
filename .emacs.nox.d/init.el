@@ -10,6 +10,21 @@
 (require 'ispell)
 (setq ispell-dictionary "polish")
 
+(defun switch-dictionary (choice)
+   "Switch between language dictionaries (optionally switched to CHOICE value)."
+   (interactive "cChoose:  (1) English | (2) Polski")
+    (cond ((eq choice ?1)
+           (setq ispell-dictionary "english")
+           (ispell-kill-ispell)
+           (message "Switched to English."))
+          ((eq choice ?2)
+           (setq ispell-dictionary "polish")
+           (ispell-kill-ispell)
+           (message "Switched to Polish."))
+          (t (message "No changes have been made."))))
+
+(global-set-key (kbd "C-c M-s") 'switch-dictionary)
+
 (setq fill-column 79)
 
 (setq mouse-yank-at-point t)
