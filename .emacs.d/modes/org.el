@@ -37,9 +37,11 @@
 (setq org-agenda-skip-scheduled-if-done t)
 (setq org-deadline-warning-days 10)
 
+(setq org-latex-table-centered t)
+
 ;; export setting
 
-(setq org-export-with-author t)
+(setq org-export-with-author nil)
 (setq org-export-with-date nil)
 (setq org-export-with-toc nil)
 (setq org-latex-default-packages-alist (quote
