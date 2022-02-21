@@ -119,14 +119,11 @@ alias sshy="torsocks ssh $1"
 alias dl='dpkg -l | less -S'
 alias acsh='apt-cache show'
 alias ach='apt changelog'
-alias ad="sudo apt update && apt list --upgradable"
 alias jf='journalctl -f -n100'
 alias jc='journalctl -e --since=today'
 alias uq='systemctl list-units | grep $1'
 alias lf='systemctl list-units --state=failed'
-alias wpa="$EDITOR /etc/wpa_supplicant/wpa_supplicant-*.conf"
 alias pass='EDITOR=nano pass'
-alias cls="echo -ne '\033c'" # urxvt terminal clean buffer
 alias known_hosts="nano ~/.ssh/known_hosts"
 alias post_new="nano ~/.mail/.notmuch/hooks/post-new"
 alias ss="ss -ltunp"
