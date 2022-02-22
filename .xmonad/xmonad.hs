@@ -119,7 +119,7 @@ projects =
             }
   ]
 
-myLayout = simpleTabbed ||| tiled ||| gappedSpacedGrid ||| Full
+myLayout = simpleTabbed ||| tiled ||| Grid ||| gappedSpacedGrid ||| Full
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled = Tall 1 (10/100) (1/2)
