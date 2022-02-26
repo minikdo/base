@@ -128,6 +128,7 @@ alias known_hosts="nano ~/.ssh/known_hosts"
 alias post_new="nano ~/.mail/.notmuch/hooks/post-new"
 alias ss="ss -ltunp"
 alias ahu="apt-history upgrade"
+alias ip="ip -c"
 
 # Function to query dpkg
 function dq () {
