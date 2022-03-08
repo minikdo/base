@@ -82,8 +82,23 @@
 (set-window-margins nil 1)
 
 ;; For better scrolling
-(setq scroll-conservatively 1000)
-(setq scroll-margin 3)
+;; (setq scroll-conservatively 1000)
+;; (setq scroll-margin 3)
+
+(setq
+ scroll-conservatively 1000                     ;; only 'jump' when moving this far
+ scroll-margin 4                                ;; scroll N lines to screen edge
+ scroll-step 1                                  ;; keyboard scroll one line at a time
+ mouse-wheel-scroll-amount '(6 ((shift) . 1))   ;; mouse scroll N lines
+ mouse-wheel-progressive-speed nil              ;; don't accelerate scrolling
+
+ redisplay-dont-pause t                         ;; don't pause display on input
+
+ ;; Always redraw immediately when scrolling,
+ ;; more responsive and doesn't hang!
+ fast-but-imprecise-scrolling nil
+ jit-lock-defer-time 0
+ )
 
 ;; Disable bars
 (menu-bar-mode -1)
@@ -168,6 +183,19 @@
       (goto-char (point-min))
       (while (search-forward-regexp "[._[:alnum:]-]+@[._[:alnum:]-]+" nil t)
         (replace-match "john.doe@do-main.com" nil t)))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;                            ;;;;
+;;;; === DEFAULT-TEXT-SCALE === ;;;;
+;;;;                            ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package default-text-scale
+  :if window-system
+  :init
+  (add-hook 'after-init-hook 'default-text-scale-mode))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                  ;;;;

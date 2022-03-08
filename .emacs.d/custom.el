@@ -8,7 +8,7 @@
  '(fringe-mode 10 nil (fringe))
  '(package-hidden-regexps '("\\`backtrace\\'" ""))
  '(package-selected-packages
-   '(lsp-mode elpy company-jedi multiple-cursors centaur-tabs rainbow-mode persistent-scratch python python-mode python-environment epc which-key web-mode tabbar smex session pyvenv projectile pod-mode php-mode muttrc-mode mutt-alias markdown-mode jedi initsplit htmlize graphviz-dot-mode git-annex folding flx-ido eproject diminish csv-mode clues-theme browse-kill-ring boxquote bm bar-cursor apache-mode)))
+   '(default-text-scale lsp-mode elpy company-jedi multiple-cursors centaur-tabs rainbow-mode persistent-scratch python python-mode python-environment epc which-key web-mode tabbar smex session pyvenv projectile pod-mode php-mode muttrc-mode mutt-alias markdown-mode jedi initsplit htmlize graphviz-dot-mode git-annex folding flx-ido eproject diminish csv-mode clues-theme browse-kill-ring boxquote bm bar-cursor apache-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

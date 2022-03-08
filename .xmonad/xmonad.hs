@@ -54,7 +54,7 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
 
 myBorderWidth :: Dimension
-myBorderWidth = 1
+myBorderWidth = 3
 
 myFocusedBorderColor :: [Char]
 myFocusedBorderColor = active
@@ -81,6 +81,7 @@ activeWarn   = red
 inactive     = base02
 focusColor   = blue
 unfocusColor = base02
+-- normalBorderColor = yellow
 
 myTabTheme = def
     { fontName              = myFont
@@ -89,7 +90,7 @@ myTabTheme = def
     , activeBorderColor     = active
     , inactiveBorderColor   = base02
     , activeTextColor       = base03
-    , inactiveTextColor     = base00
+    , inactiveTextColor     = base02
     }
               
 myFont :: [Char]
@@ -111,7 +112,7 @@ projects =
             }
   , Project { projectName      = "8"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "alacritty -t mutt -e neomutt"
+            , projectStartHook = Just $ do spawn "alacritty -t mutt -e my_mutt"
             }
   , Project { projectName      = "9"
             , projectDirectory = "~/"
@@ -119,12 +120,13 @@ projects =
             }
   ]
 
-myLayout = simpleTabbed ||| tiled ||| Grid ||| gappedSpacedGrid ||| Full
+myLayout = simpleTabbed ||| tiled ||| spacedGrid ||| gappedSpacedGrid2 ||| Grid ||| Full
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled = Tall 1 (10/100) (1/2)
-    -- spacedGrid = spacingWithEdge 10 $ Grid
-    gappedSpacedGrid = spacing 10 $ gaps [(U,10), (D, 10), (L, 10), (R,320)] $ Grid
+    spacedGrid = spacingWithEdge 8 $ Grid
+    -- gappedSpacedGrid = spacing 10 $ gaps [(U,8), (D, 8), (L, 8), (R,8)] $ Grid
+    gappedSpacedGrid2 = spacing 10 $ gaps [(U,10), (D, 10), (L, 10), (R,320)] $ Grid
     simpleTabbed = tabbed shrinkText myTabTheme
 
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
@@ -222,7 +224,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_n     ), refresh)
 
     -- Move focus to the next window
-    , ((modm,              xK_Tab   ), windows W.focusDown)
+    , ((modm,               xK_Tab   ), windows W.focusDown)
 
     -- Move focus to the next window
     , ((modm,               xK_j     ), windows W.focusDown)
@@ -230,11 +232,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Move focus to the previous window
     , ((modm,               xK_k     ), windows W.focusUp)
 
+    -- Emacs
+    , ((modm,               xK_e     ), runOrRaise "emacs" (className =? "Emacs"))
+    
+    -- Emacs
+    , ((modm,               xK_f     ), runOrRaise "firefox" (className =? "Firefox-esr"))
+
     -- Mutt
-    , ((modm,               xK_m     ), raiseMaybe (spawn "alacritty --title mutt -e neomutt") (title =? "mutt"))
+    , ((modm,               xK_m     ), raiseMaybe (spawn "alacritty --title mutt -e my_mutt") (title =? "mutt"))
 
     -- Profanity
-    , ((modm,               xK_p     ), raiseMaybe (spawn "alacritty --title profanity -e profanity") (title =? "profanity"))
+    , ((modm,               xK_p     ), raiseMaybe (spawn "alacritty --title profanity -e my_profanity") (title =? "profanity"))
 
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
@@ -314,13 +322,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [((m .|. modm, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    ++
+
+    -- ++
 
     -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    -- [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+        -- | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+        -- , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 myMouseBindings :: XConfig t -> M.Map (KeyMask, Button) (Window -> X ())
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -340,7 +349,7 @@ main = do
         , focusFollowsMouse  = myFocusFollowsMouse
         , borderWidth        = myBorderWidth
         , focusedBorderColor = myFocusedBorderColor
-
+        , normalBorderColor  = base01
         , startupHook        = setWMName "LG3D"
         , modMask            = myModMask
         , keys               = myKeys
