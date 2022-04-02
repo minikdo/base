@@ -14,7 +14,7 @@ import XMonad.Hooks.SetWMName
 
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Grid
-import XMonad.Layout.NoBorders
+import qualified XMonad.Layout.NoBorders as BO
 import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
 
@@ -362,6 +362,6 @@ main = do
 
         , manageHook = manageDocks <+> myManageHook
                         <+> manageHook def
-        , layoutHook = avoidStruts $ myLayout
+        , layoutHook = BO.lessBorders BO.Never $ avoidStruts $ myLayout
         , logHook = dynamicLogWithPP $ myPP { ppOutput = hPutStrLn xmproc }
         }
