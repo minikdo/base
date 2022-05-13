@@ -120,10 +120,11 @@ projects =
             }
   ]
 
-myLayout = simpleTabbed ||| tiled ||| spacedGrid ||| gappedSpacedGrid2 ||| Grid ||| Full
+myLayout = simpleTabbed ||| tiled ||| spacedTiled ||| spacedGrid ||| gappedSpacedGrid2 ||| Grid ||| Full
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled = Tall 1 (10/100) (1/2)
+    spacedTiled = spacingWithEdge 8 $ tiled
     spacedGrid = spacingWithEdge 8 $ Grid
     -- gappedSpacedGrid = spacing 10 $ gaps [(U,8), (D, 8), (L, 8), (R,8)] $ Grid
     gappedSpacedGrid2 = spacing 10 $ gaps [(U,10), (D, 10), (L, 10), (R,320)] $ Grid
