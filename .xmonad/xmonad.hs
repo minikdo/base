@@ -4,6 +4,7 @@ import XMonad.Actions.DynamicProjects
 import XMonad.Actions.DwmPromote
 import XMonad.Actions.WindowGo
 import XMonad.Actions.SpawnOn
+-- import XMonad.Actions.UpdateFocus
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -110,6 +111,10 @@ projects =
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn myTmux
             }
+  -- , Project { projectName      = "7"
+            -- , projectDirectory = "~/"
+            -- , projectStartHook = Just $ do spawn "LC_ALL=pl_PL.UTF-8 /usr/bin/signal-desktop"
+            -- }
   , Project { projectName      = "8"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn "alacritty -t mutt -e my_mutt"
