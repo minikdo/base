@@ -21,7 +21,7 @@ Config { font             = "xft:Iosevka-11"
                                             , "-L"         , "18"
                                             , "-H"         , "28"
                                             , "--normal"   , "green"
-                                            , "--high"     , "red"
+                                            , "--high"     , "#ff8eaa"
                                             , "--low"      , "lightblue" ] 36000
                     -- , Run Cpu               [ "-m"         , "3"
                                             -- , "-L"         , "50"
