@@ -150,4 +150,4 @@
 
 (load-file "~/.emacs.d/modes/org.el")
 
-(load-theme 'wombat t)
+(load-theme 'manoj-dark t)

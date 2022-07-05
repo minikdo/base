@@ -158,36 +158,36 @@ font:
 colors:
   # Default colors
   primary:
-    background: '#0A0E14'
-    foreground: '#B3B1AD'
+    background: '#1f1f1f'
+    foreground: '#e5e1d8'
 
   # Normal colors
   normal:
-    black: '#01060E'
-    red: '#EA6C73'
-    green: '#91B362'
-    yellow: '#F9AF4F'
-    blue: '#53BDFA'
-    magenta: '#FAE994'
-    cyan: '#90E1C6'
-    white: '#C7C7C7'
+    black: '#000000'
+    red: '#f7786d'
+    green: '#bde97c'
+    yellow: '#efdfac'
+    blue: '#6ebaf8'
+    magenta: '#ef88ff'
+    cyan: '#90fdf8'
+    white: '#e5e1d8'
 
   # Bright colors
   bright:
-    black: '#686868'
-    red: '#F07178'
-    green: '#C2D94C'
-    yellow: '#FFB454'
-    blue: '#59C2FF'
-    magenta: '#FFEE99'
-    cyan: '#95E6CB'
-    white: '#FFFFFF'
+    black: '#b4b4b4'
+    red: '#f99f92'
+    green: '#e3f7a1'
+    yellow: '#f2e9bf'
+    blue: '#b3d2ff'
+    magenta: '#e5bdff'
+    cyan: '#c2fefa'
+    white: '#ffffff'
 # Background opacity
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
 background_opacity: 0.89
-theme: Ayu-Dark
+theme: Wombat
 
 #selection:
 # This string contains all characters that are used as separators for

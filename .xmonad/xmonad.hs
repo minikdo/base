@@ -55,43 +55,39 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
 
 myBorderWidth :: Dimension
-myBorderWidth = 3
+myBorderWidth = 4
 
 myFocusedBorderColor :: [Char]
-myFocusedBorderColor = active
+myFocusedBorderColor = red02
 
-base0   = "#839496"
-base1   = "#93a1a1"
-base2   = "#eee8d5"
-base3   = "#fdf6e3"
-base00  = "#657b83"
-base01  = "#586e75"
-base02  = "#073642"
-base03  = "#002b36"
-yellow  = "#b58900"
-orange  = "#cb4b16"
-red     = "#dc322f"
-magenta = "#d33682"
-violet  = "#6c71c4"
-blue    = "#268bd2"
-cyan    = "#2aa198"
-green   = "#859900"
+myNormalBorderColor :: [Char]
+myNormalBorderColor = cyan02
+
+cyan01   = "#586e75"  -- bluish cyan hue, marble blue -- UNUSED
+cyan02   = "#073642"  -- bluish cyan hue, elephant
+cyan03   = "#002b36"  -- bluish cyan hue, firefly
+red      = "#dc322f"  -- red hue, rose madder
+red02    = "#A52A2A"  -- red hue, red brown
+red03    = "#2F2F2F"  -- red hue, thunder
+yellow   = "#D5CD6A"  -- orangy yellow, sand, pastel
+yellow02 = "#F0E0AF"  -- orange-yellow, colonial white, pastel
+blue     = "#268bd2"  -- cyan-blue hue, blue ivy
 
 active       = blue
 activeWarn   = red
-inactive     = base02
+inactive     = cyan02
 focusColor   = blue
-unfocusColor = base02
--- normalBorderColor = yellow
+unfocusColor = cyan02
+
 
 myTabTheme = def
     { fontName              = myFont
     , activeColor           = active
-    , inactiveColor         = base02
+    , inactiveColor         = inactive
     , activeBorderColor     = active
-    , inactiveBorderColor   = base02
-    , activeTextColor       = base03
-    , inactiveTextColor     = base02
+    , inactiveBorderColor   = inactive
+    , activeTextColor       = cyan03
+    , inactiveTextColor     = inactive
     }
               
 myFont :: [Char]
@@ -160,7 +156,7 @@ myWorkspaces = [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
 
 myPP :: PP
 myPP = def { ppTitle   = xmobarColor blue      "" . shorten myTitleLength
-           , ppCurrent = xmobarColor "#D5CD6A" "" . wrap "[" "]"
+           , ppCurrent = xmobarColor yellow    "" . wrap "[" "]"
            , ppHidden  = xmobarColor active    "" . noScratchPad
            , ppLayout  = xmobarColor blue      ""
            , ppSep     = " :: "
@@ -175,10 +171,10 @@ myPP = def { ppTitle   = xmobarColor blue      "" . shorten myTitleLength
 myXPConfig :: XPConfig
 myXPConfig = def
              { font              = myFont
-             , bgColor           = "#A52A2A"
-             , fgColor           = "#D5CD6A"
-             , bgHLight          = "#2F2F2F"
-             , fgHLight          = "#F0E0AF"
+             , bgColor           = red02
+             , fgColor           = yellow
+             , bgHLight          = red03
+             , fgHLight          = yellow02
              , promptBorderWidth = 0
              , position          = Top
              , height            = 20
@@ -189,8 +185,8 @@ myXPConfig = def
 myCalcConfig :: XPConfig
 myCalcConfig = def
                { font                = myFont
-               , bgColor             = "#A52A2A"
-               , fgColor             = "#D5CD6A"
+               , bgColor             = red02
+               , fgColor             = yellow
                , promptBorderWidth   = 0
                , position            = Top
                }
@@ -355,7 +351,7 @@ main = do
         , focusFollowsMouse  = myFocusFollowsMouse
         , borderWidth        = myBorderWidth
         , focusedBorderColor = myFocusedBorderColor
-        , normalBorderColor  = base01
+        , normalBorderColor  = myNormalBorderColor
         , startupHook        = setWMName "LG3D"
         , modMask            = myModMask
         , keys               = myKeys
