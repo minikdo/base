@@ -225,7 +225,7 @@
 (bind-key* "<f8>" '(lambda() (interactive) (find-file "~/.emacs.d/init.el")))
 (bind-key* "<f9>" '(lambda() (interactive) (flyspell-buffer)))
 ;; (bind-key* "<f8>" '(lambda() (interactive)(dired-other-window "~/.emacs.d/")))
-(bind-key* "C-<f6>" '(lambda() (interactive) (find-file "~/.emacs.d/init.el")))
+(bind-key* "C-<f6>" '(lambda() (interactive) (find-file "~/docs/sync/indeks/TODO.org")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;               ;;;;
