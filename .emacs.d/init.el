@@ -24,7 +24,7 @@
  (require 'use-package))
 
 ;; Debian packages: elpa-clues-theme
-(load-theme 'leuven t)
+(load-theme 'clues t)
 
 ;; Downloaded from https://github.com/be5invis/iosevka
 (set-frame-font "iosevka 12" nil t)
