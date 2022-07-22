@@ -130,6 +130,8 @@ alias ss="ss -ltunp"
 alias ahu="apt-history upgrade"
 alias ip="ip -c"
 
+alias lintian="lintian -iIEv --pedantic"
+
 # Function to query dpkg
 function dq () {
     dpkg-query -W \

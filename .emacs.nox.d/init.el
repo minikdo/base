@@ -150,4 +150,4 @@
 
 (load-file "~/.emacs.d/modes/org.el")
 
-(load-theme 'manoj-dark t)
+(load-theme 'clues t)

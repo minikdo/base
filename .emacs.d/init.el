@@ -27,8 +27,8 @@
 (load-theme 'clues t)
 
 ;; Downloaded from https://github.com/be5invis/iosevka
-(set-frame-font "iosevka 12" nil t)
-(set-face-attribute 'default nil :height 130)
+(set-frame-font "iosevka 11" nil t)
+(set-face-attribute 'default nil :height 120)
 
 ;; Custom colors
 (custom-set-faces

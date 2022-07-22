@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("ed91d4e59412defda16b551eb705213773531f30eb95b69319ecd142fab118ca" default))
+   '("4ce515d79ef94f3b7651c8e2a7c7d81814b9ca911eb2a16955f45f4555faf524" "18c5ec0e4d1723dbeadb65d17112f077529fd24261cb8cd4ceee145e6a6f4cd1" "ed91d4e59412defda16b551eb705213773531f30eb95b69319ecd142fab118ca" default))
  '(fringe-mode 10 nil (fringe))
  '(package-hidden-regexps '("\\`backtrace\\'" ""))
  '(package-selected-packages

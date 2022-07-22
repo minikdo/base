@@ -106,10 +106,14 @@
 	     "* %U %?\n" )
         ("n" "nie" entry (file "~/.agenda/nie.org")
 	     "* TODO %?\n%U\n")
+        ("p" "Protocol" entry (file "~/.agenda/links.org")
+         "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n")
+	    ("L" "Protocol Link" entry (file "~/.agenda/links.org")
+         "* [[%:link][%:description]] \n Captured On: %U")
         ("w" "work" entry (file+headline "~/.agenda/nie.org" "Tasks")
 	     "* DONE %u\n- %?\n")
         ("i" "issues" entry (file+headline "~/.agenda/issues.org" "Issues")
-	     "* TODO %?\n%U\n")
+	     "* TODO %p %U\n")
         ("m" "Mail" entry (file+headline "~/.agenda/agenda.org" "Incoming")
          "* TODO %?\n%U\nSource: %:link\n\n%i"
          :empty-lines 1
