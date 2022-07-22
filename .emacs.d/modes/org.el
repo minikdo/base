@@ -27,6 +27,8 @@
 
 ;; variables
 
+(add-hook 'auto-save-hook 'org-save-all-org-buffers)
+
 (setq org-log-done 'time)  ;; Record the time that a todo was archived.
 
 (setq calendar-latitude 52)
@@ -107,9 +109,11 @@
         ("n" "nie" entry (file "~/.agenda/nie.org")
 	     "* TODO %?\n%U\n")
         ("p" "Protocol" entry (file "~/.agenda/links.org")
-         "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n")
+         "* [[%:link][%:description]]\n\n  #+BEGIN_QUOTE\n  %i\n  #+END_QUOTE\n\n  Captured On: %u\n"
+         :immediate-finish t)
 	    ("L" "Protocol Link" entry (file "~/.agenda/links.org")
-         "* [[%:link][%:description]] \n Captured On: %U")
+         "* [[%:link][%:description]]\n  Captured On: %U"
+         :immediate-finish t)
         ("w" "work" entry (file+headline "~/.agenda/nie.org" "Tasks")
 	     "* DONE %u\n- %?\n")
         ("i" "issues" entry (file+headline "~/.agenda/issues.org" "Issues")
@@ -119,7 +123,7 @@
          :empty-lines 1
          )))
 
-(add-hook 'org-capture-mode-hook 'delete-other-windows)
+;;(add-hook 'org-capture-mode-hook 'delete-other-windows)
 (setq my-org-protocol-flag nil)
 (defadvice org-capture-finalize (after delete-frame-at-end activate)
   "Delete frame at remember finalization"

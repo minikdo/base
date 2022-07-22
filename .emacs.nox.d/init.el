@@ -147,7 +147,6 @@
               ("C-." . toggle-hidden-in-dired)))
 
 
-
 (load-file "~/.emacs.d/modes/org.el")
 
 (load-theme 'clues t)

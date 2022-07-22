@@ -47,6 +47,9 @@
 ;; Enable automatic updating a buffer if a file changes on disk
 (global-auto-revert-mode 1)
 
+;; Prevent kill emacs
+(setq confirm-kill-emacs 'yes-or-no-p)
+
 ;; Disable backups
 (setq backup-inhibited t)
 
