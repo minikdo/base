@@ -28,7 +28,7 @@
 
 ;; Downloaded from https://github.com/be5invis/iosevka
 (set-frame-font "iosevka 11" nil t)
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height 125)
 
 ;; Custom colors
 (custom-set-faces
@@ -229,6 +229,7 @@
 (bind-key* "<f9>" '(lambda() (interactive) (flyspell-buffer)))
 ;; (bind-key* "<f8>" '(lambda() (interactive)(dired-other-window "~/.emacs.d/")))
 (bind-key* "C-<f6>" '(lambda() (interactive) (find-file "~/docs/sync/indeks/TODO.org")))
+(bind-key* "C-<f5>" '(lambda() (interactive) (find-file "~/.agenda/links.org")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;               ;;;;

@@ -9,6 +9,7 @@
 !/.config/mc/mc.ext
 !/.config/mc/menu
 !/.config/mc/panels.ini
+!/.config/redshift.conf
 !/.config/systemd/user/compton.service
 !/.config/systemd/user/conky.service
 !/.config/systemd/user/emacs-nox.service

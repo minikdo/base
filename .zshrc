@@ -117,7 +117,7 @@ alias muttrc="$EDITOR ~/.muttrc"
 alias xmonadrc="$EDITOR ~/.xmonad/xmonad.hs"
 alias sshy="torsocks ssh $1"
 alias dl='dpkg -l | less -S'
-alias acsh='apt-cache show'
+# alias acsh='apt-cache show'
 alias ach='apt changelog'
 alias jf='journalctl -f -n100'
 alias jc='journalctl -e --since=today'
@@ -137,6 +137,10 @@ function dq () {
     dpkg-query -W \
                -f='${db:Status-Abbrev}${binary:Package} '"$fg[blue]"'(${Version})'"$reset_color"'\n' \
         | grep -i --colour=never $1
+}
+
+function acsh () {
+    apt-cache show $1 | more --exit-on-eof
 }
 
 
