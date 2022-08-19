@@ -1,0 +1,12 @@
+[Unit]
+Description=Lightweight GTK+ Clipboard Manager
+Documentation=http://parcellite.sourceforge.net/
+After=display-manager.service
+
+[Service]
+ExecStart=/usr/bin/parcellite -d -n
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

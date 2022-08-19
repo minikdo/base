@@ -1,0 +1,11 @@
+[Unit]
+Description=Remove idle cursor image from screen
+Documentation=man:unclutter
+After=display-manager.service
+
+[Service]
+ExecStart=/usr/bin/unclutter
+Restart=always
+
+[Install]
+WantedBy=default.target
