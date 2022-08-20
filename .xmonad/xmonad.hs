@@ -148,6 +148,7 @@ myManageHook = composeAll
       , className =? "Evince"             --> doRectFloat (W.RationalRect 0.2 0.05 0.6 0.9)
       , className =? "Pavucontrol"        --> doRectFloat (W.RationalRect 0.15 0.15 0.7 0.7)
       , stringProperty "WM_WINDOW_ROLE" =? "pop-up" --> doFloat
+      , stringProperty "WM_WINDOW_ROLE" =? "gimp-message-dialog" --> doFloat
       , stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog" --> doRectFloat (W.RationalRect 0.2 0.1 0.6 0.8)
     ] <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
 
@@ -344,7 +345,7 @@ main :: IO ()
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar ~/.config/xmobar/xmobarrc"
     setRandomWallpaper ["$HOME/.local/share/wallpapers"]
-    xmonad $ ewmh $ dynamicProjects projects def
+    xmonad $ docks $ ewmhFullscreen . ewmh $ dynamicProjects projects def
     -- xmonad $ ewmh $ def
         { workspaces         = myWorkspaces
         , terminal           = myTerminal
@@ -356,12 +357,7 @@ main = do
         , modMask            = myModMask
         , keys               = myKeys
         , mouseBindings      = myMouseBindings
-
-        , handleEventHook    = mconcat
-                               [ perWindowKbdLayout
-                               , docksEventHook
-                               , handleEventHook def <+> fullscreenEventHook ]
-
+        , handleEventHook    = perWindowKbdLayout
         , manageHook = manageDocks <+> myManageHook
                         <+> manageHook def
         , layoutHook = BO.lessBorders BO.Never $ avoidStruts $ myLayout

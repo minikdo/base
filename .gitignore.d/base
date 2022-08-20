@@ -23,6 +23,7 @@
 !/.config/systemd/user/unclutter.service
 !/.config/xmobar/xmobarrc
 !/.emacs.d/custom.el
+!/.emacs.d/debian-packages.lst
 !/.emacs.d/init.el
 !/.emacs.d/modes/flx-ido.el
 !/.emacs.d/modes/org.el
