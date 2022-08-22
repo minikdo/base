@@ -187,6 +187,21 @@
       (while (search-forward-regexp "[._[:alnum:]-]+@[._[:alnum:]-]+" nil t)
         (replace-match "john.doe@do-main.com" nil t)))))
 
+(setq ivan/themes '(clues leuven))
+(setq ivan/themes-index 0)
+
+(defun ivan/cycle-theme ()
+  (interactive)
+  (setq ivan/themes-index (% (1+ ivan/themes-index) (length ivan/themes)))
+  (ivan/load-indexed-theme))
+
+(defun ivan/load-indexed-theme ()
+  (ivan/try-load-theme (nth ivan/themes-index ivan/themes)))
+
+(defun ivan/try-load-theme (theme)
+  (if (ignore-errors (load-theme theme :no-confirm))
+      (mapcar #'disable-theme (remove theme custom-enabled-themes))
+    (message "Unable to find theme file for ‘%s’" theme)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            ;;;;
@@ -225,11 +240,13 @@
 (bind-key* "ESC <down>" 'ff/comment-and-go-down)
 (bind-key* "ESC <up>" 'ff/uncomment-and-go-up)
 (bind-key* "<f5>" '(lambda() (interactive) (minikdo/switch-to-scratch-end)))
-(bind-key* "<f8>" '(lambda() (interactive) (find-file "~/.emacs.d/init.el")))
+(bind-key* "<f8>" 'ivan/cycle-theme)
+(bind-key* "M-<f8>" '(lambda() (interactive) (find-file "~/.emacs.d/init.el")))
 (bind-key* "<f9>" '(lambda() (interactive) (flyspell-buffer)))
 ;; (bind-key* "<f8>" '(lambda() (interactive)(dired-other-window "~/.emacs.d/")))
 (bind-key* "C-<f6>" '(lambda() (interactive) (find-file "~/docs/sync/indeks/TODO.org")))
 (bind-key* "C-<f5>" '(lambda() (interactive) (find-file "~/.agenda/links.org")))
+(bind-key* "M-<f5>" '(lambda() (interactive) (find-file "~/.agenda/notes.org")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;               ;;;;
