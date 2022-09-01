@@ -17,6 +17,7 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.Grid
 import qualified XMonad.Layout.NoBorders as BO
 import XMonad.Layout.Spacing
+import XMonad.Layout.MultiColumns
 import XMonad.Layout.Gaps
 
 import XMonad.Prompt
@@ -128,7 +129,8 @@ myLayout = simpleTabbed ||| tiled ||| spacedTiled ||| spacedGrid ||| gappedSpace
     spacedTiled = spacingWithEdge 8 $ tiled
     spacedGrid = spacingWithEdge 8 $ Grid
     -- gappedSpacedGrid = spacing 10 $ gaps [(U,8), (D, 8), (L, 8), (R,8)] $ Grid
-    gappedSpacedGrid2 = spacing 10 $ gaps [(U,10), (D, 10), (L, 10), (R,320)] $ Grid
+    gappedSpacedGrid2 = spacing 100 $ gaps [(U,10), (D, 10), (L, 10), (R, 200)] $ Grid
+    -- gappedSpacedGrid2 = spacing 20 $ gaps [(U,50), (D, 50), (L, 300), (R,300)] $ Grid
     simpleTabbed = tabbed shrinkText myTabTheme
 
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
