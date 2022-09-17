@@ -27,6 +27,9 @@
 
 (setq fill-column 79)
 
+(setq column-number-mode t)
+(setq line-number-mode t)
+
 (setq mouse-yank-at-point t)
 
 (setq-default indent-tabs-mode nil)
@@ -149,4 +152,4 @@
 
 (load-file "~/.emacs.d/modes/org.el")
 
-(load-theme 'clues t)
+(load-theme 'tao-yang t)

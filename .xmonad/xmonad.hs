@@ -151,6 +151,7 @@ myManageHook = composeAll
       , className =? "Pavucontrol"        --> doRectFloat (W.RationalRect 0.15 0.15 0.7 0.7)
       , stringProperty "WM_WINDOW_ROLE" =? "pop-up" --> doFloat
       , stringProperty "WM_WINDOW_ROLE" =? "gimp-message-dialog" --> doFloat
+      , isDialog --> doFloat
       , stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog" --> doRectFloat (W.RationalRect 0.2 0.1 0.6 0.8)
     ] <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
 

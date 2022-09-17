@@ -17,6 +17,7 @@
    '(tao-theme flymake-eslint dockerfile-mode default-text-scale lsp-mode elpy company-jedi multiple-cursors centaur-tabs rainbow-mode persistent-scratch python python-mode python-environment epc which-key web-mode tabbar smex session pyvenv projectile pod-mode php-mode muttrc-mode mutt-alias markdown-mode jedi initsplit htmlize graphviz-dot-mode git-annex folding flx-ido eproject diminish csv-mode clues-theme browse-kill-ring boxquote bm bar-cursor apache-mode))
  '(powerline-color1 "#222232")
  '(powerline-color2 "#333343")
+ '(safe-local-variable-values '((flycheck-flake8rc . "setup.cfg")))
  '(vc-annotate-background "#F6F6F6")
  '(vc-annotate-color-map
    '((20 . "#C3C3C3")
