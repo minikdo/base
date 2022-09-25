@@ -64,7 +64,8 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git git-annex debian battery systemd sudo history man pip
-         virtualenvwrapper z ansible nvm) 
+         virtualenvwrapper z ansible nvm globalias
+         docker-compose)
 
 # User configuration
 
@@ -143,6 +144,12 @@ function acsh () {
     apt-cache show $1 | more --exit-on-eof
 }
 
+function dark () {
+    sed -i 's/atom_one_light/wombat/' ~/.config/alacritty/alacritty.yml
+}
+function light () {
+    sed -i 's/wombat/atom_one_light/' ~/.config/alacritty/alacritty.yml
+}
 
 # Function to print ip addr with M-k
 function ipaddr () {
