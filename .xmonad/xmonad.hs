@@ -41,10 +41,10 @@ import qualified Data.Map        as M
 import qualified XMonad.StackSet as W
 
 myTerminal :: [Char]
-myTerminal = "alacritty"
+myTerminal = "kitty"
 
 myTmux :: [Char]
-myTmux = "alacritty -e tmux"
+myTmux = "kitty tmux"
 
 myScreenlocker :: [Char]
 myScreenlocker = "/usr/bin/slock"
@@ -114,11 +114,11 @@ projects =
             -- }
   , Project { projectName      = "8"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "alacritty -t mutt -e my_mutt"
+            , projectStartHook = Just $ do spawn "kitty --title mutt neomutt"
             }
   , Project { projectName      = "9"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "alacritty -t jrnl -e my_jrnl"
+            , projectStartHook = Just $ do spawn "kitty --title jrnl my_jrnl"
             }
   ]
 
@@ -245,10 +245,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_f     ), runOrRaise "firefox" (className =? "Firefox-esr"))
 
     -- Mutt
-    , ((modm,               xK_m     ), raiseMaybe (spawn "alacritty --title mutt -e my_mutt") (title =? "mutt"))
+    , ((modm,               xK_m     ), raiseMaybe (spawn "kitty --title mutt neomutt") (title =? "mutt"))
 
     -- Profanity
-    , ((modm,               xK_p     ), raiseMaybe (spawn "alacritty --title profanity -e my_profanity") (title =? "profanity"))
+    , ((modm,               xK_p     ), raiseMaybe (spawn "kitty --title profanity profanity") (title =? "profanity"))
 
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))

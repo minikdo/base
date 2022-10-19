@@ -30,7 +30,7 @@ Config { font             = "xft:Iosevka-10"
                                             -- , "--normal"   , "orange,#002b36"
                                             -- , "--high"     , "red,#002b36" ] 10
                     , Run MultiCpu          [ "-m"         , "3"
-                                            , "-t"         , "Threads: <total0> <total1> <total2> <total3> <total4> <total5> <total6>"
+                                            , "-t"         , "Threads: <total0> <total1> <total2> <total3> <total4> <total5> <total6> <total7> <total8> <total9> <total10> <total11>"
                                             , "--Low"      , "50"         -- units: %
                                             , "--High"     , "90"         -- units: %
                                             , "--low"      , "#025e7c,#002b36"
