@@ -112,7 +112,7 @@ projects =
             -- , projectDirectory = "~/"
             -- , projectStartHook = Just $ do spawn "LC_ALL=pl_PL.UTF-8 /usr/bin/signal-desktop"
             -- }
-  , Project { projectName      = "8"
+  , Project { projectName      = "4"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn "kitty --title mutt neomutt"
             }
@@ -139,8 +139,8 @@ myManageHook = composeAll
       , className =? "Tor Browser"        --> doShift "1"
       , className =? "Firefox-esr"        --> doShift "1"
       , className =? "Emacs"              --> doShift "2"
-      , title     =? "mutt"               --> doShift "8"
-      , title     =? "profanity"          --> doShift "8"
+      , title     =? "mutt"               --> doShift "4"
+      , title     =? "profanity"          --> doShift "4"
       , className =? "Navigator"          --> doFloat
       , className =? "Viewnior"           --> doFullFloat
       , className =? "Pinentry"           --> doCenterFloat
