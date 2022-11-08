@@ -7,6 +7,10 @@ xset s 1200 1200
 
 xset dpms 1200 1200 1200
 
+# Turn off system beep in console:
+xset b off
+xset b 0 0 0
+
 xss-lock slock &
 
 # needed ?
