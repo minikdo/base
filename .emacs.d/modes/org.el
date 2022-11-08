@@ -34,14 +34,18 @@
 (setq calendar-latitude 52)
 (setq calendar-longitude 21)
 
+(setq holiday-bahai-holidays nil)
+(setq holiday-hebrew-holidays nil)
+(setq holiday-islamic-holidays nil)
+
 (setq org-agenda-include-diary t)
 (setq org-agenda-skip-deadline-if-done t)
 (setq org-agenda-skip-scheduled-if-done t)
 (setq org-deadline-warning-days 10)
 
-(setq org-latex-table-centered t)
-
 ;; export setting
+
+(setq org-latex-table-centered t)
 
 (setq org-export-with-author nil)
 (setq org-export-with-date nil)
@@ -106,7 +110,9 @@
 	     "* TODO %?\n%U\n")
 	    ("j" "journal" entry (file "~/.agenda/journal.org")
 	     "* %U %?\n" )
-        ("n" "nie" entry (file "~/.agenda/nie.org")
+        ("e" "event" entry (file "~/.agenda/events.org")
+	     "* %?\nSCHEDULED: <%<%Y-%m-%d %a>>\n%U\n")
+        ("E" "estates" entry (file "~/.agenda/estates.org")
 	     "* TODO %?\n%U\n")
         ("p" "Protocol" entry (file "~/.agenda/links.org")
          "* [[%:link][%:description]]\n\n  #+BEGIN_QUOTE\n  %i\n  #+END_QUOTE\n\n  Captured On: %u\n"
@@ -116,10 +122,10 @@
          "* [[%:link][%:description]]\n  Captured On: %U"
          :empty-lines 1
          :immediate-finish t)
-        ("w" "work" entry (file+headline "~/.agenda/nie.org" "Tasks")
+        ("w" "work" entry (file+headline "~/.agenda/estates.org" "Tasks")
 	     "* DONE %u\n- %?\n")
         ("i" "issues" entry (file+headline "~/.agenda/issues.org" "Issues")
-	     "* TODO %p %U\n")
+	     "* TODO %?\n %U\n")
         ("m" "Mail" entry (file+headline "~/.agenda/agenda.org" "Incoming")
          "* TODO %?\n%U\nSource: %:link\n\n%i"
          :empty-lines 1

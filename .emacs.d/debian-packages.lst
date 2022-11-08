@@ -2,7 +2,6 @@ elpa-auto-complete				install
 elpa-bind-key					install
 elpa-clues-theme				install
 elpa-company					install
-elpa-company-lsp				install
 elpa-concurrent					install
 elpa-ctable					install
 elpa-dash					install
@@ -24,6 +23,7 @@ elpa-modus-themes				install
 elpa-paredit					install
 elpa-popup					install
 elpa-projectile					install
+elpa-python-environment				install
 elpa-rainbow-mode				install
 elpa-s						install
 elpa-smex					install

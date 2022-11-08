@@ -1,5 +1,7 @@
 (package-initialize)
 
+(setq debug-on-error nil)
+
 (eval-when-compile
  (require 'use-package))
 

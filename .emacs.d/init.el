@@ -1,6 +1,10 @@
 ;; Install Debian packages:
 ;; sudo apt install $(grep -ri 'Debian packages:' ~/.emacs.d/modes | awk -F:  '{print $3}' | tr '\n' ' ')
 
+;; Disable bars
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+
 ;; Disable garbage collection during the startup time
 (setq gc-cons-threshold 536870912
       gc-cons-percentage 0.6)
@@ -16,7 +20,7 @@
 
 (package-initialize)
 
-;; (setq debug-on-error nil)
+(setq debug-on-error nil)
 
 ;; This is only needed once, near the top of the file
 ;; Debian packages: elpa-use-package
@@ -102,10 +106,6 @@
  fast-but-imprecise-scrolling nil
  jit-lock-defer-time 0
  )
-
-;; Disable bars
-(menu-bar-mode -1)
-(tool-bar-mode -1)
 
 ;; Handy alias
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -291,11 +291,11 @@
 
 (use-package paredit
   :config
-  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  (add-hook 'emacs-lisp-mode-hook                  #'paredit-mode)
   ;; enable in the *scratch* buffer
-  (add-hook 'lisp-interaction-mode-hook #'paredit-mode)
-  (add-hook 'ielm-mode-hook #'paredit-mode)
-  (add-hook 'lisp-mode-hook #'paredit-mode)
+  (add-hook 'lisp-interaction-mode-hook            #'paredit-mode)
+  (add-hook 'ielm-mode-hook                        #'paredit-mode)
+  (add-hook 'lisp-mode-hook                        #'paredit-mode)
   (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
 
 (use-package autopair-mode
@@ -305,11 +305,10 @@
 (use-package electric-pair
   :hook
   (python-mode . electric-pair-local-mode)
-  (latex-mode . electric-pair-local-mode)
-  (js-mode . electric-pair-local-mode)
-  (html-mode . electric-pair-local-mode)
-  (yaml-mode . electric-pair-local-mode)
-  (scss-mode . electric-pair-local-mode))
+  (latex-mode  . electric-pair-local-mode)
+  (js-mode     . electric-pair-local-mode)
+  (yaml-mode   . electric-pair-local-mode)
+  (scss-mode   . electric-pair-local-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                  ;;;;
@@ -505,6 +504,7 @@ is considered to be a project root."
 ;; Debian packages: python-mode
 (add-hook 'python-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
 ;; (add-hook 'python-mode-hook 'show-paren-mode)
+;;(add-hook 'python-mode-hook 'electric-pair-local-mode)
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'python-mode-hook 'jedi-setup-venv)
 
@@ -570,7 +570,8 @@ is considered to be a project root."
   (add-to-list 'auto-mode-alist '("\\.vue?\\'" . mhtml-mode))
   :config
   (lambda () (setq display-line-numbers t))
-  (add-hook 'html-mode-hook 'emmet-mode))
+  (add-hook 'html-mode-hook 'emmet-mode)
+  (add-hook 'html-mode-hook #'smartparens-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -638,3 +639,41 @@ is considered to be a project root."
 
 (load-file "~/.emacs.d/modes/flx-ido.el")
 (load-file "~/.emacs.d/modes/org.el")
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;                  ;;;;
+;;;; === CFW-MODE === ;;;;
+;;;;                  ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'calfw-cal)
+(require 'calfw-ical)
+(require 'calfw-org)
+
+(setq calendar-week-start-day 1) ; 0:Sunday, 1:Monday
+(setq cfw:display-calendar-holidays nil)
+(setq cfw:org-overwrite-default-keybinding t)
+
+(setq cfw:fchar-junction ?╋
+      cfw:fchar-vertical-line ?┃
+      cfw:fchar-horizontal-line ?━
+      cfw:fchar-left-junction ?┣
+      cfw:fchar-right-junction ?┫
+      cfw:fchar-top-junction ?┯
+      cfw:fchar-top-left-corner ?┏
+      cfw:fchar-top-right-corner ?┓)
+
+(defun my-open-calendar ()
+  (interactive)
+  (cfw:open-calendar-buffer
+   :contents-sources
+   (list
+    (cfw:org-create-source  "DarkGreen")
+    (cfw:ical-create-source "dominik"    "~/.calendar/dominik.ics"    "#268bd2")
+    (cfw:ical-create-source "sesje"      "~/.calendar/sesje.ics"      "IndianRed") 
+    (cfw:ical-create-source "wspinaczka" "~/.calendar/wspinaczka.ics" "Blue") 
+    (cfw:ical-create-source "inne"       "~/.calendar/inne.ics"       "Gray") 
+    (cfw:ical-create-source "travel"     "~/.calendar/travel.ics"     "Violet") 
+    (cfw:ical-create-source "zdrowie"    "~/.calendar/zdrowie.ics"    "#80D5AB") 
+   )))

@@ -12,9 +12,11 @@
  '(linum-format " %6d ")
  '(main-line-color1 "#222232")
  '(main-line-color2 "#333343")
+ '(org-agenda-files
+   '("~/.agenda/events.org" "/home/domino/.agenda/agenda.org" "/home/domino/.agenda/issues.org" "/home/domino/.agenda/journal.org" "/home/domino/.agenda/links.org" "/home/domino/.agenda/notes.org"))
  '(package-hidden-regexps '("\\`backtrace\\'" ""))
  '(package-selected-packages
-   '(tao-theme flymake-eslint dockerfile-mode default-text-scale lsp-mode elpy company-jedi multiple-cursors centaur-tabs rainbow-mode python python-mode python-environment epc which-key web-mode tabbar smex session pyvenv projectile pod-mode php-mode muttrc-mode mutt-alias markdown-mode jedi initsplit htmlize graphviz-dot-mode git-annex folding flx-ido eproject diminish csv-mode clues-theme browse-kill-ring boxquote bm bar-cursor apache-mode))
+   '(smartparens tao-theme flymake-eslint dockerfile-mode default-text-scale lsp-mode elpy company-jedi multiple-cursors centaur-tabs rainbow-mode python python-mode python-environment epc which-key web-mode tabbar smex session pyvenv projectile pod-mode php-mode muttrc-mode mutt-alias markdown-mode jedi initsplit htmlize graphviz-dot-mode git-annex folding flx-ido eproject diminish csv-mode clues-theme browse-kill-ring boxquote bm bar-cursor apache-mode))
  '(powerline-color1 "#222232")
  '(powerline-color2 "#333343")
  '(safe-local-variable-values '((flycheck-flake8rc . "setup.cfg")))
