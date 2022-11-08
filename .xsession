@@ -12,7 +12,7 @@ xss-lock slock &
 # needed ?
 xrdb -merge ~/.Xdefaults 
 
-synclient TapButton1=0 TapButton2=0 TapButton3=0 PalmDetect=1 &
+synclient TapButton1=0 TapButton2=0 TapButton3=0 PalmDetect=1 AccelFactor=2 MaxSpeed=2 &
 
 XAUTH=/tmp/container_xauth
 DISPLAY=:0

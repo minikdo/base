@@ -99,7 +99,11 @@ menubar_visible=true
 free_space=true
 horizontal_split=false
 vertical_equal=true
+<<<<<<< HEAD
 left_panel_size=191
+=======
+left_panel_size=106
+>>>>>>> b7f4f6e (initial x1 changes)
 horizontal_equal=true
 top_panel_size=40
 

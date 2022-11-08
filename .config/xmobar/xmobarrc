@@ -30,7 +30,7 @@ Config { font             = "xft:Iosevka-10"
                                             -- , "--normal"   , "orange,#002b36"
                                             -- , "--high"     , "red,#002b36" ] 10
                     , Run MultiCpu          [ "-m"         , "3"
-                                            , "-t"         , "Threads: <total0> <total1> <total2> <total3>"
+                                            , "-t"         , "Threads: <total0> <total1> <total2> <total3> <total4> <total5> <total6>"
                                             , "--Low"      , "50"         -- units: %
                                             , "--High"     , "90"         -- units: %
                                             , "--low"      , "#025e7c,#002b36"
@@ -44,20 +44,20 @@ Config { font             = "xft:Iosevka-10"
                                             , "--low"      , "#025e7c,#002b36"
                                             , "--normal"   , "darkorange,#002b36"
                                             , "--high"     , "darkred,#002b36" ] 10
-                    , Run Network "wlp3s0"   [ "--template" , "<dev>: <tx>kB/s | <rx>kB/s"
+                    , Run Network "wlp0s20f3"   [ "--template" , "<dev>: <tx>kB/s | <rx>kB/s"
                                             , "--High"     , "500000"
                                             , "-m"         , "7"
                                             , "--low"      , "#025e7c,#002b36"
                                             , "--normal"   , "#025e7c,#002b36"
                                             , "--high"     , "darkred,#002b36" ] 10
-                    , Run Wireless "wlp3s0"  [ "-t"         , "Signal: <quality>%"
+                    , Run Wireless "wlp0s20f3"  [ "-t"         , "Signal: <quality>%"
                                             , "-m"         , "3"
                                             , "--Low"      , "49"        -- units: -- %
                                             , "--High"     , "65"        -- units: -- %
                                             , "--low"      , "red,#002b36"
                                             , "--normal"   , "darkorange,#002b36"
                                             , "--high"     , "#025e7c,#002b36" ] 10
-                    , Run BatteryP          [ "BAT1" ]
+                    , Run BatteryP          [ "BAT0" ]
                                             [ "-t"         , "<acstatus><left>%"
                                             , "-L"         , "20"
                                             , "-H"         , "80"
@@ -77,6 +77,6 @@ Config { font             = "xft:Iosevka-10"
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% <fc=#268bd2,#002b36> %wlp3s0% %wlp3s0wi% %multicpu% %memory% </fc> }\
+       , template = "%StdinReader% <fc=#268bd2,#002b36> %wlp0s20f3% %wlp0s20f3wi% %multicpu% %memory% </fc> }\
                     \{ <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%  %EPWA%</fc>"
        }
