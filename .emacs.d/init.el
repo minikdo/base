@@ -32,7 +32,7 @@
 
 ;; Downloaded from https://github.com/be5invis/iosevka
 (set-frame-font "iosevka 10" nil t)
-(set-face-attribute 'default nil :height 115)
+(set-face-attribute 'default nil :height 130)
 
 ;; Custom colors
 (custom-set-faces
