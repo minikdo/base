@@ -108,13 +108,13 @@ projects =
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn myTmux
             }
-  -- , Project { projectName      = "7"
-            -- , projectDirectory = "~/"
-            -- , projectStartHook = Just $ do spawn "LC_ALL=pl_PL.UTF-8 /usr/bin/signal-desktop"
-            -- }
   , Project { projectName      = "4"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn "kitty --title mutt neomutt"
+            }
+  , Project { projectName      = "8"
+            , projectDirectory = "~/"
+            , projectStartHook = Just $ do spawn "LC_ALL=pl_PL.UTF-8 /usr/bin/signal-desktop"
             }
   , Project { projectName      = "9"
             , projectDirectory = "~/"
@@ -141,6 +141,7 @@ myManageHook = composeAll
       , className =? "Emacs"              --> doShift "2"
       , title     =? "mutt"               --> doShift "4"
       , title     =? "profanity"          --> doShift "4"
+      , className =? "Signal"             --> doShift "8"
       , className =? "Navigator"          --> doFloat
       , className =? "Viewnior"           --> doFullFloat
       , className =? "Pinentry"           --> doCenterFloat
