@@ -4,6 +4,8 @@
 !/.config/alacritty/alacritty.yml
 !/.config/conky/conky.conf
 !/.config/dunst/dunstrc
+!/.config/kitty/kitty.conf
+!/.config/kitty/theme.conf
 !/.config/mc/hotlist
 !/.config/mc/ini
 !/.config/mc/mc.ext
@@ -34,6 +36,8 @@
 !/.global_gitignore
 !/.local/share/applications/mimeapps.list
 !/.local/share/applications/mpv.desktop
+!/.local/share/applications/org-protocol.desktop
+!/.local/share/mc/skins/minikdo-modarcon16-thin.ini
 !/.mailcap
 !/.tmux.conf
 !/.urxvt/ext/resize-font

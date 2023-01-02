@@ -348,7 +348,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 main :: IO ()
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar ~/.config/xmobar/xmobarrc"
-    setRandomWallpaper ["$HOME/.local/share/wallpapers"]
+    setRandomWallpaper ["$HOME/docs/sync/wallpapers"]
     xmonad $ docks $ ewmhFullscreen . ewmh $ dynamicProjects projects def
     -- xmonad $ ewmh $ def
         { workspaces         = myWorkspaces
