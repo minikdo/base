@@ -110,10 +110,10 @@
 	     "* TODO %?\n%U\n")
 	    ("j" "journal" entry (file "~/.agenda/journal.org")
 	     "* %U %?\n" )
-        ("e" "event" entry (file "~/.agenda/events.org")
-	     "* %?\nSCHEDULED: <%<%Y-%m-%d %a>>\n%U\n")
-        ("E" "estates" entry (file "~/.agenda/estates.org")
+        ("e" "estates" entry (file+headline "~/.agenda/estates.org" "Tasks")
 	     "* TODO %?\n%U\n")
+        ("w" "work" entry (file+headline "~/.agenda/estates.org" "Work")
+	     "* DONE %u\n- %?\n")
         ("p" "Protocol" entry (file "~/.agenda/links.org")
          "* [[%:link][%:description]]\n\n  #+BEGIN_QUOTE\n  %i\n  #+END_QUOTE\n\n  Captured On: %u\n"
          :empty-lines 1
@@ -122,8 +122,6 @@
          "* [[%:link][%:description]]\n  Captured On: %U"
          :empty-lines 1
          :immediate-finish t)
-        ("w" "work" entry (file+headline "~/.agenda/estates.org" "Tasks")
-	     "* DONE %u\n- %?\n")
         ("i" "issues" entry (file+headline "~/.agenda/issues.org" "Issues")
 	     "* TODO %?\n %U\n")
         ("m" "Mail" entry (file+headline "~/.agenda/agenda.org" "Incoming")
