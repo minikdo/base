@@ -114,7 +114,7 @@ projects =
             }
   , Project { projectName      = "8"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "LC_ALL=pl_PL.UTF-8 /usr/bin/signal-desktop"
+            , projectStartHook = Just $ do spawn "signal-desktop"
             }
   , Project { projectName      = "9"
             , projectDirectory = "~/"

@@ -130,6 +130,7 @@ alias post_new="nano ~/.mail/.notmuch/hooks/post-new"
 alias ss="ss -ltunp"
 alias ahu="apt-history upgrade"
 alias ip="ip -c"
+alias cls="omz reload"
 
 alias lintian="lintian -iIEv --pedantic"
 

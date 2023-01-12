@@ -83,7 +83,7 @@
 
 (setq org-agenda-custom-commands
       '(("o" "TODOs except cyclic tasks"
-         ((tags-todo "-cycl")))
+         ((tags-todo "-cycl-hidden")))
         ("O" "TODOs except cyclic tasks with day agenda"
          ((agenda)
           (tags-todo "-cycl"))
