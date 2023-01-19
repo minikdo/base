@@ -1,6 +1,3 @@
-NVM_LAZY=1
-NVM_LAZY_CMD=(vue npx)
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
