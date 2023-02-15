@@ -11,6 +11,7 @@
 !/.config/mc/mc.ext
 !/.config/mc/menu
 !/.config/mc/panels.ini
+!/.config/mimeapps.list
 !/.config/redshift.conf
 !/.config/systemd/user/compton.service
 !/.config/systemd/user/conky.service
@@ -34,7 +35,6 @@
 !/.gimp-2.8/scripts/saveall.scm
 !/.gitignore.d/base
 !/.global_gitignore
-!/.local/share/applications/mimeapps.list
 !/.local/share/applications/mpv.desktop
 !/.local/share/applications/org-protocol.desktop
 !/.local/share/mc/skins/minikdo-modarcon16-thin.ini
