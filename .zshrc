@@ -128,6 +128,7 @@ alias ss="ss -ltunp"
 alias ahu="apt-history upgrade"
 alias ip="ip -c"
 alias cls="omz reload"
+alias rq=resolvectl
 
 alias lintian="lintian -iIEv --pedantic"
 
