@@ -677,3 +677,4 @@ is considered to be a project root."
     (cfw:ical-create-source "travel"     "~/.calendar/travel.ics"     "Violet") 
     (cfw:ical-create-source "zdrowie"    "~/.calendar/zdrowie.ics"    "#80D5AB") 
    )))
+(put 'narrow-to-region 'disabled nil)
