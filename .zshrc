@@ -143,13 +143,6 @@ function acsh () {
     apt-cache show $1 | more --exit-on-eof
 }
 
-function dark () {
-    sed -i 's/atom_one_light/wombat/' ~/.config/alacritty/alacritty.yml
-}
-function light () {
-    sed -i 's/wombat/atom_one_light/' ~/.config/alacritty/alacritty.yml
-}
-
 # Function to print ip addr with M-k
 function ipaddr () {
     echo; ip -c a; zle redisplay
@@ -157,6 +150,13 @@ function ipaddr () {
 zle -N ipaddr
 bindkey "^[k" ipaddr
 
+
+# Function to print ip addr with M-k
+function listnetworks () {
+    clear; wpa_cli list_networks; zle redisplay
+}
+zle -N listnetworks
+bindkey "^[n" listnetworks
 
 # Edit command line
 autoload -U edit-command-line
