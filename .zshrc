@@ -151,8 +151,15 @@ bindkey "^[k" ipaddr
 
 
 # Function to print ip addr with M-k
+function list-wifi-networks () {
+    wpa_cli list_networks; zle redisplay
+}
+zle -N list-wifi-networks
+bindkey "^[N" list-wifi-networks
+
+# Function to print ip addr with M-k
 function listnetworks () {
-    clear; wpa_cli list_networks; zle redisplay
+    networkctl; zle redisplay
 }
 zle -N listnetworks
 bindkey "^[n" listnetworks
