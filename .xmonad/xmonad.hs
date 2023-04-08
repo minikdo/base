@@ -108,7 +108,7 @@ projects =
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn myTmux
             }
-  , Project { projectName      = "4"
+  , Project { projectName      = "7"
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn "kitty --title mutt neomutt"
             }
@@ -139,9 +139,10 @@ myManageHook = composeAll
       , className =? "Tor Browser"        --> doShift "1"
       , className =? "Firefox-esr"        --> doShift "1"
       , className =? "Emacs"              --> doShift "2"
-      , title     =? "mutt"               --> doShift "4"
-      , title     =? "profanity"          --> doShift "4"
+      , title     =? "mutt"               --> doShift "7"
+      , title     =? "profanity"          --> doShift "7"
       , className =? "Signal"             --> doShift "8"
+      , title     =? "jrnl"               --> doShift "9"
       , className =? "Navigator"          --> doFloat
       , className =? "Viewnior"           --> doFloat
       , className =? "Pinentry"           --> doCenterFloat
