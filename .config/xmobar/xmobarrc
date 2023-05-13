@@ -17,19 +17,7 @@ Config { font             = "xft:Iosevka-10"
        , iconRoot         = "."
        , allDesktops      = True
        , overrideRedirect = True
-       , commands = [ Run Weather "EPWA"    [ "-t"         , "<tempC>°C <skyCondition> Q<pressure>"
-                                            , "-L"         , "18"
-                                            , "-H"         , "28"
-                                            , "--normal"   , "green"
-                                            , "--high"     , "#ff8eaa"
-                                            , "--low"      , "lightblue" ] 36000
-                    -- , Run Cpu               [ "-m"         , "3"
-                                            -- , "-L"         , "50"
-                                            -- , "-H"         , "90"
-                                            -- , "--low"      , "#025e7c,#002b36"
-                                            -- , "--normal"   , "orange,#002b36"
-                                            -- , "--high"     , "red,#002b36" ] 10
-                    , Run MultiCpu          [ "-m"         , "3"
+       , commands = [ Run MultiCpu          [ "-m"         , "3"
                                             , "-t"         , "Threads: <total0> <total1> <total2> <total3> <total4> <total5> <total6> <total7> <total8> <total9> <total10> <total11>"
                                             , "--Low"      , "50"         -- units: %
                                             , "--High"     , "90"         -- units: %
@@ -78,5 +66,5 @@ Config { font             = "xft:Iosevka-10"
        , sepChar  = "%"
        , alignSep = "}{"
        , template = "%StdinReader% <fc=#268bd2,#002b36> %wlp0s20f3% %wlp0s20f3wi% %multicpu% %memory% </fc> }\
-                    \{ <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%  %EPWA%</fc>"
+                    \{ <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%</fc>"
        }
