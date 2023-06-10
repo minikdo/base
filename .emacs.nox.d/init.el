@@ -154,4 +154,4 @@
 
 (load-file "~/.emacs.d/modes/org.el")
 
-(load-theme 'tao-yang t)
+(load-theme 'modus-vivendi t)
