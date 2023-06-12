@@ -73,6 +73,7 @@ red03    = "#2F2F2F"  -- red hue, thunder
 yellow   = "#D5CD6A"  -- orangy yellow, sand, pastel
 yellow02 = "#F0E0AF"  -- orange-yellow, colonial white, pastel
 blue     = "#268bd2"  -- cyan-blue hue, blue ivy
+green    = "#98C379"
 
 active       = blue
 activeWarn   = red
@@ -162,7 +163,7 @@ myWorkspaces = [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
 
 myPP :: PP
 myPP = def { ppTitle   = xmobarColor blue      "" . shorten myTitleLength
-           , ppCurrent = xmobarColor yellow    "" . wrap "[" "]"
+           , ppCurrent = xmobarColor green    "" . wrap "[" "]"
            , ppHidden  = xmobarColor active    "" . noScratchPad
            , ppLayout  = xmobarColor blue      ""
            , ppSep     = " :: "

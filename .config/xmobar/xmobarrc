@@ -66,5 +66,5 @@ Config { font             = "xft:Iosevka-10"
        , sepChar  = "%"
        , alignSep = "}{"
        , template = "%StdinReader% <fc=#268bd2,#002b36> %wlp0s20f3% %wlp0s20f3wi% %multicpu% %memory% </fc> }\
-                    \{ <fc=#ee9a00>%date%</fc> <fc=#268bd2>%battery%</fc>"
+                    \{ <fc=#98C379>%date%</fc> <fc=#268bd2>%battery%</fc>"
        }
