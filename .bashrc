@@ -124,7 +124,8 @@ __prompt_command() {
     local BRed='\[\e[0;91m\]'
     local RCol='\[\e[0m\]'
 
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\[\033[00m\]\[\033[01;34m\]\w\[\033[00m\] \$ '
 
     if [ "$curr_exit" != 0 ]; then
         PS1="[${BRed}$curr_exit${RCol}] $PS1"

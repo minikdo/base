@@ -25,7 +25,8 @@ import XMonad.Prompt.Input
 import XMonad.Prompt.Shell
 
 import XMonad.Util.Run (spawnPipe, runProcessWithInput, runInTerm, safeSpawn)
-import XMonad.Util.Scratchpad (scratchpadSpawnAction, scratchpadManageHook)
+-- import XMonad.Util.Scratchpad (scratchpadSpawnAction, scratchpadManageHook)
+import XMonad.Util.NamedScratchpad
 
 import XMonad.Wallpaper
 
@@ -95,6 +96,12 @@ myTabTheme = def
 myFont :: [Char]
 myFont = "xft:Iosevka"
 
+myScratchpads = [
+  NS "bash" "urxvt -name notes -e /bin/bash" (appName =? "notes") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+  ]
+
+
+
 projects :: [Project]
 projects =
   [ Project { projectName      = "1"
@@ -122,6 +129,9 @@ projects =
             , projectStartHook = Just $ do spawn "kitty --title jrnl my_jrnl"
             }
   ]
+
+
+
 
 myLayout = simpleTabbed ||| tiled ||| spacedTiled ||| spacedGrid ||| gappedSpacedGrid2 ||| Grid ||| Full
   where
@@ -156,8 +166,9 @@ myManageHook = composeAll
       , stringProperty "WM_WINDOW_ROLE" =? "gimp-message-dialog"  --> doFloat
       , isDialog                                                  --> doFloat
       , stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog" --> doRectFloat (W.RationalRect 0.2 0.1 0.6 0.8)
-    ] <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
-
+    ]
+       <+> namedScratchpadManageHook myScratchpads
+    -- <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
 myWorkspaces :: [[Char]]
 myWorkspaces = [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
 
@@ -314,7 +325,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_u     ), spawn "passmenu")
 
     -- Pop tiny terminal window via Scratchpad
-    , ((modm              , xK_grave ), scratchpadSpawnAction def {terminal = "urxvt"})
+    -- , ((modm              , xK_grave ), scratchpadSpawnAction def {terminal = "urxvt"})
+    , ((modm              , xK_grave ), namedScratchpadAction myScratchpads "bash")
 
     -- Shell Prompt to run a shell command
     , ((modm .|. controlMask, xK_x   ), shellPrompt myXPConfig)

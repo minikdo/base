@@ -125,9 +125,19 @@
         ("i" "issues" entry (file+headline "~/.agenda/issues.org" "Issues")
 	     "* TODO %?\n %U\n")
         ("m" "Mail" entry (file+headline "~/.agenda/agenda.org" "Incoming")
-         "* TODO %?\n%U\nSource: %:link\n\n%i"
+         "* TODO Re: %:description\n\n  Source: %u, %a\n"
          :empty-lines 1
-         )))
+         :immediate-finish t)
+        ))
+
+
+        ;; ("m"
+         ;; "Capture incoming email"
+         ;; entry
+         ;; (file+headline "~/.agenda/agenda.org" "Incoming")
+         ;; "* TODO Re: %:description\n\n  Source: %u, %a\n"
+         ;; :empty-lines 1 )
+
 
 ;;(add-hook 'org-capture-mode-hook 'delete-other-windows)
 (setq my-org-protocol-flag nil)

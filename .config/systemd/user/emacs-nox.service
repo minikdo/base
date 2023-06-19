@@ -1,5 +1,7 @@
 [Unit]
 Description=Emacs-nox for terminal and mutt
+After=display-manager.service
+Requires=graphical-session.target
 
 [Service]
 Type=forking

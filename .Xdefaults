@@ -3,10 +3,12 @@ XTerm*faceName:        Inconsolata
 
 !! Emacs.font:            -BE5N-Iosevka-normal-normal-expanded-*-18-*-*-*-d-0-iso10646-1
 
-URxvt.font:            xft:Iosevka:size=12
+URxvt.font:            xft:Iosevka:size=14
 
 XTerm*ScrollKey:       true
 XTern*sixelScrolling:  true
+
+xterm*faceSize: 14
 
 URxvt.internalBorder:  8
 
