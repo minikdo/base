@@ -540,8 +540,8 @@ is considered to be a project root."
 ;;;;                  ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-to-list 'load-path "~/.emacs.d/modes/emmet")
-(require 'emmet)
+;; (add-to-list 'load-path "~/.emacs.d/modes/emmet")
+;; (require 'emmet)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                  ;;;;
