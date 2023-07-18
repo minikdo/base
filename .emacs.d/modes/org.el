@@ -43,6 +43,9 @@
 (setq org-agenda-skip-scheduled-if-done t)
 (setq org-deadline-warning-days 10)
 
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
 ;; export setting
 
 (setq org-latex-table-centered t)

@@ -21,6 +21,7 @@ elpa-lsp-mode					install
 elpa-lv						install
 elpa-markdown-mode				install
 elpa-modus-themes				install
+elpa-org-bullets				install
 elpa-paredit					install
 elpa-popup					install
 elpa-projectile					install
