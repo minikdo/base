@@ -106,7 +106,7 @@ projects :: [Project]
 projects =
   [ Project { projectName      = "1"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do safeSpawn "firefox" []
+            , projectStartHook = Just $ do safeSpawn "firefox-esr" []
             }
   , Project { projectName      = "2"
             , projectDirectory = "~/"
@@ -362,7 +362,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 main :: IO ()
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar ~/.config/xmobar/xmobarrc"
-    setRandomWallpaper ["$HOME/docs/sync/wallpapers"]
+    setRandomWallpaper ["$HOME/syncthing/wallpapers"]
     xmonad $ docks $ ewmhFullscreen . ewmh $ dynamicProjects projects def
     -- xmonad $ ewmh $ def
         { workspaces         = myWorkspaces
