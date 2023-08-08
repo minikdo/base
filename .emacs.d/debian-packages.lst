@@ -14,7 +14,6 @@ elpa-f						install
 elpa-flx					install
 elpa-flx-ido					install
 elpa-git-annex					install
-elpa-haskell-mode				install
 elpa-ht						install
 elpa-jinja2-mode				install
 elpa-lsp-mode					install
