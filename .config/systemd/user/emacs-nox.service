@@ -8,7 +8,7 @@ Type=forking
 ExecStart=
 ExecStart="/usr/bin/emacs" "--daemon=nox" "-q" "-l" "/home/domino/.emacs.nox.d/init.el"
 ExecStop="/usr/bin/emacsclient" "--eval" "'(kill-emacs)'" "-s" "/run/user/1000/emacs-nox/server"
-ExecStop="/usr/bin/sleep" "1"
+ExecStop="/usr/bin/sleep" "1.5"
 
 [Install]
 Also=emacs-nox.socket
