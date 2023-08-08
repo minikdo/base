@@ -59,9 +59,22 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-annex debian battery systemd sudo history man pip
-         virtualenvwrapper z ansible nvm globalias
-         docker-compose)
+plugins=(
+    ansible
+    battery
+    debian
+    docker-compose
+    git
+    git-annex
+    globalias
+    history
+    man
+    pip
+    sudo
+    systemd
+    virtualenvwrapper
+    z
+)
 
 # User configuration
 
@@ -131,7 +144,8 @@ alias rq=resolvectl
 alias lintian="lintian -iIEv --pedantic"
 alias df="df -h --total"
 
-# Function to query dpkg
+# My helper functions
+
 function dq () {
     dpkg-query -W \
                -f='${db:Status-Abbrev}${binary:Package} '"$fg[blue]"'(${Version})'"$reset_color"'\n' \
@@ -142,53 +156,69 @@ function acsh () {
     apt-cache show $1 | more --exit-on-eof
 }
 
-# Function to print ip addr with M-k
 function ipaddr () {
     echo; ip -c a; zle redisplay
 }
 zle -N ipaddr
 bindkey "^[k" ipaddr
 
-
-# Function to print ip addr with M-k
 function list-wifi-networks () {
     wpa_cli list_networks; zle redisplay
 }
 zle -N list-wifi-networks
 bindkey "^[N" list-wifi-networks
 
-# Function to print ip addr with M-k
-function listnetworks () {
-    networkctl; zle redisplay
-}
-zle -N listnetworks
-bindkey "^[n" listnetworks
+# function listnetworks () {
+    # networkctl; zle redisplay
+# }
+# zle -N listnetworks
+# bindkey "^[n" listnetworks
 
 # Edit command line
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey '^x^e' edit-command-line
-
+#autoload -U edit-command-line
+#zle -N edit-command-line
+#bindkey '^x^e' edit-command-line
 
 # direnv
 if [ -x /usr/bin/direnv ]; then
     eval "$(direnv hook zsh)"
 fi
 
-
-# 
 unsetopt share_history
 setopt completealiases   
 
 apt_pref="apt"
 apt_upgr="upgrade"
 
-
 # fzf
 if [ -f ~/.config/fzf/key-bindings.zsh ]; then
     . ~/.config/fzf/key-bindings.zsh
 fi
 
+ssh() {
+  # grep -w: match command names such as "tmux-2.1" or "tmux: server"
+  if ps -p $$ -o ppid= \
+    | xargs -i ps -p {} -o comm= \
+    | grep -qw tmux; then
+    # Note: Options without parameter were hardcoded,
+    # in order to distinguish an option's parameter from the destination.
+    #
+    #                   s/[[:space:]]*\(\( | spaces before options
+    #     \(-[46AaCfGgKkMNnqsTtVvXxYy]\)\| | option without parameter
+    #                     \(-[^[:space:]]* | option
+    # \([[:space:]]\+[^[:space:]]*\)\?\)\) | parameter
+    #                      [[:space:]]*\)* | spaces between options
+    #                        [[:space:]]\+ | spaces before destination
+    #                \([^-][^[:space:]]*\) | destination
+    #                                   .* | command
+    #                                 /\6/ | replace with destination
+    tmux rename-window "$(echo "$@" \
+      | sed 's/[[:space:]]*\(\(\(-[46AaCfGgKkMNnqsTtVvXxYy]\)\|\(-[^[:space:]]*\([[:space:]]\+[^[:space:]]*\)\?\)\)[[:space:]]*\)*[[:space:]]\+\([^-][^[:space:]]*\).*/\6/')"
+    command ssh "$@"
+    tmux set-window-option automatic-rename "on" 1> /dev/null
+  else
+    command ssh "$@"
+  fi
+}
+
 autoload -U compinit && compinit
-
-
