@@ -111,11 +111,9 @@
 (setq org-capture-templates
       '(("t" "todo" entry (file+headline "~/.agenda/agenda.org" "Tasks")
 	     "* TODO %?\n%U\n")
-	    ("j" "journal" entry (file "~/.agenda/journal.org")
-	     "* %U %?\n" )
-        ("e" "estates" entry (file+headline "~/.agenda/estates.org" "Tasks")
+        ("e" "estates todo" entry (file+headline "~/.agenda/estates.org" "Tasks")
 	     "* TODO %?\n%U\n")
-        ("w" "work" entry (file+headline "~/.agenda/estates.org" "Work")
+        ("w" "work done" entry (file+headline "~/.agenda/estates.org" "Work")
 	     "* DONE %u\n- %?\n")
         ("p" "Protocol" entry (file "~/.agenda/links.org")
          "* [[%:link][%:description]]\n\n  #+BEGIN_QUOTE\n  %i\n  #+END_QUOTE\n\n  Captured On: %u\n"
@@ -123,12 +121,6 @@
          :immediate-finish t)
 	    ("L" "Protocol Link" entry (file "~/.agenda/links.org")
          "* [[%:link][%:description]]\n  Captured On: %U"
-         :empty-lines 1
-         :immediate-finish t)
-        ("i" "issues" entry (file+headline "~/.agenda/issues.org" "Issues")
-	     "* TODO %?\n %U\n")
-        ("m" "Mail" entry (file+headline "~/.agenda/agenda.org" "Incoming")
-         "* TODO Re: %:description\n\n  Source: %u, %a\n"
          :empty-lines 1
          :immediate-finish t)
         ))
