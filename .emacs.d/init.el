@@ -245,7 +245,7 @@
 (bind-key* "<f9>" '(lambda() (interactive) (flyspell-buffer)))
 ;; (bind-key* "<f8>" '(lambda() (interactive)(dired-other-window "~/.emacs.d/")))
 (bind-key* "C-<f6>" '(lambda() (interactive) (find-file "~/syncthing/processwork/processwork.org")))
-(bind-key* "M-<f6>" '(lambda() (interactive) (find-file "~/syncthing/india.org")))
+(bind-key* "M-<f6>" '(lambda() (interactive) (find-file "~/syncthing/current_travel.org")))
 (bind-key* "C-<f5>" '(lambda() (interactive) (find-file "~/.agenda/links.org")))
 (bind-key* "M-<f5>" '(lambda() (interactive) (find-file "~/.agenda/notes.org")))
 

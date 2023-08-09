@@ -143,6 +143,7 @@ alias cls="omz reload"
 alias rq=resolvectl
 alias lintian="lintian -iIEv --pedantic"
 alias df="df -h --total"
+alias fcp="fc -p ~/.zsh_history"
 
 # My helper functions
 
