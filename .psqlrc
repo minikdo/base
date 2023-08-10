@@ -1,0 +1,3 @@
+\setenv LESS '-nRSQ -z-2 -j2'
+\setenv PAGER less
+
