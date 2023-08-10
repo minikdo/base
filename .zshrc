@@ -163,11 +163,11 @@ function ipaddr () {
 zle -N ipaddr
 bindkey "^[k" ipaddr
 
-function list-wifi-networks () {
+function wpacli_list_networks () {
     wpa_cli list_networks; zle redisplay
 }
-zle -N list-wifi-networks
-bindkey "^[N" list-wifi-networks
+zle -N wpacli_list_networks
+bindkey "^[N" wpacli_list_networks
 
 # function listnetworks () {
     # networkctl; zle redisplay

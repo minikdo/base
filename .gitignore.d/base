@@ -39,6 +39,7 @@
 !/.local/share/applications/org-protocol.desktop
 !/.local/share/mc/skins/minikdo-modarcon16-thin.ini
 !/.mailcap
+!/.psqlrc
 !/.tmux.conf
 !/.urxvt/ext/resize-font
 !/.Xdefaults
