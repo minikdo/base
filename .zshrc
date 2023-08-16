@@ -144,6 +144,7 @@ alias rq=resolvectl
 alias lintian="lintian -iIEv --pedantic"
 alias df="df -h --total"
 alias fcp="fc -p ~/.zsh_history"
+alias mc="SHELL=/bin/bash mc"
 
 # My helper functions
 
