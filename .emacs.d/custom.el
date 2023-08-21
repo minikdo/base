@@ -13,7 +13,7 @@
  '(main-line-color1 "#222232")
  '(main-line-color2 "#333343")
  '(org-agenda-files
-   '("/home/domino/.agenda/estates.org" "/home/domino/.agenda/agenda.org" "/home/domino/.agenda/issues.org" "/home/domino/.agenda/journal.org" "/home/domino/.agenda/links.org" "/home/domino/.agenda/notes.org"))
+   '("/home/domino/.agenda/estates.org" "/home/domino/.agenda/agenda.org" "/home/domino/.agenda/issues.org" "/home/domino/.agenda/links.org" "/home/domino/.agenda/notes.org"))
  '(package-hidden-regexps '("\\`backtrace\\'" ""))
  '(package-selected-packages
    '(fzf nftables-mode smartparens tao-theme flymake-eslint dockerfile-mode default-text-scale lsp-mode elpy company-jedi multiple-cursors centaur-tabs rainbow-mode python python-mode python-environment epc which-key web-mode tabbar smex session pyvenv projectile pod-mode php-mode muttrc-mode mutt-alias markdown-mode jedi initsplit htmlize graphviz-dot-mode git-annex folding flx-ido eproject diminish csv-mode clues-theme browse-kill-ring boxquote bm bar-cursor apache-mode))
