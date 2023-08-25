@@ -122,7 +122,7 @@ projects =
             }
   , Project { projectName      = "8"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "signal-desktop"
+            , projectStartHook = Just $ do spawn "~/bin/signal-desktop"
             }
   , Project { projectName      = "9"
             , projectDirectory = "~/"
