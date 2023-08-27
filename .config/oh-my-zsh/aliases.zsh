@@ -1,0 +1,15 @@
+alias -s mov=mpv
+alias -s mp4=mpv
+alias -s mkv=mpv
+alias -s pdf=evince
+alias -s jpg=viewnior
+alias -s jpeg=viewnior
+alias -s JPG=viewnior
+alias -s gif=viewnior
+alias -s png=viewnior
+alias -s bmp=viewnior
+# alias -s org="emacsclient -t"
+alias -s org="~/bin/e"
+alias -s tex="~/bin/e"
+alias -s txt="~/bin/e"
+alias -s el="~/bin/e"

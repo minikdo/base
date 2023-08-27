@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+export ZSH_CUSTOM=$HOME/.config/oh-my-zsh
+
 #TERM=xterm-256color
 
 if [ -x /usr/bin/dircolors ]; then
