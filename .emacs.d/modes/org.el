@@ -72,9 +72,9 @@
   ;; ("" "amssymb" t)
   ("" "hyperref" nil)
   "\\tolerance=1000"
-  ("margin=2.5cm" "geometry" t)
+  ("a4paper,margin=2.5cm" "geometry" t)
   "\\setlength\\parindent{0pt}")))
- 
+
 ;; default browser
 
 (setq browse-url-browser-function 'browse-url-generic
