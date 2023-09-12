@@ -124,12 +124,7 @@ export SAVEHIST=0
 export EDITOR=e
 
 alias zshrc="$EDITOR ~/.zshrc"
-alias zshh="$EDITOR ~/.zsh_history"
 alias muttrc="$EDITOR ~/.muttrc"
-alias xmonadrc="$EDITOR ~/.xmonad/xmonad.hs"
-alias sshy="torsocks ssh $1"
-alias dl='dpkg -l | less -S'
-# alias acsh='apt-cache show'
 alias ach='apt changelog'
 alias jf='journalctl -f -n100'
 alias jc='journalctl -e --since=today'
@@ -139,9 +134,7 @@ alias pass='EDITOR=nano pass'
 alias known_hosts="nano ~/.ssh/known_hosts"
 alias notmuch_hooks="nano ~/.mail/.notmuch/hooks/post-new"
 alias ss="ss -ltunp"
-alias ahu="apt-history upgrade"
 alias ip="ip -c"
-alias cls="omz reload"
 alias rq=resolvectl
 alias lintian="lintian -iIEv --pedantic"
 alias df="df -h --total"
