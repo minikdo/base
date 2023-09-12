@@ -153,6 +153,7 @@ myManageHook = composeAll
       , title     =? "mutt"               --> doShift "7"
       , title     =? "profanity"          --> doShift "7"
       , className =? "Signal"             --> doShift "8"
+      , className =? "Signal Beta"        --> doShift "8"
       , title     =? "jrnl"               --> doShift "9"
       , className =? "Navigator"          --> doFloat
       , className =? "Viewnior"           --> doFloat
