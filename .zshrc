@@ -140,6 +140,7 @@ alias lintian="lintian -iIEv --pedantic"
 alias df="df -h --total"
 alias fcp="fc -p ~/.zsh_history"
 alias mc="SHELL=/bin/bash mc"
+alias git-b='gbp buildpackage -us -uc --git-pristine-tar --git-export-dir=/tmp/build/build_$(date +%s) '
 
 # My helper functions
 
