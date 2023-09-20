@@ -126,7 +126,7 @@ projects =
             }
   , Project { projectName      = "9"
             , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "kitty --title jrnl my_jrnl"
+            , projectStartHook = Just $ do spawn "kitty --title jrnl my_jrnl --override font_size=11"
             }
   ]
 
