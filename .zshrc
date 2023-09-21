@@ -132,7 +132,7 @@ alias uq='systemctl list-units | grep $1'
 alias lf='systemctl list-units --state=failed'
 alias pass='EDITOR=nano pass'
 alias known_hosts="nano ~/.ssh/known_hosts"
-alias notmuch_hooks="nano ~/.mail/.notmuch/hooks/post-new"
+alias notmuch_hooks="$EDITOR ~/.mail/.notmuch/hooks/post-new"
 alias ss="ss -ltunp"
 alias ip="ip -c"
 alias rq=resolvectl
