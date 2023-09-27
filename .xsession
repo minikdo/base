@@ -13,6 +13,9 @@ xset b 0 0 0
 
 xss-lock slock &
 
+# disable ctrl
+#xmodmap -e "keycode 37="
+
 # needed ?
 xrdb -merge ~/.Xdefaults 
 

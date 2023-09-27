@@ -60,7 +60,7 @@ myBorderWidth :: Dimension
 myBorderWidth = 4
 
 myFocusedBorderColor :: [Char]
-myFocusedBorderColor = red02
+myFocusedBorderColor = blue
 
 myNormalBorderColor :: [Char]
 myNormalBorderColor = cyan02
