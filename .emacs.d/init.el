@@ -74,6 +74,8 @@
 ;; Fill column
 (setq fill-column 79)
 
+(setq next-line-add-newlines t)
+
 ;; Mouse
 (setq mouse-yank-at-point t)
 
@@ -186,6 +188,26 @@
       (mapcar #'disable-theme (remove theme custom-enabled-themes))
     (message "Unable to find theme file for ‘%s’" theme)))
 
+;; by Mickey Petersen
+
+(defun push-mark-no-activate ()
+  "Pushes `point' to `mark-ring' and does not activate the region
+   Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
+  (interactive)
+  (push-mark (point) t nil)
+  (message "Pushed mark to ring"))
+
+;; (global-set-key (kbd "C-`") 'push-mark-no-activate)
+
+
+(defun jump-to-mark ()
+  "Jumps to the local mark, respecting the `mark-ring' order.
+  This is the same as using \\[set-mark-command] with the prefix argument."
+  (interactive)
+  (set-mark-command 1))
+;; (global-set-key (kbd "M-`") 'jump-to-mark)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                            ;;;;
 ;;;; === DEFAULT-TEXT-SCALE === ;;;;
@@ -231,6 +253,9 @@
 (bind-key* "M-<f6>" '(lambda() (interactive) (find-file "~/syncthing/current_travel.org")))
 (bind-key* "C-<f5>" '(lambda() (interactive) (find-file "~/.agenda/links.org")))
 (bind-key* "M-<f5>" '(lambda() (interactive) (find-file "~/.agenda/notes.org")))
+(bind-key* "C-`" 'push-mark-no-activate)
+(bind-key* "M-`" 'jump-to-mark)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;               ;;;;
