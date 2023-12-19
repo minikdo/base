@@ -1,6 +1,4 @@
 *
-!/.Xdefaults
-!/.Xresources
 !/.ansible.cfg
 !/.bashrc
 !/.config/alacritty/alacritty.yml
@@ -9,14 +7,13 @@
 !/.config/kitty/kitty.conf
 !/.config/kitty/theme.conf
 !/.config/mc/hotlist
-!/.config/mc/ini
 !/.config/mc/menu
 !/.config/mc/panels.ini
 !/.config/mimeapps.list
 !/.config/oh-my-zsh/aliases.zsh
-!/.config/oh-my-zsh/plugins/git-annex/README.md
 !/.config/oh-my-zsh/plugins/git-annex/_git-annex
 !/.config/oh-my-zsh/plugins/git-annex/git-annex.plugin.zsh
+!/.config/oh-my-zsh/plugins/git-annex/README.md
 !/.config/oh-my-zsh/themes/robbyrussell.zsh-theme
 !/.config/parcellite/parcelliterc
 !/.config/redshift.conf
@@ -50,7 +47,8 @@
 !/.psqlrc
 !/.tmux.conf
 !/.urxvt/ext/resize-font
-!/.xmonad/keybindings.org
+!/.Xdefaults
 !/.xmonad/xmonad.hs
+!/.Xresources
 !/.xsession
 !/.zshrc
