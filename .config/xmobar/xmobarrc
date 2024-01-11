@@ -38,13 +38,13 @@ Config { font             = "xft:Iosevka-10"
                                             , "--low"      , "#025e7c,#002b36"
                                             , "--normal"   , "#025e7c,#002b36"
                                             , "--high"     , "darkred,#002b36" ] 10
-                    , Run Wireless "wlp0s20f3"  [ "-t"         , "Signal: <quality>%"
-                                            , "-m"         , "3"
-                                            , "--Low"      , "49"        -- units: -- %
-                                            , "--High"     , "65"        -- units: -- %
-                                            , "--low"      , "red,#002b36"
-                                            , "--normal"   , "darkorange,#002b36"
-                                            , "--high"     , "#025e7c,#002b36" ] 10
+                    -- , Run Wireless "wlp0s20f3"  [ "-t"         , "Signal: <quality>%"
+                                            -- , "-m"         , "3"
+                                            -- , "--Low"      , "49"        -- units: -- %
+                                            -- , "--High"     , "65"        -- units: -- %
+                                            -- , "--low"      , "red,#002b36"
+                                            -- , "--normal"   , "darkorange,#002b36"
+                                            -- , "--high"     , "#025e7c,#002b36" ] 10
                     , Run BatteryP          [ "BAT0" ]
                                             [ "-t"         , "<acstatus><left>% <watts>W"
                                             , "-L"         , "10"
@@ -65,6 +65,9 @@ Config { font             = "xft:Iosevka-10"
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% <fc=#268bd2,#002b36> %wlp0s20f3% %wlp0s20f3wi% %multicpu% %memory% </fc> }\
+       , template = "%StdinReader% <fc=#268bd2,#002b36> %wlp0s20f3%  %multicpu% %memory% </fc> }\
                     \{ <fc=#98C379>%date%</fc> <fc=#268bd2>%battery%</fc>"
        }
+
+
+
