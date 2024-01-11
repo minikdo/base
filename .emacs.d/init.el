@@ -135,15 +135,6 @@
 	 (list (save-excursion (backward-word 1) (point)) (point)))))
 
 
-(defun kill-to-end:b ()
-  "Kills text from the cursor postion to the end of the buffer. 
-  This command adds the killed text to the kill-ring"
-    (interactive)
-      (save-excursion
-	(let ((beg (point)) (end (point-max)))
-          (kill-region beg end))))
-
-
 (defun ff/comment-and-go-down (arg)
   "Comments and goes down ARG lines."
   (interactive "p")
