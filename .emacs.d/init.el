@@ -74,7 +74,7 @@
 ;; Fill column
 (setq fill-column 79)
 
-(setq next-line-add-newlines t)
+;; (setq next-line-add-newlines t)
 
 ;; Mouse
 (setq mouse-yank-at-point t)
