@@ -27,6 +27,7 @@
 !/.config/systemd/user/notmuch.timer
 !/.config/systemd/user/parcellite.service
 !/.config/systemd/user/redshift.service
+!/.config/systemd/user/systemd-tmpfiles-clean.timer.d/override.conf
 !/.config/systemd/user/unclutter.service
 !/.config/user-dirs.dirs
 !/.config/xmobar/xmobarrc
