@@ -25,4 +25,4 @@ XAUTH=/tmp/container_xauth
 DISPLAY=:0
 xauth nextract - "$DISPLAY" | sed -e 's/^..../ffff/' | xauth -f "$XAUTH" nmerge -
 
-exec xmonad
+exec $HOME/.xmonad/xmonad-x86_64-linux
