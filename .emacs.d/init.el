@@ -1,6 +1,8 @@
 ;; Install Debian packages:
 ;; sudo apt install $(grep -ri 'Debian packages:' ~/.emacs.d/modes | awk -F:  '{print $3}' | tr '\n' ' ')
 
+(server-start)
+
 ;; Disable bars
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -161,6 +163,20 @@
   (switch-to-buffer "*scratch*")
   (recenter-top-bottom))
 
+(defun switch-dictionary (choice)
+   "Switch between language dictionaries (optionally switched to CHOICE value)."
+   (interactive "cChoose:  (1) English | (2) Polski")
+    (cond ((eq choice ?1)
+           (setq ispell-dictionary "english")
+           (ispell-kill-ispell)
+           (message "Switched to English."))
+          ((eq choice ?2)
+           (setq ispell-dictionary "polish")
+           (ispell-kill-ispell)
+           (message "Switched to Polish."))
+          (t (message "No changes have been made."))))
+
+
 ;; Themes toggle
 
 (setq ivan/themes '(clues leuven))
@@ -238,7 +254,7 @@
 (bind-key* "<f5>" '(lambda() (interactive) (minikdo/switch-to-scratch-end)))
 (bind-key* "<f8>" 'ivan/cycle-theme)
 (bind-key* "M-<f8>" '(lambda() (interactive) (find-file "~/.emacs.d/init.el")))
-(bind-key* "<f9>" '(lambda() (interactive) (flyspell-buffer)))
+(bind-key* "<f9>" 'flyspell-mode)
 ;; (bind-key* "<f8>" '(lambda() (interactive)(dired-other-window "~/.emacs.d/")))
 (bind-key* "C-<f6>" '(lambda() (interactive) (find-file "~/syncthing/processwork/processwork.org")))
 (bind-key* "M-<f6>" '(lambda() (interactive) (find-file "~/syncthing/current_travel.org")))
@@ -246,6 +262,7 @@
 (bind-key* "M-<f5>" '(lambda() (interactive) (find-file "~/.agenda/notes.org")))
 (bind-key* "C-`" 'push-mark-no-activate)
 (bind-key* "M-`" 'jump-to-mark)
+(bind-key* "C-c M-s" 'switch-dictionary)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;
