@@ -161,5 +161,5 @@
 ;; (global-set-key (kbd "<f6>") (lambda() (interactive)(org-todo-list)))
 ;; (global-set-key (kbd "<f6>") (lambda() (interactive)(org-agenda nil "o")))
 
-(bind-key* "<f6>" '(lambda() (interactive) (org-agenda-list)))
-(bind-key* "<f7>" '(lambda() (interactive) (org-agenda nil "o")))
+(bind-key* "<f6>" #'(lambda() (interactive) (org-agenda-list)))
+(bind-key* "<f7>" #'(lambda() (interactive) (org-agenda nil "o")))

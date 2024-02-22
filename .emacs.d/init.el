@@ -1,38 +1,18 @@
-;; Install Debian packages:
-;; sudo apt install $(grep -ri 'Debian packages:' ~/.emacs.d/modes | awk -F:  '{print $3}' | tr '\n' ' ')
-
 (server-start)
 
-;; Disable bars
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-
-;; Disable garbage collection during the startup time
-(setq gc-cons-threshold 536870912
-      gc-cons-percentage 0.6)
-
-(add-hook 'after-init-hook (lambda ()
-                             ;; restore after startup
-                             (setq gc-cons-threshold 16777216
-                                   gc-cons-percentage 0.1)))
-
-;; Package configuration
 (add-to-list 'package-archives
              '("melpa" . "https://stable.melpa.org/packages/") t)
 
 (package-initialize)
 
-(setq debug-on-error nil)
-
 ;; This is only needed once, near the top of the file
-;; Debian packages: elpa-use-package
 (eval-when-compile
- (require 'use-package))
+  (require 'use-package))
 
-;; Debian packages: elpa-clues-theme
+(spacious-padding-mode 1)
+
 (load-theme 'clues t)
 
-;; Downloaded from https://github.com/be5invis/iosevka
 (set-frame-font "iosevka 10" nil t)
 (set-face-attribute 'default nil :height 130)
 
@@ -42,15 +22,14 @@
  '(isearch-fail ((t (:background "red"))))
  '(hl-line ((t (:background "gray21")))))
 
-;; Inhibit startup messages
 (setq inhibit-startup-message t)
 
 (setq initial-major-mode 'text-mode)
 
-;; Transparency
-(set-frame-parameter (selected-frame) 'alpha '(95 . 95))
+(set-frame-parameter (selected-frame) 'alpha '(95 . 95)) ;; transparency
 
 ;; Enable automatic updating a buffer if a file changes on disk
+;; needed for storing links via org-protocol
 (global-auto-revert-mode 1)
 
 ;; Prevent kill emacs
@@ -66,35 +45,22 @@
 ;; (setq-default save-place t)
 ;; (require 'saveplace)
 
-;; Custom file
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
-;; Dictionary
 (setq ispell-dictionary "polish")
 
-;; Fill column
 (setq fill-column 79)
 
-;; (setq next-line-add-newlines t)
-
-;; Mouse
 (setq mouse-yank-at-point t)
 
-;; Line and column numbers
 (setq column-number-mode t)
 (setq line-number-mode t)
 
-;; Tabs
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-;; Margins
 (set-window-margins nil 1)
-
-;; For better scrolling
-;; (setq scroll-conservatively 1000)
-;; (setq scroll-margin 3)
 
 (setq
  scroll-conservatively 1000                     ;; only 'jump' when moving this far
@@ -114,11 +80,10 @@
 ;; Handy alias
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                          ;;;;
-;;;; === CUSTOM FUNCTIONS === ;;;;
-;;;;                          ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; ------
+;; Custom functions
+;; ------
 
 (defun unfill-paragraph (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."
@@ -137,25 +102,25 @@
 	 (list (save-excursion (backward-word 1) (point)) (point)))))
 
 
-(defun ff/comment-and-go-down (arg)
+(defun my-comment-and-go-down (arg)
   "Comments and goes down ARG lines."
   (interactive "p")
   (condition-case nil
       (comment-region (point-at-bol) (point-at-eol)) (error nil))
   (next-line 1)
-  (if (> arg 1) (ff/comment-and-go-down (1- arg))))
+  (if (> arg 1) (my-comment-and-go-down (1- arg))))
 
 
-(defun ff/uncomment-and-go-up (arg)
+(defun my-uncomment-and-go-up (arg)
   "Uncomments and goes up ARG lines."
   (interactive "p")
   (condition-case nil
       (uncomment-region (point-at-bol) (point-at-eol)) (error nil))
   (next-line -1)
-  (if (> arg 1) (ff/uncomment-and-go-down (1- arg))))
+  (if (> arg 1) (my-uncomment-and-go-down (1- arg))))
 
 
-(defun minikdo/switch-to-scratch-end ()
+(defun my-switch-to-scratch-end ()
   "Switch to *scratch*. If in *scratch*, go to end."
   (interactive)
   (if (equal (current-buffer) (get-buffer "*scratch*"))
@@ -163,7 +128,8 @@
   (switch-to-buffer "*scratch*")
   (recenter-top-bottom))
 
-(defun switch-dictionary (choice)
+
+(defun my-switch-dictionary (choice) ;; by dogsleg
    "Switch between language dictionaries (optionally switched to CHOICE value)."
    (interactive "cChoose:  (1) English | (2) Polski")
     (cond ((eq choice ?1)
@@ -177,99 +143,82 @@
           (t (message "No changes have been made."))))
 
 
-;; Themes toggle
+(setq my-themes '(clues leuven))
+(setq my-themes-index 0)
 
-(setq ivan/themes '(clues leuven))
-(setq ivan/themes-index 0)
-
-(defun ivan/cycle-theme ()
+(defun my-cycle-theme () ;; by Ivan
   (interactive)
-  (setq ivan/themes-index (% (1+ ivan/themes-index) (length ivan/themes)))
-  (ivan/load-indexed-theme))
+  (setq my-themes-index (% (1+ my-themes-index) (length my-themes)))
+  (my-load-indexed-theme))
 
-(defun ivan/load-indexed-theme ()
-  (ivan/try-load-theme (nth ivan/themes-index ivan/themes)))
 
-(defun ivan/try-load-theme (theme)
-  (if (ignore-errors (load-theme theme :no-confirm))
-      (mapcar #'disable-theme (remove theme custom-enabled-themes))
-    (message "Unable to find theme file for ‘%s’" theme)))
+(defun my-load-indexed-theme ()
+  (my-try-load-theme (nth my-themes-index my-themes)))
 
-;; by Mickey Petersen
 
-(defun push-mark-no-activate ()
+(defun my-push-mark-no-activate () ;; Mickey Petersen
   "Pushes `point' to `mark-ring' and does not activate the region
    Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
   (interactive)
   (push-mark (point) t nil)
   (message "Pushed mark to ring"))
 
-;; (global-set-key (kbd "C-`") 'push-mark-no-activate)
 
-
-(defun jump-to-mark ()
+(defun my-jump-to-mark () ;; Mickey Petersen
   "Jumps to the local mark, respecting the `mark-ring' order.
   This is the same as using \\[set-mark-command] with the prefix argument."
   (interactive)
   (set-mark-command 1))
-;; (global-set-key (kbd "M-`") 'jump-to-mark)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                            ;;;;
-;;;; === DEFAULT-TEXT-SCALE === ;;;;
-;;;;                            ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun my-edit-configuration ()
+  "Open the init file."
+  (interactive)
+  (find-file user-init-file))
+
+
+;; ------
+;; Default-text-scale (melpa)
+;; ------
 
 (use-package default-text-scale
+  :ensure t
   :if window-system
   :init
   (add-hook 'after-init-hook 'default-text-scale-mode))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                  ;;;;
-;;;; === BIND-KEY === ;;;;
-;;;;                  ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ------
+;; Bind-key (external)
+;; ------
 
-;; Debian packages: elpa-bind-key
-;; Unset page up and down. Too close to arrows on ThinkPads
-(global-unset-key (kbd "<prior>"))
+(global-unset-key (kbd "<prior>")) ;; too close to arrows on ThinkPads
 (global-unset-key (kbd "<next>"))
-;; Unser suspend
-(global-unset-key (kbd "C-z"))
+(global-unset-key (kbd "C-z")) ;; unset suspend
 
-(use-package bind-key
-  ;; Use C-h B to show a list of user-defined bindings
-  :bind ("C-h B" . describe-personal-keybindings))
-
-(bind-key* "C-c d" 'diff-buffer-with-file)
-(bind-key* "C-c R" 'revert-buffer)
-(bind-key* "C-x k" 'kill-this-buffer)
-(bind-key* "M-Q" 'unfill-paragraph)
-(bind-key* "<C-return>" 'other-window)
-(bind-key* "ESC <down>" 'ff/comment-and-go-down)
-(bind-key* "ESC <up>" 'ff/uncomment-and-go-up)
-(bind-key* "<f5>" '(lambda() (interactive) (minikdo/switch-to-scratch-end)))
-(bind-key* "<f8>" 'ivan/cycle-theme)
-(bind-key* "M-<f8>" '(lambda() (interactive) (find-file "~/.emacs.d/init.el")))
-(bind-key* "<f9>" 'flyspell-mode)
-;; (bind-key* "<f8>" '(lambda() (interactive)(dired-other-window "~/.emacs.d/")))
-(bind-key* "C-<f6>" '(lambda() (interactive) (find-file "~/syncthing/processwork/processwork.org")))
-(bind-key* "M-<f6>" '(lambda() (interactive) (find-file "~/syncthing/current_travel.org")))
-(bind-key* "C-<f5>" '(lambda() (interactive) (find-file "~/.agenda/links.org")))
-(bind-key* "M-<f5>" '(lambda() (interactive) (find-file "~/.agenda/notes.org")))
-(bind-key* "C-`" 'push-mark-no-activate)
-(bind-key* "M-`" 'jump-to-mark)
-(bind-key* "C-c M-s" 'switch-dictionary)
+(bind-keys*
+ ;; built-in functions
+ ("<C-return>" . other-window)
+ ("M-Q"        . unfill-paragraph)
+ ("C-h B"      . describe-personal-keybindings)
+ ("C-c d"      . diff-buffer-with-file)
+ ("C-c R"      . revert-buffer)
+ ("C-x k"      . kill-this-buffer)
+ ("<f9>"       . flyspell-mode)
+ ;; my custom functions
+ ("ESC <down>" . my-comment-and-go-down)
+ ("ESC <up>"   . my-uncomment-and-go-up)
+ ("<f5>"       . my-switch-to-scratch-end)
+ ("<f8>"       . my-cycle-theme)
+ ("M-<f8>"     . my-edit-configuration)
+ ("C-c M-s"    . my-switch-dictionary)
+ ("C-`"        . my-push-mark-no-activate)
+ ("M-`"        . my-jump-to-mark))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;
-;;;;               ;;;;
-;;;; === DIRED === ;;;;
-;;;;               ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;
+;; ------
+;; Dired
+;; ------
 
 (defun toggle-hidden-in-dired ()
   (interactive)
@@ -295,16 +244,20 @@
          (dired-mode-hook . hl-line-mode))
   :bind ("C-." . toggle-hidden-in-dired))
 
-;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                ;;;;
-;;;; === PARENS === ;;;;
-;;;;                ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; ------
+;; Parens (builtin)
+;; ------
 
 (use-package paren
   :config
   (show-paren-mode t)
   (setq show-paren-delay 0))
+
+
+;; ------
+;; Paredit (external)
+;; ------
 
 (use-package paredit
   :config
@@ -315,9 +268,19 @@
   (add-hook 'lisp-mode-hook                        #'paredit-mode)
   (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
 
+
+;; ------
+;; Autopair disabale
+;; ------
+
 (use-package autopair-mode
   :disabled t
   :hook (python-mode))
+
+
+;; ------
+;; Electric-pair (builtin)
+;; ------
 
 (use-package electric-pair
   :hook
@@ -327,11 +290,10 @@
   (yaml-mode   . electric-pair-local-mode)
   (scss-mode   . electric-pair-local-mode))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                  ;;;;
-;;;; === FCI-MODE === ;;;;
-;;;;                  ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; ------
+;; FCI-mode (disabled) (not installed) (external)
+;; ------
 
 (use-package fill-column-indicator
   :disabled t
@@ -342,27 +304,18 @@
   (setq fci-rule-color "gray1")
   :hook (python-mode . fci-mode))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                       ;;;;
-;;;; === AUTO-COMPLETE === ;;;;
-;;;;                       ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Debian packages: elpa-auto-complete
-;; (require 'auto-complete-config)
-;; (ac-config-default)
+;; ------
+;; Auto-complete (disabled)
+;; ------
+;; FIXME: why is installed?
 
-;; (setq ac-auto-show-menu (* ac-delay 2))
 (use-package auto-complete
   :disabled t
-  :init
-  (progn
-    ;; (ac-config-default)
-    ;; (global-auto-complete-mode t)
-    )
   :config
   (setq ac-ignore-case nil)
   (setq ac-auto-show-menu (* ac-delay 2)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                          ;;;;
@@ -370,7 +323,6 @@
 ;;;;                          ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Debian packages: elpa-company
 (use-package company
   :disabled t
   :config
@@ -379,32 +331,16 @@
   (global-company-mode t))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                   ;;;;
-;;;; === GIT-ANNEX === ;;;;
-;;;;                   ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ------
+;; Git-annex (external)
+;; ------
 
-;; autoloaded?
-;; Debian packages: elpa-git-annex
-;; (require 'git-annex)
 (use-package git-annex)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                            ;;;;
-;;;; === PERSISTENT-SCRATCH === ;;;;
-;;;;                            ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Installed from melpa-stable by package-install
-;; https://github.com/Fanael/persistent-scratch
-;; (persistent-scratch-setup-default)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                          ;;;;
-;;;; === MULTIPLE-CURSORS === ;;;;
-;;;;                          ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ------
+;; Multiple-cursors (melpa)
+;; ------
 
 (use-package multiple-cursors
   :ensure t
@@ -412,35 +348,18 @@
          ("C-<" . mc/unmark-next-like-this)
          ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                   ;;;;
-;;;; === WHICH-KEY === ;;;;
-;;;;                   ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Debian packages: elpa-which-key
+;; ------
+;; Which-key (external)
+;; ------
+
 (use-package which-key
   :config (which-key-mode))
 
-;;;;;;;;;;;;;;;;;;;;;;
-;;;;              ;;;;
-;;;; === SMEX === ;;;;
-;;;;              ;;;;
-;;;;;;;;;;;;;;;;;;;;;;
 
-;; Debian packages: elpa-smex
-(use-package smex
-  :bind (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands))
-  :config
-  (setq smex-completion-method 'ivy)
-  (smex-initialize))
-
-;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                ;;;;
-;;;; === AUCTEX === ;;;;
-;;;;                ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;
+;; ------
+;; Latex (builtin)
+;; ------
 
 (use-package latex
   :mode
@@ -452,48 +371,6 @@
   (setq TeX-save-query nil)
   (setq TeX-show-compilation t))
 
-;;;;;;;;;;;;;;;;;;;;;;
-;;;;              ;;;;
-;;;; === JEDI === ;;;;
-;;;;              ;;;;
-;;;;;;;;;;;;;;;;;;;;;;
-
-(defun project-directory (buffer-name)
-  "Return the root directory of the project that contain the
-given BUFFER-NAME. Any directory with a .git or .jedi file/directory
-is considered to be a project root."
-  (interactive)
-  (let ((root-dir (file-name-directory buffer-name)))
-    (while (and root-dir
-                (not (file-exists-p (concat root-dir ".git")))
-                (not (file-exists-p (concat root-dir ".jedi"))))
-      (setq root-dir
-            (if (equal root-dir "/")
-                nil
-              (file-name-directory (directory-file-name root-dir)))))
-    root-dir))
-
-
-(defun project-name (buffer-name)
-  "Return the name of the project that contain the given BUFFER-NAME."
-  (let ((root-dir (project-directory buffer-name)))
-    (if root-dir
-        (file-name-nondirectory
-         (directory-file-name root-dir))
-      nil)))
-
-
-(defun jedi-setup-venv ()
-  "Activates the virtualenv of the current buffer."
-  (interactive)
-  (let ((project-name (project-name buffer-file-name)))
-    (when project-name (venv-workon project-name))))
-
-(setq python-environment-virtualenv '("virtualenv"))
-
-(setq jedi:setup-keys t)
-(setq jedi:complete-on-dot t)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                    ;;;;
@@ -501,7 +378,6 @@ is considered to be a project root."
 ;;;;                    ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Debian packages: elpa-projectile
 (use-package projectile
   :init
   (projectile-mode +1)
@@ -512,28 +388,148 @@ is considered to be a project root."
   :bind (:map projectile-mode-map ("C-c p" . projectile-command-map)))
 
 
+;;;;;;;;;;;;;;;;;;;;;;
+;;;;              ;;;;
+;;;; === JEDI === ;;;;
+;;;;              ;;;;
+;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; (defun project-directory (buffer-name)
+;;   "Return the root directory of the project that contain the
+;; given BUFFER-NAME. Any directory with a .git or .jedi file/directory
+;; is considered to be a project root."
+;;   (interactive)
+;;   (let ((root-dir (file-name-directory buffer-name)))
+;;     (while (and root-dir
+;;                 (not (file-exists-p (concat root-dir ".projectile")))
+;;                 (not (file-exists-p (concat root-dir ".git")))
+;;                 (not (file-exists-p (concat root-dir ".jedi"))))
+;;       (setq root-dir
+;;             (if (equal root-dir "/")
+;;                 nil
+;;               (file-name-directory (directory-file-name root-dir)))))
+;;     root-dir))
+
+
+;; (defun project-name (buffer-name)
+;;   "Return the name of the project that contain the given BUFFER-NAME."
+;;   (let ((root-dir (project-directory buffer-name)))
+;;     (if root-dir
+;;         (file-name-nondirectory
+;;          (directory-file-name root-dir))
+;;       nil)))
+
+
+;; (defun jedi-setup-venv ()
+;;   "Activates the virtualenv of the current buffer."
+;;   (interactive)
+;;   (let ((project-name (project-name buffer-file-name)))
+;;     (when project-name (venv-workon project-name))))
+
+;; (setq python-environment-virtualenv '("virtualenv"))
+
+;; TODO: move to packages dir
+;; (add-to-list 'load-path "~/.emacs.d/modes/auto-virtualenv")
+
+;; (use-package auto-virtualenv
+  ;; :config
+  ;; (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
+  ;; (add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv)
+  ;; )
+
+;; ?
+;; (setq jedi:setup-keys t)
+;; (setq jedi:complete-on-dot t)
+
+
+;; (use-package company
+;;   :config
+;;   (setq company-idle-delay 0
+;;         company-minimum-prefix-length 3
+;;         company-show-numbers t
+;;         company-tooltip-limit 10
+;;         company-tooltip-align-annotations t
+;;         ;; invert the navigation direction if the the completion popup-isearch-match
+;;         ;; is displayed on top (happens near the bottom of windows)
+;;         company-tooltip-flip-when-above t)
+;;   (global-company-mode -1))
+
+
+(setq flymake-no-changes-timeout 2)
+
+
+;; ------
+;; Corfu
+;; ------
+
+(use-package corfu
+  ;; TODO
+  ;; :after orderless
+  :custom
+  (corfu-cycle t)       ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)        ;; Enable auto completion
+  (corfu-separator ?\s) ;; Orderless field separator
+  (corfu-quit-at-boundary nil) ;; Never quit at completion boundary
+  (corfu-quit-no-match 1)     ;; Never quit, even if there is no match
+  (corfu-preview-current nil) ;; Disable current candidate preview
+  ;; (corfu-preselect-first nil)    ;; Disable candidate preselection
+  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+  ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
+  (corfu-scroll-margin 5) ;; Use scroll margin
+  :hook ((prog-mode . corfu-mode)
+         (shell-mode . corfu-mode) ;; ?
+         (eshell-mode . corfu-mode)) ;; ?
+  ;; Recommended: Enable Corfu globally.
+  ;; This is recommended since Dabbrev can be used globally (M-/).
+  ;; See also `corfu-excluded-modes'.
+  ;; :init
+  ;; (global-corfu-mode) ; This does not play well in eshell if you run a repl
+  ;; (setq corfu-auto t))
+  :bind
+  (:map corfu-map
+        ("M-p". corfu-popupinfo-scroll-down)
+        ("M-n". corfu-popupinfo-scroll-up)))
+;; (define-key corfu-map (kbd "M-p") #'corfu-popupinfo-scroll-down) ;; corfu-next
+;; (define-key corfu-map (kbd "M-n") #'corfu-popupinfo-scroll-up)  ;; corfu-previous
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                ;;;;
 ;;;; === PYTHON === ;;;;
 ;;;;                ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Debian packages: python-mode
-(add-hook 'python-mode-hook (lambda () (auto-fill-mode -1))) ;; disable autofill
-;; (add-hook 'python-mode-hook 'show-paren-mode)
-;;(add-hook 'python-mode-hook 'electric-pair-local-mode)
-(add-hook 'python-mode-hook 'jedi:setup)
-(add-hook 'python-mode-hook 'jedi-setup-venv)
 
-;; Debian packages: elpa-elpy
-(elpy-enable)
-(add-hook 'elpy-mode-hook (lambda ()
-                            (highlight-indentation-mode -1)
-                            (setq display-line-numbers 1)))
+(add-hook 'python-mode-hook (lambda () (auto-fill-mode -1)))
+(add-hook 'python-mode-hook (lambda () (eldoc-mode -1)))
+(add-hook 'python-mode-hook (lambda () (yas-minor-mode -1)))
+(add-hook 'python-mode-hook 'electric-pair-local-mode)
+;; (add-hook 'python-mode-hook 'company-mode)
+(add-hook 'python-mode-hook 'eglot-ensure)
 
+;; (use-package python-mode :defer
+  ;; :mode  ("\\.py\\'" . python-ts-mode)
+  ;; :interpreter "ipython"
+  ;; :custom  (truncate-lines t)
+  ;; :init  (exec-path-from-shell-initialize))
 
-(add-hook 'python-mode-hook (lambda () (auto-complete-mode -1)))
-(setq elpy-rpc-python-command "/usr/bin/python3")
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (add-hook 'python-mode-hook 'jedi-setup-venv)
+
+;; (add-hook 'python-mode-hook (lambda () (auto-complete-mode -1)))
+
+;; (setq elpy-rpc-python-command "/usr/bin/python3")
+
+;; (use-package elpy
+;;   :ensure t
+;;   :defer t
+;;   :init
+;;   (advice-add 'python-mode :before 'elpy-enable))
+
+;; (add-hook 'elpy-mode-hook (lambda ()
+;;                             (highlight-indentation-mode -1)
+;;                             (setq display-line-numbers 1)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -543,22 +539,13 @@ is considered to be a project root."
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; (use-package js
-  ;; :init
-  ;; (lambda () (setq display-line-numbers 1)))
+;; :init
+;; (lambda () (setq display-line-numbers 1)))
 
 (add-hook 'js-mode-hook (lambda ()
                           (yas-minor-mode)
                           (setq display-line-numbers t)))
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                  ;;;;
-;;;; == EMMET-MODE == ;;;;
-;;;;                  ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; (add-to-list 'load-path "~/.emacs.d/modes/emmet")
-;; (require 'emmet)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                  ;;;;
@@ -591,13 +578,12 @@ is considered to be a project root."
   (add-hook 'html-mode-hook #'smartparens-mode))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                  ;;;;
-;;;; === YAS-MODE === ;;;;
-;;;;                  ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ------
+;; Yasnippet
+;; ------
 
 (use-package yasnippet
+  :disabled t
   ;; Enable yasnippet globally
   :config
   (setq yas-snippet-dirs
@@ -614,45 +600,68 @@ is considered to be a project root."
          ("C-c y f" . yas-visit-snippet-file)))
 
 (use-package yasnippet-snippets
+  :disabled t
   ;; Initialize yasnippet-snippets after yasnippet itself
   :after yasnippet
   :config (yasnippet-snippets-initialize))
 
-;; Debian packages: elpa-yasnippet elpa-yasnippet-snippets
-;; Fixing a key binding bug in elpy
-;; (define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand)
-;; Fixing another key binding bug in iedit mode
-;; (define-key global-map (kbd "C-c o") 'iedit-mode)
 
-;; NOT WORKING
-;; completing point by some yasnippet key
-(defun yas-ido-expand ()
-  "Lets you select (and expand) a yasnippet key"
-  (interactive)
-  (let ((original-point (point)))
-    (while (and
-            (not (= (point) (point-min) ))
-            (not
-             (string-match "[[:space:]\n]" (char-to-string (char-before)))))
-      (backward-word 1))
-    (let* ((init-word (point))
-           (word (buffer-substring init-word original-point))
-           (list (yas-active-keys)))
-      (goto-char original-point)
-      (let ((key (remove-if-not
-                  (lambda (s) (string-match (concat "^" word) s)) list)))
-        (if (= (length key) 1)
-            (setq key (pop key))
-          (setq key (ido-completing-read "key: " list nil nil word)))
-        (delete-char (- init-word original-point))
-        (insert key)
-        (yas-expand)))))
+;; ------
+;; Smex (external)
+;; 
+;; Smex is a M-x enhancement for Emacs. Built on top of Ido,
+;; it provides a convenient interface to your recently and most
+;; frequently used commands. And to all the other commands, too.
+;; ------
 
-(define-key yas-minor-mode-map (kbd "<C-tab>")     'yas-ido-expand)
+(use-package smex
+  :bind (("M-x" . smex)
+         ("M-X" . smex-major-mode-commands))
+  :config
+  (setq smex-completion-method 'ivy)
+  (smex-initialize))
 
-;;;;
-;;;; Load other modes
-;;;;
 
-(load-file "~/.emacs.d/modes/flx-ido.el")
+;; ------
+;; Ido
+;;
+;; Ido is part of Emacs, starting with release 22. The ido.el package
+;; by KimStorm lets you interactively do things with buffers and
+;; files. As an example, while searching for a file with C-x C-f, ido
+;; can helpfully suggest the files whose paths are closest to your
+;; current string, allowing you to find your files more quickly.
+;; ------
+
+(use-package ido
+  :config
+  (ido-mode t)
+  (ido-everywhere t))
+
+
+;; ------
+;; Flx-ido (external)
+;;
+;; This package provides a more powerful alternative to `ido-mode''s
+;; built-in flex matching.
+;; ------
+
+(use-package flx-ido
+  :config
+  (setq ido-decorations
+        (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]"
+                " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+  (defun ido-disable-line-truncation ()
+    (set (make-local-variable 'truncate-lines) nil))
+  :hook
+  (ido-minibuffer-setup . ido-disable-line-truncation)
+  :bind
+  (:map ido-common-completion-map
+        ("C-n" . ido-next-match)
+        ("C-p" . ido-prev-match)))
+
+
+;; ------
+;; Source other modes
+;; ------
+
 (load-file "~/.emacs.d/modes/org.el")
