@@ -372,46 +372,14 @@
         ;; is displayed on top (happens near the bottom of windows)
         company-tooltip-flip-when-above t)
   (global-company-mode -1)
-  :hook ((js-mode      . company-mode)
-         (html-mode    . company-mode)
-         (python-mode  . company-mode)
-         (emacs-lisp-mode   . company-mode)))
+  :hook ((prog-mode      . company-mode)))
 
+
+;; ------
+;; Flymake
+;; ------
 
 (setq flymake-no-changes-timeout 2)
-
-
-;; ------
-;; Corfu (disabled - quirks)
-;; ------
-
-(use-package orderless)
-
-(use-package corfu
-  :disabled t
-  :after orderless
-  :custom
-  (corfu-cycle t)       ;; Enable cycling for `corfu-next/previous'
-  (corfu-auto t)        ;; Enable auto completion
-  (corfu-separator ?\s) ;; Orderless field separator
-  (corfu-quit-at-boundary nil) ;; Never quit at completion boundary
-  (corfu-quit-no-match 1)     ;; Never quit, even if there is no match
-  (corfu-preview-current nil) ;; Disable current candidate preview
-  ;; (corfu-preselect-first nil)    ;; Disable candidate preselection
-  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-  ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
-  (corfu-scroll-margin 5) ;; Use scroll margin
-  :hook ((python-mode . corfu-mode))
-  ;; Recommended: Enable Corfu globally.
-  ;; This is recommended since Dabbrev can be used globally (M-/).
-  ;; See also `corfu-excluded-modes'.
-  ;; :init
-  ;; (global-corfu-mode) ; This does not play well in eshell if you run a repl
-  ;; (setq corfu-auto t))
-  :bind
-  (:map corfu-map
-        ("M-p". corfu-popupinfo-scroll-down)
-        ("M-n". corfu-popupinfo-scroll-up)))
 
 
 ;; ------
@@ -419,8 +387,6 @@
 ;; ------
 
 (add-hook 'python-mode-hook 'eglot-ensure)
-(add-hook 'python-mode-hook 'company-mode)
-(add-hook 'python-mode-hook 'electric-pair-local-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
