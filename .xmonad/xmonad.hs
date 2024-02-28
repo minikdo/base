@@ -148,7 +148,7 @@ myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
     [ isFullscreen                        --> doFullFloat
       , className =? "Tor Browser"        --> doShift "1"
-      , className =? "Firefox-esr"        --> doShift "1"
+      , className =? "firefox-esr"        --> doShift "1"
       , className =? "Emacs"              --> doShift "2"
       , title     =? "mutt"               --> doShift "7"
       , title     =? "profanity"          --> doShift "7"
@@ -161,7 +161,7 @@ myManageHook = composeAll
       , className =? "vlc"                --> doFullFloat
       , className =? "mpv"                --> doFullFloat
       , className =? "Arandr"             --> doCenterFloat
-      , className =? "Evince"             --> doRectFloat (W.RationalRect 0.2 0.05 0.6 0.9)
+      -- , className =? "Evince"             --> doRectFloat (W.RationalRect 0.2 0.05 0.6 0.9)
       , className =? "Pavucontrol"        --> doRectFloat (W.RationalRect 0.15 0.15 0.7 0.7)
       , stringProperty "WM_WINDOW_ROLE" =? "pop-up"               --> doFloat
       , stringProperty "WM_WINDOW_ROLE" =? "gimp-message-dialog"  --> doFloat
