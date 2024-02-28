@@ -142,6 +142,16 @@ alias fcp="fc -p ~/.zsh_history"
 alias mc="SHELL=/bin/bash mc"
 alias git-b='gbp buildpackage -us -uc --git-pristine-tar --git-export-dir=/tmp/build/build_$(date +%s) '
 
+alias ll='ls -lah'
+alias l='ls -lh'
+
+alias -g L="| less"
+alias -g M="| more"
+alias -g LL="2>&1 | less"
+
+# aviod running ghostscript
+alias gs="echo 'gs?'"
+
 # My helper functions
 
 function dq () {
