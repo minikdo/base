@@ -9,8 +9,16 @@
 
 (global-auto-revert-mode 1)
 
-(require 'ispell)
-(setq ispell-dictionary "polish")
+(use-package flyspell
+  :init
+  (progn
+    (flyspell-mode -1))
+  :config
+  (progn 
+    (setq ispell-program-name "aspell")
+    (setq ispell-dictionary "polish")    
+    (setq ispell-list-command "--list") ;; run flyspell with aspell, not ispell
+    ))
 
 (defun switch-dictionary (choice)
    "Switch between language dictionaries (optionally switched to CHOICE value)."
@@ -60,8 +68,8 @@
 (bind-key* "<C-return>" 'other-window) ;; not working
 (bind-key* "C-x k" 'kill-this-buffer)
 (bind-key* "<f5>" (lambda() (interactive) (switch-to-buffer "*scratch*")))
-(bind-key* "<f8>" (lambda() (interactive) (find-file "~/.emacs.nox.d/init.el")))
-(bind-key* "<f9>" 'flyspell-mode)
+(bind-key* "M-<f8>" (lambda() (interactive) (find-file "~/.emacs.nox.d/init.el")))
+(bind-key* "<f9>" 'flyspell-mode) ;; toggle mode
 
 (use-package paren
   :config
@@ -80,6 +88,16 @@
   (setq ido-decorations
       (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]"
               " [Matched]" " [Not readable]" " [Too big]" " [Confirm]"))))
+
+(defun ido-define-keys () ;; C-n/p is more intuitive in vertical layout
+  (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+  (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
+  ;; and include our custom ones also
+  ;;(define-key ido-completion-map (kbd "M-k") 'ido-next-match)
+  ;;(define-key ido-completion-map (kbd "M-i") 'ido-prev-match)
+  )
+
+(add-hook 'ido-setup-hook 'ido-define-keys)
 
 
 (use-package smex
@@ -118,6 +136,7 @@
   (add-to-list 'auto-mode-alist '("/neomutt" . mail-mode))
   :hook
   (mail-mode . footnote-mode)
+  (mail-mode . flyspell-mode)
   (mail-mode . yas-minor-mode)
   (mail-mode . (lambda ()
                  (font-lock-add-keywords nil
