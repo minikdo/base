@@ -9,8 +9,6 @@
 (eval-when-compile
   (require 'use-package))
 
-(spacious-padding-mode 1)
-
 (load-theme 'clues t)
 
 (set-frame-font "iosevka 10" nil t)
@@ -80,6 +78,7 @@
 ;; Handy alias
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; (spacious-padding-mode -1)
 
 ;; ------
 ;; Custom functions
@@ -156,6 +155,12 @@
   (my-try-load-theme (nth my-themes-index my-themes)))
 
 
+(defun my-try-load-theme (theme)
+  (if (ignore-errors (load-theme theme :no-confirm))
+      (mapcar #'disable-theme (remove theme custom-enabled-themes))
+    (message "Unable to find theme file for ‘%s’" theme)))
+
+
 (defun my-push-mark-no-activate () ;; Mickey Petersen
   "Pushes `point' to `mark-ring' and does not activate the region
    Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
@@ -198,13 +203,14 @@
 
 (bind-keys*
  ;; built-in functions
+ ("C-h B"      . describe-personal-keybindings)
  ("<C-return>" . other-window)
  ("M-Q"        . unfill-paragraph)
- ("C-h B"      . describe-personal-keybindings)
  ("C-c d"      . diff-buffer-with-file)
  ("C-c R"      . revert-buffer)
  ("C-x k"      . kill-this-buffer)
  ("<f9>"       . flyspell-mode)
+ ("C-<f8>"     . spacious-padding-mode)
  ;; my custom functions
  ("ESC <down>" . my-comment-and-go-down)
  ("ESC <up>"   . my-uncomment-and-go-up)
@@ -270,15 +276,6 @@
 
 
 ;; ------
-;; Autopair disabale
-;; ------
-
-(use-package autopair-mode
-  :disabled t
-  :hook (python-mode))
-
-
-;; ------
 ;; Electric-pair (builtin)
 ;; ------
 
@@ -303,32 +300,6 @@
   ;; Set fill-column-indicator color
   (setq fci-rule-color "gray1")
   :hook (python-mode . fci-mode))
-
-
-;; ------
-;; Auto-complete (disabled)
-;; ------
-;; FIXME: why is installed?
-
-(use-package auto-complete
-  :disabled t
-  :config
-  (setq ac-ignore-case nil)
-  (setq ac-auto-show-menu (* ac-delay 2)))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                          ;;;;
-;;;; === COMPANY-COMPLETE === ;;;;
-;;;;                          ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package company
-  :disabled t
-  :config
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 3)
-  (global-company-mode t))
 
 
 ;; ------
@@ -372,11 +343,9 @@
   (setq TeX-show-compilation t))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                    ;;;;
-;;;; === PROJECTILE === ;;;;
-;;;;                    ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ------
+;; Projectile (external)
+;; ------
 
 (use-package projectile
   :init
@@ -388,84 +357,39 @@
   :bind (:map projectile-mode-map ("C-c p" . projectile-command-map)))
 
 
-;;;;;;;;;;;;;;;;;;;;;;
-;;;;              ;;;;
-;;;; === JEDI === ;;;;
-;;;;              ;;;;
-;;;;;;;;;;;;;;;;;;;;;;
+;; ------
+;; Company (external)
+;; ------
 
-
-;; (defun project-directory (buffer-name)
-;;   "Return the root directory of the project that contain the
-;; given BUFFER-NAME. Any directory with a .git or .jedi file/directory
-;; is considered to be a project root."
-;;   (interactive)
-;;   (let ((root-dir (file-name-directory buffer-name)))
-;;     (while (and root-dir
-;;                 (not (file-exists-p (concat root-dir ".projectile")))
-;;                 (not (file-exists-p (concat root-dir ".git")))
-;;                 (not (file-exists-p (concat root-dir ".jedi"))))
-;;       (setq root-dir
-;;             (if (equal root-dir "/")
-;;                 nil
-;;               (file-name-directory (directory-file-name root-dir)))))
-;;     root-dir))
-
-
-;; (defun project-name (buffer-name)
-;;   "Return the name of the project that contain the given BUFFER-NAME."
-;;   (let ((root-dir (project-directory buffer-name)))
-;;     (if root-dir
-;;         (file-name-nondirectory
-;;          (directory-file-name root-dir))
-;;       nil)))
-
-
-;; (defun jedi-setup-venv ()
-;;   "Activates the virtualenv of the current buffer."
-;;   (interactive)
-;;   (let ((project-name (project-name buffer-file-name)))
-;;     (when project-name (venv-workon project-name))))
-
-;; (setq python-environment-virtualenv '("virtualenv"))
-
-;; TODO: move to packages dir
-;; (add-to-list 'load-path "~/.emacs.d/modes/auto-virtualenv")
-
-;; (use-package auto-virtualenv
-  ;; :config
-  ;; (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
-  ;; (add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv)
-  ;; )
-
-;; ?
-;; (setq jedi:setup-keys t)
-;; (setq jedi:complete-on-dot t)
-
-
-;; (use-package company
-;;   :config
-;;   (setq company-idle-delay 0
-;;         company-minimum-prefix-length 3
-;;         company-show-numbers t
-;;         company-tooltip-limit 10
-;;         company-tooltip-align-annotations t
-;;         ;; invert the navigation direction if the the completion popup-isearch-match
-;;         ;; is displayed on top (happens near the bottom of windows)
-;;         company-tooltip-flip-when-above t)
-;;   (global-company-mode -1))
+(use-package company
+  :config
+  (setq company-idle-delay 0
+        company-minimum-prefix-length 3
+        company-show-numbers t
+        company-tooltip-limit 10
+        company-tooltip-align-annotations t
+        ;; invert the navigation direction if the the completion popup-isearch-match
+        ;; is displayed on top (happens near the bottom of windows)
+        company-tooltip-flip-when-above t)
+  (global-company-mode -1)
+  :hook ((js-mode      . company-mode)
+         (html-mode    . company-mode)
+         (python-mode  . company-mode)
+         (emacs-lisp-mode   . company-mode)))
 
 
 (setq flymake-no-changes-timeout 2)
 
 
 ;; ------
-;; Corfu
+;; Corfu (disabled - quirks)
 ;; ------
 
+(use-package orderless)
+
 (use-package corfu
-  ;; TODO
-  ;; :after orderless
+  :disabled t
+  :after orderless
   :custom
   (corfu-cycle t)       ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)        ;; Enable auto completion
@@ -477,9 +401,7 @@
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
   (corfu-scroll-margin 5) ;; Use scroll margin
-  :hook ((prog-mode . corfu-mode)
-         (shell-mode . corfu-mode) ;; ?
-         (eshell-mode . corfu-mode)) ;; ?
+  :hook ((python-mode . corfu-mode))
   ;; Recommended: Enable Corfu globally.
   ;; This is recommended since Dabbrev can be used globally (M-/).
   ;; See also `corfu-excluded-modes'.
@@ -490,61 +412,15 @@
   (:map corfu-map
         ("M-p". corfu-popupinfo-scroll-down)
         ("M-n". corfu-popupinfo-scroll-up)))
-;; (define-key corfu-map (kbd "M-p") #'corfu-popupinfo-scroll-down) ;; corfu-next
-;; (define-key corfu-map (kbd "M-n") #'corfu-popupinfo-scroll-up)  ;; corfu-previous
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                ;;;;
-;;;; === PYTHON === ;;;;
-;;;;                ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;
+;; ------
+;; Python (builtin)
+;; ------
 
-
-(add-hook 'python-mode-hook (lambda () (auto-fill-mode -1)))
-(add-hook 'python-mode-hook (lambda () (eldoc-mode -1)))
-(add-hook 'python-mode-hook (lambda () (yas-minor-mode -1)))
-(add-hook 'python-mode-hook 'electric-pair-local-mode)
-;; (add-hook 'python-mode-hook 'company-mode)
 (add-hook 'python-mode-hook 'eglot-ensure)
-
-;; (use-package python-mode :defer
-  ;; :mode  ("\\.py\\'" . python-ts-mode)
-  ;; :interpreter "ipython"
-  ;; :custom  (truncate-lines t)
-  ;; :init  (exec-path-from-shell-initialize))
-
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (add-hook 'python-mode-hook 'jedi-setup-venv)
-
-;; (add-hook 'python-mode-hook (lambda () (auto-complete-mode -1)))
-
-;; (setq elpy-rpc-python-command "/usr/bin/python3")
-
-;; (use-package elpy
-;;   :ensure t
-;;   :defer t
-;;   :init
-;;   (advice-add 'python-mode :before 'elpy-enable))
-
-;; (add-hook 'elpy-mode-hook (lambda ()
-;;                             (highlight-indentation-mode -1)
-;;                             (setq display-line-numbers 1)))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;                 ;;;;
-;;;; === JS-MODE === ;;;;
-;;;;                 ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; (use-package js
-;; :init
-;; (lambda () (setq display-line-numbers 1)))
-
-(add-hook 'js-mode-hook (lambda ()
-                          (yas-minor-mode)
-                          (setq display-line-numbers t)))
+(add-hook 'python-mode-hook 'company-mode)
+(add-hook 'python-mode-hook 'electric-pair-local-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -553,7 +429,6 @@
 ;;;;                  ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Debian packages: elpa-web-mode
 (require 'web-mode)
 (add-hook 'web-mode-hook 'emmet-mode) ;; enable Emmet's css abbreviation.
 (add-hook 'web-mode-hook (lambda () (autopair-mode -1))) ;; enable Emmet's css abbreviation.
@@ -573,10 +448,10 @@
   :init
   (add-to-list 'auto-mode-alist '("\\.vue?\\'" . mhtml-mode))
   :config
-  (lambda () (setq display-line-numbers t))
-  (add-hook 'html-mode-hook 'emmet-mode)
+  (add-hook 'html-mode-hook #'emmet-mode)
   (add-hook 'html-mode-hook #'smartparens-mode))
 
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
 ;; ------
 ;; Yasnippet
@@ -635,7 +510,10 @@
 (use-package ido
   :config
   (ido-mode t)
-  (ido-everywhere t))
+  (ido-everywhere t)
+  (flx-ido-mode 1)
+  (setq ido-enable-flex-matching t)
+  (setq flx-ido-use-faces 1))
 
 
 ;; ------
@@ -659,6 +537,7 @@
         ("C-n" . ido-next-match)
         ("C-p" . ido-prev-match)))
 
+(fido-mode 1) ;; an ido-like facsimile built on top of Emacs’s Icomplete engine.
 
 ;; ------
 ;; Source other modes
