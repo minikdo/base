@@ -47,7 +47,7 @@ Config { font             = "xft:Iosevka-10"
                                             -- , "--high"     , "#025e7c,#002b36" ] 10
                     , Run BatteryP          [ "BAT0" ]
                                             [ "-t"         , "<acstatus><left>% <watts>W"
-                                            , "-L"         , "5"
+                                            , "-L"         , "2"
                                             , "-H"         , "80"
                                             , "-l"         , "red"
                                             , "-p"         , "3"
