@@ -364,7 +364,7 @@
 (use-package company
   :config
   (setq company-idle-delay 0
-        company-minimum-prefix-length 3
+        company-minimum-prefix-length 1
         company-show-numbers t
         company-tooltip-limit 10
         company-tooltip-align-annotations t
@@ -376,17 +376,28 @@
 
 
 ;; ------
-;; Flymake
+;; Flymake (disabled)
 ;; ------
 
-(setq flymake-no-changes-timeout 2)
+(flymake-mode -1)
+
+
+;; ------
+;; Flycheck
+;; ------
+
+(use-package flycheck
+  :disabled t ;; enabled manually
+  :hook
+  (prog-mode . flycheck-mode))
 
 
 ;; ------
 ;; Python (builtin)
 ;; ------
 
-(add-hook 'python-mode-hook 'eglot-ensure)
+;; (add-hook 'python-mode-hook 'eglot-ensure)
+(add-hook 'eglot--managed-mode-hook (lambda () (flymake-mode -1)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -419,12 +430,12 @@
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
+
 ;; ------
 ;; Yasnippet
 ;; ------
 
 (use-package yasnippet
-  :disabled t
   ;; Enable yasnippet globally
   :config
   (setq yas-snippet-dirs
@@ -438,7 +449,9 @@
          ("C-c y n" . yas-new-snippet)
          ("C-c y a" . yas-reload-all)
          ("C-c y t" . yas-tryout-snippet)
-         ("C-c y f" . yas-visit-snippet-file)))
+         ("C-c y f" . yas-visit-snippet-file))
+  :hook (prog-mode . yas-minor-mode)
+  )
 
 (use-package yasnippet-snippets
   :disabled t
