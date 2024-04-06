@@ -20,7 +20,8 @@
  '(powerline-color1 "#222232")
  '(powerline-color2 "#333343")
  '(safe-local-variable-values
-   '((eval venv-workon "domino")
+   '((scroll-margin . 15)
+     (eval venv-workon "domino")
      (eval venv-workon "drf")
      (flycheck-flake8rc . "setup.cfg")))
  '(vc-annotate-background "#F6F6F6")
@@ -51,5 +52,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(hl-line ((t (:background "gray21"))))
- '(isearch-fail ((t (:background "red"))))
-)
+ '(isearch-fail ((t (:background "red")))))

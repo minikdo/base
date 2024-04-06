@@ -125,6 +125,7 @@
          ("C-c y f" . yas-visit-snippet-file)))
 
 (use-package yasnippet-snippets
+  :disabled t
   ;; Initialize yasnippet-snippets after yasnippet itself
   :after yasnippet
   :config (yasnippet-snippets-initialize))
@@ -134,6 +135,7 @@
   :init
   (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
   (add-to-list 'auto-mode-alist '("/neomutt" . mail-mode))
+  (setq ispell-dictionary "polish")    
   :hook
   (mail-mode . footnote-mode)
   (mail-mode . flyspell-mode)
