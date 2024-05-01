@@ -364,7 +364,7 @@
 (use-package company
   :config
   (setq company-idle-delay 0
-        company-minimum-prefix-length 1
+        company-minimum-prefix-length 2
         company-show-numbers t
         company-tooltip-limit 10
         company-tooltip-align-annotations t
@@ -381,6 +381,12 @@
 
 (flymake-mode -1)
 
+;; ------
+;; Eldoc
+;; ------
+
+(setq eldoc-idle-delay '1)
+(setq eldoc-echo-area-use-multiline-p '1)
 
 ;; ------
 ;; Flycheck
