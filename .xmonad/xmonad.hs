@@ -116,18 +116,18 @@ projects =
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn myTmux
             }
-  , Project { projectName      = "7"
-            , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "kitty --title mutt neomutt"
-            }
-  , Project { projectName      = "8"
-            , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "~/bin/signal-desktop"
-            }
-  , Project { projectName      = "9"
-            , projectDirectory = "~/"
-            , projectStartHook = Just $ do spawn "kitty --override font_size=11 --title jrnl my_jrnl"
-            }
+  -- , Project { projectName      = "7"
+            -- , projectDirectory = "~/"
+            -- , projectStartHook = Just $ do spawn "kitty --title mutt neomutt"
+            -- }
+  -- , Project { projectName      = "8"
+            -- , projectDirectory = "~/"
+            -- , projectStartHook = Just $ do spawn "~/bin/signal-desktop"
+            -- }
+  -- , Project { projectName      = "9"
+            -- , projectDirectory = "~/"
+            -- , projectStartHook = Just $ do spawn "kitty --override font_size=11 --title jrnl my_jrnl"
+            -- }
   ]
 
 
@@ -150,11 +150,11 @@ myManageHook = composeAll
       , className =? "Tor Browser"        --> doShift "1"
       , className =? "firefox-esr"        --> doShift "1"
       , className =? "Emacs"              --> doShift "2"
-      , title     =? "mutt"               --> doShift "7"
-      , title     =? "profanity"          --> doShift "7"
-      , className =? "Signal"             --> doShift "8"
-      , className =? "Signal Beta"        --> doShift "8"
-      , title     =? "jrnl"               --> doShift "9"
+      -- , title     =? "mutt"               --> doShift "7"
+      -- , title     =? "profanity"          --> doShift "7"
+      , className =? "Signal"             --> doShift "4"
+      , className =? "Signal Beta"        --> doShift "4"
+      -- , title     =? "jrnl"               --> doShift "9"
       , className =? "Navigator"          --> doFloat
       , className =? "Viewnior"           --> doFloat
       , className =? "Pinentry"           --> doCenterFloat
@@ -171,7 +171,7 @@ myManageHook = composeAll
        <+> namedScratchpadManageHook myScratchpads
     -- <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
 myWorkspaces :: [[Char]]
-myWorkspaces = [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
+myWorkspaces = [ "1", "2", "3", "4" ]
 
 myPP :: PP
 myPP = def { ppTitle   = xmobarColor blue      "" . shorten myTitleLength
@@ -260,10 +260,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_f     ), runOrRaise "firefox" (className =? "Firefox-esr"))
 
     -- Mutt
-    , ((modm,               xK_m     ), raiseMaybe (spawn "kitty --title mutt neomutt") (title =? "mutt"))
+    -- , ((modm,               xK_m     ), raiseMaybe (spawn "kitty --title mutt neomutt") (title =? "mutt"))
 
     -- Profanity
-    , ((modm,               xK_p     ), raiseMaybe (spawn "kitty --title profanity profanity") (title =? "profanity"))
+    -- , ((modm,               xK_p     ), raiseMaybe (spawn "kitty --title profanity profanity") (title =? "profanity"))
 
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
@@ -342,7 +342,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
     [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_4]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
     -- ++
