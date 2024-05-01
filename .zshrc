@@ -149,6 +149,9 @@ alias -g L="| less"
 alias -g M="| more"
 alias -g LL="2>&1 | less"
 
+alias m="mutt"
+alias s="signal-send"
+
 # aviod running ghostscript
 alias gs="echo 'gs?'"
 
