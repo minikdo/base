@@ -52,8 +52,8 @@ Config { font             = "xft:Iosevka-10"
                                             , "-l"         , "red"
                                             , "-p"         , "3"
                                             , "--"         
-                                            , "-O"         , "+" -- On
-                                            , "-o"         , "-<timeleft>" -- Off
+                                            , "-O"         , "↑" -- On
+                                            , "-o"         , "↓<timeleft>" -- Off
                                             , "-i"         , ""
                                             , "-L"         , "-15"
                                             , "-H"         , "-5"
