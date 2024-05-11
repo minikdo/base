@@ -151,6 +151,8 @@ alias -g LL="2>&1 | less"
 
 alias m="mutt"
 alias s="signal-send"
+alias mcc="mc ~/.config"
+alias mcl="mc ~/.local/share"
 
 # aviod running ghostscript
 alias gs="echo 'gs?'"
