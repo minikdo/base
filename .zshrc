@@ -153,6 +153,7 @@ alias m="mutt"
 alias s="signal-send"
 alias mcc="mc ~/.config"
 alias mcl="mc ~/.local/share"
+alias rs="redshift_wrapper"
 
 # aviod running ghostscript
 alias gs="echo 'gs?'"
