@@ -1,9 +1,14 @@
 *
 !/.ansible.cfg
 !/.bashrc
+!/bin/dim
+!/bin/e
+!/bin/pa_switch
+!/bin/ybacklight
 !/.config/alacritty/alacritty.yml
 !/.config/conky/conky.conf
 !/.config/dunst/dunstrc
+!/.config/kitty/current-theme.conf
 !/.config/kitty/kitty.conf
 !/.config/kitty/theme.conf
 !/.config/mc/hotlist
@@ -34,6 +39,7 @@
 !/.emacs.d/custom.el
 !/.emacs.d/early-init.el
 !/.emacs.d/init.el
+!/.emacs.d/.mc-lists.el
 !/.emacs.d/modes/org.el
 !/.emacs.nox.d/init.el
 !/.gimp-2.8/scripts/arrow.scm

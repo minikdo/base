@@ -1,0 +1,36 @@
+#!/bin/bash
+
+USERID=`id -u`
+
+self=`basename $0`
+
+socket_exists() {
+    if [ ! -e ${SOCKET} ]; then
+        echo "Emacs socket not found"
+        exit 1
+    fi
+}
+
+# Open in tty
+if [[ $self == "e" ]]; then
+
+    SOCKET=/run/user/$USERID/emacs/nox
+    socket_exists
+
+    # open frame on the current terminal
+    emacsclient --socket-name ${SOCKET} -nw "$@"
+fi
+
+# Open in gtk window
+if [[ $self == "ee" ]]; then
+
+    SOCKET=/run/user/$USERID/emacs/server
+    socket_exists
+
+    # open buffer with no-wait (=return immediately without waiting
+    # for you to "finish" the buffer in Emacs.)
+    emacsclient --socket-name ${SOCKET} --no-wait "$@"
+
+    # switch to the desktop containing emacs client
+    wmctrl -xa emacs
+fi
