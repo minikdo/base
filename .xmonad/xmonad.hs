@@ -323,7 +323,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_x     ), spawn "dmenu_shutdown")
 
     -- Pop open a dmenu to pass
-    , ((modm              , xK_u     ), spawn "passmenu")
+    , ((modm              , xK_u     ), spawn "dmenu_pass")
 
     -- Pop tiny terminal window via Scratchpad
     -- , ((modm              , xK_grave ), scratchpadSpawnAction def {terminal = "urxvt"})
