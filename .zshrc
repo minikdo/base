@@ -154,9 +154,16 @@ alias s="signal-send"
 alias mcc="mc ~/.config"
 alias mcl="mc ~/.local/share"
 alias rs="redshift_wrapper"
+alias gong="play ~/annex/media/misc/gong.ogg"
+alias nm="notmuch"
 
 # aviod running ghostscript
 alias gs="echo 'gs?'"
+
+alias irssi="ssh irssi"
+alias profanity="ssh profanity"
+
+# ^^^ last alias here
 
 # My helper functions
 
