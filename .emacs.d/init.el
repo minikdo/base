@@ -161,21 +161,6 @@
     (message "Unable to find theme file for ‘%s’" theme)))
 
 
-(defun my-push-mark-no-activate () ;; Mickey Petersen
-  "Pushes `point' to `mark-ring' and does not activate the region
-   Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
-  (interactive)
-  (push-mark (point) t nil)
-  (message "Pushed mark to ring"))
-
-
-(defun my-jump-to-mark () ;; Mickey Petersen
-  "Jumps to the local mark, respecting the `mark-ring' order.
-  This is the same as using \\[set-mark-command] with the prefix argument."
-  (interactive)
-  (set-mark-command 1))
-
-
 (defun my-edit-configuration ()
   "Open the init file."
   (interactive)
@@ -210,16 +195,13 @@
  ("C-c R"      . revert-buffer)
  ("C-x k"      . kill-this-buffer)
  ("<f9>"       . flyspell-mode)
- ("C-<f8>"     . spacious-padding-mode)
  ;; my custom functions
  ("ESC <down>" . my-comment-and-go-down)
  ("ESC <up>"   . my-uncomment-and-go-up)
  ("<f5>"       . my-switch-to-scratch-end)
  ("<f8>"       . my-cycle-theme)
  ("M-<f8>"     . my-edit-configuration)
- ("C-c M-s"    . my-switch-dictionary)
- ("C-`"        . my-push-mark-no-activate)
- ("M-`"        . my-jump-to-mark))
+ ("C-c M-s"    . my-switch-dictionary))
 
 
 ;; ------
