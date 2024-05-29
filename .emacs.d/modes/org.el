@@ -46,6 +46,8 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
+(setq org-src-tab-acts-natively t)
+
 ;; export setting
 
 (setq org-latex-table-centered t)
