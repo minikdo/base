@@ -2,7 +2,7 @@
 Description=Emacs-nox server socket
 
 [Socket]
-ListenStream=%t/emacs-nox/server
+ListenStream=%t/emacs/nox
 SocketMode=0600
 DirectoryMode=0700
 
