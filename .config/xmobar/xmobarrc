@@ -59,15 +59,15 @@ Config { font             = "xft:Iosevka-10"
                                             , "-H"         , "-5"
                                             , "-l"         , "red"
                                             , "-m"         , "white"
-                                            , "-h"         , "grey" ] 600
+                                            , "-h"         , "grey" ] 300
+                    , Run Com "awk"         [ "NR==3 {print \"Quality: \" int(($3*100)/70) \"% dBm: \" int($4)}"
+                                            , "/proc/net/wireless" ] "dbm" 50
+                    -- , Run Com "uname" ["-s","-r"] "" 0
                     , Run StdinReader
                     , Run Date "%a %b %_d %H:%M" "date" 10
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% <fc=#268bd2,#002b36> %wlp0s20f3%  %multicpu% %memory% </fc> }\
+       , template = "%StdinReader% <fc=#268bd2,#002b36> %wlp0s20f3%  %dbm%  %multicpu% %memory% </fc> }\
                     \{ <fc=#98C379>%date%</fc> <fc=#268bd2>%battery%</fc>"
        }
-
-
-
