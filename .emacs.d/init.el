@@ -506,6 +506,13 @@
 
 (fido-mode 1) ;; an ido-like facsimile built on top of Emacs’s Icomplete engine.
 
+(use-package redtick
+  :config
+  (setq redtick-play-sound t)
+  (setq redtick-sound-volume "1")
+  (setq redtick-history-file nil))
+
+
 ;; ------
 ;; Source other modes
 ;; ------
