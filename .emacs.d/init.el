@@ -512,6 +512,9 @@
   (setq redtick-sound-volume "1")
   (setq redtick-history-file nil))
 
+(use-package ws-butler
+  :hook
+  (prog-mode . ws-butler-mode))
 
 ;; ------
 ;; Source other modes
