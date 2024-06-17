@@ -5,6 +5,7 @@
       '(
         default-indent-new-line
         indent-for-tab-command
+        markdown-outdent-or-delete
         org-beginning-of-line
         org-end-of-line
         org-force-self-insert
@@ -17,4 +18,5 @@
 
 (setq mc/cmds-to-run-once
       '(
+        org-cycle
         ))
