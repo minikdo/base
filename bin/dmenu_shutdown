@@ -1,0 +1,12 @@
+#!/bin/bash
+
+RET=$(echo -e "lock\nsuspend\nhibernate\nreboot\npoweroff" | dmenu -nf white -sb brown -sf yellow)
+
+case $RET in
+    suspend    ) systemctl suspend    ;;
+    hibernate  ) systemctl hibernate  ;;
+    lock       ) slock                ;;
+    reboot     ) systemctl reboot     ;;
+    poweroff   ) systemctl poweroff   ;;
+    *          )                      ;;
+esac
