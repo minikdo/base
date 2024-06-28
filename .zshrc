@@ -163,6 +163,8 @@ alias gs="echo 'gs?'"
 alias irssi="ssh irssi"
 alias profanity="ssh profanity"
 
+alias waw="ping 10.4.2.1"
+alias wisla="ping 10.0.0.1"
 # ^^^ last alias here
 
 # My helper functions
