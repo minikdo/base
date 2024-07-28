@@ -4,7 +4,9 @@
 (setq mc/cmds-to-run-for-all
       '(
         default-indent-new-line
+        delete-indentation
         indent-for-tab-command
+        kill-region
         markdown-outdent-or-delete
         org-beginning-of-line
         org-end-of-line

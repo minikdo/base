@@ -14,6 +14,7 @@ xset b off
 xset b 0 0 0
 
 xss-lock slock &
+systemctl --user import-environment XDG_SESSION_ID
 
 # disable ctrl
 #xmodmap -e "keycode 37="
