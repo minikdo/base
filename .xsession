@@ -5,19 +5,17 @@ if [ -f ~/.zsh_my_env ]; then
     . ~/.zsh_my_env
 fi
 
-xset s 1200 1200
-
+# Set screensaver values
+xset s 120 540
 xset dpms 1200 1200 1200
 
 # Turn off system beep in console:
 xset b off
 xset b 0 0 0
 
-xss-lock slock &
-systemctl --user import-environment XDG_SESSION_ID
-
-# disable ctrl
-#xmodmap -e "keycode 37="
+#xss-lock -n dim slock &
+systemctl --user import-environment XDG_SESSION_ID && \
+  systemctl --user start xss-lock.service
 
 # needed ?
 xrdb -merge ~/.Xdefaults 
