@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Fade the screen and wait. Needs xbacklight.
+# When receiving SIGHUP, stop fading and set backlight to original brightness.
+# When receiving SIGTERM, wait a bit, and set backlight to original brightness
+# (this prevents the screen from flashing before it is turned completely off
+# by DPMS in the locker command).
+
+PATH=$PATH:~/bin
+
+min_brightness=20
+
+BRIGHTNESS=$(ybacklight -get)
+trap "ybacklight -set $BRIGHTNESS" EXIT
+trap 'kill %%; exit 0' HUP
+trap 'sleep 1s; kill %%; exit 0' TERM
+
+ybacklight -set $min_brightness &
+wait
+sleep infinity & # No, sleeping in the foreground does not work
+wait
