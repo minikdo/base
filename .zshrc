@@ -131,11 +131,9 @@ alias jc='journalctl -e --since=today'
 alias uq='systemctl list-units | grep $1'
 alias lf='systemctl list-units --state=failed'
 alias pass='EDITOR=nano pass'
-alias known_hosts="nano ~/.ssh/known_hosts"
 alias notmuch_hooks="$EDITOR ~/.mail/.notmuch/hooks/post-new"
 alias ss="ss -ltunp"
 alias ip="ip -c"
-alias rq=resolvectl
 alias lintian="lintian -iIEv --pedantic"
 alias df="df -h --total"
 alias fcp="fc -p ~/.zsh_history"
@@ -154,17 +152,20 @@ alias s="signal-send"
 alias mcc="mc ~/.config"
 alias mcl="mc ~/.local/share"
 alias rs="redshift_wrapper"
-alias gong="play ~/annex/media/misc/gong.ogg"
 alias nm="notmuch"
 
-# aviod running ghostscript
+# avoid running ghostscript
 alias gs="echo 'gs?'"
+alias g="git status"
 
-alias irssi="ssh irssi"
+alias irssi="autossh irssi"
 alias profanity="ssh profanity"
 
-alias waw="ping 10.4.2.1"
-alias wisla="ping 10.0.0.1"
+alias p="ping -w5 -c1 1.1.1.1"
+alias waw="ping -w5 -c1 10.4.2.1"
+alias wisla="ping -w5 -c1 10.0.0.1"
+
+alias wp="wpa_cli"
 # ^^^ last alias here
 
 # My helper functions
@@ -185,17 +186,6 @@ function ipaddr () {
 zle -N ipaddr
 bindkey "^[k" ipaddr
 
-function wpacli_list_networks () {
-    wpa_cli list_networks; zle redisplay
-}
-zle -N wpacli_list_networks
-bindkey "^[N" wpacli_list_networks
-
-# function listnetworks () {
-    # networkctl; zle redisplay
-# }
-# zle -N listnetworks
-# bindkey "^[n" listnetworks
 
 # Edit command line
 #autoload -U edit-command-line
