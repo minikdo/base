@@ -62,35 +62,21 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    ansible
-    battery
-    debian
-    docker-compose
-    git
     git-annex
     globalias
-    history
     man
-    pip
     sudo
-    systemd
     virtualenvwrapper
-    z
 )
 
 # User configuration
 
-export PATH=$HOME/.local/bin:$HOME/bin:/usr/sbin/:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/sbin/:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 
 # autoload -U compinit && compinit
-
-# Automatically list directory contents on `cd`.
-# psuje workon 
-# auto-ls () { ls --color; }
-# chpwd_functions=( auto-ls $chpwd_functions )
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -123,14 +109,16 @@ export SAVEHIST=0
 
 export EDITOR=e
 
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
+fi
+
 alias zshrc="$EDITOR ~/.zshrc"
 alias muttrc="$EDITOR ~/.muttrc"
 alias ach='apt changelog'
 alias jf='journalctl -f -n100'
-alias jc='journalctl -e --since=today'
 alias uq='systemctl list-units | grep $1'
 alias lf='systemctl list-units --state=failed'
-alias pass='EDITOR=nano pass'
 alias notmuch_hooks="$EDITOR ~/.mail/.notmuch/hooks/post-new"
 alias ss="ss -ltunp"
 alias ip="ip -c"
@@ -166,6 +154,7 @@ alias waw="ping -w5 -c1 10.4.2.1"
 alias wisla="ping -w5 -c1 10.0.0.1"
 
 alias wp="wpa_cli"
+alias mb="mbsync_wrapper minik"
 # ^^^ last alias here
 
 # My helper functions
@@ -233,5 +222,43 @@ ssh() {
     command ssh "$@"
   fi
 }
+
+
+# Prints apt history
+# Usage:
+#   apt-history install
+#   apt-history upgrade
+#   apt-history remove
+#   apt-history rollback
+#   apt-history list
+# Based On: https://linuxcommando.blogspot.com/2008/08/how-to-show-apt-log-history.html
+function apt-history() {
+  case "$1" in
+    install)
+      zgrep --no-filename 'install ' $(ls -rt /var/log/dpkg*)
+      ;;
+    upgrade|remove)
+      zgrep --no-filename $1 $(ls -rt /var/log/dpkg*)
+      ;;
+    rollback)
+      zgrep --no-filename upgrade $(ls -rt /var/log/dpkg*) | \
+        grep "$2" -A10000000 | \
+        grep "$3" -B10000000 | \
+        awk '{print $4"="$5}'
+      ;;
+    list)
+      zgrep --no-filename '' $(ls -rt /var/log/dpkg*)
+      ;;
+    *)
+      echo "Parameters:"
+      echo " install - Lists all packages that have been installed."
+      echo " upgrade - Lists all packages that have been upgraded."
+      echo " remove - Lists all packages that have been removed."
+      echo " rollback - Lists rollback information."
+      echo " list - Lists all contains of dpkg logs."
+      ;;
+  esac
+}
+
 
 autoload -U compinit && compinit
