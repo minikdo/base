@@ -6,7 +6,7 @@ if [ -f ~/.zsh_my_env ]; then
 fi
 
 # Set screensaver values
-xset s 120 540
+xset s 240 540
 xset dpms 1200 1200 1200
 
 # Turn off system beep in console:
