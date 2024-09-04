@@ -1,7 +1,7 @@
 *
+!/.aliases
 !/.ansible.cfg
 !/.bashrc
-!/bin/dim
 !/bin/dmenu_pass
 !/bin/dmenu_shutdown
 !/bin/e
