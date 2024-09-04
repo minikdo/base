@@ -1,10 +1,17 @@
 # -*- mode: shell-script; -*-
-# Ansible
-alias aplaybook='ansible-playbook '
-alias adoc='ansible-doc '
-alias aval='ansible-vault'
+# Global
+alias -g 192=192.168.0.1
 
-# Debian
+# Misc
+alias h=history
+
+# ansible
+alias aplaybook='ansible-playbook'
+alias adoc='ansible-doc'
+alias aval='ansible-vault'
+alias alint='ansible-lint'
+
+# debian
 alias aac='sudo apt autoclean'
 alias aar='sudo apt autoremove'
 alias ach='apt changelog'
@@ -70,5 +77,3 @@ alias scu-show='systemctl --user show'
 alias scu-start='systemctl --user start'
 alias scu-status='systemctl --user status'
 alias scu-stop='systemctl --user stop'
-
-alias h=history
