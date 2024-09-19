@@ -18,7 +18,7 @@ Config { font             = "xft:Iosevka-10"
        , allDesktops      = True
        , overrideRedirect = True
        , commands = [ Run MultiCpu          [ "-m"         , "3"
-                                            , "-t"         , "Threads: <total0> <total1> <total2> <total3> <total4> <total5> <total6> <total7> <total8> <total9> <total10> <total11>"
+                                            , "-t"         , "Threads: <total0> <total1> <total2> <total3>"
                                             , "--Low"      , "50"         -- units: %
                                             , "--High"     , "90"         -- units: %
                                             , "--low"      , "#025e7c,#002b36"
@@ -32,34 +32,19 @@ Config { font             = "xft:Iosevka-10"
                                             , "--low"      , "#025e7c,#002b36"
                                             , "--normal"   , "darkorange,#002b36"
                                             , "--high"     , "darkred,#002b36" ] 10
-                    , Run Network "wlp0s20f3"   [ "--template" , "<dev>: <tx>kB/s | <rx>kB/s"
+                    , Run Network "wlp4s0"   [ "--template" , "<dev>: <tx>kB/s | <rx>kB/s"
                                             , "--High"     , "500000"
                                             , "-m"         , "7"
                                             , "--low"      , "#025e7c,#002b36"
                                             , "--normal"   , "#025e7c,#002b36"
                                             , "--high"     , "darkred,#002b36" ] 10
-                    -- , Run Wireless "wlp0s20f3"  [ "-t"         , "Signal: <quality>%"
+                    -- , Run Wireless "wlp4s0"  [ "-t"         , "Signal: <quality>%"
                                             -- , "-m"         , "3"
                                             -- , "--Low"      , "49"        -- units: -- %
                                             -- , "--High"     , "65"        -- units: -- %
                                             -- , "--low"      , "red,#002b36"
                                             -- , "--normal"   , "darkorange,#002b36"
                                             -- , "--high"     , "#025e7c,#002b36" ] 10
-                    , Run BatteryP          [ "BAT0" ]
-                                            [ "-t"         , "<acstatus><left>% <watts>W"
-                                            , "-L"         , "2"
-                                            , "-H"         , "80"
-                                            , "-l"         , "red"
-                                            , "-p"         , "3"
-                                            , "--"         
-                                            , "-O"         , "↑" -- On
-                                            , "-o"         , "↓<timeleft>" -- Off
-                                            , "-i"         , ""
-                                            , "-L"         , "-15"
-                                            , "-H"         , "-5"
-                                            , "-l"         , "red"
-                                            , "-m"         , "white"
-                                            , "-h"         , "grey" ] 300
                     , Run Com "awk"         [ "NR==3 {print \"Quality: \" int(($3*100)/70) \"% dBm: \" int($4)}"
                                             , "/proc/net/wireless" ] "dbm" 50
                     -- , Run Com "uname" ["-s","-r"] "" 0
@@ -68,6 +53,6 @@ Config { font             = "xft:Iosevka-10"
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% <fc=#268bd2,#002b36> %wlp0s20f3%  %dbm%  %multicpu% %memory% </fc> }\
-                    \{ <fc=#98C379>%date%</fc> <fc=#268bd2>%battery%</fc>"
+       , template = "%StdinReader% <fc=#268bd2,#002b36> %wlp4s0%  %dbm%  %multicpu% %memory% </fc> }\
+                    \{ <fc=#98C379>%date%</fc>"
        }
