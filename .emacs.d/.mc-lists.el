@@ -6,15 +6,20 @@
         default-indent-new-line
         delete-indentation
         indent-for-tab-command
+        ispell-minor-check
         kill-region
         markdown-outdent-or-delete
         org-beginning-of-line
+        org-ctrl-c-ctrl-c
         org-delete-char
         org-end-of-line
+        org-fill-paragraph
         org-force-self-insert
         org-kill-line
+        org-metaright
         org-open-line
         org-self-insert-command
+        upcase-region
         yaml-electric-backspace
         yaml-electric-dash-and-dot
         ))
@@ -22,4 +27,5 @@
 (setq mc/cmds-to-run-once
       '(
         org-cycle
+        smex
         ))
