@@ -57,6 +57,7 @@
 !/.mailcap
 !/.psqlrc
 !/.tmux.conf
+!/.tzlist
 !/.urxvt/ext/resize-font
 !/.Xdefaults
 !/.xmonad/xmonad.hs
