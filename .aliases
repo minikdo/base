@@ -5,6 +5,7 @@ alias -g 192=192.168.0.1
 # Misc
 alias h=history
 alias sgnl='tmux setw monitor-activity on; autossh signal'
+alias metar_epwa_curl='curl https://waw.minik.pl/metar/stream/'
 
 # ansible
 alias aplaybook='ansible-playbook'
