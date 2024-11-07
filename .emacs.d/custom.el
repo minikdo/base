@@ -13,7 +13,7 @@
  '(main-line-color1 "#222232")
  '(main-line-color2 "#333343")
  '(org-agenda-files
-   '("/home/domino/.agenda/estates.org" "/home/domino/.agenda/agenda.org" "/home/domino/.agenda/issues.org" "/home/domino/.agenda/links.org" "/home/domino/.agenda/notes.org"))
+   '("~/syncthing/current_travel.org" "/home/domino/.agenda/estates.org" "/home/domino/.agenda/agenda.org" "/home/domino/.agenda/issues.org" "/home/domino/.agenda/links.org" "/home/domino/.agenda/notes.org"))
  '(package-hidden-regexps '("\\`backtrace\\'" ""))
  '(package-selected-packages
    '(emmet-mode yasnippet-snippets yaml-mode which-key web-mode virtualenvwrapper use-package smex rainbow-mode projectile popup paredit org-bullets modus-themes lsp-mode jinja2-mode haskell-mode git-annex flx-ido dockerfile-mode diminish corfu clues-theme apache-mode tao-theme smartparens rust-mode nftables-mode multiple-cursors jsonrpc jedi default-text-scale))
