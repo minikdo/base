@@ -3,8 +3,10 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        cycle-spacing
         default-indent-new-line
         delete-indentation
+        electric-pair-delete-pair
         indent-for-tab-command
         ispell-minor-check
         kill-region
