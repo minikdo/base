@@ -22,9 +22,9 @@ xrdb -merge ~/.Xdefaults
 
 synclient TapButton1=0 TapButton2=0 TapButton3=0 PalmDetect=1 AccelFactor=2 MaxSpeed=2 &
 
-XAUTH=/tmp/container_xauth
-DISPLAY=:0
-xauth nextract - "$DISPLAY" | sed -e 's/^..../ffff/' | xauth -f "$XAUTH" nmerge -
+#XAUTH=/tmp/container_xauth
+#DISPLAY=:0
+#xauth nextract - "$DISPLAY" | sed -e 's/^..../ffff/' | xauth -f "$XAUTH" nmerge -
 
 pidof picom 1> /dev/null || picom &
 
