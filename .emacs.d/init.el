@@ -167,6 +167,12 @@
   (find-file user-init-file))
 
 
+;; from https://zck.org/balance-emacs-windows
+(seq-doseq (fn (list #'split-window #'delete-window))
+  (advice-add fn
+              :after
+              #'(lambda (&rest args) (balance-windows))))
+
 ;; ------
 ;; Default-text-scale (melpa)
 ;; ------
