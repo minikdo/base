@@ -174,6 +174,29 @@
               #'(lambda (&rest args) (balance-windows))))
 
 ;; ------
+;; Printing settings
+;; ------
+
+(setq ps-print-footer nil)
+(setq ps-print-header nil)
+
+(setq ps-font-info-database
+      (append
+       '((Iosevka
+          (fonts (normal      . "Iosevka")
+                 (bold        . "Iosevka-Bold")
+                 (italic      . "Iosevka-Italic")
+                 (bold-italic . "Iosevka-Bold-Italic"))
+          (size           . 8.0)
+          (line-height    . 13.0)
+          (space-width    . 6.04688)
+          (avg-char-width . 6.04688)))
+       ps-font-info-database))
+(setq ps-font-family 'Iosevka)
+(setq ps-font-size 8)
+
+
+;; ------
 ;; Default-text-scale (melpa)
 ;; ------
 
