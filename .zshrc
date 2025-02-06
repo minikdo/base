@@ -155,6 +155,7 @@ alias wisla="ping -w5 -c1 10.0.0.1"
 
 alias wp="wpa_cli"
 alias mb="mbsync_wrapper minik"
+alias imap_list="imap_idle -l"
 # ^^^ last alias here
 
 # My helper functions
