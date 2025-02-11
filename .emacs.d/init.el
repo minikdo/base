@@ -177,6 +177,7 @@
 ;; Printing settings
 ;; ------
 
+(require 'ps-print)
 (setq ps-print-footer nil)
 (setq ps-print-header nil)
 
