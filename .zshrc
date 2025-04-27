@@ -67,6 +67,7 @@ plugins=(
     man
     sudo
     virtualenvwrapper
+    zsh-autopair
 )
 
 # User configuration
@@ -115,47 +116,12 @@ fi
 
 alias zshrc="$EDITOR ~/.zshrc"
 alias muttrc="$EDITOR ~/.muttrc"
-alias ach='apt changelog'
-alias jf='journalctl -f -n100'
-alias uq='systemctl list-units | grep $1'
-alias lf='systemctl list-units --state=failed'
 alias notmuch_hooks="$EDITOR ~/.mail/.notmuch/hooks/post-new"
-alias ss="ss -ltunp"
-alias ip="ip -c"
-alias lintian="lintian -iIEv --pedantic"
-alias df="df -h --total"
-alias fcp="fc -p ~/.zsh_history; cd ~; clear;  tmux clear-history"
-alias mc="SHELL=/bin/bash mc"
-alias git-b='gbp buildpackage -us -uc --git-pristine-tar --git-export-dir=/tmp/build/build_$(date +%s) '
-
-alias ll='ls -lah'
-alias l='ls -lh'
 
 alias -g L="| less"
 alias -g M="| more"
 alias -g LL="2>&1 | less"
 
-alias m="mutt"
-alias s="signal-send"
-alias mcc="mc ~/.config"
-alias mcl="mc ~/.local/share"
-alias rs="redshift_wrapper"
-alias nm="notmuch"
-
-# avoid running ghostscript
-alias gs="echo 'gs?'"
-alias g="git status"
-
-alias irssi="autossh irssi"
-alias profanity="ssh profanity"
-
-alias p="ping -w5 -c1 1.1.1.1"
-alias waw="ping -w5 -c1 10.4.2.1"
-alias wisla="ping -w5 -c1 10.0.0.1"
-
-alias wp="wpa_cli"
-alias mb="mbsync_wrapper minik"
-alias imap_list="imap_idle -l"
 # ^^^ last alias here
 
 # My helper functions

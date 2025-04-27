@@ -4,8 +4,42 @@ alias -g 192=192.168.0.1
 
 # Misc
 alias h=history
+alias ss="ss -ltunp"
+alias ip="ip -c"
+alias lintian="lintian -iIEv --pedantic"
+alias df="df -h --total"
+alias fcp="fc -p ~/.zsh_history; cd ~; clear;  tmux clear-history"
+alias mc="SHELL=/bin/bash mc"
+alias git-b='gbp buildpackage -us -uc --git-pristine-tar --git-export-dir=/tmp/build/build_$(date +%s) '
+alias ll='ls -lah'
+alias l='ls -lh'
 alias sgnl='tmux setw monitor-activity on; autossh signal'
 alias metar_epwa_curl='curl https://waw.minik.pl/metar/stream/'
+alias czantoria='~/syncthing/bin/scrape_czantoria_weather.py | jq .'
+
+alias m="mutt"
+alias s="signal-send"
+
+alias mcc="mc ~/.config"
+alias mcl="mc ~/.local/share"
+
+alias rs="redshift_wrapper"
+alias nm="notmuch"
+
+# avoid running ghostscript
+alias gs="echo 'gs?'"
+alias g="git status"
+
+alias irssi="autossh irssi"
+alias profanity="ssh profanity"
+
+alias p="ping -w5 -c1 1.1.1.1"
+alias waw="ping -w5 -c1 10.4.2.1"
+alias wisla="ping -w5 -c1 10.0.0.1"
+
+alias wp="wpa_cli"
+alias mb="mbsync_wrapper minik"
+alias imap_list="imap_idle -l"
 
 # ansible
 alias aplaybook='ansible-playbook'
@@ -14,6 +48,7 @@ alias aval='ansible-vault'
 alias alint='ansible-lint'
 
 # debian
+alias ach='apt changelog'
 alias aac='sudo apt autoclean'
 alias aar='sudo apt autoremove'
 alias ach='apt changelog'
@@ -21,7 +56,6 @@ alias acs='apt-cache search'
 alias ad='sudo apt update'
 alias afs='apt-file search --regexp'
 alias ai='sudo apt install'
-alias alu='sudo apt update && apt list -u && sudo apt upgrade'
 alias ap='sudo apt purge'
 alias au='sudo apt upgrade'
 
@@ -61,7 +95,13 @@ alias grs='git restore'
 alias gsw='git switch'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message "--wip-- [skip ci]"'
 
+# journal
+alias jf='journalctl -f -n100'
+alias je='journalctl -e'
+
 # systemd
+alias uq='systemctl list-units | grep $1'
+alias lf='systemctl list-units --state=failed'
 alias sc-cat='systemctl cat'
 alias sc-daemon-reload='sudo systemctl daemon-reload'
 alias sc-disable='sudo systemctl disable'
