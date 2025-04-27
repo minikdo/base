@@ -21,6 +21,7 @@
         org-metaright
         org-open-line
         org-self-insert-command
+        org-yank
         upcase-region
         yaml-electric-backspace
         yaml-electric-dash-and-dot
