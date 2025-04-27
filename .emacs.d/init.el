@@ -223,7 +223,7 @@
  ("M-Q"        . unfill-paragraph)
  ("C-c d"      . diff-buffer-with-file)
  ("C-c R"      . revert-buffer)
- ("C-x k"      . kill-this-buffer)
+ ("C-x k"      . kill-current-buffer)
  ("<f9>"       . flyspell-mode)
  ;; my custom functions
  ("ESC <down>" . my-comment-and-go-down)

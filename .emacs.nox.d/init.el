@@ -66,7 +66,7 @@
   :bind ("C-h B" . describe-personal-keybindings))
 
 (bind-key* "<C-return>" 'other-window) ;; not working
-(bind-key* "C-x k" 'kill-this-buffer)
+(bind-key* "C-x k" 'kill-current-buffer)
 (bind-key* "<f5>" (lambda() (interactive) (switch-to-buffer "*scratch*")))
 (bind-key* "M-<f8>" (lambda() (interactive) (find-file "~/.emacs.nox.d/init.el")))
 (bind-key* "<f9>" 'flyspell-mode) ;; toggle mode
