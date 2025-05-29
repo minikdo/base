@@ -449,6 +449,27 @@
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
 
+;; ---------
+;; mail-mode
+;; ---------
+
+(use-package mail
+  :init
+  (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
+  (add-to-list 'auto-mode-alist '("/neomutt" . mail-mode))
+  (setq ispell-dictionary "polish")
+  :hook
+  (mail-mode . footnote-mode)
+  (mail-mode . flyspell-mode)
+  (mail-mode . yas-minor-mode)
+  (mail-mode . (lambda ()
+                 (font-lock-add-keywords nil
+                                         '(("^[ \t]*>[ \t]*>[\t]*>.*$"
+                                            (0 'match))
+                                           ("^[\t]*>[ \t]*>.*$"
+                                            (0 'success))))
+                 (auto-fill-mode))))
+
 ;; ------
 ;; Yasnippet
 ;; ------
