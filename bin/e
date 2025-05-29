@@ -14,7 +14,7 @@ socket_exists() {
 # Open in tty
 if [[ $self == "e" ]]; then
 
-    SOCKET=/run/user/$USERID/emacs/nox
+    SOCKET=/run/user/$USERID/emacs/server
     socket_exists
 
     # open frame on the current terminal
