@@ -298,6 +298,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Expand the master area
     , ((modm              , xK_l     ), sendMessage Expand)
 
+    -- Screenshot with select
+    , ((modm .|. shiftMask, xK_s     ), spawn "scrot -s")
+
     -- Push window back into tiling
     , ((modm              , xK_t     ), withFocused $ windows . W.sink)
 
