@@ -424,14 +424,20 @@
 ;;;;                  ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'web-mode)
-(add-hook 'web-mode-hook 'emmet-mode) ;; enable Emmet's css abbreviation.
-(add-hook 'web-mode-hook (lambda () (autopair-mode -1))) ;; enable Emmet's css abbreviation.
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(setq web-mode-engines-alist
+;; (require 'web-mode)
+;; (add-hook 'web-mode-hook 'emmet-mode) ;; enable Emmet's css abbreviation.
+;; (add-hook 'web-mode-hook (lambda () (autopair-mode -1))) ;; enable Emmet's css abbreviation.
+;; (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+;; (setq web-mode-engines-alist
+      ;; '(("django" . "\\.html\\'")))
+;; (setq web-mode-enable-auto-closing t)
+;; (setq web-mode-enable-auto-pairing t)
+
+(use-package web-mode
+  :config
+  (setq web-mode-engines-alist
       '(("django" . "\\.html\\'")))
-(setq web-mode-enable-auto-closing t)
-(setq web-mode-enable-auto-pairing t)
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                    ;;;;
