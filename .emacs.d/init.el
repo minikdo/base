@@ -225,6 +225,7 @@
  ("C-c R"      . revert-buffer)
  ("C-x k"      . kill-current-buffer)
  ("<f9>"       . flyspell-mode)
+ ("M-<f9>"     . whitespace-mode)
  ;; my custom functions
  ("ESC <down>" . my-comment-and-go-down)
  ("ESC <up>"   . my-uncomment-and-go-up)
