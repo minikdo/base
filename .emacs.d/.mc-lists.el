@@ -9,11 +9,13 @@
         electric-pair-delete-pair
         indent-for-tab-command
         ispell-minor-check
+        jinja2-insert-var
         kill-region
         markdown-outdent-or-delete
         org-beginning-of-line
         org-ctrl-c-ctrl-c
         org-delete-char
+        org-delete-indentation
         org-end-of-line
         org-fill-paragraph
         org-force-self-insert
@@ -22,6 +24,7 @@
         org-open-line
         org-self-insert-command
         org-yank
+        transpose-words
         upcase-region
         yaml-electric-backspace
         yaml-electric-dash-and-dot

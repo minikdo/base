@@ -116,7 +116,7 @@ fi
 
 alias zshrc="$EDITOR ~/.zshrc"
 alias muttrc="$EDITOR ~/.muttrc"
-alias notmuch_hooks="$EDITOR ~/.mail/.notmuch/hooks/post-new"
+alias nm_hooks="$EDITOR ~/.mail/.notmuch/hooks/post-new"
 
 alias -g L="| less"
 alias -g M="| more"
@@ -130,6 +130,11 @@ function dq () {
     dpkg-query -W \
                -f='${db:Status-Abbrev}${binary:Package} '"$fg[blue]"'(${Version})'"$reset_color"'\n' \
         | grep -i --colour=never $1
+}
+
+function curl_logs () {
+    curl -H'Range: entries=:-25:'\
+         "http://${1}:19531/entries?follow"
 }
 
 function acsh () {
