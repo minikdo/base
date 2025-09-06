@@ -16,6 +16,7 @@ image/gif=viewnior.desktop
 image/tiff=viewnior.desktop
 x-scheme-handler/mailto=neomutt.desktop
 video/vnd.avi=mpv.desktop
+audio/mpeg=mpv.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox-esr.desktop;
