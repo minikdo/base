@@ -118,11 +118,11 @@
         ("w" "work done" entry (file+headline "~/.agenda/estates.org" "Work")
 	     "* DONE %u\n- %?\n")
         ("p" "Protocol" entry (file "~/.agenda/links.org")
-         "* [[%:link][%:description]]\n\n  #+BEGIN_QUOTE\n  %i\n  #+END_QUOTE\n\n  Captured On: %u\n"
+         "* TODO [[%:link][%:description]]\n\n  #+BEGIN_QUOTE\n  %i\n  #+END_QUOTE\n\n  Captured On: %u\n"
          :empty-lines 1
          :immediate-finish t)
 	    ("L" "Protocol Link" entry (file "~/.agenda/links.org")
-         "* [[%:link][%:description]]\n  Captured On: %U"
+         "* TODO [[%:link][%:description]]\n  Captured On: %U"
          :empty-lines 1
          :immediate-finish t)
         ))
