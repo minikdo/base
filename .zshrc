@@ -132,9 +132,14 @@ function dq () {
         | grep -i --colour=never $1
 }
 
-function curl_logs () {
-    curl -H'Range: entries=:-25:'\
-         "http://${1}:19531/entries?follow"
+function logs () {
+    local server
+    unset FZF_DEFAULT_OPTS
+    server=$(grep -E '^10\..*' /etc/hosts | grep 'srv-' | awk '{print $2}' | fzf --reverse)
+    if [[ -n $server ]]; then
+        curl -H'Range: entries=:-25:'\
+             "http://${server}:19531/entries?follow"
+    fi
 }
 
 function acsh () {
@@ -147,6 +152,18 @@ function ipaddr () {
 zle -N ipaddr
 bindkey "^[k" ipaddr
 
+function sshfzf () {
+    local server
+    unset FZF_DEFAULT_OPTS
+    server=$(grep -E '^Host ' ~/.ssh/config | awk '{print $2}' | fzf --layout=reverse)
+    # server=$(grep -E '^10\..*' /etc/hosts | awk '{print $2}' | fzf)
+    if [[ -n $server ]]; then
+        BUFFER="ssh $server"
+        zle accept-line
+    fi
+}
+zle -N sshfzf
+bindkey "^[j" sshfzf
 
 # Edit command line
 #autoload -U edit-command-line
