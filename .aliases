@@ -34,13 +34,12 @@ alias irssi="autossh irssi"
 alias profanity="ssh profanity"
 
 alias p="ping -w5 -c1 1.1.1.1"
-alias waw="ping -w5 -c1 10.4.2.1"
-alias wisla="ping -w5 -c1 10.0.0.1"
+alias pp="network_test"
 
 alias wp="wpa_cli"
 alias mb="mbsync_wrapper minik"
-alias imap_list="imap_idle -l"
 alias im="imap_idle -l"
+alias imm="imap_idle"
 
 # ansible
 alias aplaybook='ansible-playbook'
