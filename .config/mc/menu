@@ -409,3 +409,13 @@ U       git annex add
 + t t
 U       git annex add
         git annex add %u
+
+x       Rename with 00->99 counter preserving extension
+        i=1
+        for file in %s; do
+            extension=.${file##*.}
+            [ "$extension" = ".$file" ] && extension=""
+            cnt=$(printf '%%02d' "$i")
+            mv -- "$file" "$cnt$extension"
+            i=$((i+1))
+        done
