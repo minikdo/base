@@ -12,7 +12,7 @@
 (load-theme 'clues t)
 
 (set-frame-font "iosevka 10" nil t)
-(set-face-attribute 'default nil :height 130)
+(set-face-attribute 'default nil :height 145)
 
 ;; Custom colors
 (custom-set-faces
