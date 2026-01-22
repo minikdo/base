@@ -570,9 +570,17 @@
   (setq redtick-sound-volume "1")
   (setq redtick-history-file nil))
 
+
+;; Upon saving a file in Emacs, these modes delete trailing whitespace
+;; on lines of the buffer that have been edited.
 (use-package ws-butler
   :hook
   (prog-mode . ws-butler-mode))
+
+
+;; diff-hl-mode highlights uncommitted changes on the side of the
+;; window, allows you to jump between and revert them selectively.
+(global-diff-hl-mode)
 
 ;; ------
 ;; Source other modes
