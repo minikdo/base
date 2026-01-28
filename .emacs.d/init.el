@@ -12,7 +12,7 @@
 (load-theme 'clues t)
 
 (set-frame-font "iosevka 10" nil t)
-(set-face-attribute 'default nil :height 145)
+(set-face-attribute 'default nil :height 135)
 
 ;; Custom colors
 (custom-set-faces
@@ -570,6 +570,12 @@
   (setq redtick-sound-volume "1")
   (setq redtick-history-file nil))
 
+
+(use-package whitespace
+  :config
+  (setq whitespace-line-column 52)
+  (setq whitespace-style '(face lines-tail))
+)
 
 ;; Upon saving a file in Emacs, these modes delete trailing whitespace
 ;; on lines of the buffer that have been edited.
