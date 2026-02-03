@@ -34,9 +34,11 @@ alias irssi="autossh irssi"
 alias profanity="ssh profanity"
 
 alias p="ping -w5 -c1 1.1.1.1"
+alias p6="ping6 -w5 -c1 2a01:7e01::f03c:91ff:febb:1d9d"
 alias pp="network_test"
 
 alias wp="wpa_cli"
+alias wpp="wpa_cli scan_results | less"
 alias mb="mbsync_wrapper minik"
 alias im="imap_idle -l"
 alias imm="imap_idle"
