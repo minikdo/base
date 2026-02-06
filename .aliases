@@ -98,6 +98,10 @@ alias gsw='git switch'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message "--wip-- [skip ci]"'
 alias gunwip='git rev-list --max-count=1 --format="%s" HEAD | grep -q -- "--wip--" && git reset HEAD~1'
 
+# git-annex
+alias gaa='git annex add'
+alias gas='git annex sync --content'
+
 # journal
 alias jf='journalctl -f -n100'
 alias je='journalctl -e'
