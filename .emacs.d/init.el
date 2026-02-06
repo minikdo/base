@@ -119,12 +119,13 @@
   (if (> arg 1) (my-uncomment-and-go-down (1- arg))))
 
 
-(defun my-switch-to-scratch-end ()
-  "Switch to *scratch*. If in *scratch*, go to end."
+(defun my-switch-to-scratch-del-other ()
+  "Switch to *scratch*. If in *scratch*, delete other windows."
   (interactive)
   (if (equal (current-buffer) (get-buffer "*scratch*"))
-      (end-of-buffer))
+      (delete-other-windows))
   (switch-to-buffer "*scratch*")
+  ;; (end-of-buffer)
   (recenter-top-bottom))
 
 
@@ -229,7 +230,7 @@
  ;; my custom functions
  ("ESC <down>" . my-comment-and-go-down)
  ("ESC <up>"   . my-uncomment-and-go-up)
- ("<f5>"       . my-switch-to-scratch-end)
+ ("<f5>"       . my-switch-to-scratch-del-other)
  ("<f8>"       . my-cycle-theme)
  ("M-<f8>"     . my-edit-configuration)
  ("C-c M-s"    . my-switch-dictionary))
