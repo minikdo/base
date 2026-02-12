@@ -26,12 +26,17 @@
         org-yank
         transpose-words
         upcase-region
+        wdired--self-insert
+        wdired-capitalize-word
         yaml-electric-backspace
         yaml-electric-dash-and-dot
         ))
 
 (setq mc/cmds-to-run-once
       '(
+        dired-previous-line
         org-cycle
         smex
+        wdired-finish-edit
+        wdired-next-line
         ))
