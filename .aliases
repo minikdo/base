@@ -101,6 +101,7 @@ alias gunwip='git rev-list --max-count=1 --format="%s" HEAD | grep -q -- "--wip-
 # git-annex
 alias gaa='git annex add'
 alias gas='git annex sync --content'
+alias gal='git annex list'
 
 # journal
 alias jf='journalctl -f -n100'
