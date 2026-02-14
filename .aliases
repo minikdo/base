@@ -28,7 +28,6 @@ alias nm="notmuch"
 
 # avoid running ghostscript
 alias gs="echo 'gs?'"
-alias g="git status"
 
 alias irssi="autossh irssi"
 alias profanity="ssh profanity"
@@ -93,6 +92,7 @@ alias gd='git diff'
 alias gl='git pull'
 alias gg='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset" --date=short'
 alias gp='git push'
+alias gr='git remote'
 alias grs='git restore'
 alias gsw='git switch'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message "--wip-- [skip ci]"'
