@@ -574,8 +574,8 @@
 
 (use-package whitespace
   :config
-  (setq whitespace-line-column 52)
-  (setq whitespace-style '(face lines-tail))
+  ;; (setq whitespace-line-column 52)
+  ;; (setq whitespace-style '(face lines-tail))
 )
 
 ;; Upon saving a file in Emacs, these modes delete trailing whitespace
