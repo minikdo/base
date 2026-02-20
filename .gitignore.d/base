@@ -29,6 +29,8 @@
 !/.config/mimeapps.list
 !/.config/mpv
 !/.config/mpv/mpv.conf
+!/.config/nano
+!/.config/nano/nanorc
 !/.config/oh-my-zsh
 !/.config/oh-my-zsh/aliases.zsh
 !/.config/oh-my-zsh/plugins

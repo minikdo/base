@@ -1,0 +1,27 @@
+## Enable syntax highlighting
+include "/usr/share/nano/*.nanorc"
+
+## Interface & Navigation
+set linenumbers      # Display line numbers on the left
+set constantshow     # Show cursor position (line, col, char) at the bottom
+set mouse            # Enable mouse support for scrolling and positioning
+set smooth           # Smooth scrolling (line by line instead of half-screens)
+set softwrap         # Wrap long lines without breaking words
+
+## Editing & Indentation
+set tabsize 4        # Set tab width to 4 spaces
+set tabstospaces     # Convert tabs to spaces (prevents YAML/Python syntax errors)
+set autoindent       # Indent new lines to the previous line's level
+set zap              # Use Backspace/Delete to remove selected text
+
+## UI Colors
+set titlecolor brightwhite,blue    # Title bar colors
+set statuscolor brightwhite,green  # Status bar colors
+set numbercolor cyan               # Line numbers color
+set selectedcolor black,yellow     # Highlighted text color
+
+## Behavior & Safety
+set atblanks         # Wrap lines at whitespace instead of mid-word
+# set historylog       # Remember search strings and position between sessions
+# set backup           # Enable backups (creates 'filename~' on save)
+# set backupdir "~/.nano_backups"    # Keep backups in a dedicated folder
