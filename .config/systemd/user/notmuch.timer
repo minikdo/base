@@ -1,9 +1,0 @@
-[Unit]
-Description=notmuch timer
-
-[Timer]
-OnBootSec=5min
-OnUnitActiveSec=1d
-
-[Install]
-WantedBy=default.target

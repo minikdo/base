@@ -45,15 +45,10 @@
 !/.config/redshift.conf
 !/.config/systemd
 !/.config/systemd/user
-!/.config/systemd/user/compton.service
-!/.config/systemd/user/conky.service
-!/.config/systemd/user/emacs.service
-!/.config/systemd/user/emacs.socket
-!/.config/systemd/user/notmuch.service
-!/.config/systemd/user/notmuch.timer
 !/.config/systemd/user/parcellite.service
 !/.config/systemd/user/redshift.service
 !/.config/systemd/user/unclutter.service
+!/.config/systemd/user/xsession.target
 !/.config/systemd/user/xss-lock.service
 !/.config/user-dirs.dirs
 !/.config/xmobar
