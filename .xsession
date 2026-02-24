@@ -13,6 +13,12 @@ xset dpms 1200 1200 1200
 xset b off
 xset b 0 0 0
 
+# 1. Export environment variables to systemd
+dbus-update-activation-environment --systemd DISPLAY XAUTHORITY
+
+# 2. Start your proxy target (which pulls in graphical-session.target)
+systemctl --user start xsession.target
+
 #xss-lock -n dim slock &
 systemctl --user import-environment XDG_SESSION_ID && \
   systemctl --user start xss-lock.service
