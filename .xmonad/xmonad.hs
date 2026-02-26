@@ -4,7 +4,6 @@ import XMonad.Actions.DynamicProjects
 import XMonad.Actions.DwmPromote
 import XMonad.Actions.WindowGo
 import XMonad.Actions.SpawnOn
--- import XMonad.Actions.UpdateFocus
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -25,7 +24,6 @@ import XMonad.Prompt.Input
 import XMonad.Prompt.Shell
 
 import XMonad.Util.Run (spawnPipe, runProcessWithInput, runInTerm, safeSpawn)
--- import XMonad.Util.Scratchpad (scratchpadSpawnAction, scratchpadManageHook)
 import XMonad.Util.NamedScratchpad
 
 import XMonad.Wallpaper
@@ -116,18 +114,6 @@ projects =
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn myTmux
             }
-  -- , Project { projectName      = "7"
-            -- , projectDirectory = "~/"
-            -- , projectStartHook = Just $ do spawn "kitty --title mutt neomutt"
-            -- }
-  -- , Project { projectName      = "8"
-            -- , projectDirectory = "~/"
-            -- , projectStartHook = Just $ do spawn "~/bin/signal-desktop"
-            -- }
-  -- , Project { projectName      = "9"
-            -- , projectDirectory = "~/"
-            -- , projectStartHook = Just $ do spawn "kitty --override font_size=11 --title jrnl my_jrnl"
-            -- }
   ]
 
 
@@ -150,11 +136,8 @@ myManageHook = composeAll
       , className =? "Tor Browser"        --> doShift "1"
       , className =? "firefox-esr"        --> doShift "1"
       , className =? "Emacs"              --> doShift "2"
-      -- , title     =? "mutt"               --> doShift "7"
-      -- , title     =? "profanity"          --> doShift "7"
       , className =? "Signal"             --> doShift "4"
       , className =? "Signal Beta"        --> doShift "4"
-      -- , title     =? "jrnl"               --> doShift "9"
       , className =? "Navigator"          --> doFloat
       , className =? "Viewnior"           --> doFloat
       , className =? "Pinentry"           --> doCenterFloat
@@ -175,7 +158,7 @@ myWorkspaces = [ "1", "2", "3", "4" ]
 
 myPP :: PP
 myPP = def { ppTitle   = xmobarColor blue      "" . shorten myTitleLength
-           , ppCurrent = xmobarColor green    "" . wrap "[" "]"
+           , ppCurrent = xmobarColor green     "" . wrap "[" "]"
            , ppHidden  = xmobarColor active    "" . noScratchPad
            , ppLayout  = xmobarColor blue      ""
            , ppSep     = " :: "
@@ -222,7 +205,6 @@ calcPrompt c ans =
 myModMask :: KeyMask
 myModMask = mod4Mask
 
--- showKeybindings :: [((KeyMask, KeySym), NamedAction)] -> NamedAction
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
@@ -248,22 +230,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_Tab   ), windows W.focusDown)
 
     -- Move focus to the next window
-    , ((modm,               xK_j     ), windows W.focusDown)
+    -- , ((modm,               xK_j     ), windows W.focusDown)
 
     -- Move focus to the previous window
-    , ((modm,               xK_k     ), windows W.focusUp)
+    -- , ((modm,               xK_k     ), windows W.focusUp)
 
     -- Emacs
-    , ((modm,               xK_e     ), runOrRaise "emacs" (className =? "Emacs"))
+    -- , ((modm,               xK_e     ), runOrRaise "emacs" (className =? "Emacs"))
     
-    -- Emacs
-    , ((modm,               xK_f     ), runOrRaise "firefox" (className =? "Firefox-esr"))
-
-    -- Mutt
-    -- , ((modm,               xK_m     ), raiseMaybe (spawn "kitty --title mutt neomutt") (title =? "mutt"))
-
-    -- Profanity
-    -- , ((modm,               xK_p     ), raiseMaybe (spawn "kitty --title profanity profanity") (title =? "profanity"))
+    -- Firefox
+    -- , ((modm,               xK_f     ), runOrRaise "firefox-esr" (className =? "Firefox-esr"))
 
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
@@ -287,16 +263,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0  , xF86XK_MonBrightnessDown), spawn "xbacklight -dec 10")
 
     -- Swap the focused window with the next window
-    , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
+    -- , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
 
     -- Swap the focused window with the previous window
-    , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
+    -- , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
 
     -- Shrink the master area
-    , ((modm              , xK_h     ), sendMessage Shrink)
+    -- , ((modm              , xK_h     ), sendMessage Shrink)
 
     -- Expand the master area
-    , ((modm              , xK_l     ), sendMessage Expand)
+    -- , ((modm              , xK_l     ), sendMessage Expand)
 
     -- Screenshot with select
     , ((modm .|. shiftMask, xK_s     ), spawn "scrot -s")
@@ -305,10 +281,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_t     ), withFocused $ windows . W.sink)
 
     -- Increment the number of windows in the master area
-    , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
+    -- , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
 
     -- Deincrement the number of windows in the master area
-    , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+    -- , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
     -- Lock the screen using command specified by myScreenlocker
     , ((0                 , xK_F12   ), spawn myScreenlocker)
@@ -323,13 +299,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_Return), dwmpromote)
 
     -- Pop open a dmenu to poweroff/reboot/suspend/lock
-    , ((modm              , xK_x     ), spawn "dmenu_shutdown")
+    -- , ((modm              , xK_x     ), spawn "dmenu_shutdown")
 
     -- Pop open a dmenu to pass
     , ((modm              , xK_u     ), spawn "dmenu_pass")
 
     -- Pop tiny terminal window via Scratchpad
-    -- , ((modm              , xK_grave ), scratchpadSpawnAction def {terminal = "urxvt"})
     , ((modm              , xK_grave ), namedScratchpadAction myScratchpads "bash")
 
     -- Shell Prompt to run a shell command
@@ -363,19 +338,23 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm, button3), (\w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster))
     ]
 
+myStartupHook :: X ()
+myStartupHook = do
+  setWMName "LG3D"
+  windows $ W.view "3"
+
 main :: IO ()
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar ~/.config/xmobar/xmobarrc"
     setRandomWallpaper ["$HOME/.local/share/wallpapers"]
     xmonad $ docks $ ewmhFullscreen . ewmh $ dynamicProjects projects def
-    -- xmonad $ ewmh $ def
         { workspaces         = myWorkspaces
         , terminal           = myTerminal
         , focusFollowsMouse  = myFocusFollowsMouse
         , borderWidth        = myBorderWidth
         , focusedBorderColor = myFocusedBorderColor
         , normalBorderColor  = myNormalBorderColor
-        , startupHook        = setWMName "LG3D"
+        , startupHook        = myStartupHook
         , modMask            = myModMask
         , keys               = myKeys
         , mouseBindings      = myMouseBindings
