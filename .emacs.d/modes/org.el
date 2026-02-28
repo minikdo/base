@@ -110,6 +110,7 @@
 
 (require 'org-protocol)
 
+
 (setq org-capture-templates
       '(("t" "todo" entry (file+headline "~/.agenda/agenda.org" "Tasks")
 	     "* TODO %?\n%U\n")
@@ -125,29 +126,42 @@
          "* TODO [[%:link][%:description]]\n  Captured On: %U"
          :empty-lines 1
          :immediate-finish t)
+        ("m" "Mutt TODO" entry (file "~/.agenda/mails.org")
+         "* TODO Reply to: %i\n   Subject: %:description\n   Source: [[%:link][message-id]]\n   %U"
+         :empty-lines 1
+         :immediate-finish t)
         ))
 
 
-        ;; ("m"
-         ;; "Capture incoming email"
-         ;; entry
-         ;; (file+headline "~/.agenda/agenda.org" "Incoming")
-         ;; "* TODO Re: %:description\n\n  Source: %u, %a\n"
-         ;; :empty-lines 1 )
+(org-link-set-parameters "message"
+ :follow (lambda (msg-id)
+           ;; Using vfolder-from-query to find the ID globally
+           (let ((command (format "kitty neomutt -e \"push '<vfolder-from-query>id:%s<enter>'\" 2>/dev/null" msg-id)))
+             (message "Opening message: %s" msg-id)
+             (shell-command command))))
 
 
-;;(add-hook 'org-capture-mode-hook 'delete-other-windows)
-(setq my-org-protocol-flag nil)
-(defadvice org-capture-finalize (after delete-frame-at-end activate)
-  "Delete frame at remember finalization"
-  (progn (if my-org-protocol-flag (delete-frame))
-         (setq my-org-protocol-flag nil)))
-(defadvice org-capture-kill (after delete-frame-at-end activate)
-  "Delete frame at remember abort"
-  (progn (if my-org-protocol-flag (delete-frame))
-         (setq my-org-protocol-flag nil)))
-(defadvice org-protocol-capture (before set-org-protocol-flag activate)
+
+(defvar my-org-protocol-flag nil
+  "Flag to track if the current capture was initiated via org-protocol.")
+
+;; Funkcja pomocnicza do sprzątania ramki
+(defun my-org-capture-cleanup-frame (&rest _)
+  "Delete frame if it was created via org-protocol."
+  (when my-org-protocol-flag
+    (setq my-org-protocol-flag nil)
+    (delete-frame)))
+
+;; Ustawienie flagi przed uruchomieniem capture przez protokół
+(define-advice org-protocol-capture (:before (&rest _) set-flag)
   (setq my-org-protocol-flag t))
+
+;; Podpięcie sprzątania pod finalizację ORAZ porzucenie (kill) capture
+(advice-add 'org-capture-finalize :after #'my-org-capture-cleanup-frame)
+(advice-add 'org-capture-kill :after #'my-org-capture-cleanup-frame)
+
+
+
 
 
 (add-hook 'org-mode-hook 'auto-fill-mode)
