@@ -1,5 +1,10 @@
 echo "=== $(date) ===" >> $HOME/.xsession-errors
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
 # source my env
 if [ -f ~/.zsh_my_env ]; then
     . ~/.zsh_my_env
