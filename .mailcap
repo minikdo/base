@@ -1,6 +1,5 @@
-application/pdf; evince %s; test=test -n "$DISPLAY"
+application/pdf; okular %s; test=test -n "$DISPLAY"
 text/html; /usr/bin/sensible-browser %s & sleep 5s ; copiusoutput; test=test -n "$DISPLAY"; nametemplate=%s.html
-#text/html; chmod +w %s && $HOME/bin/my_html_preview %s ; description=HTML Text; nametemplate=%s.html
 text/html; /usr/bin/w3m -I %{charset} -dump -T text/html %s; copiousoutput; description=HTML Text; nametemplate=%s.html
 image/gif; viewnior '%s'; test=test -n "$DISPLAY" ; description=GIF Image; nametemplate=%s.gif
 image/jpeg; viewnior '%s'; test=test -n "$DISPLAY" ; description=JPEG Image; nametemplate=%s.jpeg
@@ -11,9 +10,9 @@ image/targa; viewnior '%s'; test=test -n "$DISPLAY" ; description=TGA Image; nam
 image/x-ms-bmp; viewnior '%s'; test=test -n "$DISPLAY" ; description=BMP Image; nametemplate=%s.bmp
 image/x-xpixmap; viewnior '%s'; test=test -n "$DISPLAY" ; description=XPM Image; nametemplate=%s.xpm
 image/pjpeg; viewnior '%s'; test=test -n "$DISPLAY" ; description=JPEG Image; nametemplate=%s.jpeg
-video/mkv;mplayer -zoom %s
-video/mp4;mplayer -zoom %s
-video/x-msvideo;mplayer -zoom %s
-video/avi;mplayer -zoom %s
-video/x-matroska;mplayer -zoom %s
+video/mkv;mpv %s
+video/mp4;mpv %s
+video/x-msvideo;mpv %s
+video/x-matroska;mpv %s
+video/avi;mpv %s
 

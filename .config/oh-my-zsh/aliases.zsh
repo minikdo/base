@@ -1,7 +1,7 @@
 alias -s mov=mpv
 alias -s mp4=mpv
 alias -s mkv=mpv
-alias -s pdf=evince
+alias -s pdf=okular
 alias -s jpg=viewnior
 alias -s jpeg=viewnior
 alias -s JPG=viewnior
