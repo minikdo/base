@@ -95,7 +95,7 @@ myFont :: [Char]
 myFont = "xft:Iosevka"
 
 myScratchpads = [
-  NS "bash" "urxvt -name notes -e /bin/bash" (appName =? "notes") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
+  NS "bash" "kitty --name notes /bin/bash" (appName =? "notes") (customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3))
   ]
 
 
@@ -153,6 +153,7 @@ myManageHook = composeAll
     ]
        <+> namedScratchpadManageHook myScratchpads
     -- <+> scratchpadManageHook (W.RationalRect 0.25 0.25 0.5 0.5)
+
 myWorkspaces :: [[Char]]
 myWorkspaces = [ "1", "2", "3", "4" ]
 
@@ -229,6 +230,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Move focus to the next window
     , ((modm,               xK_Tab   ), windows W.focusDown)
 
+    , ((controlMask .|. mod1Mask, xK_Delete), spawn "systemctl poweroff")
+
     -- Move focus to the next window
     -- , ((modm,               xK_j     ), windows W.focusDown)
 
@@ -240,6 +243,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     
     -- Firefox
     -- , ((modm,               xK_f     ), runOrRaise "firefox-esr" (className =? "Firefox-esr"))
+
+    -- Signal-desktop
+    , ((controlMask .|. modm,  xK_s     ), runOrRaise "signal-desktop" (className =? "Signal Beta"))
 
     -- Pavucontrol
     , ((modm,               xK_v     ), runOrRaiseMaster "pavucontrol" (className =? "Pavucontrol"))
